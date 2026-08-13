@@ -94,3 +94,8 @@ Publica el contenido de `dist/faro-angular`.
 
 - El proyecto incluye `.gitignore` para artefactos de Angular/Node y archivos locales.
 - Si se actualiza contenido desde otra fuente, se recomienda mantener paridad editando `faro-config.ts` y validando con `npm run build`.
+
+
+## Build & Deployment
+
+ng build --output-path docs --base-href "https://boruroad.github.io/comunidad-faro/"

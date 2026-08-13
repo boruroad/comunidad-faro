@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { FARO_CONFIG, FaroConfig } from './faro-config';
+import { CalendarEvent, FARO_CONFIG, FaroConfig } from './faro-config';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ export class App implements AfterViewInit, OnDestroy {
   readonly releases = this.cfg.music.releases;
   readonly firstVisit = this.cfg.firstVisit;
   readonly newsletterTag = this.cfg.newsletter.tag;
+  readonly calendar = this.cfg.calendar;
 
   readonly onlineUrl = this.meeting.onlineUrl.trim();
   readonly nearestUrl = this.meeting.nearestUrl || this.meeting.facebookUrl || this.cfg.socials['facebook'];
@@ -24,6 +25,7 @@ export class App implements AfterViewInit, OnDestroy {
   readonly socialEntries = Object.entries(this.cfg.socials || {}).filter(([, url]) => Boolean(url));
   readonly newsletterAction = this.computeNewsletterAction();
   readonly isMusicEnabled = this.cfg.music.enabled && this.releases.length > 0;
+  readonly isCalendarEnabled = this.calendar.enabled && this.calendar.events.length > 0;
   readonly isLiveActive = this.computeLiveActive();
   readonly liveStreamUrl = (this.live.url || this.onlineUrl).trim();
   readonly safeEmbedUrl: SafeResourceUrl | null;
@@ -127,6 +129,23 @@ export class App implements AfterViewInit, OnDestroy {
 
   coverAriaLabel(title: string, artist: string): string {
     return `Portada de ${title || 'la canción'}${artist ? `, de ${artist}` : ''}`;
+  }
+
+  formatCalendarDate(date: string): string {
+    const parsedDate = Date.parse(date);
+    if (Number.isNaN(parsedDate)) {
+      return date;
+    }
+
+    return new Intl.DateTimeFormat('es-MX', {
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short'
+    }).format(parsedDate).replace('.', '').toUpperCase();
+  }
+
+  hasCalendarCta(event: CalendarEvent): boolean {
+    return Boolean((event.ctaLabel || '').trim() && (event.ctaUrl || '').trim());
   }
 
   private computeNewsletterAction(): string {

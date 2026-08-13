@@ -291,6 +291,23 @@ img{max-width:100%;display:block}
 .faq details[open] summary:after{content:"−"}
 .faq p{font-family:"Source Serif 4",serif;line-height:1.6;color:#57534c;max-width:40rem}
 
+/* Calendar */
+.calendar-section{padding:10rem var(--pad);position:relative;overflow:hidden}
+.calendar-section:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 78% 18%,rgba(255,255,255,.08),transparent 28%);pointer-events:none}
+.calendar-heading{max-width:var(--max);margin:0 auto 3.5rem;display:grid;grid-template-columns:.8fr 1fr 1fr;gap:2.5rem;align-items:end}
+.calendar-heading h2{font-size:clamp(3.6rem,8.5vw,8rem);line-height:.83;letter-spacing:-.074em;margin:0;text-transform:uppercase}
+.calendar-heading h2 span{font-family:"Source Serif 4",serif;font-weight:400;font-style:italic;text-transform:none}
+.calendar-heading .serif-lead{max-width:32rem;color:#cbc7bf;margin:0 0 .45rem}
+.calendar-grid{max-width:var(--max);margin:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:#3c3c38;border-top:1px solid #3c3c38;border-bottom:1px solid #3c3c38}
+.calendar-card{background:#11110f;padding:1.6rem 1.5rem 1.8rem;display:flex;flex-direction:column;min-height:320px}
+.calendar-card-top{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px solid #34342f;padding-bottom:.85rem}
+.calendar-card-top time{font-size:.74rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:#f3f0e9}
+.calendar-card-top span{font-size:.7rem;letter-spacing:.09em;text-transform:uppercase;color:#aba59a}
+.calendar-card h3{font-size:clamp(1.6rem,3vw,2.6rem);line-height:.95;letter-spacing:-.04em;margin:1.1rem 0 .75rem;text-transform:uppercase}
+.calendar-location{font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:#d6d0c5;margin:0 0 .75rem}
+.calendar-description{font:400 1.05rem/1.45 "Source Serif 4",serif;color:#aaa69f;max-width:30ch;margin:0 0 auto}
+.calendar-card .text-link{margin-top:1.4rem;align-self:flex-start}
+
 /* Footer */
 .site-footer{background:var(--ink);color:#fff}
 .footer-photo{min-height:48vw;max-height:780px}
@@ -316,6 +333,7 @@ img{max-width:100%;display:block}
   .newsletter-section{grid-template-columns:1fr;padding-top:7rem;padding-bottom:7rem}.newsletter-panel{margin-top:2rem}
   .social-section{grid-template-columns:1fr}.social-statement{border-left:0;border-top:1px solid var(--line);padding:2rem 0 0}
   .visit-grid{grid-template-columns:1fr}.visit-essential{position:static;margin-bottom:2rem}
+  .calendar-section{padding-top:7rem;padding-bottom:7rem}.calendar-heading{grid-template-columns:1fr;gap:1.2rem}.calendar-heading .serif-lead{margin-top:.8rem}.calendar-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr}.footer-grid>div:last-child{justify-content:flex-start}.footer-bottom{gap:1rem;flex-direction:column}
 }
 @media(max-width:560px){
@@ -324,7 +342,7 @@ img{max-width:100%;display:block}
   .live-takeover{padding-top:7.8rem}.live-broadcast-bar{top:4.55rem}.live-grid{min-height:calc(100svh - 9rem)}.live-copy h1{font-size:19vw}.live-signal-art{width:82vw}.signal-core{min-width:92px;min-height:92px}.live-primary{width:100%;justify-content:center}.live-corner{display:none}
   .voice-track{font-size:11vw;padding-top:1rem;padding-bottom:1rem}
   .section-heading h2,.meeting-section h2,.social-section h2,.first-visit h2{font-size:16vw}
-  .manifesto h2{font-size:21vw}.kingdom-copy h2{font-size:15vw}.music-heading h2{font-size:16vw}.music-release-info h3{font-size:15vw}.music-cover-art strong{font-size:16vw}.newsletter-copy h2{font-size:17vw}.footer-main h2{font-size:19vw}
+  .manifesto h2{font-size:21vw}.kingdom-copy h2{font-size:15vw}.music-heading h2{font-size:16vw}.music-release-info h3{font-size:15vw}.music-cover-art strong{font-size:16vw}.newsletter-copy h2{font-size:17vw}.calendar-heading h2{font-size:15vw}.footer-main h2{font-size:19vw}
   .newsletter-field{grid-template-columns:1fr}.newsletter-field button{text-align:left;padding:.8rem 0;border-top:1px solid #353532}
   .scroll-cue{display:none}
 }
