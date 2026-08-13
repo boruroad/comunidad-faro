@@ -28,6 +28,12 @@ export class App implements AfterViewInit, OnDestroy {
   readonly liveStreamUrl = (this.live.url || this.onlineUrl).trim();
   readonly safeEmbedUrl: SafeResourceUrl | null;
 
+  readonly heroTitleTop: string;
+  readonly heroTitleAccent: string;
+  readonly heroLine: string;
+  readonly footerTitleTop: string;
+  readonly footerTitleAccent: string;
+
   expandedReleaseIndex: number | null = null;
   menuOpen = false;
   headerScrolled = false;
@@ -45,6 +51,20 @@ export class App implements AfterViewInit, OnDestroy {
     this.safeEmbedUrl = this.live.embedUrl
       ? this.sanitizer.bypassSecurityTrustResourceUrl(this.live.embedUrl)
       : null;
+
+    if (this.isLiveActive) {
+      this.heroTitleTop = 'UNA FAMILIA.';
+      this.heroTitleAccent = 'MUCHAS TRIBUS.';
+      this.heroLine = 'Fe · Amor · Relevancia · Obediencia.';
+      this.footerTitleTop = 'NOS VEMOS';
+      this.footerTitleAccent = 'EN CASA.';
+    } else {
+      this.heroTitleTop = 'NOS VEMOS';
+      this.heroTitleAccent = 'EN CASA.';
+      this.heroLine = 'Una familia, muchas tribus.';
+      this.footerTitleTop = 'UNA FAMILIA.';
+      this.footerTitleAccent = 'MUCHAS TRIBUS.';
+    }
   }
 
   ngAfterViewInit(): void {
@@ -99,6 +119,14 @@ export class App implements AfterViewInit, OnDestroy {
 
   socialLabel(name: string): string {
     return `${name.charAt(0).toUpperCase() + name.slice(1)} ↗`;
+  }
+
+  hasCoverImage(path: string): boolean {
+    return Boolean(path);
+  }
+
+  coverAriaLabel(title: string, artist: string): string {
+    return `Portada de ${title || 'la canción'}${artist ? `, de ${artist}` : ''}`;
   }
 
   private computeNewsletterAction(): string {

@@ -68,8 +68,8 @@
     <div class="hero-shade"></div>
     <div class="hero-content reveal">
       <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
-      <h1 id="hero-title">NOS VEMOS<br><span>EN CASA.</span></h1>
-      <p class="hero-line">Una familia, muchas tribus.</p>
+      <h1 id="hero-title"><b>{{ heroTitleTop }}</b><br><span>{{ heroTitleAccent }}</span></h1>
+      <p class="hero-line">{{ heroLine }}</p>
       <div class="hero-utility">
         <div>
           <small>ESTA SEMANA</small>
@@ -153,11 +153,19 @@
       <div class="music-releases" id="music-releases">
         @for (release of releases; track $index) {
           <article class="music-release reveal">
-            <div class="music-cover-art" [style.background-image]="photoStyle(release.coverImage)" [class.has-cover]="!!release.coverImage">
-              <span class="music-cover-label">FARO · MUSIC</span>
-              <strong>{{ release.title }}</strong>
-              <span class="music-cover-artist">{{ release.artist }}</span>
-              <span class="music-vinyl" aria-hidden="true"></span>
+            <div
+              class="music-cover-art"
+              [style.background-image]="photoStyle(release.coverImage)"
+              [class.has-cover]="hasCoverImage(release.coverImage)"
+              [attr.role]="hasCoverImage(release.coverImage) ? 'img' : null"
+              [attr.aria-label]="hasCoverImage(release.coverImage) ? coverAriaLabel(release.title, release.artist) : null"
+            >
+              @if (!hasCoverImage(release.coverImage)) {
+                <span class="music-cover-label">FARO · MUSIC</span>
+                <strong>{{ release.title }}</strong>
+                <span class="music-cover-artist">{{ release.artist }}</span>
+                <span class="music-vinyl" aria-hidden="true"></span>
+              }
             </div>
 
             <div class="music-release-info">
@@ -278,9 +286,9 @@
   <div class="footer-photo photo-slot" [style.background-image]="photoStyle(cfg.photos.footer)" [class.has-image]="!!cfg.photos.footer" aria-hidden="true"></div>
   <div class="footer-main">
     <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
-    <h2>NOS VEMOS<br><span>EN CASA.</span></h2>
+    <h2><b>{{ footerTitleTop }}</b><br><span>{{ footerTitleAccent }}</span></h2>
     <div class="footer-grid">
-      <div><strong>Fe · Amor · Relevancia · Obediencia</strong><span>Una familia, muchas tribus.</span></div>
+      <div><strong>Fe · Amor · Relevancia · Obediencia</strong><span>Casa · Familia · Rey · Reino.</span></div>
       <div><a class="button button-light" [href]="facebookUrl" target="_blank" rel="noopener">Ver proxima convocatoria ↗</a></div>
     </div>
   </div>

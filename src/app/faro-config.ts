@@ -72,24 +72,24 @@ export const FARO_CONFIG: FaroConfig = {
   },
   meeting: {
     status: 'CONFIRMAR EN REDES',
-    title: 'Nos vemos en Casa.',
-    description: 'Revisa la publicacion mas reciente para confirmar el punto, la reunion en casas o el acceso en linea.',
+    title: 'La próxima convocatoria.',
+    description: 'Revisa la publicación más reciente para confirmar el punto, la reunión en casas o el acceso en línea.',
     schedule: 'Consulta la convocatoria vigente',
     facebookUrl: 'https://www.facebook.com/comunidad.FARO/',
     nearestUrl: 'https://www.facebook.com/comunidad.FARO/',
     onlineUrl: '',
-    onlineLabel: 'Entrar a la transmision'
+    onlineLabel: 'Entrar a la transmisión'
   },
   live: {
-    enabled: true,
+    enabled: false,
     startsAt: '',
     endsAt: '',
-    label: 'TRANSMISION EN VIVO',
+    label: 'TRANSMISIÓN EN VIVO',
     titleTop: 'ESTAMOS',
     titleAccent: 'EN VIVO.',
-    description: 'Entra desde donde estes.',
-    url: 'https://open.spotify.com/intl-es/track/7BlZl5wsnxif6XalOeaTUa',
-    buttonLabel: 'Entrar a la transmision',
+    description: 'Conéctate desde donde estés.',
+    url: 'https://www.youtube.com/watch?v=ZuEz0U2F7Yg',
+    buttonLabel: 'Entrar a la transmisión',
     embedUrl: ''
   },
   music: {
@@ -99,7 +99,7 @@ export const FARO_CONFIG: FaroConfig = {
         title: 'El Dios Que Gobierna',
         artist: 'A. Mendoza',
         eyebrow: 'YA DISPONIBLE',
-        coverImage: '',
+        coverImage: 'assets/images/el-dios-que-gobierna.png',
         platforms: [
           { name: 'Spotify', url: 'https://open.spotify.com/intl-es/track/7BlZl5wsnxif6XalOeaTUa' },
           { name: 'YouTube Music', url: 'https://music.youtube.com/search?q=El%20Dios%20Que%20Gobierna%20A.%20Mendoza' },
@@ -124,12 +124,12 @@ export const FARO_CONFIG: FaroConfig = {
     whatsapp: ''
   },
   firstVisit: [
-    ['¿Donde se reunen esta semana?', 'La ubicacion no se deja fija en este sitio. Revisa la convocatoria vigente en nuestras redes.'],
-    ['¿Y si la reunion es en casas?', 'Escribenos desde el enlace Preguntar por la mas cercana para conocer el punto que te conviene.'],
-    ['¿Hay transmision en vivo?', 'Cuando exista una transmision confirmada, sera lo primero que aparezca al entrar al sitio.'],
-    ['¿Hay actividades para ninos?', '[INFORMACION POR CONFIRMAR]'],
-    ['¿Necesito registrarme?', '[INFORMACION POR CONFIRMAR]'],
-    ['¿Hay codigo de vestimenta?', '[INFORMACION POR CONFIRMAR]']
+    ['¿Dónde se reúnen esta semana?', 'La ubicación no se deja fija en este sitio. Revisa la convocatoria vigente en nuestras redes.'],
+    ['¿Y si la reunión es en casas?', 'Escríbenos desde el enlace Preguntar por la más cercana para conocer el punto que te conviene.'],
+    ['¿Hay transmisión en vivo?', 'Cuando exista una transmisión confirmada, será lo primero que aparezca al entrar al sitio.'],
+    ['¿Hay actividades para niños?', '[INFORMACIÓN POR CONFIRMAR]'],
+    ['¿Necesito registrarme?', '[INFORMACIÓN POR CONFIRMAR]'],
+    ['¿Hay código de vestimenta?', '[INFORMACIÓN POR CONFIRMAR]']
   ],
   photos: {
     hero: '',
