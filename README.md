@@ -94,9 +94,3 @@ Publica el contenido de `dist/faro-angular`.
 
 - El proyecto incluye `.gitignore` para artefactos de Angular/Node y archivos locales.
 - Si se actualiza contenido desde otra fuente, se recomienda mantener paridad editando `faro-config.ts` y validando con `npm run build`.
-
-
-esto es una prueba
-
-
-asda
