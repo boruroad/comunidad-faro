@@ -159,7 +159,7 @@ img{max-width:100%;display:block}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.12) 38%,rgba(0,0,0,.77))}
 .hero-content{position:relative;z-index:2;min-height:100svh;padding:10rem var(--pad) 4rem;display:flex;flex-direction:column;justify-content:flex-end;max-width:var(--max);margin:auto}
 .hero h1{font-size:clamp(4.2rem,11vw,10rem);line-height:.82;letter-spacing:-.078em;margin:.5rem 0 1.3rem;text-transform:uppercase}
-.hero h1 span{font-family:"Source Serif 4",Georgia,serif;font-weight:400;font-style:italic;text-transform:none;letter-spacing:-.055em}
+.hero h1 b{font:inherit;font-weight:900}.hero h1 span{font-family:"Source Serif 4",Georgia,serif;font-weight:400;font-style:italic;text-transform:none;letter-spacing:-.055em}
 .hero-line{font:400 clamp(1.2rem,2vw,2rem)/1.25 "Source Serif 4",serif;margin:0 0 2.1rem}
 .hero-utility{display:grid;grid-template-columns:1fr 1fr auto;gap:2rem;align-items:end;border-top:1px solid rgba(255,255,255,.36);padding-top:1.25rem}
 .hero-utility>div{display:flex;flex-direction:column;gap:.35rem}
@@ -218,8 +218,8 @@ img{max-width:100%;display:block}
 .music-release{display:grid;grid-template-columns:minmax(280px,.82fr) minmax(0,1.18fr);background:var(--ink);min-height:620px}
 .music-cover-art{position:relative;min-height:620px;background:#e7e2d8;color:#151513;padding:2rem;overflow:hidden;background-position:center;background-size:cover;display:flex;flex-direction:column;justify-content:space-between}
 .music-cover-art:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(21,21,19,.03),rgba(21,21,19,.1));pointer-events:none}
-.music-cover-art.has-cover{color:#fff}
-.music-cover-art.has-cover:before{background:linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.56))}
+.music-cover-art.has-cover{color:#fff;min-height:0;aspect-ratio:1/1;background-size:cover;background-position:center;padding:0;align-self:start;width:100%}
+.music-cover-art.has-cover:before{display:none}
 .music-cover-label,.music-cover-artist,.music-cover-art strong{position:relative;z-index:2}
 .music-cover-label{font-size:.58rem;font-weight:900;letter-spacing:.15em}
 .music-cover-art strong{font-size:clamp(3.4rem,6.3vw,7rem);line-height:.78;letter-spacing:-.07em;text-transform:uppercase;max-width:8ch;margin-top:auto;margin-bottom:1.2rem}
@@ -296,7 +296,7 @@ img{max-width:100%;display:block}
 .footer-photo{min-height:48vw;max-height:780px}
 .footer-main{padding:8rem var(--pad) 5rem}
 .footer-main h2{font-size:clamp(5rem,13vw,11rem);line-height:.82;letter-spacing:-.078em;margin:1rem 0 5rem;text-transform:uppercase}
-.footer-main h2 span{font-family:"Source Serif 4",serif;font-weight:400;font-style:italic;text-transform:none}
+.footer-main h2 b{font:inherit;font-weight:900}.footer-main h2 span{font-family:"Source Serif 4",serif;font-weight:400;font-style:italic;text-transform:none}
 .footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;border-top:1px solid #44443f;padding-top:1.5rem}
 .footer-grid>div:first-child{display:flex;flex-direction:column;gap:.5rem}
 .footer-grid>div:last-child{display:flex;justify-content:flex-end}
@@ -334,4 +334,4 @@ img{max-width:100%;display:block}
 [data-photo="worship"]:not(.has-image)::before{content:"REY.";border:0;left:1.2rem;bottom:1rem;padding:0;font-size:clamp(4rem,11vw,9rem);line-height:.8;letter-spacing:-.07em;font-weight:900;color:rgba(255,255,255,.13)}
 [data-photo="people"]:not(.has-image)::before{content:"FAMILIA.";border:0;left:.8rem;bottom:1rem;padding:0;font-size:clamp(2.8rem,6vw,6rem);line-height:.85;letter-spacing:-.065em;font-weight:900;color:rgba(255,255,255,.14)}
 [data-photo="prayer"]:not(.has-image)::before{content:"CASA.";border:0;left:.8rem;bottom:1rem;padding:0;font-size:clamp(3rem,7vw,6rem);line-height:.8;letter-spacing:-.06em;font-weight:900;color:rgba(255,255,255,.14)}
-.footer-photo:not(.has-image)::before{content:"NOS VEMOS\A EN CASA.";white-space:pre;border:0;left:var(--pad);bottom:var(--pad);padding:0;font-size:clamp(4rem,11vw,10rem);line-height:.8;letter-spacing:-.075em;font-weight:900;color:rgba(255,255,255,.12)}
+.footer-photo:not(.has-image)::before{content:"F.A.R.O.";white-space:pre;border:0;left:var(--pad);bottom:var(--pad);padding:0;font-size:clamp(5rem,15vw,14rem);line-height:.8;letter-spacing:-.075em;font-weight:900;color:rgba(255,255,255,.10)}

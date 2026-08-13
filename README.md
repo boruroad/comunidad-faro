@@ -41,7 +41,7 @@ Busca el bloque `meeting`:
 ```js
 meeting: {
   status: "CONFIRMAR EN REDES",
-  title: "Nos vemos en Casa.",
+  title: "La próxima convocatoria.",
   description: "Revisa la publicación más reciente...",
   schedule: "Consulta la convocatoria vigente",
   facebookUrl: "https://www.facebook.com/comunidad.FARO/",
@@ -113,6 +113,16 @@ Si la plataforma entrega una URL que permite `iframe`, colócala en `embedUrl`. 
 
 ---
 
+
+### Cómo se comporta “Nos vemos en Casa”
+
+Para que la frase no pierda fuerza, el sitio la muestra **una sola vez** según el estado de la transmisión:
+
+- Si `live.enabled` es `false`, aparece en el hero al entrar. El cierre cambia a **“Una familia. Muchas tribus.”**
+- Si `live.enabled` es `true` (o está dentro del horario programado), el hero cambia a **“Una familia. Muchas tribus.”** y **“Nos vemos en Casa.”** queda reservado para el cierre.
+
+No tienes que cambiar ningún texto manualmente; `js/main.js` lo resuelve según el estado de `live`.
+
 ## 4. Agregar o cambiar canciones
 
 La sección **Música de Casa** también se administra desde `js/config.js`.
@@ -127,7 +137,7 @@ music: {
       title: "El Dios Que Gobierna",
       artist: "A. Mendoza",
       eyebrow: "YA DISPONIBLE",
-      coverImage: "",
+      coverImage: "assets/images/el-dios-que-gobierna.png",
       platforms: [
         { name: "Spotify", url: "..." },
         { name: "YouTube Music", url: "..." }
@@ -161,7 +171,7 @@ releases: [
 ]
 ```
 
-`coverImage` es opcional. Si está vacío, el sitio genera una portada tipográfica que combina con FARO. Si tienen la portada oficial, guárdala en `assets/images/` y coloca su ruta.
+`coverImage` es opcional. La portada oficial de **El Dios Que Gobierna** ya está incluida en `assets/images/el-dios-que-gobierna.png`. Si agregas otra canción, guarda su portada en `assets/images/` y coloca su ruta; si la dejas vacía, el sitio genera una portada tipográfica FARO.
 
 ---
 
