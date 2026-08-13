@@ -1,117 +1,252 @@
 # Comunidad F.A.R.O. — sitio web
 
-Sitio estático para Comunidad FARO, pensado para GitHub Pages.
+Sitio estático de Comunidad FARO. Funciona con HTML, CSS y JavaScript vanilla, así que puede publicarse en GitHub Pages sin servidor propio.
 
-## Qué versión es esta
+## 1. Ver la página en tu computadora
 
-Esta versión fusiona el diseño editorial de la propuesta inicial —hero de pantalla completa, tipografía grande, fotografía protagonista, contrastes oscuros y ritmo de revista— con la información vigente:
-
-- FARO = **Fe · Amor · Relevancia · Obediencia**.
-- No se publica una dirección fija si no está confirmada.
-- La reunión puede ser en un punto presencial, en casas o en línea.
-- La convocatoria vigente de redes tiene prioridad.
-- Si existe una liga de Google Meet, puede mostrarse desde `js/config.js`.
-
-La antigua sección amarilla fue eliminada. La paleta actual usa carbón, marfil y tonos piedra para que el color principal venga de las fotografías y artes reales de FARO.
-
-## Cómo verla en tu computadora
-
-1. Descomprime el ZIP.
-2. Entra a la carpeta `faro-site`.
-3. En Windows, haz clic en la barra donde aparece la ruta de la carpeta, escribe `cmd` y presiona Enter.
-4. Ejecuta:
+1. Descomprime la carpeta del proyecto.
+2. Abre una terminal dentro de la carpeta `faro-site`.
+3. Ejecuta:
 
 ```bash
 python -m http.server 8000
 ```
 
-Si no reconoce `python`, prueba:
+En Windows también puedes probar:
 
 ```bash
 py -m http.server 8000
 ```
 
-5. Abre Chrome y entra a:
+4. Abre en el navegador:
 
 ```text
 http://localhost:8000
 ```
 
-## Cómo cambiar la próxima reunión
+No es recomendable abrir `index.html` sólo con doble clic.
 
-Abre `js/config.js`.
+---
 
-Dentro de `meeting` puedes cambiar:
+## 2. Dónde cambiar la información semanal
 
-- `status`: estado de la convocatoria.
-- `title`: título principal.
-- `description`: explicación breve.
-- `schedule`: horario confirmado.
-- `facebookUrl`: enlace a la convocatoria o a la página.
-- `nearestUrl`: enlace para preguntar por la reunión/casa más cercana.
-- `meetUrl`: liga de Google Meet.
+Casi toda la información que cambia está en:
 
-Si `meetUrl` está vacío, el botón de Meet no aparece.
-
-Ejemplo:
-
-```js
-meetUrl: "https://meet.google.com/xxx-xxxx-xxx"
+```text
+js/config.js
 ```
 
-## Cómo agregar fotografías reales
+Busca el bloque `meeting`:
 
-Guarda las fotos dentro de:
+```js
+meeting: {
+  status: "CONFIRMAR EN REDES",
+  title: "Nos vemos en Casa.",
+  description: "Revisa la publicación más reciente...",
+  schedule: "Consulta la convocatoria vigente",
+  facebookUrl: "https://www.facebook.com/comunidad.FARO/",
+  nearestUrl: "https://www.facebook.com/comunidad.FARO/",
+  onlineUrl: "",
+  onlineLabel: "Entrar a la transmisión"
+}
+```
+
+Si esa semana existe un acceso en línea, pega la liga en `onlineUrl`. Puede ser YouTube, Meet u otra plataforma. Si queda vacío, el botón desaparece.
+
+---
+
+## 3. Hacer que TRANSMISIÓN EN VIVO sea lo primero que se vea
+
+En `js/config.js` busca:
+
+```js
+live: {
+  enabled: false,
+  startsAt: "",
+  endsAt: "",
+  label: "TRANSMISIÓN EN VIVO",
+  titleTop: "ESTAMOS",
+  titleAccent: "EN VIVO.",
+  url: "",
+  embedUrl: ""
+}
+```
+
+### Opción fácil: encenderlo manualmente
+
+Cambia:
+
+```js
+enabled: true
+```
+
+Y coloca el enlace de la transmisión, sin importar la plataforma:
+
+```js
+url: "https://..."
+```
+
+Mientras `enabled` sea `true`, el visitante verá primero una pantalla completa de **TRANSMISIÓN EN VIVO** con el acceso destacado.
+
+Al terminar, vuelve a:
+
+```js
+enabled: false
+```
+
+### Opción automática por horario
+
+Puedes dejar `enabled: false` y programar una ventana:
+
+```js
+startsAt: "2026-08-16T11:00:00-06:00",
+endsAt: "2026-08-16T13:00:00-06:00"
+```
+
+Durante ese horario el modo EN VIVO aparecerá automáticamente.
+
+### Video incrustado
+
+Si la plataforma entrega una URL que permite `iframe`, colócala en `embedUrl`. Si no, deja `embedUrl` vacío y usa sólo el botón con `url`.
+
+> El sitio no asume Facebook, YouTube ni Meet. Para la página siempre se trata simplemente de una **transmisión**.
+
+---
+
+## 4. Agregar o cambiar canciones
+
+La sección **Música de Casa** también se administra desde `js/config.js`.
+
+La primera canción ya está configurada:
+
+```js
+music: {
+  enabled: true,
+  releases: [
+    {
+      title: "El Dios Que Gobierna",
+      artist: "A. Mendoza",
+      eyebrow: "YA DISPONIBLE",
+      coverImage: "",
+      platforms: [
+        { name: "Spotify", url: "..." },
+        { name: "YouTube Music", url: "..." }
+      ]
+    }
+  ]
+}
+```
+
+### Para agregar otra canción
+
+Copia el objeto completo de una canción y pégalo después, separado por coma:
+
+```js
+releases: [
+  {
+    title: "El Dios Que Gobierna",
+    artist: "A. Mendoza",
+    ...
+  },
+  {
+    title: "NUEVA CANCIÓN",
+    artist: "AUTOR",
+    eyebrow: "YA DISPONIBLE",
+    coverImage: "assets/images/portada-nueva.jpg",
+    platforms: [
+      { name: "Spotify", url: "https://..." },
+      { name: "YouTube Music", url: "https://..." }
+    ]
+  }
+]
+```
+
+`coverImage` es opcional. Si está vacío, el sitio genera una portada tipográfica que combina con FARO. Si tienen la portada oficial, guárdala en `assets/images/` y coloca su ruta.
+
+---
+
+## 5. Activar el newsletter
+
+La sección del newsletter ya está diseñada. Para registrar correos se necesita un servicio externo porque GitHub Pages no guarda datos por sí solo.
+
+El proyecto está preparado para **Buttondown**.
+
+1. Crea el newsletter de Comunidad FARO en Buttondown.
+2. Obtén el `username` de la cuenta/newsletter.
+3. Abre `js/config.js`.
+4. Busca:
+
+```js
+newsletter: {
+  enabled: true,
+  buttondownUsername: "",
+  actionUrl: "",
+  tag: "sitio-web"
+}
+```
+
+5. Coloca el username:
+
+```js
+buttondownUsername: "comunidad-faro"
+```
+
+Si después usas otro proveedor, puedes dejar `buttondownUsername` vacío y pegar la URL POST del formulario en `actionUrl`.
+
+> Antes de captar suscriptores, define quién administrará la lista de correos y completa el aviso de privacidad que corresponda a Comunidad FARO.
+
+---
+
+## 6. Cambiar fotografías
+
+Guarda fotografías reales en:
 
 ```text
 assets/images/
 ```
 
-Por ejemplo:
-
-```text
-assets/images/hero.jpg
-assets/images/reunion.jpg
-assets/images/personas.jpg
-assets/images/oracion.jpg
-assets/images/footer.jpg
-```
-
-Luego abre `js/config.js` y cambia:
+Después abre `js/config.js` y cambia:
 
 ```js
 photos: {
-  hero: "assets/images/hero.jpg",
+  hero: "assets/images/hero-faro.jpg",
   worship: "assets/images/reunion.jpg",
-  people: "assets/images/personas.jpg",
+  people: "assets/images/familia.jpg",
   prayer: "assets/images/oracion.jpg",
   footer: "assets/images/footer.jpg"
 }
 ```
 
-Mientras esos campos estén vacíos, el sitio usa fondos editoriales neutros en lugar de stock.
+Si una foto queda vacía, el sitio muestra una composición tipográfica FARO en lugar de un cuadro roto.
 
-## Cómo cambiar redes sociales
+---
 
-En `js/config.js`, modifica `socials`.
+## 7. Cambiar redes sociales
 
-Si un dato todavía no está confirmado, puedes dejar:
+En `js/config.js`:
 
-```text
-[INFORMACIÓN POR CONFIRMAR]
+```js
+socials: {
+  facebook: "https://www.facebook.com/comunidad.FARO/",
+  instagram: "https://www.instagram.com/comunidad_faro/",
+  youtube: "",
+  whatsapp: ""
+}
 ```
 
-El enlace no se mostrará.
+Los campos vacíos no aparecen en la página.
 
-## Cómo subir a GitHub
+---
 
-1. Entra a GitHub.
-2. Crea un repositorio nuevo, por ejemplo `comunidad-faro`.
-3. Selecciona `Add file` → `Upload files`.
-4. Sube **el contenido de esta carpeta**, incluyendo `index.html`, `css/`, `js/`, `assets/`, etc.
+## 8. Subir el sitio a GitHub
+
+1. Crea un repositorio nuevo, por ejemplo `comunidad-faro`.
+2. Descomprime este proyecto.
+3. Sube **el contenido de `faro-site`**, no la carpeta externa completa.
+4. En la raíz del repositorio debe verse `index.html`.
 5. Haz `Commit changes`.
 
-La raíz del repositorio debe verse así:
+La estructura correcta es:
 
 ```text
 comunidad-faro/
@@ -126,21 +261,49 @@ comunidad-faro/
 └── sitemap.xml
 ```
 
-## Activar GitHub Pages
+---
 
-1. En el repositorio entra a `Settings`.
-2. Abre `Pages`.
-3. En `Source`, selecciona `Deploy from a branch`.
-4. Branch: `main`.
-5. Folder: `/ (root)`.
-6. Pulsa `Save`.
+## 9. Activar GitHub Pages
 
-GitHub generará una dirección similar a:
+En GitHub:
+
+1. Entra al repositorio.
+2. Abre **Settings**.
+3. Entra a **Pages**.
+4. En **Source**, elige `Deploy from a branch`.
+5. Branch: `main`.
+6. Folder: `/ (root)`.
+7. Guarda.
+
+GitHub publicará una URL similar a:
 
 ```text
 https://TU-USUARIO.github.io/comunidad-faro/
 ```
 
-## Dominio propio más adelante
+---
 
-Cuando tengan dominio, en GitHub Pages puedes agregarlo en `Custom domain`. Después habrá que actualizar `canonicalUrl`, `canonical`, Open Graph, `robots.txt` y `sitemap.xml` con la URL definitiva.
+## 10. Conectar un dominio propio después
+
+Cuando exista un dominio propio, se configura desde **Settings → Pages → Custom domain**.
+
+También cambia en `js/config.js`:
+
+```js
+canonicalUrl: "https://www.tudominio.mx/"
+```
+
+Y cambia el canonical/OG URL de `index.html`, `sitemap.xml` y `robots.txt` si corresponde.
+
+---
+
+## 11. Archivos que normalmente vas a tocar
+
+Para el uso diario basta con estos:
+
+```text
+js/config.js       → reunión, transmisión, música, newsletter, redes y fotos
+assets/images/     → fotografías y portadas musicales
+```
+
+No necesitas modificar el CSS o el HTML para actualizar una convocatoria, activar una transmisión o agregar una canción.

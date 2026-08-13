@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#11110f">
-  <title>Comunidad F.A.R.O. | Fe · Amor · Relevancia · Obediencia</title>
-  <meta name="description" content="Comunidad F.A.R.O. Fe, Amor, Relevancia y Obediencia. Consulta la convocatoria vigente para saber dónde nos reunimos esta semana.">
+  <meta name="theme-color" content="#151513">
+  <title>Comunidad F.A.R.O. | Nos vemos en Casa</title>
+  <meta name="description" content="Comunidad F.A.R.O. — Fe, Amor, Relevancia y Obediencia. Consulta la convocatoria vigente, entra a la transmisión en vivo y escucha la música de Casa FARO.">
   <link rel="canonical" href="https://TU-DOMINIO-AQUI/">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Comunidad F.A.R.O.">
-  <meta property="og:description" content="Fe · Amor · Relevancia · Obediencia. Consulta la convocatoria vigente de Comunidad FARO.">
+  <meta property="og:title" content="Comunidad F.A.R.O. | Nos vemos en Casa">
+  <meta property="og:description" content="Una familia, muchas tribus. Consulta la convocatoria vigente de Casa FARO.">
   <meta property="og:url" content="https://TU-DOMINIO-AQUI/">
   <link rel="icon" href="favicon/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -27,46 +27,108 @@
       <span class="brand-copy"><strong>COMUNIDAD FARO</strong><small>FE · AMOR · RELEVANCIA · OBEDIENCIA</small></span>
     </a>
     <nav class="desktop-nav" aria-label="Navegación principal">
-      <a href="#identidad">Identidad</a>
       <a href="#casa">Casa</a>
+      <a href="#identidad">F.A.R.O.</a>
       <a href="#reunion">Esta semana</a>
-      <a href="#visita">Primera vez</a>
+      <a href="#musica">Música</a>
+      <a href="#newsletter">Mantente cerca</a>
     </nav>
-    <a class="header-cta" data-facebook-link target="_blank" rel="noopener">Convocatoria ↗</a>
+    <a class="header-cta" data-facebook-link target="_blank" rel="noopener">Última convocatoria ↗</a>
     <button class="menu-button" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Abrir menú"><span></span><span></span></button>
     <nav id="mobile-menu" class="mobile-menu" aria-label="Navegación móvil" hidden>
-      <a href="#identidad">Identidad</a>
       <a href="#casa">Casa</a>
+      <a href="#identidad">F.A.R.O.</a>
       <a href="#reunion">Esta semana</a>
-      <a href="#visita">Primera vez</a>
-      <a data-facebook-link target="_blank" rel="noopener">Convocatoria ↗</a>
+      <a href="#musica">Música</a>
+      <a href="#newsletter">Mantente cerca</a>
+      <a data-facebook-link target="_blank" rel="noopener">Última convocatoria ↗</a>
     </nav>
   </header>
 
   <main id="contenido">
+    <!-- Se muestra antes que cualquier otra sección cuando live.enabled=true
+         o cuando la hora actual está entre live.startsAt y live.endsAt. -->
+    <section class="live-takeover" id="en-vivo" data-live-section hidden aria-labelledby="live-title">
+      <div class="live-broadcast-bar" aria-hidden="true">
+        <div class="live-broadcast-track">
+          <span>● TRANSMISIÓN ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISIÓN ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISIÓN ACTIVA</span><span>ENTRA AHORA</span>
+        </div>
+      </div>
+      <div class="live-grid">
+        <div class="live-copy reveal">
+          <p class="live-kicker"><span class="live-dot" aria-hidden="true"></span><span data-live-label>TRANSMISIÓN EN VIVO</span></p>
+          <h1 id="live-title"><span data-live-title-top>ESTAMOS</span><br><em data-live-title-accent>EN VIVO.</em></h1>
+          <p class="live-description" data-live-description>La Casa está transmitiendo. Entra desde donde estés.</p>
+          <div class="live-actions">
+            <a class="live-primary" data-live-link target="_blank" rel="noopener"><span class="live-primary-dot" aria-hidden="true"></span><span data-live-button>Entrar a la transmisión</span><span aria-hidden="true">↗</span></a>
+            <a class="live-scroll" href="#inicio">Seguir al sitio ↓</a>
+          </div>
+        </div>
+        <div class="live-media" data-live-media hidden>
+          <iframe data-live-embed title="Transmisión en vivo de Comunidad FARO" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+        </div>
+        <div class="live-signal-art" data-live-art aria-hidden="true">
+          <div class="signal-ring signal-ring-one"></div>
+          <div class="signal-ring signal-ring-two"></div>
+          <div class="signal-ring signal-ring-three"></div>
+          <div class="signal-core"><span></span><strong>ON<br>AIR</strong></div>
+        </div>
+      </div>
+      <div class="live-corner live-corner-a" aria-hidden="true"></div>
+      <div class="live-corner live-corner-b" aria-hidden="true"></div>
+    </section>
+
     <section class="hero" id="inicio" aria-labelledby="hero-title">
       <div class="hero-photo photo-slot" data-photo="hero" aria-hidden="true"></div>
       <div class="hero-shade"></div>
       <div class="hero-content reveal">
         <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
-        <h1 id="hero-title">UNA FAMILIA.<br><span>MUCHAS TRIBUS.</span></h1>
-        <p class="hero-values">Fe · Amor · Relevancia · Obediencia.</p>
+        <h1 id="hero-title">NOS VEMOS<br><span>EN CASA.</span></h1>
+        <p class="hero-line">Una familia, muchas tribus.</p>
         <div class="hero-utility">
           <div>
-            <small>PRÓXIMA REUNIÓN</small>
+            <small>ESTA SEMANA</small>
             <strong data-meeting-title>La próxima reunión se confirma en nuestras redes.</strong>
           </div>
           <div>
-            <small>MODALIDAD</small>
-            <strong data-meeting-status>Consulta la convocatoria vigente</strong>
+            <small>¿DÓNDE?</small>
+            <strong data-meeting-status>Revisa la convocatoria vigente</strong>
           </div>
           <div class="hero-actions">
             <a class="button button-light" data-facebook-link target="_blank" rel="noopener">Ver convocatoria ↗</a>
-            <a class="hero-secondary" data-meet-link target="_blank" rel="noopener" hidden>Entrar a Google Meet ↗</a>
+            <a class="hero-secondary" data-online-link target="_blank" rel="noopener" hidden>Entrar a la transmisión ↗</a>
           </div>
         </div>
       </div>
-      <a class="scroll-cue" href="#identidad" aria-label="Continuar hacia la identidad de FARO">SCROLL <span>↓</span></a>
+      <a class="scroll-cue" href="#casa" aria-label="Continuar hacia Casa FARO">SCROLL <span>↓</span></a>
+    </section>
+
+    <section class="voice-strip" aria-label="Palabras que atraviesan la comunicación de FARO">
+      <div class="voice-track">
+        <span>CASA.</span><em>FAMILIA.</em><span>REY.</span><em>REINO.</em><span>FARO.</span>
+      </div>
+    </section>
+
+    <section class="life-section" id="casa" aria-labelledby="casa-title">
+      <div class="section-heading reveal">
+        <p class="eyebrow">DOMINGO EN CASA · LA SEMANA EN MOVIMIENTO</p>
+        <h2 id="casa-title">HAY UN LUGAR<br><span>EN LA MESA.</span></h2>
+      </div>
+      <div class="photo-story">
+        <figure class="story-shot shot-wide reveal">
+          <div class="photo-slot" data-photo="worship"></div>
+          <figcaption>Celebrar al Rey · crecer en familia</figcaption>
+        </figure>
+        <figure class="story-shot shot-tall reveal">
+          <div class="photo-slot" data-photo="people"></div>
+          <figcaption>Una familia · muchas tribus</figcaption>
+        </figure>
+        <blockquote class="story-quote reveal">La Casa no termina cuando termina la reunión.</blockquote>
+        <figure class="story-shot shot-square reveal">
+          <div class="photo-slot" data-photo="prayer"></div>
+          <figcaption>Oración · conversación · comunidad</figcaption>
+        </figure>
+      </div>
     </section>
 
     <section class="manifesto section-dark" id="identidad" aria-labelledby="identity-title">
@@ -80,46 +142,27 @@
         </h2>
       </div>
       <div class="manifesto-copy reveal">
-        <p class="serif-lead">Cuatro palabras que forman nuestro nombre y atraviesan la identidad de Comunidad FARO.</p>
-        <p class="quiet-copy">No queremos que una dirección, un formato o una semana definan la Casa. La manera de reunirnos puede cambiar; la identidad permanece.</p>
+        <p class="serif-lead">Fe. Amor. Relevancia. Obediencia. No son un pie de página: forman nuestro nombre.</p>
+        <p class="quiet-copy">La forma de reunirnos puede cambiar. El punto puede cambiar. La identidad permanece.</p>
       </div>
     </section>
 
-    <section class="life-section" id="casa" aria-labelledby="vida-title">
-      <div class="section-heading reveal">
-        <p class="eyebrow">CASA</p>
-        <h2 id="vida-title">NOS VEMOS<br>EN CASA.</h2>
-      </div>
-      <div class="photo-story">
-        <figure class="story-shot shot-wide reveal">
-          <div class="photo-slot" data-photo="worship"></div>
-          <figcaption>Comunidad · reunión · vida compartida</figcaption>
-        </figure>
-        <figure class="story-shot shot-tall reveal">
-          <div class="photo-slot" data-photo="people"></div>
-          <figcaption>Una familia, muchas historias</figcaption>
-        </figure>
-        <blockquote class="story-quote reveal">“Una familia, muchas tribus.”</blockquote>
-        <figure class="story-shot shot-square reveal">
-          <div class="photo-slot" data-photo="prayer"></div>
-          <figcaption>Oración · conversación · comunidad</figcaption>
-        </figure>
+    <section class="kingdom-section" aria-labelledby="kingdom-title">
+      <div class="kingdom-word reveal" aria-hidden="true">REINO</div>
+      <div class="kingdom-copy reveal">
+        <p class="eyebrow">MÁS ALLÁ DE UNA REUNIÓN</p>
+        <h2 id="kingdom-title">CELEBRAMOS<br>AL REY.<br><span>VIVIMOS EL REINO.</span></h2>
+        <p class="serif-lead">Casa FARO habla de una Iglesia que forma discípulos, transforma familias y vive su fe también fuera de un lugar o un horario.</p>
       </div>
     </section>
 
-    <section class="story-panel" aria-labelledby="story-title">
-      <div class="story-sticky reveal">
-        <p class="eyebrow">EL PUNTO CAMBIA</p>
-        <h2 id="story-title">LA CASA<br>CONTINÚA.</h2>
+    <section class="music-section section-dark" id="musica" aria-labelledby="music-title" data-music-section>
+      <div class="music-heading reveal">
+        <p class="eyebrow">MÚSICA DE CASA</p>
+        <h2 id="music-title">TAMBIÉN<br><span>SUENA AFUERA.</span></h2>
+        <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas.</p>
       </div>
-      <div class="story-copy reveal">
-        <p class="serif-lead">La convocatoria de cada semana define cómo y dónde nos encontramos.</p>
-        <div class="story-lines">
-          <div><span>01</span><strong>Punto presencial</strong><p>Cuando exista una sede o punto confirmado, se publica en la convocatoria vigente.</p></div>
-          <div><span>02</span><strong>Reuniones en casas</strong><p>Cuando nos reunamos por casas, puedes preguntar cuál queda más cerca de ti.</p></div>
-          <div><span>03</span><strong>En línea</strong><p>Si existe una liga de Google Meet confirmada, el acceso aparecerá aquí automáticamente.</p></div>
-        </div>
-      </div>
+      <div class="music-releases" id="music-releases"></div>
     </section>
 
     <section class="meeting-section" id="reunion" aria-labelledby="meeting-title">
@@ -129,43 +172,67 @@
         <div class="meeting-grid reveal">
           <div class="meeting-main">
             <small>CONVOCATORIA VIGENTE</small>
-            <strong data-meeting-title>La próxima reunión se confirma en nuestras redes.</strong>
-            <p data-meeting-description>Puede ser en un punto presencial, en casas o en línea.</p>
+            <strong data-meeting-title>Nos vemos en Casa.</strong>
+            <p data-meeting-description>Revisa la publicación más reciente para confirmar el punto, la reunión en casas o el acceso en línea.</p>
           </div>
           <div class="meeting-meta">
-            <div><span>ESTADO</span><strong data-meeting-status>CONFIRMA LA CONVOCATORIA</strong></div>
-            <div><span>HORARIO</span><strong data-meeting-schedule>Consulta la publicación vigente</strong></div>
+            <div><span>MODALIDAD</span><strong data-meeting-status>CONFIRMAR EN REDES</strong></div>
+            <div><span>HORARIO</span><strong data-meeting-schedule>Consulta la convocatoria vigente</strong></div>
           </div>
           <div class="meeting-actions">
-            <a class="button button-dark" data-facebook-link target="_blank" rel="noopener">Ver convocatoria ↗</a>
+            <a class="button button-dark" data-facebook-link target="_blank" rel="noopener">Ver última convocatoria ↗</a>
             <a class="text-link" data-nearest-link target="_blank" rel="noopener">Preguntar por la más cercana ↗</a>
-            <a class="text-link" data-meet-link target="_blank" rel="noopener" hidden>Entrar a Google Meet ↗</a>
+            <a class="text-link" data-online-link target="_blank" rel="noopener" hidden>Entrar a la transmisión ↗</a>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="social-section section-dark" aria-labelledby="social-title">
+    <section class="newsletter-section section-dark" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="newsletter-copy reveal">
+        <p class="eyebrow">MANTENTE CERCA · NEWSLETTER FARO</p>
+        <h2 id="newsletter-title">NO TE PIERDAS<br><span>LA PRÓXIMA.</span></h2>
+        <p class="serif-lead">Recibe la convocatoria, cambios de punto, reuniones en casas y acceso en línea directamente en tu correo.</p>
+      </div>
+      <div class="newsletter-panel reveal">
+        <form class="newsletter-form" data-newsletter-form method="post">
+          <label for="newsletter-email">Tu correo</label>
+          <div class="newsletter-field">
+            <input id="newsletter-email" type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required>
+            <button type="submit">QUIERO RECIBIRLO ↗</button>
+          </div>
+          <input type="hidden" name="embed" value="1">
+          <input type="hidden" name="tag" value="sitio-web">
+          <label class="newsletter-consent">
+            <input type="checkbox" required>
+            <span>Acepto recibir novedades de Comunidad FARO por correo. Puedo cancelar mi suscripción cuando quiera.</span>
+          </label>
+          <p class="newsletter-status" data-newsletter-status aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+
+    <section class="social-section" aria-labelledby="social-title">
       <div class="social-copy reveal">
-        <p class="eyebrow">LO MÁS RECIENTE</p>
+        <p class="eyebrow">LA CONVERSACIÓN SIGUE</p>
         <h2 id="social-title">PRIMERO<br><span>EN REDES.</span></h2>
-        <p class="serif-lead">Ahí publicamos cambios de punto, reuniones en casas, transmisiones y convocatorias especiales.</p>
+        <p class="serif-lead">Ahí aparece la convocatoria más reciente, lo que estamos viviendo en Casa y lo que sigue.</p>
         <div class="social-links" id="social-links"></div>
       </div>
-      <div class="social-note reveal">
-        <span>01</span>
-        <p>Este sitio no va a congelar una dirección vieja. La convocatoria vigente siempre tendrá prioridad.</p>
+      <div class="social-statement reveal">
+        <span>#WEAREFARO</span>
+        <strong>#UNAFAMILIAMUCHASTRIBUS</strong>
       </div>
     </section>
 
     <section class="first-visit" id="visita" aria-labelledby="visit-title">
       <div class="section-heading reveal">
-        <p class="eyebrow">PRIMERA VEZ</p>
+        <p class="eyebrow">¿ES TU PRIMERA VEZ?</p>
         <h2 id="visit-title">ANTES DE<br>LLEGAR.</h2>
       </div>
       <div class="visit-grid">
         <div class="visit-essential reveal">
-          <p class="serif-lead">Revisa primero la convocatoria más reciente. Si la reunión es por casas, pregunta cuál te queda más cerca.</p>
+          <p class="serif-lead">Lo primero es saber dónde nos vemos esta semana. Si la reunión es por casas, pregúntanos cuál te queda más cerca.</p>
           <a class="button button-dark" data-facebook-link target="_blank" rel="noopener">Revisar convocatoria ↗</a>
         </div>
         <div class="faq reveal" id="faq-list"></div>
@@ -179,11 +246,11 @@
       <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
       <h2>NOS VEMOS<br><span>EN CASA.</span></h2>
       <div class="footer-grid">
-        <div><strong>Fe · Amor · Relevancia · Obediencia</strong><span>La próxima reunión se confirma en nuestras redes.</span></div>
+        <div><strong>Fe · Amor · Relevancia · Obediencia</strong><span>Una familia, muchas tribus.</span></div>
         <div><a class="button button-light" data-facebook-link target="_blank" rel="noopener">Ver próxima convocatoria ↗</a></div>
       </div>
     </div>
-    <div class="footer-bottom"><span>© <span id="year"></span> Comunidad F.A.R.O.</span><span>Una familia, muchas tribus.</span></div>
+    <div class="footer-bottom"><span>© <span id="year"></span> Comunidad F.A.R.O.</span><span>#weareFARO</span></div>
   </footer>
 
   <script src="js/config.js"></script>
