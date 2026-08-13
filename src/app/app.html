@@ -27,42 +27,88 @@
 </header>
 
 <main id="contenido">
-  @if (isLiveActive) {
+  @if (isLiveActive()) {
     <section class="live-takeover" id="en-vivo" aria-labelledby="live-title">
       <div class="live-broadcast-bar" aria-hidden="true">
         <div class="live-broadcast-track">
           <span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span>
         </div>
       </div>
+
       <div class="live-grid">
-        <div class="live-copy reveal">
-          <p class="live-kicker"><span class="live-dot" aria-hidden="true"></span><span>{{ live.label || 'TRANSMISION EN VIVO' }}</span></p>
-          <h1 id="live-title"><span>{{ live.titleTop || 'ESTAMOS' }}</span><br><em>{{ live.titleAccent || 'EN VIVO.' }}</em></h1>
-          <p class="live-description">{{ live.description || 'La Casa esta transmitiendo. Entra desde donde estes.' }}</p>
+        <div class="live-copy">
+          <p class="live-kicker">
+            <span class="live-dot" aria-hidden="true"></span>
+            <span>{{ live.label || 'TRANSMISION EN VIVO' }}</span>
+          </p>
+
+          <h1 id="live-title">
+            <span>{{ live.titleTop || 'ESTAMOS' }}</span><br>
+            <em>{{ live.titleAccent || 'EN VIVO.' }}</em>
+          </h1>
+
+          <p class="live-description">{{ liveDescription() }}</p>
+
+          @if (alertMessage()) {
+            <div class="live-alert" role="status" aria-live="polite">
+              <strong>AVISO</strong>
+              <span>{{ alertMessage() }}</span>
+            </div>
+          }
+
           <div class="live-actions">
-            @if (liveStreamUrl) {
-              <a class="live-primary" [href]="liveStreamUrl" target="_blank" rel="noopener"><span class="live-primary-dot" aria-hidden="true"></span><span>{{ live.buttonLabel || 'Entrar a la transmision' }}</span><span aria-hidden="true">↗</span></a>
+            @if (liveStreamUrl()) {
+              <a
+                class="live-primary"
+                [href]="liveStreamUrl()"
+                target="_blank"
+                rel="noopener"
+              >
+                <span class="live-primary-dot" aria-hidden="true"></span>
+                <span>{{ live.buttonLabel || 'Entrar a la transmision' }}</span>
+                <span aria-hidden="true">↗</span>
+              </a>
             }
+
             <a class="live-scroll" href="#inicio">Seguir al sitio ↓</a>
           </div>
         </div>
 
-        @if (safeEmbedUrl) {
+        @if (safeEmbedUrl()) {
           <div class="live-media">
-            <iframe [src]="safeEmbedUrl" title="Transmision en vivo de Comunidad FARO" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+            <iframe
+              [src]="safeEmbedUrl()"
+              title="Transmision en vivo de Comunidad FARO"
+              allow="autoplay; encrypted-media; picture-in-picture"
+              allowfullscreen
+            ></iframe>
           </div>
         } @else {
           <div class="live-signal-art" aria-hidden="true">
             <div class="signal-ring signal-ring-one"></div>
             <div class="signal-ring signal-ring-two"></div>
             <div class="signal-ring signal-ring-three"></div>
-            <div class="signal-core"><span></span><strong>ON<br>AIR</strong></div>
+
+            <div class="signal-core">
+              <span></span>
+              <strong>ON<br>AIR</strong>
+            </div>
           </div>
         }
       </div>
+
       <div class="live-corner live-corner-a" aria-hidden="true"></div>
       <div class="live-corner live-corner-b" aria-hidden="true"></div>
     </section>
+  }
+
+  @if (alertMessage() && !isLiveActive()) {
+    <aside class="site-alert" role="status" aria-live="polite">
+      <div class="site-alert-inner">
+        <strong>AVISO FARO</strong>
+        <p>{{ alertMessage() }}</p>
+      </div>
+    </aside>
   }
 
   <section class="hero" id="inicio" aria-labelledby="hero-title">
@@ -70,21 +116,21 @@
     <div class="hero-shade"></div>
     <div class="hero-content reveal">
       <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
-      <h1 id="hero-title"><b>{{ heroTitleTop }}</b><br><span>{{ heroTitleAccent }}</span></h1>
-      <p class="hero-line">{{ heroLine }}</p>
+      <h1 id="hero-title"><b>{{ heroTitleTop() }}</b><br><span>{{ heroTitleAccent() }}</span></h1>
+      <p class="hero-line">{{ heroLine() }}</p>
       <div class="hero-utility">
         <div>
           <small>ESTA SEMANA</small>
-          <strong>{{ meeting.title }}</strong>
+          <strong>{{ meetingTitle() }}</strong>
         </div>
         <div>
           <small>¿DONDE?</small>
-          <strong>{{ meeting.status }}</strong>
+          <strong>{{ meetingStatus() }}</strong>
         </div>
         <div class="hero-actions">
           <a class="button button-light" [href]="facebookUrl" target="_blank" rel="noopener">Ver convocatoria ↗</a>
-          @if (onlineUrl) {
-            <a class="hero-secondary" [href]="onlineUrl" target="_blank" rel="noopener">{{ meeting.onlineLabel || 'Entrar a la transmision' }} ↗</a>
+          @if (meetingOnlineUrl()) {
+            <a class="hero-secondary" [href]="meetingOnlineUrl()" target="_blank" rel="noopener">{{ meeting.onlineLabel || 'Entrar a la transmision' }} ↗</a>
           }
         </div>
       </div>
@@ -201,23 +247,38 @@
       <div class="meeting-grid reveal">
         <div class="meeting-main">
           <small>CONVOCATORIA VIGENTE</small>
-          <strong>{{ meeting.title }}</strong>
-          <p>{{ meeting.description }}</p>
+          <strong>{{ meetingTitle() }}</strong>
+          <p>{{ meetingDescription() }}</p>
         </div>
         <div class="meeting-meta">
-          <div><span>MODALIDAD</span><strong>{{ meeting.status }}</strong></div>
-          <div><span>HORARIO</span><strong>{{ meeting.schedule }}</strong></div>
+          <div><span>MODALIDAD</span><strong>{{ meetingStatus() }}</strong></div>
+          <div><span>HORARIO</span><strong>{{ meetingSchedule() }}</strong></div>
         </div>
         <div class="meeting-actions">
           <a class="button button-dark" [href]="facebookUrl" target="_blank" rel="noopener">Ver ultima convocatoria ↗</a>
           <a class="text-link" [href]="nearestUrl" target="_blank" rel="noopener">Preguntar por la mas cercana ↗</a>
-          @if (onlineUrl) {
-            <a class="text-link" [href]="onlineUrl" target="_blank" rel="noopener">{{ meeting.onlineLabel || 'Entrar a la transmision' }} ↗</a>
+          @if (meetingOnlineUrl()) {
+            <a class="text-link" [href]="meetingOnlineUrl()" target="_blank" rel="noopener">{{ meeting.onlineLabel || 'Entrar a la transmision' }} ↗</a>
           }
         </div>
       </div>
     </div>
   </section>
+
+  @if (featuredMessage()) {
+    <section class="featured-message-section" aria-labelledby="featured-message-title">
+      <div class="featured-message-wrap">
+        <div class="featured-message-label">
+          <p class="eyebrow">DESTACADO · FARO</p>
+          <span>AHORA</span>
+        </div>
+
+        <div class="featured-message-copy">
+          <h2 id="featured-message-title">{{ featuredMessage() }}</h2>
+        </div>
+      </div>
+    </section>
+  }
 
   @if (cfg.newsletter.enabled) {
     <section class="newsletter-section section-dark" id="newsletter" aria-labelledby="newsletter-title">
@@ -283,7 +344,7 @@
     </div>
   </section>
 
-  @if (isCalendarEnabled) {
+  @if (isStaticCalendarEnabled) {
     <section class="calendar-section section-dark" id="calendario" aria-labelledby="calendar-title">
       <div class="calendar-heading reveal">
         <p class="eyebrow">PROXIMAS FECHAS</p>
@@ -316,7 +377,7 @@
   <div class="footer-photo photo-slot" [style.background-image]="photoStyle(cfg.photos.footer)" [class.has-image]="!!cfg.photos.footer" aria-hidden="true"></div>
   <div class="footer-main">
     <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
-    <h2><b>{{ footerTitleTop }}</b><br><span>{{ footerTitleAccent }}</span></h2>
+    <h2><b>{{ footerTitleTop() }}</b><br><span>{{ footerTitleAccent() }}</span></h2>
     <div class="footer-grid">
       <div><strong>Fe · Amor · Relevancia · Obediencia</strong><span>Casa · Familia · Rey · Reino.</span></div>
       <div><a class="button button-light" [href]="facebookUrl" target="_blank" rel="noopener">Ver proxima convocatoria ↗</a></div>

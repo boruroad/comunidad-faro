@@ -51,26 +51,41 @@ export interface FaroConfig {
     description: string;
     canonicalUrl: string;
   };
+
+  api: {
+    enabled: boolean;
+    url: string;
+    refreshMs: number;
+  };
+
   meeting: MeetingConfig;
   live: LiveConfig;
+
   music: {
     enabled: boolean;
     releases: MusicRelease[];
   };
+
   newsletter: {
     enabled: boolean;
     buttondownUsername: string;
     actionUrl: string;
     tag: string;
   };
+
   calendar: {
     enabled: boolean;
     title: string;
     subtitle: string;
+
+    // Se conserva únicamente como fallback.
+    // La fuente principal ahora es Google Calendar mediante FARO Web API.
     events: CalendarEvent[];
   };
+
   socials: Record<string, string>;
   firstVisit: [string, string][];
+
   photos: {
     hero: string;
     worship: string;
@@ -86,6 +101,20 @@ export const FARO_CONFIG: FaroConfig = {
     description: 'Fe, Amor, Relevancia y Obediencia. Una familia, muchas tribus.',
     canonicalUrl: 'https://TU-DOMINIO-AQUI/'
   },
+
+  /*
+   * FUENTE DINÁMICA DE LA WEB
+   *
+   * Angular consulta este endpoint automáticamente.
+   * Los horarios, próximos eventos y transmisiones LIVE
+   * dejan de depender de cambios manuales en el código.
+   */
+  api: {
+    enabled: true,
+    url: 'https://script.google.com/macros/s/AKfycbwAC0pJrqevZMBgXSis6qQRlw4s3h9ARQtBR2KizHZMmojnwZ3WxJL60KJKzfeXReIw/exec',
+    refreshMs: 30000
+  },
+
   meeting: {
     status: 'CONFIRMAR EN REDES',
     title: 'La próxima convocatoria.',
@@ -96,6 +125,14 @@ export const FARO_CONFIG: FaroConfig = {
     onlineUrl: '',
     onlineLabel: 'Entrar a la transmisión'
   },
+
+  /*
+   * FALLBACK MANUAL.
+   *
+   * Normalmente estos campos quedan vacíos porque Google Calendar
+   * controla el LIVE. Si algún día la API falla, todavía puedes usar
+   * enabled / startsAt / endsAt / url manualmente.
+   */
   live: {
     enabled: false,
     startsAt: '',
@@ -104,10 +141,11 @@ export const FARO_CONFIG: FaroConfig = {
     titleTop: 'ESTAMOS',
     titleAccent: 'EN VIVO.',
     description: 'Conéctate desde donde estés.',
-    url: 'https://www.youtube.com/watch?v=ZuEz0U2F7Yg',
+    url: '',
     buttonLabel: 'Entrar a la transmisión',
     embedUrl: ''
   },
+
   music: {
     enabled: true,
     releases: [
@@ -127,12 +165,14 @@ export const FARO_CONFIG: FaroConfig = {
       }
     ]
   },
+
   newsletter: {
     enabled: true,
     buttondownUsername: '',
     actionUrl: '',
     tag: 'sitio-web'
   },
+
   calendar: {
     enabled: true,
     title: 'Calendario FARO',
@@ -167,20 +207,23 @@ export const FARO_CONFIG: FaroConfig = {
       }
     ]
   },
+
   socials: {
     facebook: 'https://www.facebook.com/comunidad.FARO/',
     instagram: 'https://www.instagram.com/comunidad_faro/',
     youtube: '',
     whatsapp: ''
   },
+
   firstVisit: [
-    ['¿Dónde se reúnen esta semana?', 'La ubicación no se deja fija en este sitio. Revisa la convocatoria vigente en nuestras redes.'],
+    ['¿Dónde se reúnen esta semana?', 'La ubicación puede cambiar. Revisa aquí la próxima fecha o la convocatoria vigente en nuestras redes.'],
     ['¿Y si la reunión es en casas?', 'Escríbenos desde el enlace Preguntar por la más cercana para conocer el punto que te conviene.'],
-    ['¿Hay transmisión en vivo?', 'Cuando exista una transmisión confirmada, será lo primero que aparezca al entrar al sitio.'],
+    ['¿Hay transmisión en vivo?', 'Cuando exista una transmisión activa, será lo primero que aparezca al entrar al sitio.'],
     ['¿Hay actividades para niños?', '[INFORMACIÓN POR CONFIRMAR]'],
     ['¿Necesito registrarme?', '[INFORMACIÓN POR CONFIRMAR]'],
     ['¿Hay código de vestimenta?', '[INFORMACIÓN POR CONFIRMAR]']
   ],
+
   photos: {
     hero: '',
     worship: '',

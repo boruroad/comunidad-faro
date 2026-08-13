@@ -353,3 +353,126 @@ img{max-width:100%;display:block}
 [data-photo="people"]:not(.has-image)::before{content:"FAMILIA.";border:0;left:.8rem;bottom:1rem;padding:0;font-size:clamp(2.8rem,6vw,6rem);line-height:.85;letter-spacing:-.065em;font-weight:900;color:rgba(255,255,255,.14)}
 [data-photo="prayer"]:not(.has-image)::before{content:"CASA.";border:0;left:.8rem;bottom:1rem;padding:0;font-size:clamp(3rem,7vw,6rem);line-height:.8;letter-spacing:-.06em;font-weight:900;color:rgba(255,255,255,.14)}
 .footer-photo:not(.has-image)::before{content:"F.A.R.O.";white-space:pre;border:0;left:var(--pad);bottom:var(--pad);padding:0;font-size:clamp(5rem,15vw,14rem);line-height:.8;letter-spacing:-.075em;font-weight:900;color:rgba(255,255,255,.10)}
+
+/* FARO CONTROL — ALERT */
+.site-alert{
+  margin-top:4.7rem;
+  background:#d8d1c5;
+  color:var(--ink);
+  border-top:1px solid rgba(21,21,19,.18);
+  border-bottom:1px solid rgba(21,21,19,.18);
+}
+.site-alert-inner{
+  max-width:var(--max);
+  margin:auto;
+  min-height:58px;
+  padding:.9rem var(--pad);
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:clamp(1.2rem,3vw,3.5rem);
+  align-items:center;
+}
+.site-alert strong{
+  font-size:.61rem;
+  letter-spacing:.16em;
+  white-space:nowrap;
+}
+.site-alert p{
+  margin:0;
+  font:500 clamp(.92rem,1.4vw,1.18rem)/1.35 "Source Serif 4",serif;
+  white-space:pre-line;
+}
+
+.live-alert{
+  max-width:34rem;
+  display:grid;
+  grid-template-columns:auto 1fr;
+  gap:1rem;
+  align-items:start;
+  margin:-.4rem 0 1.8rem;
+  padding:1rem 1.1rem;
+  border:1px solid rgba(240,79,67,.42);
+  background:rgba(240,79,67,.075);
+}
+.live-alert strong{
+  color:var(--live-signal);
+  font-size:.58rem;
+  letter-spacing:.16em;
+  padding-top:.18rem;
+}
+.live-alert span{
+  color:#e7e2da;
+  font:400 1rem/1.45 "Source Serif 4",serif;
+  white-space:pre-line;
+}
+
+/* FARO CONTROL — FEATURED MESSAGE */
+.featured-message-section{
+  background:var(--paper-2);
+  color:var(--ink);
+  padding:8rem var(--pad);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.featured-message-wrap{
+  max-width:var(--max);
+  margin:auto;
+  display:grid;
+  grid-template-columns:minmax(160px,.32fr) minmax(0,1.68fr);
+  gap:clamp(2rem,6vw,7rem);
+  align-items:start;
+}
+.featured-message-label{
+  display:flex;
+  flex-direction:column;
+  gap:1.2rem;
+  padding-top:.65rem;
+}
+.featured-message-label .eyebrow{
+  margin:0;
+}
+.featured-message-label>span{
+  font-size:clamp(2.3rem,4.5vw,5rem);
+  line-height:.8;
+  font-weight:900;
+  letter-spacing:-.06em;
+  color:#c3bbae;
+}
+.featured-message-copy{
+  border-top:1px solid var(--ink);
+  padding-top:1.4rem;
+}
+.featured-message-copy h2{
+  margin:0;
+  max-width:18ch;
+  font:400 clamp(2.8rem,6.2vw,6.8rem)/.98 "Source Serif 4",serif;
+  letter-spacing:-.045em;
+  white-space:pre-line;
+}
+
+@media(max-width:760px){
+  .site-alert-inner{
+    grid-template-columns:1fr;
+    gap:.35rem;
+  }
+  .live-alert{
+    grid-template-columns:1fr;
+    gap:.4rem;
+  }
+  .featured-message-section{
+    padding-top:6rem;
+    padding-bottom:6rem;
+  }
+  .featured-message-wrap{
+    grid-template-columns:1fr;
+    gap:2.5rem;
+  }
+  .featured-message-label{
+    flex-direction:row;
+    justify-content:space-between;
+    align-items:baseline;
+  }
+  .featured-message-copy h2{
+    font-size:clamp(2.7rem,13vw,5rem);
+  }
+}
