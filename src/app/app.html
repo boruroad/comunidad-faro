@@ -1,0 +1,296 @@
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<header class="site-header" [class.scrolled]="headerScrolled" data-header>
+  <a class="brand" href="#inicio" aria-label="Comunidad FARO, ir al inicio">
+    <span class="brand-mark" aria-hidden="true">F</span>
+    <span class="brand-copy"><strong>COMUNIDAD FARO</strong><small>FE · AMOR · RELEVANCIA · OBEDIENCIA</small></span>
+  </a>
+  <nav class="desktop-nav" aria-label="Navegacion principal">
+    <a href="#casa">Casa</a>
+    <a href="#identidad">F.A.R.O.</a>
+    <a href="#reunion">Esta semana</a>
+    <a href="#musica">Musica</a>
+    <a href="#newsletter">Mantente cerca</a>
+  </nav>
+  <a class="header-cta" [href]="facebookUrl" target="_blank" rel="noopener">Ultima convocatoria ↗</a>
+  <button class="menu-button" type="button" [attr.aria-expanded]="menuOpen" aria-controls="mobile-menu" aria-label="Abrir menu" (click)="toggleMenu()"><span></span><span></span></button>
+  <nav id="mobile-menu" class="mobile-menu" aria-label="Navegacion movil" [hidden]="!menuOpen">
+    <a href="#casa" (click)="closeMenu()">Casa</a>
+    <a href="#identidad" (click)="closeMenu()">F.A.R.O.</a>
+    <a href="#reunion" (click)="closeMenu()">Esta semana</a>
+    <a href="#musica" (click)="closeMenu()">Musica</a>
+    <a href="#newsletter" (click)="closeMenu()">Mantente cerca</a>
+    <a [href]="facebookUrl" target="_blank" rel="noopener" (click)="closeMenu()">Ultima convocatoria ↗</a>
+  </nav>
+</header>
+
+<main id="contenido">
+  @if (isLiveActive) {
+    <section class="live-takeover" id="en-vivo" aria-labelledby="live-title">
+      <div class="live-broadcast-bar" aria-hidden="true">
+        <div class="live-broadcast-track">
+          <span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span>
+        </div>
+      </div>
+      <div class="live-grid">
+        <div class="live-copy reveal">
+          <p class="live-kicker"><span class="live-dot" aria-hidden="true"></span><span>{{ live.label || 'TRANSMISION EN VIVO' }}</span></p>
+          <h1 id="live-title"><span>{{ live.titleTop || 'ESTAMOS' }}</span><br><em>{{ live.titleAccent || 'EN VIVO.' }}</em></h1>
+          <p class="live-description">{{ live.description || 'La Casa esta transmitiendo. Entra desde donde estes.' }}</p>
+          <div class="live-actions">
+            @if (liveStreamUrl) {
+              <a class="live-primary" [href]="liveStreamUrl" target="_blank" rel="noopener"><span class="live-primary-dot" aria-hidden="true"></span><span>{{ live.buttonLabel || 'Entrar a la transmision' }}</span><span aria-hidden="true">↗</span></a>
+            }
+            <a class="live-scroll" href="#inicio">Seguir al sitio ↓</a>
+          </div>
+        </div>
+
+        @if (safeEmbedUrl) {
+          <div class="live-media">
+            <iframe [src]="safeEmbedUrl" title="Transmision en vivo de Comunidad FARO" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        } @else {
+          <div class="live-signal-art" aria-hidden="true">
+            <div class="signal-ring signal-ring-one"></div>
+            <div class="signal-ring signal-ring-two"></div>
+            <div class="signal-ring signal-ring-three"></div>
+            <div class="signal-core"><span></span><strong>ON<br>AIR</strong></div>
+          </div>
+        }
+      </div>
+      <div class="live-corner live-corner-a" aria-hidden="true"></div>
+      <div class="live-corner live-corner-b" aria-hidden="true"></div>
+    </section>
+  }
+
+  <section class="hero" id="inicio" aria-labelledby="hero-title">
+    <div class="hero-photo photo-slot" [style.background-image]="photoStyle(cfg.photos.hero)" [class.has-image]="!!cfg.photos.hero" aria-hidden="true"></div>
+    <div class="hero-shade"></div>
+    <div class="hero-content reveal">
+      <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
+      <h1 id="hero-title"><b>{{ heroTitleTop }}</b><br><span>{{ heroTitleAccent }}</span></h1>
+      <p class="hero-line">{{ heroLine }}</p>
+      <div class="hero-utility">
+        <div>
+          <small>ESTA SEMANA</small>
+          <strong>{{ meeting.title }}</strong>
+        </div>
+        <div>
+          <small>¿DONDE?</small>
+          <strong>{{ meeting.status }}</strong>
+        </div>
+        <div class="hero-actions">
+          <a class="button button-light" [href]="facebookUrl" target="_blank" rel="noopener">Ver convocatoria ↗</a>
+          @if (onlineUrl) {
+            <a class="hero-secondary" [href]="onlineUrl" target="_blank" rel="noopener">{{ meeting.onlineLabel || 'Entrar a la transmision' }} ↗</a>
+          }
+        </div>
+      </div>
+    </div>
+    <a class="scroll-cue" href="#casa" aria-label="Continuar hacia Casa FARO">SCROLL <span>↓</span></a>
+  </section>
+
+  <section class="voice-strip" aria-label="Palabras que atraviesan la comunicacion de FARO">
+    <div class="voice-track">
+      <span>CASA.</span><em>FAMILIA.</em><span>REY.</span><em>REINO.</em><span>FARO.</span>
+    </div>
+  </section>
+
+  <section class="life-section" id="casa" aria-labelledby="casa-title">
+    <div class="section-heading reveal">
+      <p class="eyebrow">DOMINGO EN CASA · LA SEMANA EN MOVIMIENTO</p>
+      <h2 id="casa-title">HAY UN LUGAR<br><span>EN LA MESA.</span></h2>
+    </div>
+    <div class="photo-story">
+      <figure class="story-shot shot-wide reveal">
+        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.worship)" [class.has-image]="!!cfg.photos.worship"></div>
+        <figcaption>Celebrar al Rey · crecer en familia</figcaption>
+      </figure>
+      <figure class="story-shot shot-tall reveal">
+        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.people)" [class.has-image]="!!cfg.photos.people"></div>
+        <figcaption>Una familia · muchas tribus</figcaption>
+      </figure>
+      <blockquote class="story-quote reveal">La Casa no termina cuando termina la reunion.</blockquote>
+      <figure class="story-shot shot-square reveal">
+        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.prayer)" [class.has-image]="!!cfg.photos.prayer"></div>
+        <figcaption>Oracion · conversacion · comunidad</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="manifesto section-dark" id="identidad" aria-labelledby="identity-title">
+    <div class="manifesto-intro reveal">
+      <p class="eyebrow">NUESTRO NOMBRE</p>
+      <h2 id="identity-title">
+        <span class="value-row"><b>F</b><em>e.</em></span>
+        <span class="value-row"><b>A</b><em>mor.</em></span>
+        <span class="value-row"><b>R</b><em>elevancia.</em></span>
+        <span class="value-row"><b>O</b><em>bediencia.</em></span>
+      </h2>
+    </div>
+    <div class="manifesto-copy reveal">
+      <p class="serif-lead">Fe. Amor. Relevancia. Obediencia. No son un pie de pagina: forman nuestro nombre.</p>
+      <p class="quiet-copy">La forma de reunirnos puede cambiar. El punto puede cambiar. La identidad permanece.</p>
+    </div>
+  </section>
+
+  <section class="kingdom-section" aria-labelledby="kingdom-title">
+    <div class="kingdom-word reveal" aria-hidden="true">REINO</div>
+    <div class="kingdom-copy reveal">
+      <p class="eyebrow">MAS ALLA DE UNA REUNION</p>
+      <h2 id="kingdom-title">CELEBRAMOS<br>AL REY.<br><span>VIVIMOS EL REINO.</span></h2>
+      <p class="serif-lead">Casa FARO habla de una Iglesia que forma discipulos, transforma familias y vive su fe tambien fuera de un lugar o un horario.</p>
+    </div>
+  </section>
+
+  @if (isMusicEnabled) {
+    <section class="music-section section-dark" id="musica" aria-labelledby="music-title">
+      <div class="music-heading reveal">
+        <p class="eyebrow">MUSICA DE CASA</p>
+        <h2 id="music-title">TAMBIEN<br><span>SUENA AFUERA.</span></h2>
+        <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas.</p>
+      </div>
+      <div class="music-releases" id="music-releases">
+        @for (release of releases; track $index) {
+          <article class="music-release reveal">
+            <div
+              class="music-cover-art"
+              [style.background-image]="photoStyle(release.coverImage)"
+              [class.has-cover]="hasCoverImage(release.coverImage)"
+              [attr.role]="hasCoverImage(release.coverImage) ? 'img' : null"
+              [attr.aria-label]="hasCoverImage(release.coverImage) ? coverAriaLabel(release.title, release.artist) : null"
+            >
+              @if (!hasCoverImage(release.coverImage)) {
+                <span class="music-cover-label">FARO · MUSIC</span>
+                <strong>{{ release.title }}</strong>
+                <span class="music-cover-artist">{{ release.artist }}</span>
+                <span class="music-vinyl" aria-hidden="true"></span>
+              }
+            </div>
+
+            <div class="music-release-info">
+              <p class="music-available"><span aria-hidden="true">●</span>{{ release.eyebrow || 'YA DISPONIBLE' }}</p>
+              <h3>{{ release.title }}</h3>
+              <p class="music-artist">{{ release.artist }}</p>
+              <button class="music-listen-button" type="button" [attr.aria-expanded]="isReleaseExpanded($index)" [attr.aria-controls]="'music-platforms-' + $index" (click)="toggleRelease($index)">
+                <span>Escuchar cancion</span><span aria-hidden="true">{{ isReleaseExpanded($index) ? '−' : '＋' }}</span>
+              </button>
+
+              <div class="music-platforms" [id]="'music-platforms-' + $index" [hidden]="!isReleaseExpanded($index)">
+                @for (platform of release.platforms; track platform.name + platform.url) {
+                  @if (platform.url) {
+                    <a class="music-platform" [href]="platform.url" target="_blank" rel="noopener">
+                      <span>{{ ($index + 1).toString().padStart(2, '0') }}</span><strong>{{ platform.name }}</strong><em aria-hidden="true">↗</em>
+                    </a>
+                  }
+                }
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+  }
+
+  <section class="meeting-section" id="reunion" aria-labelledby="meeting-title">
+    <div class="meeting-wrap">
+      <p class="eyebrow reveal">ESTA SEMANA</p>
+      <h2 id="meeting-title" class="reveal">¿DONDE NOS<br>VEMOS ESTA VEZ?</h2>
+      <div class="meeting-grid reveal">
+        <div class="meeting-main">
+          <small>CONVOCATORIA VIGENTE</small>
+          <strong>{{ meeting.title }}</strong>
+          <p>{{ meeting.description }}</p>
+        </div>
+        <div class="meeting-meta">
+          <div><span>MODALIDAD</span><strong>{{ meeting.status }}</strong></div>
+          <div><span>HORARIO</span><strong>{{ meeting.schedule }}</strong></div>
+        </div>
+        <div class="meeting-actions">
+          <a class="button button-dark" [href]="facebookUrl" target="_blank" rel="noopener">Ver ultima convocatoria ↗</a>
+          <a class="text-link" [href]="nearestUrl" target="_blank" rel="noopener">Preguntar por la mas cercana ↗</a>
+          @if (onlineUrl) {
+            <a class="text-link" [href]="onlineUrl" target="_blank" rel="noopener">{{ meeting.onlineLabel || 'Entrar a la transmision' }} ↗</a>
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  @if (cfg.newsletter.enabled) {
+    <section class="newsletter-section section-dark" id="newsletter" aria-labelledby="newsletter-title">
+      <div class="newsletter-copy reveal">
+        <p class="eyebrow">MANTENTE CERCA · NEWSLETTER FARO</p>
+        <h2 id="newsletter-title">NO TE PIERDAS<br><span>LA PROXIMA.</span></h2>
+        <p class="serif-lead">Recibe la convocatoria, cambios de punto, reuniones en casas y acceso en linea directamente en tu correo.</p>
+      </div>
+      <div class="newsletter-panel reveal">
+        <form class="newsletter-form" method="post" [attr.action]="newsletterAction || null" (submit)="onNewsletterSubmit($event)">
+          <label for="newsletter-email">Tu correo</label>
+          <div class="newsletter-field">
+            <input id="newsletter-email" type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required>
+            <button type="submit">QUIERO RECIBIRLO ↗</button>
+          </div>
+          <input type="hidden" name="embed" value="1">
+          <input type="hidden" name="tag" [value]="newsletterTag">
+          <label class="newsletter-consent">
+            <input type="checkbox" required>
+            <span>Acepto recibir novedades de Comunidad FARO por correo. Puedo cancelar mi suscripcion cuando quiera.</span>
+          </label>
+          <p class="newsletter-status" [class.is-warning]="newsletterWarning" aria-live="polite">{{ newsletterStatus }}</p>
+        </form>
+      </div>
+    </section>
+  }
+
+  <section class="social-section" aria-labelledby="social-title">
+    <div class="social-copy reveal">
+      <p class="eyebrow">LA CONVERSACION SIGUE</p>
+      <h2 id="social-title">PRIMERO<br><span>EN REDES.</span></h2>
+      <p class="serif-lead">Ahi aparece la convocatoria mas reciente, lo que estamos viviendo en Casa y lo que sigue.</p>
+      <div class="social-links" id="social-links">
+        @for (social of socialEntries; track social[0]) {
+          <a [href]="social[1]" target="_blank" rel="noopener">{{ socialLabel(social[0]) }}</a>
+        }
+      </div>
+    </div>
+    <div class="social-statement reveal">
+      <span>#WEAREFARO</span>
+      <strong>#UNAFAMILIAMUCHASTRIBUS</strong>
+    </div>
+  </section>
+
+  <section class="first-visit" id="visita" aria-labelledby="visit-title">
+    <div class="section-heading reveal">
+      <p class="eyebrow">¿ES TU PRIMERA VEZ?</p>
+      <h2 id="visit-title">ANTES DE<br>LLEGAR.</h2>
+    </div>
+    <div class="visit-grid">
+      <div class="visit-essential reveal">
+        <p class="serif-lead">Lo primero es saber donde nos vemos esta semana. Si la reunion es por casas, preguntanos cual te queda mas cerca.</p>
+        <a class="button button-dark" [href]="facebookUrl" target="_blank" rel="noopener">Revisar convocatoria ↗</a>
+      </div>
+      <div class="faq reveal" id="faq-list">
+        @for (item of firstVisit; track item[0]) {
+          <details>
+            <summary>{{ item[0] }}</summary>
+            <p>{{ item[1] }}</p>
+          </details>
+        }
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-photo photo-slot" [style.background-image]="photoStyle(cfg.photos.footer)" [class.has-image]="!!cfg.photos.footer" aria-hidden="true"></div>
+  <div class="footer-main">
+    <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
+    <h2><b>{{ footerTitleTop }}</b><br><span>{{ footerTitleAccent }}</span></h2>
+    <div class="footer-grid">
+      <div><strong>Fe · Amor · Relevancia · Obediencia</strong><span>Casa · Familia · Rey · Reino.</span></div>
+      <div><a class="button button-light" [href]="facebookUrl" target="_blank" rel="noopener">Ver proxima convocatoria ↗</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© {{ year }} Comunidad F.A.R.O.</span><span>#weareFARO</span></div>
+</footer>
