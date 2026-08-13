@@ -38,6 +38,28 @@
   const liveActive = Boolean(live.enabled || scheduledLive);
   const liveSection = $('[data-live-section]');
 
+  // "Nos vemos en Casa" aparece una sola vez en la experiencia.
+  // Sin transmisión: abre el sitio. Con transmisión: se reserva para el cierre.
+  const heroTop = $('[data-hero-title-top]');
+  const heroAccent = $('[data-hero-title-accent]');
+  const heroLine = $('[data-hero-line]');
+  const footerTop = $('[data-footer-title-top]');
+  const footerAccent = $('[data-footer-title-accent]');
+
+  if (liveActive) {
+    heroTop.textContent = 'UNA FAMILIA.';
+    heroAccent.textContent = 'MUCHAS TRIBUS.';
+    heroLine.textContent = 'Fe · Amor · Relevancia · Obediencia.';
+    footerTop.textContent = 'NOS VEMOS';
+    footerAccent.textContent = 'EN CASA.';
+  } else {
+    heroTop.textContent = 'NOS VEMOS';
+    heroAccent.textContent = 'EN CASA.';
+    heroLine.textContent = 'Una familia, muchas tribus.';
+    footerTop.textContent = 'UNA FAMILIA.';
+    footerAccent.textContent = 'MUCHAS TRIBUS.';
+  }
+
   if (liveActive) {
     liveSection.hidden = false;
     document.body.classList.add('is-live');
@@ -82,13 +104,16 @@
       if (release.coverImage) {
         cover.style.backgroundImage = `url("${release.coverImage}")`;
         cover.classList.add('has-cover');
+        cover.setAttribute('role', 'img');
+        cover.setAttribute('aria-label', `Portada de ${release.title || 'la canción'}${release.artist ? `, de ${release.artist}` : ''}`);
+      } else {
+        cover.innerHTML = `
+          <span class="music-cover-label">FARO · MUSIC</span>
+          <strong>${release.title || ''}</strong>
+          <span class="music-cover-artist">${release.artist || ''}</span>
+          <span class="music-vinyl" aria-hidden="true"></span>
+        `;
       }
-      cover.innerHTML = `
-        <span class="music-cover-label">FARO · MUSIC</span>
-        <strong>${release.title || ''}</strong>
-        <span class="music-cover-artist">${release.artist || ''}</span>
-        <span class="music-vinyl" aria-hidden="true"></span>
-      `;
 
       const info = document.createElement('div');
       info.className = 'music-release-info';

@@ -11,7 +11,7 @@ window.FARO_CONFIG = {
    */
   meeting: {
     status: "CONFIRMAR EN REDES",
-    title: "Nos vemos en Casa.",
+    title: "La próxima convocatoria.",
     description: "Revisa la publicación más reciente para confirmar el punto, la reunión en casas o el acceso en línea.",
     schedule: "Consulta la convocatoria vigente",
     facebookUrl: "https://www.facebook.com/comunidad.FARO/",
@@ -29,14 +29,14 @@ window.FARO_CONFIG = {
    * embedUrl es opcional y sólo se usa si la plataforma permite iframe.
    */
   live: {
-    enabled: true,
+    enabled: false,
     startsAt: "",
     endsAt: "",
     label: "TRANSMISIÓN EN VIVO",
     titleTop: "ESTAMOS",
     titleAccent: "EN VIVO.",
-    description: "Entra desde donde estés.",
-    url: "https://open.spotify.com/intl-es/track/7BlZl5wsnxif6XalOeaTUa",
+    description: "Conéctate desde donde estés.",
+    url: "https://www.youtube.com/watch?v=ZuEz0U2F7Yg",
     buttonLabel: "Entrar a la transmisión",
     embedUrl: ""
   },
@@ -53,7 +53,7 @@ window.FARO_CONFIG = {
         title: "El Dios Que Gobierna",
         artist: "A. Mendoza",
         eyebrow: "YA DISPONIBLE",
-        coverImage: "",
+        coverImage: "assets/images/el-dios-que-gobierna.png",
         platforms: [
           { name: "Spotify", url: "https://open.spotify.com/intl-es/track/7BlZl5wsnxif6XalOeaTUa" },
           { name: "YouTube Music", url: "https://music.youtube.com/search?q=El%20Dios%20Que%20Gobierna%20A.%20Mendoza" },
