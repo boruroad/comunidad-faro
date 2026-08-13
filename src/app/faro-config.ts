@@ -35,6 +35,16 @@ export interface MusicRelease {
   platforms: MusicPlatform[];
 }
 
+export interface CalendarEvent {
+  date: string;
+  title: string;
+  time: string;
+  location: string;
+  description: string;
+  ctaLabel: string;
+  ctaUrl: string;
+}
+
 export interface FaroConfig {
   site: {
     name: string;
@@ -52,6 +62,12 @@ export interface FaroConfig {
     buttondownUsername: string;
     actionUrl: string;
     tag: string;
+  };
+  calendar: {
+    enabled: boolean;
+    title: string;
+    subtitle: string;
+    events: CalendarEvent[];
   };
   socials: Record<string, string>;
   firstVisit: [string, string][];
@@ -116,6 +132,40 @@ export const FARO_CONFIG: FaroConfig = {
     buttondownUsername: '',
     actionUrl: '',
     tag: 'sitio-web'
+  },
+  calendar: {
+    enabled: true,
+    title: 'Calendario FARO',
+    subtitle: 'Aparta estas fechas y sigue la convocatoria semanal para confirmar ubicacion o modalidad.',
+    events: [
+      {
+        date: '2026-08-16',
+        title: 'Reunion de domingo',
+        time: '11:00',
+        location: 'Por confirmar en redes',
+        description: 'Celebracion principal de comunidad. Revisa la publicacion vigente antes de salir.',
+        ctaLabel: 'Ver convocatoria',
+        ctaUrl: 'https://www.facebook.com/comunidad.FARO/'
+      },
+      {
+        date: '2026-08-20',
+        title: 'Noche de oracion en casas',
+        time: '20:00',
+        location: 'Reuniones por zonas',
+        description: 'Tiempo de oracion y comunidad en grupos cercanos.',
+        ctaLabel: 'Preguntar punto cercano',
+        ctaUrl: 'https://www.facebook.com/comunidad.FARO/'
+      },
+      {
+        date: '2026-08-23',
+        title: 'Domingo en Casa FARO',
+        time: '11:00',
+        location: 'Por confirmar en redes',
+        description: 'Continuamos celebrando al Rey y viviendo el Reino como familia.',
+        ctaLabel: 'Actualizarme por Facebook',
+        ctaUrl: 'https://www.facebook.com/comunidad.FARO/'
+      }
+    ]
   },
   socials: {
     facebook: 'https://www.facebook.com/comunidad.FARO/',
