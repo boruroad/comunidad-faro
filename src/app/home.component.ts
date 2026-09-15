@@ -12,7 +12,7 @@ import {
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
-import { FARO_CONFIG, FaroConfig } from './faro-config';
+import { FaroConfig } from './faro-config';
 import { CalendarSectionComponent } from './components/calendar-section.component';
 import { FirstVisitSectionComponent } from './components/first-visit-section.component';
 import { HeroSectionComponent } from './components/hero-section.component';
@@ -23,6 +23,7 @@ import { NewsletterSectionComponent } from './components/newsletter-section.comp
 import { SocialSectionComponent } from './components/social-section.component';
 import { SiteFooterComponent } from './components/site-footer.component';
 import { SiteHeaderComponent } from './components/site-header.component';
+import { RuntimeConfigService } from './config/runtime-config.service';
 import { toPhotoBackground } from './shared/presentation.utils';
 
 interface FaroApiEvent {
@@ -87,7 +88,12 @@ interface FaroApiResponse {
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
-  readonly cfg: FaroConfig = FARO_CONFIG;
+  private readonly runtimeConfig =
+    inject(RuntimeConfigService);
+
+  readonly cfg: FaroConfig =
+    this.runtimeConfig.config;
+
   readonly year = new Date().getFullYear();
 
   readonly meeting = this.cfg.meeting;

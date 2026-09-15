@@ -274,7 +274,7 @@ img{max-width:100%;display:block}
 .social-section{display:grid;grid-template-columns:1fr .7fr;gap:8vw;align-items:end}
 .social-links{display:flex;gap:1.2rem;flex-wrap:wrap;margin-top:2rem}
 .social-links a{font-size:.73rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid currentColor;padding-bottom:.25rem}
-.social-statement{border-left:1px solid var(--line);padding-left:2rem;display:flex;flex-direction:column;gap:.7rem;word-break:break-word}
+.social-statement{border-left:1px solid var(--line);padding-left:2rem;display:flex;flex-direction:column;gap:.7rem;overflow-wrap:anywhere}
 .social-statement span{font:400 clamp(1.6rem,3vw,3rem) "Source Serif 4",serif}
 .social-statement strong{font-size:clamp(1.5rem,3.2vw,3.5rem);line-height:.92;letter-spacing:-.045em}
 
@@ -450,6 +450,100 @@ img{max-width:100%;display:block}
   white-space:pre-line;
 }
 
+/* Internal access */
+.home-access-strip{
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  background:rgba(231,226,216,.45);
+  padding:1rem var(--pad);
+}
+.home-access-wrap{
+  max-width:var(--max);
+  margin:auto;
+  display:flex;
+  justify-content:flex-end;
+}
+.home-access-link{
+  font-size:.64rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#605b54;
+  border-bottom:1px solid transparent;
+  padding-bottom:.2rem;
+}
+.home-access-link:hover,.home-access-link:focus-visible{border-color:currentColor}
+
+/* Auth pages */
+.auth-page,.dashboard-page{
+  min-height:100svh;
+  padding:8.2rem var(--pad) 4rem;
+  background:linear-gradient(180deg,var(--paper),#ebe6dc 52%,var(--paper));
+}
+.auth-panel,.dashboard-panel{
+  max-width:960px;
+  margin:auto;
+  border:1px solid var(--line);
+  background:#f8f5ee;
+  padding:clamp(1.4rem,4vw,2.6rem);
+}
+.auth-panel h1,.dashboard-panel h1{
+  font-size:clamp(2.3rem,6vw,5rem);
+  line-height:.9;
+  letter-spacing:-.05em;
+  margin:.2rem 0 1.1rem;
+  text-transform:uppercase;
+}
+.auth-copy{font:400 1.05rem/1.55 "Source Serif 4",serif;color:#5f5a52;max-width:42ch;margin:0 0 1.5rem}
+.auth-form{
+  display:grid;
+  gap:.7rem;
+  max-width:560px;
+}
+.auth-form label{
+  font-size:.63rem;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  color:#726d65;
+  margin-top:.55rem;
+}
+.auth-form input{
+  border:0;
+  border-bottom:1px solid #a9a195;
+  background:transparent;
+  padding:.8rem 0;
+  outline:0;
+  font:400 1.1rem "Source Serif 4",serif;
+}
+.auth-form input:focus{border-color:var(--ink)}
+.auth-form .button{margin-top:1rem;justify-self:start}
+.auth-error{
+  margin:.8rem 0 0;
+  color:#9d3f39;
+  font-size:.78rem;
+  letter-spacing:.02em;
+}
+
+.dashboard-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:1px;
+  background:#d2cabd;
+  border-top:1px solid #cfc7bb;
+  border-bottom:1px solid #cfc7bb;
+}
+.dashboard-card{
+  background:#fdfbf6;
+  padding:1.1rem;
+  min-height:120px;
+  display:flex;
+  flex-direction:column;
+  gap:.6rem;
+  justify-content:center;
+}
+.dashboard-card small{font-size:.58rem;letter-spacing:.14em;color:#7b756d}
+.dashboard-card strong{font-size:clamp(1.1rem,2.6vw,1.8rem);line-height:1.1}
+.dashboard-actions{display:flex;gap:1rem;align-items:center;margin-top:1.4rem;flex-wrap:wrap}
+
 @media(max-width:760px){
   .site-alert-inner{
     grid-template-columns:1fr;
@@ -475,4 +569,6 @@ img{max-width:100%;display:block}
   .featured-message-copy h2{
     font-size:clamp(2.7rem,13vw,5rem);
   }
+  .dashboard-grid{grid-template-columns:1fr}
+  .home-access-wrap{justify-content:flex-start}
 }

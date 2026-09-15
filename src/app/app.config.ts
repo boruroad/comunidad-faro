@@ -1,5 +1,7 @@
 import {
   ApplicationConfig,
+  inject,
+  provideAppInitializer,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
@@ -10,6 +12,7 @@ import {
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
+import { RuntimeConfigService } from './config/runtime-config.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,6 +24,10 @@ export const appConfig: ApplicationConfig = {
       withJsonpSupport()
     ),
 
-    provideRouter(routes)
+    provideRouter(routes),
+    provideAppInitializer(() =>
+      inject(RuntimeConfigService)
+        .loadConfig()
+    )
   ]
 };
