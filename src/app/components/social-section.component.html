@@ -1,0 +1,16 @@
+<section class="social-section" aria-labelledby="social-title">
+  <div class="social-copy reveal">
+    <p class="eyebrow">LA CONVERSACION SIGUE</p>
+    <h2 id="social-title">PRIMERO<br><span>EN REDES.</span></h2>
+    <p class="serif-lead">Ahi aparece la convocatoria mas reciente, lo que estamos viviendo en Casa y lo que sigue.</p>
+    <div class="social-links" id="social-links">
+      @for (social of socialEntries; track social[0]) {
+        <a [href]="social[1]" target="_blank" rel="noopener">{{ socialLabel(social[0]) }}</a>
+      }
+    </div>
+  </div>
+  <div class="social-statement reveal">
+    <span>#WEAREFARO</span>
+    <strong>#UNAFAMILIAMUCHASTRIBUS</strong>
+  </div>
+</section>
