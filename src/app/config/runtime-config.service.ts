@@ -3,6 +3,18 @@ import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 
 import { FARO_CONFIG, FaroConfig } from '../faro-config';
+import { environment } from '../../environments/environment';
+
+interface SiteConfigActiveEnvelope {
+  success: boolean;
+  message: string;
+  data?: {
+    config?: Partial<FaroConfig>;
+    item?: {
+      config?: Partial<FaroConfig>;
+    };
+  };
+}
 
 @Injectable({
   providedIn: 'root'
@@ -32,19 +44,26 @@ export class RuntimeConfigService {
   }
 
   private async fetchRemoteConfig(): Promise<Partial<FaroConfig> | null> {
+    const apiBaseUrl =
+      environment.apiBaseUrl
+        .replace(/\/$/, '');
+
     const urls = [
-      '/api/site-config',
+      `${apiBaseUrl}/site-config/active`,
       '/data/site-config.json'
     ];
 
     for (const url of urls) {
       try {
         const response = await firstValueFrom(
-          this.http.get<Partial<FaroConfig>>(url)
+          this.http.get<unknown>(url)
         );
 
-        if (response) {
-          return response;
+        const normalized =
+          this.normalizeResponse(response);
+
+        if (normalized) {
+          return normalized;
         }
       } catch {
         // Intentamos siguiente origen sin romper el arranque.
@@ -52,6 +71,33 @@ export class RuntimeConfigService {
     }
 
     return null;
+  }
+
+  private normalizeResponse(payload: unknown): Partial<FaroConfig> | null {
+    if (!payload || typeof payload !== 'object' || Array.isArray(payload)) {
+      return null;
+    }
+
+    const envelope = payload as SiteConfigActiveEnvelope;
+    if (typeof envelope.success === 'boolean') {
+      if (!envelope.success) {
+        return null;
+      }
+
+      const fromData = envelope.data?.config;
+      if (fromData && typeof fromData === 'object' && !Array.isArray(fromData)) {
+        return fromData;
+      }
+
+      const fromItem = envelope.data?.item?.config;
+      if (fromItem && typeof fromItem === 'object' && !Array.isArray(fromItem)) {
+        return fromItem;
+      }
+
+      return null;
+    }
+
+    return payload as Partial<FaroConfig>;
   }
 }
 

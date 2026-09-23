@@ -12,19 +12,19 @@ import {
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
-import { FaroConfig } from './faro-config';
-import { CalendarSectionComponent } from './components/calendar-section.component';
-import { FirstVisitSectionComponent } from './components/first-visit-section.component';
-import { HeroSectionComponent } from './components/hero-section.component';
-import { LiveTakeoverComponent } from './components/live-takeover.component';
-import { MeetingSectionComponent } from './components/meeting-section.component';
-import { MusicSectionComponent } from './components/music-section.component';
-import { NewsletterSectionComponent } from './components/newsletter-section.component';
-import { SocialSectionComponent } from './components/social-section.component';
-import { SiteFooterComponent } from './components/site-footer.component';
-import { SiteHeaderComponent } from './components/site-header.component';
-import { RuntimeConfigService } from './config/runtime-config.service';
-import { toPhotoBackground } from './shared/presentation.utils';
+import { FaroConfig } from '../../../faro-config';
+import { CalendarSectionComponent } from '../../../components/calendar-section.component';
+import { FirstVisitSectionComponent } from '../../../components/first-visit-section.component';
+import { HeroSectionComponent } from '../../../components/hero-section.component';
+import { LiveTakeoverComponent } from '../../../components/live-takeover.component';
+import { MeetingSectionComponent } from '../../../components/meeting-section.component';
+import { MusicSectionComponent } from '../../../components/music-section.component';
+import { NewsletterSectionComponent } from '../../../components/newsletter-section.component';
+import { SocialSectionComponent } from '../../../components/social-section.component';
+import { SiteFooterComponent } from '../../../components/site-footer.component';
+import { SiteHeaderComponent } from '../../../components/site-header.component';
+import { RuntimeConfigService } from '../../../config/runtime-config.service';
+import { toPhotoBackground } from '../../../shared/presentation.utils';
 
 interface FaroApiEvent {
   title: string;

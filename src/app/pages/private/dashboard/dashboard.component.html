@@ -33,6 +33,9 @@
 
       <div class="dashboard-actions">
         <button class="button button-dark" type="button" (click)="logout()">Cerrar sesion</button>
+        @if (canManageConfig()) {
+          <a class="button" routerLink="/dashboard/configuracion">Administrar configuracion</a>
+        }
         <a class="text-link" routerLink="/">Volver al inicio</a>
       </div>
     }

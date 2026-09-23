@@ -1,0 +1,98 @@
+<app-site-header
+  [facebookUrl]="facebookUrl"
+  [menuOpen]="menuOpen"
+  [headerScrolled]="headerScrolled"
+  (toggleMenu)="toggleMenu()"
+  (closeMenu)="closeMenu()"
+></app-site-header>
+
+<main id="contenido" class="dashboard-page">
+  <section class="dashboard-panel config-admin-panel" aria-labelledby="config-admin-title">
+    <p class="eyebrow">PANEL INTERNO</p>
+    <h1 id="config-admin-title">CONFIGURACION DEL SITIO</h1>
+
+    @if (loading()) {
+      <p class="auth-copy">Cargando configuraciones...</p>
+    } @else {
+      <p class="auth-copy">Edita la configuracion que alimenta el sitio publico y administra versiones activas/inactivas.</p>
+
+      <form class="config-admin-form" [formGroup]="form" (ngSubmit)="save()">
+        <label for="config-nombre">Nombre de la version</label>
+        <input id="config-nombre" type="text" formControlName="nombre" placeholder="Ejemplo: Temporada Septiembre 2026" />
+
+        <label for="config-descripcion">Descripcion</label>
+        <input id="config-descripcion" type="text" formControlName="descripcion" placeholder="Notas de cambios" />
+
+        <label for="config-json">JSON de configuracion</label>
+        <textarea id="config-json" formControlName="configJson" rows="16" spellcheck="false"></textarea>
+
+        <label class="config-admin-checkbox">
+          <input type="checkbox" formControlName="activateOnSave" />
+          <span>Activar al guardar</span>
+        </label>
+
+        <div class="dashboard-actions">
+          <button class="button button-dark" type="submit" [disabled]="saving()">
+            {{ selectedId() ? 'Actualizar configuracion' : 'Guardar nueva version' }}
+          </button>
+          <button class="button" type="button" (click)="createFromCurrentEditor()">Nueva version</button>
+          <a class="text-link" routerLink="/dashboard">Volver a dashboard</a>
+        </div>
+      </form>
+
+      <section class="config-admin-history" aria-labelledby="config-admin-history-title">
+        <h2 id="config-admin-history-title">Historial de configuraciones</h2>
+
+        @if (!versions().length) {
+          <p class="auth-copy">Aun no hay versiones guardadas en base de datos.</p>
+        } @else {
+          <div class="config-admin-list">
+            @for (version of versions(); track trackByVersionId($index, version)) {
+              <article class="config-admin-card" [class.is-active]="version.activo">
+                <header>
+                  <strong>{{ version.nombre }}</strong>
+                  @if (version.activo) {
+                    <span class="config-admin-badge">ACTIVA</span>
+                  } @else {
+                    <span class="config-admin-badge is-muted">INACTIVA</span>
+                  }
+                </header>
+
+                <p>{{ version.descripcion || 'Sin descripcion' }}</p>
+
+                <small>
+                  Creada: {{ version.createdAt || 'N/D' }}
+                  @if (version.createdByEmail) {
+                    · {{ version.createdByEmail }}
+                  }
+                </small>
+
+                <div class="config-admin-actions">
+                  <button class="button" type="button" (click)="edit(version)">Editar</button>
+
+                  @if (!version.activo) {
+                    <button class="button button-dark" type="button" (click)="activate(version.id)">Activar</button>
+                  } @else {
+                    <button class="button" type="button" (click)="deactivate(version.id)">Desactivar</button>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </section>
+    }
+
+    @if (successMessage()) {
+      <p class="config-admin-success" aria-live="polite">{{ successMessage() }}</p>
+    }
+
+    @if (errorMessage()) {
+      <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+    }
+
+    @if (roleName()) {
+      <p class="config-admin-role">Perfil activo: {{ roleName() }}</p>
+    }
+  </section>
+</main>

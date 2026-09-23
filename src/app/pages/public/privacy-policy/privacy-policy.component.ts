@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-interested-registration',
+  selector: 'app-privacy-policy',
   standalone: true,
   imports: [RouterLink],
-  templateUrl: './interested-registration.component.html'
+  templateUrl: './privacy-policy.component.html'
 })
-export class InterestedRegistrationComponent {}
+export class PrivacyPolicyComponent {}

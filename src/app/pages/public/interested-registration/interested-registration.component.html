@@ -1,0 +1,95 @@
+<main id="contenido" class="interested-page">
+  <section class="meeting-section" aria-labelledby="interested-title" style="padding-top: 8rem;">
+    <div class="meeting-wrap">
+      <p class="eyebrow">REGISTRO</p>
+      <h1 id="interested-title">¿Te gustaría ser parte?</h1>
+      <p style="max-width: 42rem; margin-top: 1rem;">
+        Cuentanos un poco de ti y te contactaremos por el medio que prefieras.
+      </p>
+
+      <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <label for="interested-nombre">Nombre(s) *</label>
+        <input id="interested-nombre" type="text" formControlName="nombre" autocomplete="given-name" placeholder="Tu nombre">
+        @if (fieldInvalid('nombre')) {
+          <p class="auth-error">Escribe tu nombre (maximo 100 caracteres).</p>
+        }
+
+        <label for="interested-apellidos">Apellidos (opcional)</label>
+        <input id="interested-apellidos" type="text" formControlName="apellidos" autocomplete="family-name" placeholder="Tus apellidos">
+        @if (fieldInvalid('apellidos')) {
+          <p class="auth-error">Los apellidos no deben superar 150 caracteres.</p>
+        }
+
+        <label for="interested-whatsapp">Whatsapp *</label>
+        <input id="interested-whatsapp" type="tel" formControlName="whatsapp" autocomplete="tel" placeholder="Ej. 55 1234 5678">
+        @if (fieldInvalid('whatsapp')) {
+          <p class="auth-error">Escribe un numero de Whatsapp valido (7 a 30 caracteres).</p>
+        }
+
+        <label for="interested-email">Email (opcional)</label>
+        <input id="interested-email" type="email" formControlName="email" autocomplete="email" placeholder="tu@correo.com">
+        @if (fieldInvalid('email')) {
+          <p class="auth-error">Escribe un correo con formato valido.</p>
+        }
+
+        <label for="interested-como-se-entero">¿Como te enteraste de FARO? *</label>
+        <input id="interested-como-se-entero" type="text" formControlName="comoSeEntero" placeholder="Ej. redes sociales, un amigo, un evento">
+        @if (fieldInvalid('comoSeEntero')) {
+          <p class="auth-error">Cuentanos como te enteraste de FARO.</p>
+        }
+
+        <label for="interested-medio-contacto">¿En que forma prefieres que te contactemos? *</label>
+        <select id="interested-medio-contacto" formControlName="medioContactoPreferido">
+          <option value="WHATSAPP">Whatsapp</option>
+          <option value="LLAMADA">Llamada</option>
+          <option value="EMAIL">Email</option>
+        </select>
+
+        <label for="interested-comentario">¿Quieres dejarnos un comentario?</label>
+        <textarea id="interested-comentario" formControlName="comentario" rows="4" placeholder="Cuentanos lo que quieras (opcional)"></textarea>
+        @if (fieldInvalid('comentario')) {
+          <p class="auth-error">El comentario no debe superar 2000 caracteres.</p>
+        }
+
+        <label class="config-admin-checkbox">
+          <input type="checkbox" formControlName="aceptoPrivacidad">
+          <span>
+            Acepto que mis datos sean usados para dar seguimiento a este registro y con fines
+            estadisticos, conforme al <a class="text-link" routerLink="/privacidad">Aviso de Privacidad</a>. *
+          </span>
+        </label>
+        @if (fieldInvalid('aceptoPrivacidad')) {
+          <p class="auth-error">Debes aceptar el Aviso de Privacidad para continuar.</p>
+        }
+
+        @if (attemptedSubmit() && form.invalid) {
+          <p class="auth-error" aria-live="polite">Revisa los campos marcados antes de enviar el registro.</p>
+        }
+
+        @if (errorMessage()) {
+          <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+        }
+
+        <button class="button button-dark" type="submit" [disabled]="loading()">
+          {{ loading() ? 'Enviando...' : 'Enviar registro' }}
+        </button>
+      </form>
+
+      <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+        <a class="button" routerLink="/">Volver al inicio</a>
+      </div>
+    </div>
+  </section>
+
+  <dialog #successDialog class="modal-panel" aria-labelledby="interested-success-title">
+    <p class="eyebrow">REGISTRO ENVIADO</p>
+    <h2 id="interested-success-title">¡GRACIAS POR TU INTERES!</h2>
+    <p class="auth-copy" style="max-width: none;">
+      Ya recibimos tu informacion. Muy pronto alguien de nuestro equipo se pondra en
+      contacto contigo por el medio que elegiste.
+    </p>
+    <div class="modal-actions">
+      <button class="button button-dark" type="button" (click)="acceptSuccessModal()">Aceptar</button>
+    </div>
+  </dialog>
+</main>

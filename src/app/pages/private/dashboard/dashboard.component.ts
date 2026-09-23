@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
-import { SiteHeaderComponent } from './components/site-header.component';
-import { FARO_CONFIG } from './faro-config';
-import { SessionService } from './auth/session.service';
+import { SiteHeaderComponent } from '../../../components/site-header.component';
+import { FARO_CONFIG } from '../../../faro-config';
+import { SessionService } from '../../../auth/session.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   readonly errorMessage = signal('');
   readonly userName = signal('');
   readonly roleName = signal('');
+  readonly canManageConfig = signal(false);
 
   menuOpen = false;
   headerScrolled = true;
@@ -52,12 +53,14 @@ export class DashboardComponent implements OnInit {
 
           const roleRaw = typeof role['nombre'] === 'string' ? role['nombre'] : 'CONSULTA';
           this.roleName.set(roleRaw);
+          this.canManageConfig.set(roleRaw === 'SUPERADMIN' || roleRaw === 'ADMIN_COMUNIDAD');
 
           this.loading.set(false);
         },
         error: () => {
           this.session.clearToken();
           this.errorMessage.set('Tu sesion expiro. Inicia sesion nuevamente.');
+          this.canManageConfig.set(false);
           this.loading.set(false);
           this.router.navigate(['/login']);
         }

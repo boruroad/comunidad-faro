@@ -3,9 +3,9 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { SiteHeaderComponent } from './components/site-header.component';
-import { FARO_CONFIG } from './faro-config';
-import { SessionService } from './auth/session.service';
+import { SiteHeaderComponent } from '../../../components/site-header.component';
+import { FARO_CONFIG } from '../../../faro-config';
+import { SessionService } from '../../../auth/session.service';
 
 @Component({
   selector: 'app-login',
