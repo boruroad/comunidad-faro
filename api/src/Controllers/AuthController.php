@@ -26,18 +26,26 @@ class AuthController extends BaseController
         return $this->ok($result, 'login successful');
     }
 
+    // Autoregistro publico: solo email/password/confirmPassword. La cuenta queda
+    // inactiva hasta que un SUPERADMIN o ADMIN_COMUNIDAD la active.
     public function register($request)
     {
         $email = isset($request['email']) ? strtolower(trim((string) $request['email'])) : '';
         $password = isset($request['password']) ? (string) $request['password'] : '';
-        $comunidadId = isset($request['comunidad_id']) ? (int) $request['comunidad_id'] : 0;
+        $confirmPassword = isset($request['confirmPassword'])
+            ? (string) $request['confirmPassword']
+            : (isset($request['confirm_password']) ? (string) $request['confirm_password'] : '');
 
-        if ($email === '' || $password === '' || $comunidadId <= 0) {
-            return $this->fail('email, password and comunidad_id are required', 422);
+        if ($email === '' || $password === '' || $confirmPassword === '') {
+            return $this->fail('email, password and confirmPassword are required', 422);
         }
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             return $this->fail('email format is invalid', 422);
+        }
+
+        if ($password !== $confirmPassword) {
+            return $this->fail('password and confirmPassword do not match', 422);
         }
 
         if (!$this->isStrongPassword($password)) {
@@ -45,8 +53,6 @@ class AuthController extends BaseController
         }
 
         $createdUser = $this->authService->register(array(
-            'comunidad_id' => $comunidadId,
-            'persona_id' => isset($request['persona_id']) ? $request['persona_id'] : null,
             'email' => $email,
             'password' => $password,
         ));
@@ -57,7 +63,7 @@ class AuthController extends BaseController
 
         return $this->ok(array(
             'user' => $createdUser->toArray(),
-        ), 'user registered successfully');
+        ), 'cuenta creada correctamente; un administrador debe activarla antes de iniciar sesion');
     }
 
     public function validate($request)

@@ -1,0 +1,104 @@
+<app-site-header
+  [facebookUrl]="facebookUrl"
+  [menuOpen]="menuOpen"
+  [headerScrolled]="headerScrolled"
+  (toggleMenu)="toggleMenu()"
+  (closeMenu)="closeMenu()"
+></app-site-header>
+
+<main id="contenido" class="auth-page">
+  <section class="auth-panel" aria-labelledby="register-title">
+    <p class="eyebrow">ACCESO INTERNO</p>
+    <h1 id="register-title">CREAR CUENTA</h1>
+    <p class="auth-copy">
+      Registra tu correo y contraseña. Un administrador debe activar tu cuenta antes de
+      que puedas iniciar sesion.
+    </p>
+
+    <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+      <label for="register-email">Correo *</label>
+      <input id="register-email" type="email" formControlName="email" autocomplete="email" placeholder="tu@correo.com">
+      @if (fieldInvalid('email')) {
+        <p class="auth-error">Escribe un correo valido.</p>
+      }
+
+      <label for="register-password">Contraseña *</label>
+      <div class="password-field">
+        <input id="register-password" [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password" placeholder="••••••••••••">
+        <button
+          type="button"
+          class="password-toggle"
+          (click)="togglePasswordVisibility()"
+          [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          [attr.aria-pressed]="showPassword()"
+        >
+          @if (showPassword()) {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3l18 18"></path>
+              <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+              <path d="M9.9 5.1A10.4 10.4 0 0 1 12 5c6 0 10 6 10 6a13.6 13.6 0 0 1-2.2 2.9M6.6 6.6C3.9 8.4 2 12 2 12s4 6 10 6c1 0 2-.2 3-.5"></path>
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          }
+        </button>
+      </div>
+      @if (fieldInvalid('password')) {
+        <p class="auth-error">Minimo 12 caracteres, con mayuscula, minuscula, numero, caracter especial y sin espacios.</p>
+      }
+
+      <label for="register-confirm-password">Confirmar contraseña *</label>
+      <div class="password-field">
+        <input id="register-confirm-password" [type]="showConfirmPassword() ? 'text' : 'password'" formControlName="confirmPassword" autocomplete="new-password" placeholder="••••••••••••">
+        <button
+          type="button"
+          class="password-toggle"
+          (click)="toggleConfirmPasswordVisibility()"
+          [attr.aria-label]="showConfirmPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          [attr.aria-pressed]="showConfirmPassword()"
+        >
+          @if (showConfirmPassword()) {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3l18 18"></path>
+              <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+              <path d="M9.9 5.1A10.4 10.4 0 0 1 12 5c6 0 10 6 10 6a13.6 13.6 0 0 1-2.2 2.9M6.6 6.6C3.9 8.4 2 12 2 12s4 6 10 6c1 0 2-.2 3-.5"></path>
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          }
+        </button>
+      </div>
+      @if (passwordsMismatch) {
+        <p class="auth-error">Las contraseñas no coinciden.</p>
+      }
+
+      @if (errorMessage()) {
+        <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+      }
+
+      <button class="button button-dark" type="submit" [disabled]="loading()">
+        {{ loading() ? 'Creando cuenta...' : 'Crear cuenta' }}
+      </button>
+
+      <a class="text-link" routerLink="/login">Ya tengo cuenta, iniciar sesion</a>
+    </form>
+  </section>
+
+  <dialog #successDialog class="modal-panel" aria-labelledby="register-success-title">
+    <p class="eyebrow">CUENTA CREADA</p>
+    <h2 id="register-success-title">¡LISTO!</h2>
+    <p class="auth-copy" style="max-width: none;">
+      Tu cuenta fue creada correctamente. Un administrador debe activarla antes de que
+      puedas iniciar sesion; te avisaremos cuando este lista.
+    </p>
+    <div class="modal-actions">
+      <button class="button button-dark" type="button" (click)="acceptSuccessModal()">Aceptar</button>
+    </div>
+  </dialog>
+</main>

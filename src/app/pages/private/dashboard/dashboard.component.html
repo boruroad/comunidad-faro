@@ -1,47 +1,16 @@
-<app-site-header
-  [facebookUrl]="facebookUrl"
-  [menuOpen]="menuOpen"
-  [headerScrolled]="headerScrolled"
-  (toggleMenu)="toggleMenu()"
-  (closeMenu)="closeMenu()"
-></app-site-header>
+<app-private-header (logout)="logout()"></app-private-header>
 
 <main id="contenido" class="dashboard-page">
-  <section class="dashboard-panel" aria-labelledby="dashboard-title">
-    <p class="eyebrow">PANEL INTERNO</p>
-    <h1 id="dashboard-title">DASHBOARD</h1>
+  @if (loading()) {
+    <p class="auth-copy" style="padding:2.4rem var(--pad) 0;">Cargando tu sesion...</p>
+  } @else {
+    <div class="dashboard-main">
+      <router-outlet></router-outlet>
+    </div>
+  }
 
-    @if (loading()) {
-      <p class="auth-copy">Cargando tu sesion...</p>
-    } @else {
-      <div class="dashboard-grid">
-        <article class="dashboard-card">
-          <small>USUARIO</small>
-          <strong>{{ userName() }}</strong>
-        </article>
-
-        <article class="dashboard-card">
-          <small>ROL</small>
-          <strong>{{ roleName() }}</strong>
-        </article>
-
-        <article class="dashboard-card">
-          <small>ESTADO</small>
-          <strong>Sesion activa</strong>
-        </article>
-      </div>
-
-      <div class="dashboard-actions">
-        <button class="button button-dark" type="button" (click)="logout()">Cerrar sesion</button>
-        @if (canManageConfig()) {
-          <a class="button" routerLink="/dashboard/configuracion">Administrar configuracion</a>
-        }
-        <a class="text-link" routerLink="/">Volver al inicio</a>
-      </div>
-    }
-
-    @if (errorMessage()) {
-      <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
-    }
-  </section>
+  @if (errorMessage()) {
+    <p class="auth-error" style="padding:0 var(--pad);" aria-live="polite">{{ errorMessage() }}</p>
+  }
 </main>
+

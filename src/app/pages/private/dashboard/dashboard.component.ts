@@ -1,37 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
-import { SiteHeaderComponent } from '../../../components/site-header.component';
-import { FARO_CONFIG } from '../../../faro-config';
+import { PrivateHeaderComponent } from '../../../components/private-header.component';
 import { SessionService } from '../../../auth/session.service';
+import { CurrentUserService } from '../../../auth/current-user.service';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
-    SiteHeaderComponent
+    RouterOutlet,
+    PrivateHeaderComponent
   ],
   templateUrl: './dashboard.component.html'
 })
 export class DashboardComponent implements OnInit {
   private readonly router = inject(Router);
   private readonly session = inject(SessionService);
-
-  readonly facebookUrl =
-    FARO_CONFIG.meeting.facebookUrl ||
-    FARO_CONFIG.socials['facebook'];
+  readonly currentUser = inject(CurrentUserService);
 
   readonly loading = signal(true);
   readonly errorMessage = signal('');
-  readonly userName = signal('');
-  readonly roleName = signal('');
-  readonly canManageConfig = signal(false);
-
-  menuOpen = false;
-  headerScrolled = true;
 
   ngOnInit(): void {
     const token = this.session.getToken();
@@ -49,30 +40,19 @@ export class DashboardComponent implements OnInit {
           const role = data.role || {};
 
           const email = typeof user['email'] === 'string' ? user['email'] : 'Usuario';
-          this.userName.set(email);
-
           const roleRaw = typeof role['nombre'] === 'string' ? role['nombre'] : 'CONSULTA';
-          this.roleName.set(roleRaw);
-          this.canManageConfig.set(roleRaw === 'SUPERADMIN' || roleRaw === 'ADMIN_COMUNIDAD');
 
+          this.currentUser.set({ email, roleName: roleRaw });
           this.loading.set(false);
         },
         error: () => {
           this.session.clearToken();
+          this.currentUser.clear();
           this.errorMessage.set('Tu sesion expiro. Inicia sesion nuevamente.');
-          this.canManageConfig.set(false);
           this.loading.set(false);
           this.router.navigate(['/login']);
         }
       });
-  }
-
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  closeMenu(): void {
-    this.menuOpen = false;
   }
 
   logout(): void {
@@ -86,12 +66,15 @@ export class DashboardComponent implements OnInit {
     this.session.logout(token).subscribe({
       complete: () => {
         this.session.clearToken();
+        this.currentUser.clear();
         this.router.navigate(['/login']);
       },
       error: () => {
         this.session.clearToken();
+        this.currentUser.clear();
         this.router.navigate(['/login']);
       }
     });
   }
 }
+

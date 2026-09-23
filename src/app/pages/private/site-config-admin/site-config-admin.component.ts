@@ -1,10 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 
-import { SessionService } from '../../../auth/session.service';
-import { SiteHeaderComponent } from '../../../components/site-header.component';
 import { SiteConfigAdminService, SiteConfigVersion } from './site-config-admin.service';
 import { FARO_CONFIG } from '../../../faro-config';
 
@@ -14,31 +12,20 @@ import { FARO_CONFIG } from '../../../faro-config';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink,
-    SiteHeaderComponent
+    RouterLink
   ],
   templateUrl: './site-config-admin.component.html'
 })
 export class SiteConfigAdminComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
-  private readonly router = inject(Router);
-  private readonly session = inject(SessionService);
   private readonly adminService = inject(SiteConfigAdminService);
-
-  readonly facebookUrl =
-    FARO_CONFIG.meeting.facebookUrl ||
-    FARO_CONFIG.socials['facebook'];
 
   readonly loading = signal(true);
   readonly saving = signal(false);
   readonly errorMessage = signal('');
   readonly successMessage = signal('');
-  readonly roleName = signal('');
   readonly versions = signal<SiteConfigVersion[]>([]);
   readonly selectedId = signal<number | null>(null);
-
-  menuOpen = false;
-  headerScrolled = true;
 
   readonly form = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(180)]],
@@ -47,42 +34,9 @@ export class SiteConfigAdminComponent implements OnInit {
     activateOnSave: [false]
   });
 
+  // El adminGuard de la ruta ya garantiza el rol; aqui solo cargamos datos.
   ngOnInit(): void {
-    const token = this.session.getToken();
-
-    if (!token) {
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    this.session.validate(token).subscribe({
-      next: payload => {
-        const role = payload.role || {};
-        const roleRaw = typeof role['nombre'] === 'string' ? role['nombre'] : '';
-        const roleName = roleRaw.toUpperCase();
-        this.roleName.set(roleName);
-
-        if (roleName !== 'SUPERADMIN' && roleName !== 'ADMIN_COMUNIDAD') {
-          this.errorMessage.set('No tienes permisos para administrar configuraciones.');
-          this.loading.set(false);
-          return;
-        }
-
-        this.loadVersions();
-      },
-      error: () => {
-        this.session.clearToken();
-        this.router.navigate(['/login']);
-      }
-    });
-  }
-
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  closeMenu(): void {
-    this.menuOpen = false;
+    this.loadVersions();
   }
 
   createFromCurrentEditor(): void {

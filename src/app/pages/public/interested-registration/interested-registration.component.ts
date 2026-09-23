@@ -25,7 +25,8 @@ export class InterestedRegistrationComponent {
 
   readonly form = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(100)]],
-    apellidos: ['', [Validators.maxLength(150)]],
+    apellidoPaterno: ['', [Validators.maxLength(100)]],
+    apellidoMaterno: ['', [Validators.maxLength(100)]],
     whatsapp: ['', [Validators.required, Validators.pattern(/^[0-9+()\s-]{7,30}$/)]],
     email: ['', [Validators.email]],
     comoSeEntero: ['', [Validators.required, Validators.maxLength(150)]],
@@ -50,7 +51,8 @@ export class InterestedRegistrationComponent {
     this.registrationService
       .register({
         nombre: (value.nombre || '').trim(),
-        apellidos: (value.apellidos || '').trim(),
+        apellidoPaterno: (value.apellidoPaterno || '').trim(),
+        apellidoMaterno: (value.apellidoMaterno || '').trim(),
         whatsapp: (value.whatsapp || '').trim(),
         email: (value.email || '').trim(),
         comoSeEntero: (value.comoSeEntero || '').trim(),
@@ -62,7 +64,8 @@ export class InterestedRegistrationComponent {
         next: () => {
           this.form.reset({
             nombre: '',
-            apellidos: '',
+            apellidoPaterno: '',
+            apellidoMaterno: '',
             whatsapp: '',
             email: '',
             comoSeEntero: '',

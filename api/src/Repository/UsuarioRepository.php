@@ -5,6 +5,20 @@ class UsuarioRepository extends BaseRepository
     protected $table = 'usuarios';
     protected $fillable = array('comunidad_id', 'persona_id', 'rol_id', 'email', 'activo');
 
+    // Sobrescribe BaseRepository::findById para nunca traer password_hash en detail/update/delete.
+    public function findById($id)
+    {
+        $sql = 'SELECT id, comunidad_id, persona_id, rol_id, email, activo, ultimo_acceso, created_at, updated_at
+            FROM usuarios WHERE id = ? LIMIT 1';
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('i', $id);
+        $stmt->execute();
+        $row = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
+
+        return $row ?: null;
+    }
+
     public function findModelById($id)
     {
         $row = $this->findById($id);
@@ -25,16 +39,21 @@ class UsuarioRepository extends BaseRepository
 
     public function createWithPassword(array $data)
     {
+        $activo = array_key_exists('activo', $data) ? (int) (bool) $data['activo'] : 1;
+        $comunidadId = isset($data['comunidad_id']) ? $data['comunidad_id'] : null;
+        $personaId = isset($data['persona_id']) ? $data['persona_id'] : null;
+
         $sql = 'INSERT INTO usuarios (comunidad_id, persona_id, rol_id, email, password_hash, activo)
-            VALUES (?, ?, ?, ?, ?, 1)';
+            VALUES (?, ?, ?, ?, ?, ?)';
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param(
-            'iiiss',
-            $data['comunidad_id'],
-            $data['persona_id'],
+            'iiissi',
+            $comunidadId,
+            $personaId,
             $data['rol_id'],
             $data['email'],
-            $data['password_hash']
+            $data['password_hash'],
+            $activo
         );
 
         $stmt->execute();
@@ -42,6 +61,18 @@ class UsuarioRepository extends BaseRepository
         $stmt->close();
 
         return $id;
+    }
+
+    public function setActivo($usuarioId, $activo)
+    {
+        $activo = (int) (bool) $activo;
+        $sql = 'UPDATE usuarios SET activo = ? WHERE id = ?';
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('ii', $activo, $usuarioId);
+        $ok = $stmt->execute();
+        $stmt->close();
+
+        return $ok;
     }
 
     public function updatePasswordHash($usuarioId, $newHash)

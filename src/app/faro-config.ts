@@ -99,7 +99,7 @@ export const FARO_CONFIG: FaroConfig = {
   site: {
     name: 'Comunidad F.A.R.O.',
     description: 'Fe, Amor, Relevancia y Obediencia. Una familia, muchas tribus.',
-    canonicalUrl: 'https://TU-DOMINIO-AQUI/'
+    canonicalUrl: 'https://faro.neitanworales.com/'
   },
 
   /*

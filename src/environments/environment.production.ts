@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  backendBaseUrl: 'https://faro.local',
-  apiBaseUrl: 'https://faro.local/api/v1'
+  backendBaseUrl: 'https://faro.neitanworales.com',
+  apiBaseUrl: 'https://faro.neitanworales.com/api/v1'
 };

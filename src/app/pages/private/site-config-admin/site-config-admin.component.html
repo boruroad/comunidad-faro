@@ -1,15 +1,6 @@
-<app-site-header
-  [facebookUrl]="facebookUrl"
-  [menuOpen]="menuOpen"
-  [headerScrolled]="headerScrolled"
-  (toggleMenu)="toggleMenu()"
-  (closeMenu)="closeMenu()"
-></app-site-header>
-
-<main id="contenido" class="dashboard-page">
-  <section class="dashboard-panel config-admin-panel" aria-labelledby="config-admin-title">
-    <p class="eyebrow">PANEL INTERNO</p>
-    <h1 id="config-admin-title">CONFIGURACION DEL SITIO</h1>
+<section class="config-admin-panel" aria-labelledby="config-admin-title">
+  <p class="eyebrow">MODULO</p>
+  <h1 id="config-admin-title">CONFIGURACION DEL SITIO</h1>
 
     @if (loading()) {
       <p class="auth-copy">Cargando configuraciones...</p>
@@ -36,7 +27,7 @@
             {{ selectedId() ? 'Actualizar configuracion' : 'Guardar nueva version' }}
           </button>
           <button class="button" type="button" (click)="createFromCurrentEditor()">Nueva version</button>
-          <a class="text-link" routerLink="/dashboard">Volver a dashboard</a>
+          <a class="text-link" routerLink="/dashboard/usuarios">Volver al dashboard</a>
         </div>
       </form>
 
@@ -90,9 +81,4 @@
     @if (errorMessage()) {
       <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
     }
-
-    @if (roleName()) {
-      <p class="config-admin-role">Perfil activo: {{ roleName() }}</p>
-    }
   </section>
-</main>

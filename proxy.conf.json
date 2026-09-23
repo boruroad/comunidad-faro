@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "https://faro.local",
+    "target": "https://faro.loc",
     "secure": false,
     "changeOrigin": true,
     "logLevel": "debug"

@@ -30,6 +30,7 @@ export class LoginComponent {
 
   readonly loading = signal(false);
   readonly errorMessage = signal('');
+  readonly showPassword = signal(false);
 
   menuOpen = false;
   headerScrolled = true;
@@ -45,6 +46,10 @@ export class LoginComponent {
 
   closeMenu(): void {
     this.menuOpen = false;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword.update(value => !value);
   }
 
   submit(): void {

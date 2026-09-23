@@ -1,0 +1,21 @@
+RewriteEngine On
+RewriteBase /
+
+# Apache no reenvia el header Authorization a PHP por defecto.
+CGIPassAuth On
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# /api/* lo resuelve el front-controller de la API (misma estructura de carpetas que en local).
+# La condicion evita que la regla se re-dispare sobre su propio destino (api/public/...).
+RewriteCond %{REQUEST_URI} ^/api/
+RewriteCond %{REQUEST_URI} !^/api/public/
+RewriteRule ^ api/public/index.php [QSA,L]
+
+# Assets/archivos reales (js, css, imagenes, etc.) se sirven tal cual.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Cualquier otra ruta (ej. /dashboard/usuarios) cae al index.html para que el router de Angular la resuelva.
+RewriteRule ^ /index.html [L]

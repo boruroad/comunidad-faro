@@ -99,27 +99,39 @@ NEW_EMAIL="qa.user.${SUFFIX}@example.com"
 NEW_PASS='QaPass1234!Test'
 
 
-echo "== 4) Register =="
-request POST /api/v1/auth/register "{\"email\":\"$NEW_EMAIL\",\"password\":\"$NEW_PASS\",\"comunidad_id\":$TEST_COMUNIDAD_ID}"
+echo "== 4) Register (solo email/password/confirmPassword) =="
+request POST /api/v1/auth/register "{\"email\":\"$NEW_EMAIL\",\"password\":\"$NEW_PASS\",\"confirmPassword\":\"$NEW_PASS\"}"
 assert_status 200
 assert_success_true
 REGISTERED_ID=$(json_read "data.user.id")
 
 
-echo "== 5) Login new user =="
+echo "== 5) Login con cuenta recien registrada debe fallar (inactiva) =="
+request POST /api/v1/auth/login "{\"email\":\"$NEW_EMAIL\",\"password\":\"$NEW_PASS\"}"
+assert_status 401
+assert_success_false
+
+
+echo "== 6) Admin activa la cuenta =="
+request POST /api/v1/usuarios/activate "{\"id\":$REGISTERED_ID}" "$ADMIN_TOKEN"
+assert_status 200
+assert_success_true
+
+
+echo "== 7) Login tras activacion =="
 request POST /api/v1/auth/login "{\"email\":\"$NEW_EMAIL\",\"password\":\"$NEW_PASS\"}"
 assert_status 200
 assert_success_true
 USER_TOKEN=$(json_read "data.token")
 
 
-echo "== 6) Forgot password =="
+echo "== 8) Forgot password =="
 request POST /api/v1/auth/forgot-password "{\"email\":\"$NEW_EMAIL\"}"
 assert_status 200
 assert_success_true
 
 
-echo "== 7) Obtener token reset desde DB (solo QA local) =="
+echo "== 9) Obtener token reset desde DB (solo QA local) =="
 RESET_TOKEN=$(php -r '
 require $argv[1] . "/bootstrap.php";
 $db = Connection::getInstance();
@@ -139,23 +151,24 @@ if [[ -z "$RESET_TOKEN" ]]; then
 fi
 
 
-echo "== 8) Validate reset token =="
+echo "== 10) Validate reset token =="
 request POST /api/v1/auth/validate-reset-token "{\"token\":\"$RESET_TOKEN\"}"
 assert_status 200
 assert_success_true
 
 NEW_PASS_2='QaPass1234!Renew'
 
-echo "== 9) Reset password =="
+echo "== 11) Reset password =="
 request POST /api/v1/auth/reset-password "{\"token\":\"$RESET_TOKEN\",\"new_password\":\"$NEW_PASS_2\"}"
 assert_status 200
 assert_success_true
 
 
-echo "== 10) Login con nueva password =="
+echo "== 12) Login con nueva password =="
 request POST /api/v1/auth/login "{\"email\":\"$NEW_EMAIL\",\"password\":\"$NEW_PASS_2\"}"
 assert_status 200
 assert_success_true
+
 
 
 echo "== 11) CRUD usuarios (admin) =="

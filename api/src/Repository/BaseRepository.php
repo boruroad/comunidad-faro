@@ -90,6 +90,9 @@ class BaseRepository
         $types = '';
         $values = array();
         foreach ($payload as $value) {
+            if (is_bool($value)) {
+                $value = (int) $value;
+            }
             if (is_int($value)) {
                 $types .= 'i';
             } elseif (is_float($value)) {
@@ -120,6 +123,9 @@ class BaseRepository
         $values = array();
 
         foreach ($payload as $field => $value) {
+            if (is_bool($value)) {
+                $value = (int) $value;
+            }
             $set[] = $field . ' = ?';
             if (is_int($value)) {
                 $types .= 'i';
@@ -170,7 +176,7 @@ class BaseRepository
         return $filtered;
     }
 
-    private function bindDynamic($stmt, $types, $values)
+    protected function bindDynamic($stmt, $types, $values)
     {
         $refs = array();
         $refs[] = &$types;

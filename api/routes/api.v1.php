@@ -71,6 +71,15 @@ $router->add('GET', '/api/v1/usuarios/profile', function ($request) use ($usuari
     return $usuarioController->profile($request);
 });
 
+// Activacion/desactivacion administrativa de cuentas autoregistradas.
+$router->add('POST', '/api/v1/usuarios/activate', function ($request) use ($usuarioController) {
+    return $usuarioController->activate($request);
+});
+
+$router->add('POST', '/api/v1/usuarios/deactivate', function ($request) use ($usuarioController) {
+    return $usuarioController->deactivate($request);
+});
+
 register_crud($router, '/api/v1/usuarios', 'UsuarioController');
 
 // ---------------------------------------------------------------------
@@ -89,6 +98,72 @@ register_crud($router, '/api/v1/roles', 'RolController');
 register_crud($router, '/api/v1/personas', 'PersonaController');
 
 // ---------------------------------------------------------------------
+// Personas interesadas (registro publico "¿Estas interesado?" + seguimiento interno)
+// ---------------------------------------------------------------------
+$personaInteresadaController = new PersonaInteresadaController();
+
+// Publica: alta del formulario de interes, no requiere autenticacion
+$router->add('POST', '/api/v1/personas-interesadas', function ($request) use ($personaInteresadaController) {
+    return $personaInteresadaController->register($request);
+});
+
+// Administrativa: listar/consultar/actualizar seguimiento/eliminar (rol admin)
+$router->add('GET', '/api/v1/personas-interesadas', function ($request) use ($personaInteresadaController) {
+    return $personaInteresadaController->index($request);
+});
+
+$router->add('GET', '/api/v1/personas-interesadas/detail', function ($request) use ($personaInteresadaController) {
+    return $personaInteresadaController->detail($request);
+});
+
+$router->add('PUT', '/api/v1/personas-interesadas', function ($request) use ($personaInteresadaController) {
+    return $personaInteresadaController->update($request);
+});
+
+$router->add('DELETE', '/api/v1/personas-interesadas', function ($request) use ($personaInteresadaController) {
+    return $personaInteresadaController->delete($request);
+});
+
+// ---------------------------------------------------------------------
 // Auth tokens (consulta/revocacion administrativa)
 // ---------------------------------------------------------------------
 register_crud($router, '/api/v1/auth-tokens', 'AuthTokenController');
+
+// ---------------------------------------------------------------------
+// Configuracion del sitio (versionada)
+// ---------------------------------------------------------------------
+$siteConfigController = new SiteConfigController();
+
+// Publica: retorna la configuracion activa
+$router->add('GET', '/api/v1/site-config/active', function ($request) use ($siteConfigController) {
+    return $siteConfigController->active($request);
+});
+
+// Administrativa: listar/versionar/activar/desactivar
+$router->add('GET', '/api/v1/site-configs', function ($request) use ($siteConfigController) {
+    return $siteConfigController->index($request);
+});
+
+$router->add('GET', '/api/v1/site-configs/detail', function ($request) use ($siteConfigController) {
+    return $siteConfigController->detail($request);
+});
+
+$router->add('POST', '/api/v1/site-configs', function ($request) use ($siteConfigController) {
+    return $siteConfigController->create($request);
+});
+
+$router->add('PUT', '/api/v1/site-configs', function ($request) use ($siteConfigController) {
+    return $siteConfigController->update($request);
+});
+
+$router->add('DELETE', '/api/v1/site-configs', function ($request) use ($siteConfigController) {
+    return $siteConfigController->delete($request);
+});
+
+$router->add('POST', '/api/v1/site-configs/activate', function ($request) use ($siteConfigController) {
+    return $siteConfigController->activate($request);
+});
+
+$router->add('POST', '/api/v1/site-configs/deactivate', function ($request) use ($siteConfigController) {
+    return $siteConfigController->deactivate($request);
+});

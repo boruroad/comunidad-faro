@@ -4,7 +4,7 @@ class UsuarioController extends CrudController
 {
     protected $resourceLabel = 'usuario';
     protected $allowedFields = array('comunidad_id', 'persona_id', 'rol_id', 'email', 'activo');
-    protected $filterableFields = array('comunidad_id', 'rol_id');
+    protected $filterableFields = array('comunidad_id', 'rol_id', 'activo');
     protected $writeRoles = array('SUPERADMIN', 'ADMIN_COMUNIDAD');
 
     private $authService;
@@ -39,6 +39,7 @@ class UsuarioController extends CrudController
             : $this->repo->findAllBy($conditions, $limit, $offset);
 
         $rows = $this->ocultarSuperadminsSiNoAplica($usuario, $rows);
+        $rows = $this->enrichRows($rows);
 
         return $this->ok(array(
             'items' => $this->camelize($rows),
@@ -62,9 +63,22 @@ class UsuarioController extends CrudController
             return $this->fail($this->resourceLabel . ' not found', 404);
         }
 
+        $enriched = $this->enrichRows(array($row));
+
         return $this->ok(array(
-            'item' => $this->camelize($row),
+            'item' => $this->camelize($enriched[0]),
         ), $this->resourceLabel . ' found');
+    }
+
+    // Nunca debe salir password_hash por la API; de paso se agrega el nombre del rol para la UI.
+    private function enrichRows(array $rows)
+    {
+        return array_map(function ($row) {
+            unset($row['password_hash']);
+            $rol = $this->roles->findById((int) $row['rol_id']);
+            $row['rol_nombre'] = $rol ? $rol['nombre'] : null;
+            return $row;
+        }, $rows);
     }
 
     // Un ADMIN_COMUNIDAD (u otro rol no SUPERADMIN) no debe ver cuentas de SUPERADMIN.
@@ -140,6 +154,59 @@ class UsuarioController extends CrudController
             'role' => $this->authService->roleForUsuario($usuario),
             'persona' => $this->authService->personaForUsuario($usuario),
         ), 'profile found');
+    }
+
+    // Alta de cuentas de autoregistro (email/password) pendientes de aprobacion.
+    public function activate($request)
+    {
+        return $this->setActivoConGuardas($request, true, 'usuario activated');
+    }
+
+    // Ademas de desactivar, revoca cualquier sesion activa de esa cuenta.
+    public function deactivate($request)
+    {
+        $result = $this->setActivoConGuardas($request, false, 'usuario deactivated');
+
+        if (!empty($result['success'])) {
+            $id = isset($request['id']) ? (int) $request['id'] : 0;
+            (new AuthTokenRepository())->revokeAllForUsuario($id);
+        }
+
+        return $result;
+    }
+
+    private function setActivoConGuardas($request, $activo, $successMessage)
+    {
+        $usuario = $this->requireAuth();
+        if (!$usuario) {
+            return $this->fail('unauthorized', 401);
+        }
+
+        if (!$this->hasAnyRole($usuario, $this->writeRoles)) {
+            return $this->fail('insufficient permissions', 403);
+        }
+
+        $id = isset($request['id']) ? (int) $request['id'] : 0;
+        if ($id <= 0) {
+            return $this->fail('id is required', 422);
+        }
+
+        $target = $this->repo->findById($id);
+        if (!$target || empty($this->ocultarSuperadminsSiNoAplica($usuario, array($target)))) {
+            return $this->fail('usuario not found', 404);
+        }
+
+        $ok = $this->repo->setActivo($id, $activo);
+        if (!$ok) {
+            return $this->fail('usuario could not be updated', 409);
+        }
+
+        $updated = $this->repo->findById($id);
+        $enriched = $this->enrichRows(array($updated));
+
+        return $this->ok(array(
+            'item' => $this->camelize($enriched[0]),
+        ), $successMessage);
     }
 
     private function isStrongPassword($password)

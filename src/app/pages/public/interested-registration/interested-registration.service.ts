@@ -14,7 +14,8 @@ export type MedioContactoPreferido = 'WHATSAPP' | 'LLAMADA' | 'EMAIL';
 
 export interface InterestedRegistrationPayload {
   nombre: string;
-  apellidos: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
   whatsapp: string;
   email: string;
   comoSeEntero: string;

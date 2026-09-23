@@ -22,6 +22,15 @@ interface ValidatePayload {
   role: Record<string, unknown> | null;
 }
 
+interface RegisterPayload {
+  user: Record<string, unknown>;
+}
+
+interface ValidateResetTokenPayload {
+  valid: boolean;
+  expiresAt: string | null;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +52,43 @@ export class SessionService {
       .pipe(
         map(response => response.data)
       );
+  }
+
+  register(email: string, password: string, confirmPassword: string): Observable<RegisterPayload> {
+    return this.http
+      .post<ApiEnvelope<RegisterPayload>>(this.endpoint('/auth/register'), {
+        email,
+        password,
+        confirmPassword
+      })
+      .pipe(
+        map(response => response.data)
+      );
+  }
+
+  forgotPassword(email: string): Observable<void> {
+    return this.http
+      .post<ApiEnvelope<unknown>>(this.endpoint('/auth/forgot-password'), {
+        email
+      })
+      .pipe(map(() => undefined));
+  }
+
+  validateResetToken(token: string): Observable<ValidateResetTokenPayload> {
+    return this.http
+      .post<ApiEnvelope<ValidateResetTokenPayload>>(this.endpoint('/auth/validate-reset-token'), {
+        token
+      })
+      .pipe(map(response => response.data));
+  }
+
+  resetPassword(token: string, newPassword: string): Observable<void> {
+    return this.http
+      .post<ApiEnvelope<unknown>>(this.endpoint('/auth/reset-password'), {
+        token,
+        new_password: newPassword
+      })
+      .pipe(map(() => undefined));
   }
 
   validate(token: string): Observable<ValidatePayload> {

@@ -1,0 +1,28 @@
+<section class="data-table-panel" aria-labelledby="dashboard-home-title">
+  <p class="eyebrow">PANEL INTERNO</p>
+  <h1 id="dashboard-home-title">DASHBOARD</h1>
+  <p class="auth-copy">
+    Bienvenido, {{ currentUser.email() }}. Tu rol actual es {{ currentUser.roleName() }}.
+  </p>
+
+  <div class="dashboard-grid">
+    <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/usuarios">
+      <small>MODULO</small>
+      <strong>Usuarios</strong>
+    </a>
+    <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/personas">
+      <small>MODULO</small>
+      <strong>Personas</strong>
+    </a>
+    @if (currentUser.isAdmin()) {
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/comunidades">
+        <small>MODULO</small>
+        <strong>Comunidades</strong>
+      </a>
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/configuracion">
+        <small>MODULO</small>
+        <strong>Configuracion</strong>
+      </a>
+    }
+  </div>
+</section>

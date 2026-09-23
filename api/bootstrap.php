@@ -149,3 +149,9 @@ function camel_to_snake($value)
     $value = preg_replace('/[A-Z]/', '_$0', $value);
     return strtolower(ltrim($value, '_'));
 }
+
+function env_value($key, $default = '')
+{
+    $value = getenv($key);
+    return ($value !== false && $value !== '') ? $value : $default;
+}

@@ -41,6 +41,18 @@ class AuthTokenRepository extends BaseRepository
         return $ok;
     }
 
+    // Usado al desactivar una cuenta: cierra todas sus sesiones activas de inmediato.
+    public function revokeAllForUsuario($usuarioId, $tokenType = 'AUTH')
+    {
+        $sql = 'UPDATE auth_tokens SET revoked_at = NOW() WHERE usuario_id = ? AND token_type = ? AND revoked_at IS NULL';
+        $stmt = $this->db->prepare($sql);
+        $stmt->bind_param('is', $usuarioId, $tokenType);
+        $ok = $stmt->execute();
+        $stmt->close();
+
+        return $ok;
+    }
+
     public function createPasswordResetToken($usuarioId, $token, $expiresAt)
     {
         return $this->createToken($usuarioId, $token, $expiresAt, 'PASSWORD_RESET');

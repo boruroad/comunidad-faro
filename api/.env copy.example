@@ -7,3 +7,7 @@ TEST_ADMIN_EMAIL=admin@example.com
 TEST_ADMIN_PASSWORD=Admin1234!Pass
 TEST_COMUNIDAD_ID=1
 TEST_ROL_ID=2
+APP_NAME="Comunidad FARO"
+FRONTEND_URL=http://localhost:4200
+MAIL_FROM_ADDRESS=no-responder@faro.loc
+MAIL_FROM_NAME="Comunidad FARO"

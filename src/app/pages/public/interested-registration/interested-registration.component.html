@@ -14,10 +14,16 @@
           <p class="auth-error">Escribe tu nombre (maximo 100 caracteres).</p>
         }
 
-        <label for="interested-apellidos">Apellidos (opcional)</label>
-        <input id="interested-apellidos" type="text" formControlName="apellidos" autocomplete="family-name" placeholder="Tus apellidos">
-        @if (fieldInvalid('apellidos')) {
-          <p class="auth-error">Los apellidos no deben superar 150 caracteres.</p>
+        <label for="interested-apellido-paterno">Apellido paterno (opcional)</label>
+        <input id="interested-apellido-paterno" type="text" formControlName="apellidoPaterno" autocomplete="family-name" placeholder="Tu apellido paterno">
+        @if (fieldInvalid('apellidoPaterno')) {
+          <p class="auth-error">El apellido paterno no debe superar 100 caracteres.</p>
+        }
+
+        <label for="interested-apellido-materno">Apellido materno (opcional)</label>
+        <input id="interested-apellido-materno" type="text" formControlName="apellidoMaterno" autocomplete="family-name" placeholder="Tu apellido materno">
+        @if (fieldInvalid('apellidoMaterno')) {
+          <p class="auth-error">El apellido materno no debe superar 100 caracteres.</p>
         }
 
         <label for="interested-whatsapp">Whatsapp *</label>

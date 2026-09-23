@@ -8,6 +8,7 @@ class AuthService
     private $tokens;
     private $roles;
     private $personas;
+    private $mailer;
 
     public function __construct()
     {
@@ -15,6 +16,7 @@ class AuthService
         $this->tokens = new AuthTokenRepository();
         $this->roles = new RolRepository();
         $this->personas = new PersonaRepository();
+        $this->mailer = new MailService();
     }
 
     public function login($email, $plainPassword)
@@ -57,6 +59,8 @@ class AuthService
         return $this->tokens->revokeByToken($token);
     }
 
+    // Autoregistro publico: solo email/password. Se crea SIEMPRE inactivo y con el rol
+    // minimo por defecto; un SUPERADMIN/ADMIN_COMUNIDAD debe activarlo explicitamente.
     public function register($payload)
     {
         $email = strtolower(trim(isset($payload['email']) ? (string) $payload['email'] : ''));
@@ -69,22 +73,21 @@ class AuthService
             return null;
         }
 
-        $comunidadId = isset($payload['comunidad_id']) ? (int) $payload['comunidad_id'] : 0;
-        if ($comunidadId <= 0) {
-            return null;
-        }
-
         $rol = $this->roles->findByNombre(self::DEFAULT_ROLE_NAME);
         if (!$rol) {
             return null;
         }
 
+        $comunidadId = (!empty($payload['comunidad_id'])) ? (int) $payload['comunidad_id'] : null;
+        $personaId = (!empty($payload['persona_id'])) ? (int) $payload['persona_id'] : null;
+
         $usuarioId = (int) $this->usuarios->createWithPassword(array(
             'comunidad_id' => $comunidadId,
-            'persona_id' => isset($payload['persona_id']) && $payload['persona_id'] ? (int) $payload['persona_id'] : null,
+            'persona_id' => $personaId,
             'rol_id' => (int) $rol['id'],
             'email' => $email,
             'password_hash' => $this->hashPassword((string) $payload['password']),
+            'activo' => false,
         ));
 
         return $usuarioId <= 0 ? null : $this->usuarios->findModelById($usuarioId);
@@ -141,15 +144,40 @@ class AuthService
         $expiresAt = date('Y-m-d H:i:s', strtotime('+30 minutes'));
         $usuario = $this->usuarios->findByEmail($email);
 
-        // Evita enumeracion de cuentas: siempre responde con la misma forma.
+        // Evita enumeracion de cuentas: siempre responde con la misma forma,
+        // el correo solo se envia si la cuenta realmente existe.
         if ($usuario) {
             $token = bin2hex(random_bytes(32));
             $this->tokens->createPasswordResetToken((int) $usuario->id, $token, $expiresAt);
+            $this->sendPasswordResetEmail($usuario->email, $token);
         }
 
         return array(
             'expires_at' => $expiresAt,
         );
+    }
+
+    private function sendPasswordResetEmail($email, $token)
+    {
+        $frontendUrl = rtrim(env_value('FRONTEND_URL', 'http://localhost:4200'), '/');
+        $resetUrl = $frontendUrl . '/restablecer-password?token=' . urlencode($token);
+
+        // Respaldo para pruebas locales sin SMTP configurado.
+        error_log('[AuthService] enlace de restablecimiento para ' . $email . ': ' . $resetUrl);
+
+        $appName = env_value('APP_NAME', 'Comunidad FARO');
+        $subject = $appName . ': restablece tu contrasena';
+        $safeAppName = htmlspecialchars($appName, ENT_QUOTES, 'UTF-8');
+        $safeResetUrl = htmlspecialchars($resetUrl, ENT_QUOTES, 'UTF-8');
+
+        $html = '<p>Recibimos una solicitud para restablecer tu contrasena en ' . $safeAppName . '.</p>'
+            . '<p><a href="' . $safeResetUrl . '">Haz clic aqui para crear una nueva contrasena</a>. '
+            . 'Este enlace vence en 30 minutos.</p>'
+            . '<p>Si tu no solicitaste esto, puedes ignorar este correo.</p>';
+
+        $text = 'Restablece tu contrasena visitando: ' . $resetUrl . ' (valido por 30 minutos).';
+
+        $this->mailer->send($email, $subject, $html, $text);
     }
 
     public function resetPasswordByToken($token, $newPassword)
