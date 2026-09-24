@@ -1,13 +1,15 @@
 <main id="contenido" class="interested-page">
   <section class="meeting-section" aria-labelledby="interested-title" style="padding-top: 8rem;">
     <div class="meeting-wrap">
-      <p class="eyebrow">REGISTRO</p>
-      <h1 id="interested-title">¿Te gustaría ser parte?</h1>
-      <p style="max-width: 42rem; margin-top: 1rem;">
-        Cuentanos un poco de ti y te contactaremos por el medio que prefieras.
-      </p>
+      <img src="assets/images/farologuito.png" alt="F.A.R.O." class="interested-page-logo">
+      <div class="data-table-panel">
+        <p class="eyebrow">REGISTRO</p>
+        <h1 id="interested-title">¿Te gustaría ser parte?</h1>
+        <p style="max-width: 42rem; margin-top: 1rem;">
+          Cuentanos un poco de ti y te contactaremos por el medio que prefieras.
+        </p>
 
-      <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+        <form class="auth-form" [formGroup]="form" (ngSubmit)="submit()" novalidate>
         <label for="interested-nombre">Nombre(s) *</label>
         <input id="interested-nombre" type="text" formControlName="nombre" autocomplete="given-name" placeholder="Tu nombre">
         @if (fieldInvalid('nombre')) {
@@ -51,8 +53,8 @@
           <option value="EMAIL">Email</option>
         </select>
 
-        <label for="interested-comentario">¿Quieres dejarnos un comentario?</label>
-        <textarea id="interested-comentario" formControlName="comentario" rows="4" placeholder="Cuentanos lo que quieras (opcional)"></textarea>
+        <label for="interested-comentario">Cuentanos lo que quieras (opcional)</label>
+        <textarea id="interested-comentario" formControlName="comentario" rows="4" placeholder="Permítenos conocerte, ¿hay algo que te gustaría compartir?"></textarea>
         @if (fieldInvalid('comentario')) {
           <p class="auth-error">El comentario no debe superar 2000 caracteres.</p>
         }
@@ -83,6 +85,7 @@
 
       <div style="margin-top: 2rem; display: flex; gap: 1rem; flex-wrap: wrap;">
         <a class="button" routerLink="/">Volver al inicio</a>
+      </div>
       </div>
     </div>
   </section>

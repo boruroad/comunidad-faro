@@ -507,6 +507,7 @@ img{max-width:100%;display:block}
 /* Registro de interesados: formulario largo, aprovecha mas ancho de pantalla */
 .interested-page .meeting-wrap{max-width:100%}
 .interested-page .auth-form{max-width:100%}
+.interested-page-logo{display:block;margin:-6rem auto 2rem;max-height:9rem;width:auto}
 .auth-form label{
   font-size:.63rem;
   letter-spacing:.13em;
