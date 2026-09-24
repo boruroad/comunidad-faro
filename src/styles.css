@@ -504,6 +504,9 @@ img{max-width:100%;display:block}
   gap:.7rem;
   max-width:560px;
 }
+/* Registro de interesados: formulario largo, aprovecha mas ancho de pantalla */
+.interested-page .meeting-wrap{max-width:100%}
+.interested-page .auth-form{max-width:100%}
 .auth-form label{
   font-size:.63rem;
   letter-spacing:.13em;
@@ -624,7 +627,7 @@ img{max-width:100%;display:block}
 .private-header-actions .text-link:hover,.private-header-actions .text-link:focus-visible{color:#fff}
 .private-header-actions .button{padding:.55rem .9rem;min-height:auto;font-size:.62rem}
 
-.dashboard-main{max-width:1400px;margin:auto;padding:2.4rem var(--pad) 0}
+.dashboard-main{padding:2.4rem var(--pad) 0}
 
 .data-table-panel{
   border:1px solid var(--line);
@@ -637,6 +640,14 @@ img{max-width:100%;display:block}
 .data-table-wrap th.mat-mdc-header-cell{font-family:Archivo,sans-serif;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#5f5a52}
 .data-table-wrap .button{padding:.4rem .7rem;min-height:auto;font-size:.62rem}
 .data-table-wrap .button + .button{margin-left:.5rem}
+
+/* Filas expandibles de Personas */
+.persona-expand-toggle{width:1.8rem;height:1.8rem;border:1px solid var(--line);background:#fff;cursor:pointer;font-weight:700;line-height:1;font-size:1rem}
+.persona-detail-row td{border-bottom:1px solid var(--line);padding:0}
+.persona-detail{padding:1.2rem 1rem;background:#f3f0e9}
+.persona-detail small{font-size:.58rem;letter-spacing:.12em;color:#7b756d;text-transform:uppercase}
+.persona-detail .filters-grid{margin-bottom:0}
+.persona-detail .config-admin-form{margin-top:0}
 
 /* Panel de filtros de busqueda (Personas, Comunidades) */
 .filters-form{margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1.2rem}
@@ -660,7 +671,7 @@ img{max-width:100%;display:block}
   .private-header-actions{width:100%;justify-content:space-between}
 }
 
-.config-admin-panel{max-width:1140px}
+/* Sin max-width en data-table-panel: aprovecha el ancho completo de .dashboard-main */
 .config-admin-form{display:grid;gap:.7rem;margin-top:1.4rem}
 .config-admin-form label{font-size:.63rem;letter-spacing:.13em;text-transform:uppercase;color:#726d65}
 .config-admin-form input,.config-admin-form textarea{border:0;border-bottom:1px solid #a9a195;background:transparent;padding:.8rem 0;outline:0;font:400 1rem "Source Serif 4",serif}

@@ -88,6 +88,11 @@ register_crud($router, '/api/v1/usuarios', 'UsuarioController');
 register_crud($router, '/api/v1/comunidades', 'ComunidadController');
 
 // ---------------------------------------------------------------------
+// Casas (catalogo asociado a una comunidad)
+// ---------------------------------------------------------------------
+register_crud($router, '/api/v1/casas', 'CasaController');
+
+// ---------------------------------------------------------------------
 // Roles
 // ---------------------------------------------------------------------
 register_crud($router, '/api/v1/roles', 'RolController');
@@ -95,6 +100,13 @@ register_crud($router, '/api/v1/roles', 'RolController');
 // ---------------------------------------------------------------------
 // Personas
 // ---------------------------------------------------------------------
+$personaController = new PersonaController();
+
+// Catalogo para el filtro "Lider" (personas que ya lideran a alguien).
+$router->add('GET', '/api/v1/personas/lideres', function ($request) use ($personaController) {
+    return $personaController->lideres($request);
+});
+
 register_crud($router, '/api/v1/personas', 'PersonaController');
 
 // ---------------------------------------------------------------------

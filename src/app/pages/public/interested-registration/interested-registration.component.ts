@@ -98,6 +98,6 @@ export class InterestedRegistrationComponent {
 
   acceptSuccessModal(): void {
     this.successDialog?.nativeElement.close();
-    this.router.navigateByUrl('/');
+    this.router.navigateByUrl('/interesado');
   }
 }

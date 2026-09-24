@@ -14,20 +14,49 @@ interface ApiEnvelope<T> {
 export interface Persona {
   id: number;
   comunidadId: number | null;
+  casaId: number | null;
+  casaNombre: string | null;
+  liderId: number | null;
+  liderNombre: string | null;
   numeroControl: string | null;
   origen: 'MIEMBRO' | 'INTERESADO';
   nombre: string;
   apellidoPaterno: string | null;
   apellidoMaterno: string | null;
+  fechaNacimiento: string | null;
   telefono: string | null;
   whatsapp: string | null;
   email: string | null;
+  direccion: string | null;
+  barrio: string | null;
+  seccion: string | null;
   comoSeEntero: string | null;
   medioContactoPreferido: string | null;
   observaciones: string | null;
   estatus: string;
   fechaAlta: string | null;
   createdAt: string | null;
+}
+
+export interface PersonaEditPayload {
+  comunidadId?: number | null;
+  casaId?: number | null;
+  liderId?: number | null;
+  numeroControl?: string;
+  origen?: string;
+  nombre?: string;
+  apellidoPaterno?: string;
+  apellidoMaterno?: string;
+  telefono?: string;
+  whatsapp?: string;
+  email?: string;
+  direccion?: string;
+  barrio?: string;
+  seccion?: string;
+  estatus?: string;
+  comoSeEntero?: string;
+  medioContactoPreferido?: string;
+  observaciones?: string;
 }
 
 export interface PersonaFilters {
@@ -42,10 +71,15 @@ export interface PersonaFilters {
   medioContactoPreferido?: string;
   estatus?: string;
   origen?: string;
+  liderId?: number | string;
 }
 
 interface PersonaListPayload {
   items: Persona[];
+}
+
+interface PersonaMutationPayload {
+  item: Persona;
 }
 
 @Injectable({
@@ -64,7 +98,6 @@ export class PersonasService {
         params = params.set(this.toSnakeCase(key), value);
       }
     }
-
     return this.http
       .get<ApiEnvelope<PersonaListPayload>>(this.endpoint('/personas'), {
         headers: this.authHeaders(),
@@ -73,8 +106,35 @@ export class PersonasService {
       .pipe(map(response => response.data.items || []));
   }
 
+  // Catalogo para el filtro "Lider": solo personas que ya lideran a alguien.
+  listLideres(): Observable<Persona[]> {
+    return this.http
+      .get<ApiEnvelope<PersonaListPayload>>(this.endpoint('/personas/lideres'), {
+        headers: this.authHeaders()
+      })
+      .pipe(map(response => response.data.items || []));
+  }
+
   private toSnakeCase(value: string): string {
     return value.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+  }
+
+  update(id: number, payload: PersonaEditPayload): Observable<Persona> {
+    return this.http
+      .put<ApiEnvelope<PersonaMutationPayload>>(
+        this.endpoint('/personas'),
+        { id, ...payload },
+        { headers: this.authHeaders() }
+      )
+      .pipe(map(response => response.data.item));
+  }
+
+  create(payload: PersonaEditPayload): Observable<Persona> {
+    return this.http
+      .post<ApiEnvelope<PersonaMutationPayload>>(this.endpoint('/personas'), payload, {
+        headers: this.authHeaders()
+      })
+      .pipe(map(response => response.data.item));
   }
 
   private endpoint(path: string): string {

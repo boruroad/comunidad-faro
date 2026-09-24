@@ -1,0 +1,98 @@
+<section class="data-table-panel" aria-labelledby="casas-title">
+  <p class="eyebrow">MODULO</p>
+  <h1 id="casas-title">CASAS</h1>
+  <p class="auth-copy">Catalogo de casas asociadas a cada comunidad, con su ubicacion en el mapa.</p>
+
+  <form class="config-admin-form" [formGroup]="form" (ngSubmit)="save()">
+    <label for="casa-comunidad">Comunidad</label>
+    <select id="casa-comunidad" formControlName="comunidadId">
+      <option [value]="0" disabled>Selecciona una comunidad</option>
+      @for (comunidad of comunidades(); track comunidad.id) {
+        <option [value]="comunidad.id">{{ comunidad.nombre }} ({{ comunidad.lugar }})</option>
+      }
+    </select>
+
+    <label for="casa-nombre">Nombre</label>
+    <input id="casa-nombre" type="text" formControlName="nombre" placeholder="Ejemplo: Casa Norte">
+
+    <label for="casa-direccion">Direccion</label>
+    <input id="casa-direccion" type="text" formControlName="direccion" placeholder="Direccion completa">
+
+    <label for="casa-latitud">Latitud</label>
+    <input id="casa-latitud" type="number" step="0.0000001" formControlName="latitud" placeholder="Ejemplo: 19.4326000">
+
+    <label for="casa-longitud">Longitud</label>
+    <input id="casa-longitud" type="number" step="0.0000001" formControlName="longitud" placeholder="Ejemplo: -99.1332000">
+
+    <div class="dashboard-actions">
+      <button class="button button-dark" type="submit" [disabled]="saving()">
+        {{ selectedId() ? 'Actualizar casa' : 'Crear casa' }}
+      </button>
+      @if (selectedId()) {
+        <button class="button" type="button" (click)="cancelEdit()">Cancelar edicion</button>
+      }
+    </div>
+  </form>
+
+  @if (successMessage()) {
+    <p class="config-admin-success" aria-live="polite">{{ successMessage() }}</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+  }
+
+  @if (loading()) {
+    <mat-spinner diameter="32"></mat-spinner>
+  } @else {
+    <div class="data-table-wrap">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let casa">{{ casa.nombre }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="comunidad">
+          <th mat-header-cell *matHeaderCellDef>Comunidad</th>
+          <td mat-cell *matCellDef="let casa">{{ comunidadNombre(casa.comunidadId) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Direccion</th>
+          <td mat-cell *matCellDef="let casa">{{ casa.direccion }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="coordenadas">
+          <th mat-header-cell *matHeaderCellDef>Coordenadas</th>
+          <td mat-cell *matCellDef="let casa">
+            @if (casa.latitud && casa.longitud) {
+              <a
+                class="text-link"
+                [href]="'https://maps.google.com/?q=' + casa.latitud + ',' + casa.longitud"
+                target="_blank"
+                rel="noopener"
+              >{{ casa.latitud }}, {{ casa.longitud }}</a>
+            } @else {
+              —
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let casa">
+            <button class="button" type="button" (click)="edit(casa)">Editar</button>
+            <button class="button" type="button" (click)="remove(casa)">Eliminar</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      @if (!dataSource.data.length) {
+        <p class="auth-copy">No hay casas registradas todavia.</p>
+      }
+    </div>
+  }
+</section>

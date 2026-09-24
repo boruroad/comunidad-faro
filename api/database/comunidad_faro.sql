@@ -10,6 +10,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS auth_tokens;
 DROP TABLE IF EXISTS usuarios;
 DROP TABLE IF EXISTS personas;
+DROP TABLE IF EXISTS casas;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS comunidades;
 
@@ -35,7 +36,23 @@ CREATE TABLE roles (
 INSERT INTO roles (nombre, descripcion) VALUES
 ('SUPERADMIN', 'Administrador global de la plataforma'),
 ('ADMIN_COMUNIDAD', 'Administrador de una comunidad'),
-('CONSULTA', 'Acceso de solo lectura');
+('CONSULTA', 'Acceso de solo lectura'),
+('PASTOR', 'Pastor de la comunidad'),
+('LIDER', 'Lider de una casa o grupo'),
+('SERVIDOR', 'Servidor dentro de la comunidad');
+
+CREATE TABLE casas (
+    id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    comunidad_id BIGINT UNSIGNED NOT NULL,
+    nombre VARCHAR(150) NOT NULL,
+    direccion VARCHAR(255) NOT NULL,
+    latitud DECIMAL(10,7) NULL,
+    longitud DECIMAL(10,7) NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    CONSTRAINT fk_casas_comunidad FOREIGN KEY (comunidad_id) REFERENCES comunidades(id),
+    INDEX idx_casas_comunidad (comunidad_id)
+);
 
 -- `personas` cubre tanto miembros formales de una comunidad (origen=MIEMBRO,
 -- con comunidad_id/numero_control) como leads del formulario publico
@@ -43,6 +60,8 @@ INSERT INTO roles (nombre, descripcion) VALUES
 CREATE TABLE personas (
     id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
     comunidad_id BIGINT UNSIGNED NULL,
+    casa_id BIGINT UNSIGNED NULL,
+    lider_id BIGINT UNSIGNED NULL,
     numero_control VARCHAR(40) NULL,
     origen ENUM('MIEMBRO','INTERESADO') NOT NULL DEFAULT 'INTERESADO',
     nombre VARCHAR(100) NOT NULL,
@@ -65,8 +84,12 @@ CREATE TABLE personas (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_personas_comunidad FOREIGN KEY (comunidad_id) REFERENCES comunidades(id),
+    CONSTRAINT fk_personas_casa FOREIGN KEY (casa_id) REFERENCES casas(id),
+    CONSTRAINT fk_personas_lider FOREIGN KEY (lider_id) REFERENCES personas(id),
     UNIQUE KEY uk_persona_numero_control (comunidad_id, numero_control),
     INDEX idx_personas_comunidad (comunidad_id),
+    INDEX idx_personas_casa (casa_id),
+    INDEX idx_personas_lider (lider_id),
     INDEX idx_personas_nombre (nombre, apellido_paterno, apellido_materno),
     INDEX idx_personas_estatus (estatus),
     INDEX idx_personas_origen (origen)

@@ -9,12 +9,16 @@ class UsuarioController extends CrudController
 
     private $authService;
     private $roles;
+    private $comunidades;
+    private $personas;
 
     public function __construct()
     {
         $this->repo = new UsuarioRepository();
         $this->authService = new AuthService();
         $this->roles = new RolRepository();
+        $this->comunidades = new ComunidadRepository();
+        $this->personas = new PersonaRepository();
     }
 
     public function index($request)
@@ -70,13 +74,27 @@ class UsuarioController extends CrudController
         ), $this->resourceLabel . ' found');
     }
 
-    // Nunca debe salir password_hash por la API; de paso se agrega el nombre del rol para la UI.
+    // Nunca debe salir password_hash por la API; de paso se agrega el nombre del rol/comunidad/persona para la UI.
     private function enrichRows(array $rows)
     {
         return array_map(function ($row) {
             unset($row['password_hash']);
+
             $rol = $this->roles->findById((int) $row['rol_id']);
             $row['rol_nombre'] = $rol ? $rol['nombre'] : null;
+
+            $row['comunidad_nombre'] = null;
+            if (!empty($row['comunidad_id'])) {
+                $comunidad = $this->comunidades->findById((int) $row['comunidad_id']);
+                $row['comunidad_nombre'] = $comunidad ? $comunidad['nombre'] : null;
+            }
+
+            $row['persona_nombre'] = null;
+            if (!empty($row['persona_id'])) {
+                $persona = $this->personas->findById((int) $row['persona_id']);
+                $row['persona_nombre'] = $persona ? trim($persona['nombre'] . ' ' . $persona['apellido_paterno']) : null;
+            }
+
             return $row;
         }, $rows);
     }
@@ -140,6 +158,95 @@ class UsuarioController extends CrudController
         return $this->ok(array(
             'item' => $this->camelize($createdUser->toArray()),
         ), 'usuario created');
+    }
+
+    // Sobrescribe el update generico: permite cambiar email, rol, comunidad, activo
+    // y opcionalmente la contraseña (todo en una sola llamada).
+    public function update($request)
+    {
+        $usuario = $this->requireAuth();
+        if (!$usuario) {
+            return $this->fail('unauthorized', 401);
+        }
+
+        if (!$this->hasAnyRole($usuario, $this->writeRoles)) {
+            return $this->fail('insufficient permissions', 403);
+        }
+
+        $id = isset($request['id']) ? (int) $request['id'] : 0;
+        if ($id <= 0) {
+            return $this->fail('id is required', 422);
+        }
+
+        $target = $this->repo->findById($id);
+        if (!$target || empty($this->ocultarSuperadminsSiNoAplica($usuario, array($target)))) {
+            return $this->fail('usuario not found', 404);
+        }
+
+        $payload = $this->extractPayload($request);
+        $fields = array();
+
+        if (isset($payload['email'])) {
+            $email = strtolower(trim((string) $payload['email']));
+            if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                return $this->fail('email format is invalid', 422);
+            }
+
+            $existing = $this->repo->findByEmail($email);
+            if ($existing && (int) $existing->id !== $id) {
+                return $this->fail('email already exists', 409);
+            }
+
+            $fields['email'] = $email;
+        }
+
+        if (isset($payload['rol_id'])) {
+            $rolId = (int) $payload['rol_id'];
+            if ($rolId <= 0 || !$this->roles->findById($rolId)) {
+                return $this->fail('rol_id is invalid', 422);
+            }
+
+            $fields['rol_id'] = $rolId;
+        }
+
+        if (array_key_exists('comunidad_id', $payload)) {
+            $fields['comunidad_id'] = $payload['comunidad_id'] ? (int) $payload['comunidad_id'] : null;
+        }
+
+        if (array_key_exists('persona_id', $payload)) {
+            $fields['persona_id'] = $payload['persona_id'] ? (int) $payload['persona_id'] : null;
+        }
+
+        if (array_key_exists('activo', $payload)) {
+            $fields['activo'] = (bool) $payload['activo'];
+        }
+
+        $newPassword = isset($request['password']) ? (string) $request['password'] : '';
+        if ($newPassword !== '') {
+            if (!$this->isStrongPassword($newPassword)) {
+                return $this->fail('password must be at least 12 chars and include uppercase, lowercase, number, special char, and no spaces', 422);
+            }
+
+            $this->authService->updatePassword($id, $newPassword);
+        }
+
+        if (empty($fields) && $newPassword === '') {
+            return $this->fail('payload is required', 422);
+        }
+
+        if (!empty($fields)) {
+            $ok = $this->repo->updateById($id, $fields);
+            if (!$ok) {
+                return $this->fail('usuario could not be updated', 409);
+            }
+        }
+
+        $updated = $this->repo->findById($id);
+        $enriched = $this->enrichRows(array($updated));
+
+        return $this->ok(array(
+            'item' => $this->camelize($enriched[0]),
+        ), 'usuario updated');
     }
 
     public function profile($request)

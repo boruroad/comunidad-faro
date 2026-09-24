@@ -5,6 +5,8 @@ class PersonaController extends CrudController
     protected $resourceLabel = 'persona';
     protected $allowedFields = array(
         'comunidad_id',
+        'casa_id',
+        'lider_id',
         'numero_control',
         'origen',
         'nombre',
@@ -25,6 +27,8 @@ class PersonaController extends CrudController
     );
     protected $filterableFields = array(
         'comunidad_id',
+        'casa_id',
+        'lider_id',
         'numero_control',
         'origen',
         'nombre',
@@ -43,9 +47,12 @@ class PersonaController extends CrudController
     );
     protected $writeRoles = array('SUPERADMIN', 'ADMIN_COMUNIDAD', 'CAPTURISTA');
 
+    private $casas;
+
     public function __construct()
     {
         $this->repo = new PersonaRepository();
+        $this->casas = new CasaRepository();
     }
 
     // Busqueda por coincidencia parcial en cada campo (mas exacta en origen/estatus/etc).
@@ -68,9 +75,47 @@ class PersonaController extends CrudController
         }
 
         $rows = $this->repo->search($conditions, $limit, $offset);
+        $rows = $this->enrichRows($rows);
 
         return $this->ok(array(
             'items' => $this->camelize($rows),
         ), $this->resourceLabel . ' list');
+    }
+
+    // Agrega nombre de la casa y del lider para mostrarlos en la tabla sin viajes extra desde el front.
+    private function enrichRows(array $rows)
+    {
+        return array_map(function ($row) {
+            $row['casa_nombre'] = null;
+            if (!empty($row['casa_id'])) {
+                $casa = $this->casas->findById((int) $row['casa_id']);
+                $row['casa_nombre'] = $casa ? $casa['nombre'] : null;
+            }
+
+            $row['lider_nombre'] = null;
+            if (!empty($row['lider_id'])) {
+                $lider = $this->repo->findById((int) $row['lider_id']);
+                if ($lider) {
+                    $row['lider_nombre'] = trim($lider['nombre'] . ' ' . $lider['apellido_paterno']);
+                }
+            }
+
+            return $row;
+        }, $rows);
+    }
+
+    // Catalogo para el filtro "Lider": solo personas que ya lideran a alguien.
+    public function lideres($request)
+    {
+        $usuario = $this->requireAuth();
+        if (!$usuario) {
+            return $this->fail('unauthorized', 401);
+        }
+
+        $rows = $this->repo->findLideres();
+
+        return $this->ok(array(
+            'items' => $this->camelize($rows),
+        ), 'lideres list');
     }
 }

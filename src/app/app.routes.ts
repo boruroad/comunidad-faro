@@ -11,6 +11,7 @@ import { DashboardHomeComponent } from './pages/private/dashboard-home/dashboard
 import { UsuariosComponent } from './pages/private/usuarios/usuarios.component';
 import { PersonasComponent } from './pages/private/personas/personas.component';
 import { ComunidadesComponent } from './pages/private/comunidades/comunidades.component';
+import { CasasComponent } from './pages/private/casas/casas.component';
 import { authGuard } from './auth/auth.guard';
 import { adminGuard } from './auth/admin.guard';
 import { SiteConfigAdminComponent } from './pages/private/site-config-admin/site-config-admin.component';
@@ -18,7 +19,8 @@ import { SiteConfigAdminComponent } from './pages/private/site-config-admin/site
 export const routes: Routes = [
 	{
 		path: '',
-		component: HomeComponent
+		//component: HomeComponent
+		component: InterestedRegistrationComponent
 	},
 	{
 		path: 'home',
@@ -68,6 +70,11 @@ export const routes: Routes = [
 			{
 				path: 'comunidades',
 				component: ComunidadesComponent,
+				canActivate: [adminGuard]
+			},
+			{
+				path: 'casas',
+				component: CasasComponent,
 				canActivate: [adminGuard]
 			},
 			{

@@ -5,6 +5,8 @@ class PersonaRepository extends BaseRepository
     protected $table = 'personas';
     protected $fillable = array(
         'comunidad_id',
+        'casa_id',
+        'lider_id',
         'numero_control',
         'origen',
         'nombre',
@@ -81,5 +83,16 @@ class PersonaRepository extends BaseRepository
         $stmt->close();
 
         return $rows ?: array();
+    }
+
+    // Solo personas que YA son lider de alguien mas (aparecen como lider_id de otra persona).
+    public function findLideres()
+    {
+        $sql = 'SELECT p.* FROM personas p
+            WHERE p.id IN (SELECT DISTINCT lider_id FROM personas WHERE lider_id IS NOT NULL)
+            ORDER BY p.nombre ASC';
+        $result = $this->db->query($sql);
+
+        return $result ? $result->fetch_all(MYSQLI_ASSOC) : array();
     }
 }

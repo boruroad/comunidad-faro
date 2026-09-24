@@ -63,6 +63,15 @@
           <option value="MIEMBRO">Miembro</option>
         </select>
       </label>
+      <label>
+        <span>Lider</span>
+        <select formControlName="liderId">
+          <option value="">Todos</option>
+          @for (lider of lideres(); track lider.id) {
+            <option [value]="lider.id">{{ nombreCompleto(lider) }}</option>
+          }
+        </select>
+      </label>
     </div>
 
     <div class="filters-actions">
@@ -71,15 +80,144 @@
     </div>
   </form>
 
+  @if (successMessage()) {
+    <p class="config-admin-success" aria-live="polite">{{ successMessage() }}</p>
+  }
+
   @if (errorMessage()) {
     <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+  }
+
+  @if (currentUser.isAdmin() && !creatingNew()) {
+    <div class="dashboard-actions">
+      <button class="button button-dark" type="button" (click)="startCreate()">Nueva persona</button>
+    </div>
+  }
+
+  @if (currentUser.isAdmin() && creatingNew()) {
+    <form class="config-admin-form" [formGroup]="editForm" (ngSubmit)="saveCreate()">
+      <div class="filters-grid">
+        <label>
+          <span>Nombre</span>
+          <input type="text" formControlName="nombre">
+        </label>
+        <label>
+          <span>Apellido paterno</span>
+          <input type="text" formControlName="apellidoPaterno">
+        </label>
+        <label>
+          <span>Apellido materno</span>
+          <input type="text" formControlName="apellidoMaterno">
+        </label>
+        <label>
+          <span>Telefono</span>
+          <input type="text" formControlName="telefono">
+        </label>
+        <label>
+          <span>Whatsapp</span>
+          <input type="text" formControlName="whatsapp">
+        </label>
+        <label>
+          <span>Correo</span>
+          <input type="email" formControlName="email">
+        </label>
+        <label>
+          <span>Direccion</span>
+          <input type="text" formControlName="direccion">
+        </label>
+        <label>
+          <span>Barrio</span>
+          <input type="text" formControlName="barrio">
+        </label>
+        <label>
+          <span>Seccion</span>
+          <input type="text" formControlName="seccion">
+        </label>
+        <label>
+          <span>Numero de control</span>
+          <input type="text" formControlName="numeroControl">
+        </label>
+        <label>
+          <span>Origen</span>
+          <select formControlName="origen">
+            <option value="INTERESADO">Interesado</option>
+            <option value="MIEMBRO">Miembro</option>
+          </select>
+        </label>
+        <label>
+          <span>Estatus</span>
+          <select formControlName="estatus">
+            <option value="NUEVO">Nuevo</option>
+            <option value="CONTACTADO">Contactado</option>
+            <option value="DESCARTADO">Descartado</option>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+            <option value="FALLECIDO">Fallecido</option>
+            <option value="BAJA">Baja</option>
+          </select>
+        </label>
+        <label>
+          <span>Como se entero</span>
+          <input type="text" formControlName="comoSeEntero">
+        </label>
+        <label>
+          <span>Medio preferido</span>
+          <select formControlName="medioContactoPreferido">
+            <option value="">Sin definir</option>
+            <option value="WHATSAPP">Whatsapp</option>
+            <option value="LLAMADA">Llamada</option>
+            <option value="EMAIL">Email</option>
+          </select>
+        </label>
+        <label>
+          <span>Casa</span>
+          <select formControlName="casaId">
+            <option [value]="null">Sin casa</option>
+            @for (casa of casas(); track casa.id) {
+              <option [value]="casa.id">{{ casa.nombre }}</option>
+            }
+          </select>
+        </label>
+        <label>
+          <span>Lider</span>
+          <select formControlName="liderId">
+            <option [value]="null">Sin lider</option>
+            @for (candidato of dataSource.data; track candidato.id) {
+              <option [value]="candidato.id">{{ nombreCompleto(candidato) }}</option>
+            }
+          </select>
+        </label>
+      </div>
+
+      <label for="persona-create-observaciones">Observaciones / comentario</label>
+      <textarea id="persona-create-observaciones" formControlName="observaciones" rows="3"></textarea>
+
+      <div class="dashboard-actions">
+        <button class="button button-dark" type="submit" [disabled]="saving()">Crear persona</button>
+        <button class="button" type="button" (click)="cancelEdit()">Cancelar</button>
+      </div>
+    </form>
   }
 
   @if (loading()) {
     <mat-spinner diameter="32"></mat-spinner>
   } @else {
     <div class="data-table-wrap">
-      <table mat-table [dataSource]="dataSource" matSort>
+      <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows>
+        <ng-container matColumnDef="expand">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let persona">
+            <button
+              class="persona-expand-toggle"
+              type="button"
+              [attr.aria-expanded]="expandedId() === persona.id"
+              (click)="toggleExpand(persona); $event.stopPropagation()"
+            >
+              {{ expandedId() === persona.id ? '−' : '+' }}
+            </button>
+          </td>
+        </ng-container>
+
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
           <td mat-cell *matCellDef="let persona">{{ nombreCompleto(persona) }}</td>
@@ -95,14 +233,14 @@
           <td mat-cell *matCellDef="let persona">{{ persona.email || '—' }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="comoSeEntero">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Como se entero</th>
-          <td mat-cell *matCellDef="let persona">{{ persona.comoSeEntero || '—' }}</td>
+        <ng-container matColumnDef="casaNombre">
+          <th mat-header-cell *matHeaderCellDef>Casa</th>
+          <td mat-cell *matCellDef="let persona">{{ persona.casaNombre || '—' }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="medioContactoPreferido">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Medio preferido</th>
-          <td mat-cell *matCellDef="let persona">{{ persona.medioContactoPreferido || '—' }}</td>
+        <ng-container matColumnDef="liderNombre">
+          <th mat-header-cell *matHeaderCellDef>Lider</th>
+          <td mat-cell *matCellDef="let persona">{{ persona.liderNombre || '—' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="estatus">
@@ -121,8 +259,143 @@
           <td mat-cell *matCellDef="let persona">{{ persona.origen }}</td>
         </ng-container>
 
+        <ng-container matColumnDef="expandedDetail">
+          <td mat-cell *matCellDef="let persona" [attr.colspan]="displayedColumns.length">
+            <div class="persona-detail" [style.display]="expandedId() === persona.id ? 'block' : 'none'">
+              @if (editingId() === persona.id && currentUser.isAdmin()) {
+                <form class="config-admin-form" [formGroup]="editForm" (ngSubmit)="saveEdit(persona)">
+                  <div class="filters-grid">
+                    <label>
+                      <span>Nombre</span>
+                      <input type="text" formControlName="nombre">
+                    </label>
+                    <label>
+                      <span>Apellido paterno</span>
+                      <input type="text" formControlName="apellidoPaterno">
+                    </label>
+                    <label>
+                      <span>Apellido materno</span>
+                      <input type="text" formControlName="apellidoMaterno">
+                    </label>
+                    <label>
+                      <span>Telefono</span>
+                      <input type="text" formControlName="telefono">
+                    </label>
+                    <label>
+                      <span>Whatsapp</span>
+                      <input type="text" formControlName="whatsapp">
+                    </label>
+                    <label>
+                      <span>Correo</span>
+                      <input type="email" formControlName="email">
+                    </label>
+                    <label>
+                      <span>Direccion</span>
+                      <input type="text" formControlName="direccion">
+                    </label>
+                    <label>
+                      <span>Barrio</span>
+                      <input type="text" formControlName="barrio">
+                    </label>
+                    <label>
+                      <span>Seccion</span>
+                      <input type="text" formControlName="seccion">
+                    </label>
+                    <label>
+                      <span>Numero de control</span>
+                      <input type="text" formControlName="numeroControl">
+                    </label>
+                    <label>
+                      <span>Origen</span>
+                      <select formControlName="origen">
+                        <option value="INTERESADO">Interesado</option>
+                        <option value="MIEMBRO">Miembro</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Estatus</span>
+                      <select formControlName="estatus">
+                        <option value="NUEVO">Nuevo</option>
+                        <option value="CONTACTADO">Contactado</option>
+                        <option value="DESCARTADO">Descartado</option>
+                        <option value="ACTIVO">Activo</option>
+                        <option value="INACTIVO">Inactivo</option>
+                        <option value="FALLECIDO">Fallecido</option>
+                        <option value="BAJA">Baja</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Como se entero</span>
+                      <input type="text" formControlName="comoSeEntero">
+                    </label>
+                    <label>
+                      <span>Medio preferido</span>
+                      <select formControlName="medioContactoPreferido">
+                        <option value="">Sin definir</option>
+                        <option value="WHATSAPP">Whatsapp</option>
+                        <option value="LLAMADA">Llamada</option>
+                        <option value="EMAIL">Email</option>
+                      </select>
+                    </label>
+                    <label>
+                      <span>Casa</span>
+                      <select formControlName="casaId">
+                        <option [value]="null">Sin casa</option>
+                        @for (casa of casas(); track casa.id) {
+                          <option [value]="casa.id">{{ casa.nombre }}</option>
+                        }
+                      </select>
+                    </label>
+                    <label>
+                      <span>Lider</span>
+                      <select formControlName="liderId">
+                        <option [value]="null">Sin lider</option>
+                        @for (candidato of posiblesLideres(persona); track candidato.id) {
+                          <option [value]="candidato.id">{{ nombreCompleto(candidato) }}</option>
+                        }
+                      </select>
+                    </label>
+                  </div>
+
+                  <label for="persona-edit-observaciones">Observaciones / comentario</label>
+                  <textarea id="persona-edit-observaciones" formControlName="observaciones" rows="3"></textarea>
+
+                  <div class="dashboard-actions">
+                    <button class="button button-dark" type="submit" [disabled]="saving()">Guardar cambios</button>
+                    <button class="button" type="button" (click)="cancelEdit()">Cancelar</button>
+                  </div>
+                </form>
+              } @else {
+                <div class="filters-grid">
+                  <div><small>TELEFONO</small><br>{{ persona.telefono || '—' }}</div>
+                  <div><small>DIRECCION</small><br>{{ persona.direccion || '—' }}</div>
+                  <div><small>BARRIO</small><br>{{ persona.barrio || '—' }}</div>
+                  <div><small>SECCION</small><br>{{ persona.seccion || '—' }}</div>
+                  <div><small>NUMERO DE CONTROL</small><br>{{ persona.numeroControl || '—' }}</div>
+                  <div><small>FECHA DE ALTA</small><br>{{ persona.fechaAlta || '—' }}</div>
+                  <div><small>COMO SE ENTERO</small><br>{{ persona.comoSeEntero || '—' }}</div>
+                  <div><small>MEDIO PREFERIDO</small><br>{{ persona.medioContactoPreferido || '—' }}</div>
+                </div>
+                <p class="auth-copy" style="margin-top: 1rem;">{{ persona.observaciones || 'Sin comentarios.' }}</p>
+
+                @if (currentUser.isAdmin()) {
+                  <div class="dashboard-actions">
+                    <button class="button" type="button" (click)="startEdit(persona)">Editar</button>
+                  </div>
+                }
+              }
+            </div>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="persona-row"></tr>
+        <tr
+          mat-row
+          *matRowDef="let row; columns: ['expandedDetail']"
+          class="persona-detail-row"
+          [style.display]="expandedId() === row.id ? '' : 'none'"
+        ></tr>
       </table>
 
       @if (!dataSource.data.length) {

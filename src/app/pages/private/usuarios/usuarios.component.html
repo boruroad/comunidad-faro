@@ -3,6 +3,85 @@
   <h1 id="usuarios-title">USUARIOS</h1>
   <p class="auth-copy">Consulta las cuentas registradas. Las cuentas autoregistradas quedan inactivas hasta que un administrador las active.</p>
 
+  @if (currentUser.isAdmin() && !selectedId() && !creating()) {
+    <div class="dashboard-actions">
+      <button class="button button-dark" type="button" (click)="startCreate()">Nuevo usuario</button>
+    </div>
+  }
+
+  @if (currentUser.isAdmin() && (selectedId() || creating())) {
+    <form class="config-admin-form" [formGroup]="form" (ngSubmit)="save()">
+      <label for="usuario-email">Correo</label>
+      <input id="usuario-email" type="email" formControlName="email">
+
+      <label for="usuario-rol">Rol</label>
+      <select id="usuario-rol" formControlName="rolId">
+        <option [value]="0" disabled>Selecciona un rol</option>
+        @for (rol of roles(); track rol.id) {
+          <option [value]="rol.id">{{ rol.nombre }}</option>
+        }
+      </select>
+
+      <label for="usuario-comunidad">Comunidad (opcional)</label>
+      <select id="usuario-comunidad" formControlName="comunidadId">
+        <option [value]="null">Sin comunidad</option>
+        @for (comunidad of comunidades(); track comunidad.id) {
+          <option [value]="comunidad.id">{{ comunidad.nombre }} ({{ comunidad.lugar }})</option>
+        }
+      </select>
+
+      <label for="usuario-persona">Persona asociada (opcional)</label>
+      <select id="usuario-persona" formControlName="personaId">
+        <option [value]="null">Sin persona</option>
+        @for (persona of personas(); track persona.id) {
+          <option [value]="persona.id">{{ nombreCompletoPersona(persona) }}</option>
+        }
+      </select>
+
+      <label class="config-admin-checkbox">
+        <input type="checkbox" formControlName="activo">
+        <span>Cuenta activa</span>
+      </label>
+
+      <label for="usuario-password">{{ creating() ? 'Contraseña' : 'Nueva contraseña (opcional)' }}</label>
+      <div class="password-field">
+        <input id="usuario-password" [type]="showPassword() ? 'text' : 'password'" formControlName="password" autocomplete="new-password" [placeholder]="creating() ? 'Minimo 12 caracteres' : 'Dejar en blanco para no cambiarla'">
+        <button
+          type="button"
+          class="password-toggle"
+          (click)="togglePasswordVisibility()"
+          [attr.aria-label]="showPassword() ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+          [attr.aria-pressed]="showPassword()"
+        >
+          @if (showPassword()) {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M3 3l18 18"></path>
+              <path d="M10.6 10.6a2 2 0 0 0 2.8 2.8"></path>
+              <path d="M9.9 5.1A10.4 10.4 0 0 1 12 5c6 0 10 6 10 6a13.6 13.6 0 0 1-2.2 2.9M6.6 6.6C3.9 8.4 2 12 2 12s4 6 10 6c1 0 2-.2 3-.5"></path>
+            </svg>
+          } @else {
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6-10-6-10-6z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          }
+        </button>
+      </div>
+      @if (form.get('password')?.invalid && form.get('password')?.touched) {
+        <p class="auth-error">Minimo 12 caracteres, con mayuscula, minuscula, numero, caracter especial y sin espacios.</p>
+      }
+
+      <div class="dashboard-actions">
+        <button class="button button-dark" type="submit" [disabled]="saving()">{{ creating() ? 'Crear usuario' : 'Guardar cambios' }}</button>
+        <button class="button" type="button" (click)="cancelEdit()">Cancelar</button>
+      </div>
+    </form>
+  }
+
+  @if (successMessage()) {
+    <p class="config-admin-success" aria-live="polite">{{ successMessage() }}</p>
+  }
+
   @if (errorMessage()) {
     <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
   }
@@ -15,6 +94,16 @@
         <ng-container matColumnDef="email">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
           <td mat-cell *matCellDef="let usuario">{{ usuario.email }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="comunidadNombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Comunidad</th>
+          <td mat-cell *matCellDef="let usuario">{{ usuario.comunidadNombre || '—' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="personaNombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Persona</th>
+          <td mat-cell *matCellDef="let usuario">{{ usuario.personaNombre || '—' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="rolNombre">
@@ -42,6 +131,7 @@
           <th mat-header-cell *matHeaderCellDef>Acciones</th>
           <td mat-cell *matCellDef="let usuario">
             @if (currentUser.isAdmin()) {
+              <button class="button" type="button" (click)="edit(usuario)">Editar</button>
               <button
                 class="button"
                 type="button"
