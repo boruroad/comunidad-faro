@@ -4,88 +4,49 @@
   [facebookUrl]="facebookUrl"
   [menuOpen]="menuOpen"
   [headerScrolled]="headerScrolled"
+  [isSermonsEnabled]="isSermonsEnabled"
   (toggleMenu)="toggleMenu()"
   (closeMenu)="closeMenu()"
 ></app-site-header>
 
 <main id="contenido">
+  <app-alert-banner [alertMessage]="alertMessage"></app-alert-banner>
+
   <app-live-takeover
-    [live]="live"
-    [isLiveActive]="isLiveActive()"
-    [liveDescription]="liveDescription()"
-    [alertMessage]="alertMessage()"
-    [liveStreamUrl]="liveStreamUrl()"
-    [safeEmbedUrl]="safeEmbedUrl()"
+    [isLiveActive]="isLiveActive"
+    [liveTickerText]="liveTickerText"
+    [liveKickerText]="liveKickerText"
+    [liveTitleTopText]="liveTitleTopText"
+    [liveTitleAccentText]="liveTitleAccentText"
+    [liveDescriptionText]="liveDescriptionText"
+    [liveButtonLabelText]="liveButtonLabelText"
+    [liveStreamUrl]="liveStreamUrl"
+    [safeEmbedUrl]="safeEmbedUrl"
   ></app-live-takeover>
 
   <app-hero-section
-    [heroPhoto]="cfg.photos.hero"
-    [heroTitleTop]="heroTitleTop()"
-    [heroTitleAccent]="heroTitleAccent()"
-    [heroLine]="heroLine()"
-    [meetingTitle]="meetingTitle()"
-    [meetingStatus]="meetingStatus()"
+    [heroTitleTop]="heroTitleTop"
+    [heroTitleAccent]="heroTitleAccent"
+    [heroLine]="heroLine"
+    [meetingTitle]="meeting.title"
+    [meetingStatus]="meeting.status"
     [facebookUrl]="facebookUrl"
-    [meetingOnlineUrl]="meetingOnlineUrl()"
-    [meetingOnlineLabel]="meeting.onlineLabel ? meeting.onlineLabel : ''"
+    [meetingOnlineUrl]="onlineUrl"
+    [meetingOnlineLabel]="meeting.onlineLabel || ''"
   ></app-hero-section>
 
-  <section class="voice-strip" aria-label="Palabras que atraviesan la comunicacion de FARO">
-    <div class="voice-track">
-      <span>CASA.</span><em>FAMILIA.</em><span>REY.</span><em>REINO.</em><span>FARO.</span>
-    </div>
-  </section>
+  <app-voice-strip></app-voice-strip>
 
-  <section class="life-section" id="casa" aria-labelledby="casa-title">
-    <div class="section-heading reveal">
-      <p class="eyebrow">DOMINGO EN CASA · LA SEMANA EN MOVIMIENTO</p>
-      <h2 id="casa-title">HAY UN LUGAR<br><span>EN LA MESA.</span></h2>
-    </div>
-    <div class="photo-story">
-      <figure class="story-shot shot-wide reveal">
-        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.worship)" [class.has-image]="!!cfg.photos.worship"></div>
-        <figcaption>Celebrar al Rey · crecer en familia</figcaption>
-      </figure>
-      <figure class="story-shot shot-tall reveal">
-        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.people)" [class.has-image]="!!cfg.photos.people"></div>
-        <figcaption>Una familia · muchas tribus</figcaption>
-      </figure>
-      <blockquote class="story-quote reveal">La Casa no termina cuando termina la reunion.</blockquote>
-      <figure class="story-shot shot-square reveal">
-        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.prayer)" [class.has-image]="!!cfg.photos.prayer"></div>
-        <figcaption>Oracion · conversacion · comunidad</figcaption>
-      </figure>
-    </div>
-  </section>
+  <app-moments-section [moments]="moments"></app-moments-section>
 
-  <section class="manifesto section-dark" id="identidad" aria-labelledby="identity-title">
-    <div class="manifesto-intro reveal">
-      <p class="eyebrow">NUESTRO NOMBRE</p>
-      <h2 id="identity-title">
-        <span class="value-row"><b>F</b><em>e.</em></span>
-        <span class="value-row"><b>A</b><em>mor.</em></span>
-        <span class="value-row"><b>R</b><em>elevancia.</em></span>
-        <span class="value-row"><b>O</b><em>bediencia.</em></span>
-      </h2>
-    </div>
-    <div class="manifesto-copy reveal">
-      <p class="serif-lead">Fe. Amor. Relevancia. Obediencia. No son un pie de pagina: forman nuestro nombre.</p>
-      <p class="quiet-copy">La forma de reunirnos puede cambiar. El punto puede cambiar. La identidad permanece.</p>
-    </div>
-  </section>
+  <app-manifesto-section></app-manifesto-section>
 
-  <section class="kingdom-section" aria-labelledby="kingdom-title">
-    <div class="kingdom-word reveal" aria-hidden="true">REINO</div>
-    <div class="kingdom-copy reveal">
-      <p class="eyebrow">MAS ALLA DE UNA REUNION</p>
-      <h2 id="kingdom-title">CELEBRAMOS<br>AL REY.<br><span>VIVIMOS EL REINO.</span></h2>
-      <p class="serif-lead">Casa FARO habla de una Iglesia que forma discipulos, transforma familias y vive su fe tambien fuera de un lugar o un horario.</p>
-    </div>
-  </section>
+  <app-kingdom-section></app-kingdom-section>
 
   <app-music-section
     [isMusicEnabled]="isMusicEnabled"
     [releases]="releases"
+    [artistSpotifyUrl]="artistSpotifyUrl"
   ></app-music-section>
 
   <app-sermons-section
@@ -95,30 +56,15 @@
   ></app-sermons-section>
 
   <app-meeting-section
-    [meetingTitle]="meetingTitle()"
-    [meetingDescription]="meetingDescription()"
-    [meetingStatus]="meetingStatus()"
-    [meetingSchedule]="meetingSchedule()"
+    [meetingTitle]="meeting.title"
+    [meetingDescription]="meeting.description"
+    [meetingStatus]="meeting.status"
+    [meetingSchedule]="meeting.schedule"
     [facebookUrl]="facebookUrl"
     [nearestUrl]="nearestUrl"
-    [meetingOnlineUrl]="meetingOnlineUrl()"
-    [meetingOnlineLabel]="meeting.onlineLabel ? meeting.onlineLabel : ''"
+    [meetingOnlineUrl]="onlineUrl"
+    [meetingOnlineLabel]="meeting.onlineLabel || ''"
   ></app-meeting-section>
-
-  @if (featuredMessage()) {
-    <section class="featured-message-section" aria-labelledby="featured-message-title">
-      <div class="featured-message-wrap">
-        <div class="featured-message-label">
-          <p class="eyebrow">DESTACADO · FARO</p>
-          <span>AHORA</span>
-        </div>
-
-        <div class="featured-message-copy">
-          <h2 id="featured-message-title">{{ featuredMessage() }}</h2>
-        </div>
-      </div>
-    </section>
-  }
 
   <app-newsletter-section
     [enabled]="cfg.newsletter.enabled"
@@ -126,31 +72,21 @@
     [newsletterTag]="newsletterTag"
   ></app-newsletter-section>
 
-  <app-social-section
-    [socialEntries]="socialEntries"
-  ></app-social-section>
+  <app-social-section [socialEntries]="socialEntries"></app-social-section>
 
-  <app-first-visit-section
-    [firstVisit]="firstVisit"
-    [facebookUrl]="facebookUrl"
-  ></app-first-visit-section>
+  <app-first-visit-section [firstVisit]="firstVisit" [facebookUrl]="facebookUrl"></app-first-visit-section>
 
   <app-calendar-section
-    [isStaticCalendarEnabled]="isStaticCalendarEnabled"
+    [isStaticCalendarEnabled]="isCalendarEnabled"
     [calendar]="calendar"
+    [calendarEmbedUrl]="calendarEmbedUrl"
   ></app-calendar-section>
-
-  <section class="home-access-strip" aria-label="Acceso interno">
-    <div class="home-access-wrap">
-      <a class="home-access-link" href="/login">Acceso interno</a>
-    </div>
-  </section>
 </main>
 
 <app-site-footer
   [footerPhoto]="cfg.photos.footer"
-  [footerTitleTop]="footerTitleTop()"
-  [footerTitleAccent]="footerTitleAccent()"
+  [footerTitleTop]="footerTitleTop"
+  [footerTitleAccent]="footerTitleAccent"
   [facebookUrl]="facebookUrl"
   [year]="year"
 ></app-site-footer>

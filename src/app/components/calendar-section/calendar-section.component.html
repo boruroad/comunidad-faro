@@ -4,6 +4,11 @@
       <p class="eyebrow">PROXIMAS FECHAS</p>
       <h2 id="calendar-title">{{ calendar.title }}<br><span>DE COMUNIDAD.</span></h2>
       <p class="serif-lead">{{ calendar.subtitle }}</p>
+      @if (calendarEmbedUrl) {
+        <a class="calendar-external-link" [href]="calendarEmbedUrl" target="_blank" rel="noopener">
+          <span>Abrir Google Calendar</span>
+        </a>
+      }
     </div>
 
     <div class="calendar-grid">
