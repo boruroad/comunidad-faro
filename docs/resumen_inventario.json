@@ -1,0 +1,2652 @@
+{
+  "resumen": {
+    "total_items": 6782,
+    "total_carpetas": 502,
+    "total_archivos": 6280,
+    "tamano_total_bytes": 1253952226964,
+    "tamano_total_formateado": "1.14 TB",
+    "tamano_total_gb": 1167.83,
+    "tamano_total_tb": 1.14,
+    "distribucion_tipo_archivo": {
+      ".jpg": 3489,
+      ".cr2": 959,
+      ".heic": 441,
+      ".mp4": 371,
+      ".mov": 370,
+      ".png": 186,
+      "[SIN EXTENSIÓN]": 104,
+      ".jpeg": 62,
+      ".dng": 49,
+      ".m4a": 35,
+      ".mp3": 19,
+      ".wav": 19,
+      ".pdf": 15,
+      ".aep": 10,
+      ".gform": 9,
+      ".thm": 9,
+      ".gsheet": 8,
+      ".m4v": 8,
+      ".ai": 5,
+      ".mkv": 4
+    },
+    "distribucion_mime": {
+      "image/jpeg": 3569,
+      "image/x-canon-cr2": 959,
+      "video/mp4": 534,
+      "image/heif": 440,
+      "video/quicktime": 373,
+      "image/png": 181,
+      "image/dng": 47,
+      "audio/x-m4a": 35,
+      "application/octet-stream": 20,
+      "audio/mpeg": 19,
+      "audio/vnd.wave": 15,
+      "application/pdf": 15,
+      "application/vnd.google-apps.form": 9,
+      "application/vnd.google-apps.spreadsheet": 8,
+      "video/x-m4v": 7,
+      "text/plain": 6,
+      "audio/wav": 5,
+      "application/postscript": 5,
+      "video/x-matroska": 4,
+      "application/msword": 3
+    },
+    "distribucion_ano": {
+      "2011": 1,
+      "2012": 15,
+      "2016": 1,
+      "2018": 2,
+      "2021": 134,
+      "2022": 382,
+      "2023": 2578,
+      "2024": 1069,
+      "2025": 1716,
+      "2026": 382
+    },
+    "distribucion_categorias": {
+      "fotografías": {
+        "conteo": 5031,
+        "tamano_bytes": 44023832365,
+        "tamano_formateado": "41.00 GB",
+        "tamano_gb": 41.0
+      },
+      "videos": {
+        "conteo": 458,
+        "tamano_bytes": 583867185281,
+        "tamano_formateado": "543.77 GB",
+        "tamano_gb": 543.77
+      },
+      "POR REVISAR": {
+        "conteo": 402,
+        "tamano_bytes": 69269746245,
+        "tamano_formateado": "64.51 GB",
+        "tamano_gb": 64.51
+      },
+      "prédicas": {
+        "conteo": 270,
+        "tamano_bytes": 288605321942,
+        "tamano_formateado": "268.78 GB",
+        "tamano_gb": 268.78
+      },
+      "diseños gráficos": {
+        "conteo": 233,
+        "tamano_bytes": 4155122195,
+        "tamano_formateado": "3.87 GB",
+        "tamano_gb": 3.87
+      },
+      "escuela de capacitación": {
+        "conteo": 191,
+        "tamano_bytes": 246438919880,
+        "tamano_formateado": "229.51 GB",
+        "tamano_gb": 229.51
+      },
+      "redes sociales": {
+        "conteo": 104,
+        "tamano_bytes": 14731152664,
+        "tamano_formateado": "13.72 GB",
+        "tamano_gb": 13.72
+      },
+      "fotografías editadas": {
+        "conteo": 65,
+        "tamano_bytes": 545683822,
+        "tamano_formateado": "520.40 MB",
+        "tamano_gb": 0.51
+      },
+      "series de prédicas": {
+        "conteo": 8,
+        "tamano_bytes": 0,
+        "tamano_formateado": "0.00 B",
+        "tamano_gb": 0.0
+      },
+      "ministerial": {
+        "conteo": 6,
+        "tamano_bytes": 509149124,
+        "tamano_formateado": "485.56 MB",
+        "tamano_gb": 0.47
+      },
+      "otros": {
+        "conteo": 5,
+        "tamano_bytes": 26639,
+        "tamano_formateado": "26.01 KB",
+        "tamano_gb": 0.0
+      },
+      "anuncios": {
+        "conteo": 4,
+        "tamano_bytes": 908566706,
+        "tamano_formateado": "866.48 MB",
+        "tamano_gb": 0.85
+      },
+      "discipulado": {
+        "conteo": 3,
+        "tamano_bytes": 778265444,
+        "tamano_formateado": "742.21 MB",
+        "tamano_gb": 0.72
+      },
+      "música": {
+        "conteo": 1,
+        "tamano_bytes": 28469106,
+        "tamano_formateado": "27.15 MB",
+        "tamano_gb": 0.03
+      },
+      "documentos administrativos": {
+        "conteo": 1,
+        "tamano_bytes": 90785551,
+        "tamano_formateado": "86.58 MB",
+        "tamano_gb": 0.08
+      }
+    },
+    "carpetas_duplicadas_resumen": {
+      "video": 23,
+      "fotos": 19,
+      "audio": 11,
+      "2024": 6,
+      "2023": 5,
+      "19": 5,
+      "junio": 4,
+      "12": 4,
+      "6": 4,
+      "27": 4,
+      "24": 4,
+      "22": 4,
+      "16": 4,
+      "2022": 3,
+      "abril": 3,
+      "2025": 3,
+      "4. abril": 3,
+      "5. mayo": 3,
+      "10": 3,
+      "23": 3,
+      "17": 3,
+      "originales": 3,
+      "18": 3,
+      "21": 3,
+      "reels": 3,
+      "2": 3,
+      "septiembre": 2,
+      "mayo": 2,
+      "2026": 2,
+      "enero": 2
+    },
+    "total_carpetas_con_nombres_repetidos": 78,
+    "total_archivos_con_nombres_repetidos": 471,
+    "total_archivos_ambiguos": 2167,
+    "total_por_revisar": 402
+  },
+  "carpetas_duplicadas": {
+    "2022": [
+      "Mi unidad / 05. PHOTOSHOOT / 2022",
+      "Mi unidad / 02. DOMINGO / 2022",
+      "Mi unidad / 04. EVENTOS / NAVIDADES & ROSCAS DE REYES 🎄👑 / 2022"
+    ],
+    "2023": [
+      "Mi unidad / 05. PHOTOSHOOT / 2023",
+      "Mi unidad / 02. DOMINGO / 2023",
+      "Mi unidad / 04. EVENTOS / NAVIDADES & ROSCAS DE REYES 🎄👑 / 2023",
+      "Mi unidad / 06. RRSS / VIDEOS TIKTOKS / 2023",
+      "Mi unidad / 06. RRSS / VIDEOS / 2023"
+    ],
+    "septiembre": [
+      "Mi unidad / 05. PHOTOSHOOT / 2023 / SEPTIEMBRE",
+      "Mi unidad / 02. DOMINGO / 2026 / SEPTIEMBRE"
+    ],
+    "abril": [
+      "Mi unidad / 05. PHOTOSHOOT / 2022 / ABRIL",
+      "Mi unidad / 02. DOMINGO / 2026 / ABRIL",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2024 / ABRIL"
+    ],
+    "mayo": [
+      "Mi unidad / 05. PHOTOSHOOT / 2022 / MAYO",
+      "Mi unidad / 02. DOMINGO / 2026 / MAYO"
+    ],
+    "junio": [
+      "Mi unidad / 05. PHOTOSHOOT / 2022 / JUNIO",
+      "Mi unidad / 02. DOMINGO / 2026 / JUNIO",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2024 / JUNIO",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2025 / JUNIO"
+    ],
+    "2024": [
+      "Mi unidad / 02. DOMINGO / 2024",
+      "Mi unidad / 04. EVENTOS / NAVIDADES & ROSCAS DE REYES 🎄👑 / 2024",
+      "Mi unidad / 06. RRSS / REELS / 2024",
+      "Mi unidad / 06. RRSS / STORIES / 2024",
+      "Mi unidad / 06. RRSS / TRIBUS / 2024",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2024"
+    ],
+    "2025": [
+      "Mi unidad / 02. DOMINGO / 2025",
+      "Mi unidad / 03. ORACIÓN / 2025",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2025"
+    ],
+    "2026": [
+      "Mi unidad / 02. DOMINGO / 2026",
+      "Mi unidad / 07. CLASES / 2026"
+    ],
+    "video": [
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2026 / ENERO / 18 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2026 / FEBRERO / 1 / Video",
+      "Mi unidad / 02. DOMINGO / 2025 / 5. MAYO / GRABACIONES MAYO / 25 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO / GRABACIONES JUNIO / 22 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO / GRABACIONES JUNIO / 29 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 13 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 20 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 6 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 27 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 3 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 10 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 24 / Video",
+      "Mi unidad / 02. DOMINGO / 2025 / 9.- SEPTIEMBRE / 07 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 10.- OCTUBRE / 19 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 10.- OCTUBRE / 5 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 10.- OCTUBRE / 12 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 10.- OCTUBRE / 26 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 11.-NOVIEMBRE / 2 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 11.-NOVIEMBRE / 16 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 11.-NOVIEMBRE / 23 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 11.-NOVIEMBRE / 30 / VIDEO",
+      "Mi unidad / 02. DOMINGO / 2025 / 12.-DICIEMBRE / 7 / VIDEO"
+    ],
+    "audio": [
+      "Mi unidad / 02. DOMINGO / 2023 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO / GRABACIONES JUNIO / 22 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO / GRABACIONES JUNIO / 29 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 13 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 20 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 6 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO / GRABACIONES JULIO / 27 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 3 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 31 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 9.- SEPTIEMBRE / 07 / AUDIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 9.- SEPTIEMBRE / 21 / AUDIO"
+    ],
+    "enero": [
+      "Mi unidad / 02. DOMINGO / 2026 / ENERO",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2024 / ENERO"
+    ],
+    "febrero": [
+      "Mi unidad / 02. DOMINGO / 2026 / FEBRERO",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2025 / Febrero"
+    ],
+    "marzo": [
+      "Mi unidad / 02. DOMINGO / 2026 / MARZO",
+      "Mi unidad / 03. ORACIÓN / 2025 / Marzo"
+    ],
+    "agosto": [
+      "Mi unidad / 02. DOMINGO / 2026 / AGOSTO",
+      "Mi unidad / 04. EVENTOS / REUNIÓN MUJERES / 2025 / AGOSTO"
+    ],
+    "1. enero": [
+      "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO",
+      "Mi unidad / 02. DOMINGO / 2025 / 1. ENERO"
+    ],
+    "2. febrero": [
+      "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO",
+      "Mi unidad / 02. DOMINGO / 2025 / 2. FEBRERO"
+    ],
+    "3. marzo": [
+      "Mi unidad / 02. DOMINGO / 2024 / 3. MARZO",
+      "Mi unidad / 02. DOMINGO / 2025 / 3. MARZO"
+    ],
+    "4. abril": [
+      "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL",
+      "Mi unidad / 02. DOMINGO / 2025 / 4. ABRIL",
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL"
+    ],
+    "5. mayo": [
+      "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO",
+      "Mi unidad / 02. DOMINGO / 2025 / 5. MAYO",
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 5. MAYO"
+    ],
+    "10. octubre": [
+      "Mi unidad / 02. DOMINGO / 2024 / 10. OCTUBRE",
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 10. OCTUBRE"
+    ],
+    "7. julio": [
+      "Mi unidad / 02. DOMINGO / 2024 / 7. JULIO",
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 7. JULIO"
+    ],
+    "6. junio": [
+      "Mi unidad / 02. DOMINGO / 2024 / 6. JUNIO",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO"
+    ],
+    "11. noviembre": [
+      "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE",
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 11. NOVIEMBRE"
+    ],
+    "12. diciembre": [
+      "Mi unidad / 02. DOMINGO / 2024 / 12. DICIEMBRE",
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE"
+    ],
+    "semana 1": [
+      "Mi unidad / EDCDM / Docs  EDCDM / Semana 1",
+      "Mi unidad / 06. RRSS / TRIBUS / 2024 / Youth Fire 🔥 / Semana 1"
+    ],
+    "10": [
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 10",
+      "Mi unidad / 02. DOMINGO / 2024 / 3. MARZO / Fotos Marzo / 10",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 10"
+    ],
+    "23": [
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 23",
+      "Mi unidad / 02. DOMINGO / 2025 / 3. MARZO / FOTOS MARZO / 23",
+      "Mi unidad / 02. DOMINGO / 2025 / 11.-NOVIEMBRE / 23"
+    ],
+    "29": [
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 29",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO / GRABACIONES JUNIO / 29"
+    ],
+    "17": [
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 17",
+      "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / 17",
+      "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO / GRABACIONES AGOSTO / 17"
+    ],
+    "originales": [
+      "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES",
+      "Mi unidad / 04. EVENTOS / ANIVERSARIOS / ANIVERSARIO 10 AÑOS / DÍA 2 / ORIGINALES",
+      "Mi unidad / 04. EVENTOS / ANIVERSARIOS / ANIVERSARIO 10 AÑOS / DÍA 1 / ORIGINALES"
+    ],
+    "18": [
+      "Mi unidad / 02. DOMINGO / 2026 / ENERO / 18",
+      "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero / 18",
+      "Mi unidad / 02. DOMINGO / 2024 / 8. AGOSTO / Fotos Agosto / 18"
+    ],
+    "1": [
+      "Mi unidad / 02. DOMINGO / 2026 / FEBRERO / 1",
+      "Mi unidad / 02. DOMINGO / 2024 / 12. DICIEMBRE / 1"
+    ],
+    "fundamentos": [
+      "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Fundamentos",
+      "Mi unidad / 07. CLASES / BONES SCHOOL 🦴📚 / ONLINE / FUNDAMENTOS"
+    ],
+    "resurrección": [
+      "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Resurrección",
+      "Mi unidad / 02. DOMINGO / 2026 / ABRIL / Resurrección"
+    ],
+    "encargo": [
+      "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Encargo",
+      "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Encargo"
+    ],
+    "día del padre   jehú": [
+      "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Día del padre   Jehú",
+      "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Día del Padre   Jehú"
+    ],
+    "fotos enero": [
+      "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO / Fotos Enero",
+      "Mi unidad / 02. DOMINGO / 2025 / 1. ENERO / FOTOS ENERO"
+    ],
+    "grabaciones enero": [
+      "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO / Grabaciones Enero",
+      "Mi unidad / 02. DOMINGO / 2025 / 1. ENERO / GRABACIONES ENERO"
+    ],
+    "grabaciones febrero": [
+      "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Grabaciones Febrero",
+      "Mi unidad / 02. DOMINGO / 2025 / 2. FEBRERO / GRABACIONES FEBRERO"
+    ],
+    "fotos febrero": [
+      "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero",
+      "Mi unidad / 02. DOMINGO / 2025 / 2. FEBRERO / FOTOS FEBRERO"
+    ],
+    "21": [
+      "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO / Fotos Enero / 21",
+      "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril / 21",
+      "Mi unidad / 02. DOMINGO / 2025 / 9.- SEPTIEMBRE / 21"
+    ],
+    "grabaciones marzo": [
+      "Mi unidad / 02. DOMINGO / 2024 / 3. MARZO / Grabaciones Marzo",
+      "Mi unidad / 02. DOMINGO / 2025 / 3. MARZO / GRABACIONES MARZO"
+    ],
+    "fotos marzo": [
+      "Mi unidad / 02. DOMINGO / 2024 / 3. MARZO / Fotos Marzo",
+      "Mi unidad / 02. DOMINGO / 2025 / 3. MARZO / FOTOS MARZO"
+    ],
+    "4": [
+      "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero / 4",
+      "Mi unidad / 02. DOMINGO / 2024 / 8. AGOSTO / Fotos Agosto / 4"
+    ],
+    "25": [
+      "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero / 25",
+      "Mi unidad / 02. DOMINGO / 2025 / 5. MAYO / GRABACIONES MAYO / 25"
+    ],
+    "reels": [
+      "Mi unidad / 02. DOMINGO / 2026 / AGOSTO / Reels",
+      "Mi unidad / 06. RRSS / REELS",
+      "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO / GRABACIONES JUNIO / 22 / Reels"
+    ],
+    "grabaciones mayo": [
+      "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo",
+      "Mi unidad / 02. DOMINGO / 2025 / 5. MAYO / GRABACIONES MAYO"
+    ],
+    "fotos mayo": [
+      "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo",
+      "Mi unidad / 02. DOMINGO / 2025 / 5. MAYO / FOTOS MAYO"
+    ],
+    "5": [
+      "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo / 5",
+      "Mi unidad / 02. DOMINGO / 2025 / 10.- OCTUBRE / 5"
+    ]
+  },
+  "archivos_ambiguos_muestra": [
+    {
+      "nombre": "0000.jpg",
+      "ruta": "Mi unidad / 09.LEARN-FLOW / persona / 0000.jpg",
+      "tamano": "29.30 KB",
+      "categoria": "escuela de capacitación",
+      "enlace": "https://drive.google.com/file/d/1fsWvsXyRP9Z4SrUsWOb9V5jyNdqZG3Qt/view"
+    },
+    {
+      "nombre": "IMG_1867.JPG",
+      "ruta": "Mi unidad / 09.LEARN-FLOW / covers / IMG_1867.JPG",
+      "tamano": "1.85 MB",
+      "categoria": "escuela de capacitación",
+      "enlace": "https://drive.google.com/file/d/1qkytoqGLOvqd5zc6brh1Z4cKUX6F1vrl/view"
+    },
+    {
+      "nombre": "IMG_8279.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 10. OCTUBRE / IMG_8279.MOV",
+      "tamano": "4.72 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1ErbfRZWUX7wRvgSkC8QEhK1yhecY_wao/view"
+    },
+    {
+      "nombre": "IMG_8477.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 10. OCTUBRE / IMG_8477.MOV",
+      "tamano": "8.42 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1ZDhKToJt1J4E9NrGv4EdUv6NVXScJqpv/view"
+    },
+    {
+      "nombre": "IMG_8350.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 10. OCTUBRE / IMG_8350.MOV",
+      "tamano": "5.22 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/14AzKaeKXBrhw_ogyGseCYvZX02Iu-9S5/view"
+    },
+    {
+      "nombre": "IMG_8521.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 11. NOVIEMBRE / IMG_8521.MOV",
+      "tamano": "10.13 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1afPeE2okqjJweRUjXGwmRA_HkA7tSiHe/view"
+    },
+    {
+      "nombre": "IMG_8684.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 11. NOVIEMBRE / IMG_8684.MOV",
+      "tamano": "12.64 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1aorEm_c6N8y-ksFD7GbbEMRuIl5QXz3X/view"
+    },
+    {
+      "nombre": "IMG_8814.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 11. NOVIEMBRE / IMG_8814.MOV",
+      "tamano": "5.99 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1XwX7Y86w9Iegl_bICeEA_JJcNqvagTV1/view"
+    },
+    {
+      "nombre": "1.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 1.mp3",
+      "tamano": "746.48 KB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1lNj29jlb6RuM6-CmYlYM2_4T02xn3dFV/view"
+    },
+    {
+      "nombre": "2.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 2.mp3",
+      "tamano": "576.79 KB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1si4RrbQ6d00w-wI76A46H48pzckNKe8J/view"
+    },
+    {
+      "nombre": "4.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 4.mp3",
+      "tamano": "787.73 KB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1Ctomrbut8sCfuId2HhTNnAxy_58A0l0j/view"
+    },
+    {
+      "nombre": "7.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 7.mp3",
+      "tamano": "1.01 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1V9P3N3nYl8mls3nsKtMhqgNvFIbg9GY0/view"
+    },
+    {
+      "nombre": "8.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 8.mp3",
+      "tamano": "494.29 KB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/19kcVp1rS4-sArdP5fbGynn4335RzeIln/view"
+    },
+    {
+      "nombre": "10.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 10.mp3",
+      "tamano": "1.81 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1FLACZKneVhgN-jRWLFUcVNP_BQyfIEjO/view"
+    },
+    {
+      "nombre": "11.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 11.mp3",
+      "tamano": "1.25 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/13DtvTu1sAQIQhnOv0UlMMr8nartmek8u/view"
+    },
+    {
+      "nombre": "12.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 12.mp3",
+      "tamano": "763.36 KB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/12FNZacazEEKOwe0U0TQltEktgSxTryV5/view"
+    },
+    {
+      "nombre": "14.mp3",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES / 14.mp3",
+      "tamano": "2.05 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1oWmLamFnoqzw1VINUWT0G56ab5KSE_X-/view"
+    },
+    {
+      "nombre": "IMG_8907.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 03 / IMG_8907.MOV",
+      "tamano": "11.80 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1GxEOzj9A-zJAJAyVAhDMDndFWFF-uu0y/view"
+    },
+    {
+      "nombre": "IMG_9429.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 29 / IMG_9429.MOV",
+      "tamano": "13.62 GB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1gfucR1Dmzda1lAIAZ9Sb70eCISbG47Sp/view"
+    },
+    {
+      "nombre": "IMG_0816.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0816.HEIC",
+      "tamano": "1.53 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1wl4noSikrE63mTGMOD0k0Wv1niAPLEZz/view"
+    },
+    {
+      "nombre": "IMG_0824.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0824.HEIC",
+      "tamano": "1.54 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1Tq7ndpWpIIWI-bcrAS80iH2PRBFbkeOA/view"
+    },
+    {
+      "nombre": "IMG_0845.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0845.HEIC",
+      "tamano": "1.59 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1k7UMxDGaIEC2r3pLU349jYsbfdYJXMMX/view"
+    },
+    {
+      "nombre": "IMG_0819.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0819.HEIC",
+      "tamano": "1.13 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/12AAjgwuBhDLtQAe5q_s2pVOXysT1BFHt/view"
+    },
+    {
+      "nombre": "IMG_0855.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0855.HEIC",
+      "tamano": "1.88 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/14qiWWu2tLn6BTH17eXbHRy1eLTx6Z1WS/view"
+    },
+    {
+      "nombre": "IMG_0818.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0818.HEIC",
+      "tamano": "1.47 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1fb4FAG9q3qyCjq21DT312krOetIkVgQS/view"
+    },
+    {
+      "nombre": "IMG_0840.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0840.HEIC",
+      "tamano": "1.85 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1WS7zN544Q3s7GdwK-vQ3j1tVX92jr9Dv/view"
+    },
+    {
+      "nombre": "IMG_0851.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0851.HEIC",
+      "tamano": "1.48 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1PRM9VsWg95YcTx322NwPjJ6jsQt03ag2/view"
+    },
+    {
+      "nombre": "IMG_0847.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0847.HEIC",
+      "tamano": "1.91 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1U6jKWYq7PIy8KXmgbbjaYc-_-CiAND-7/view"
+    },
+    {
+      "nombre": "IMG_0826.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0826.HEIC",
+      "tamano": "1.60 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1BN6W9rUmXLibqJtt3ey40qz2rJ1tM-nb/view"
+    },
+    {
+      "nombre": "IMG_0863.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0863.HEIC",
+      "tamano": "1.78 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1Rve1Q_NP3tv7OV7BiAYB0d8jJHapY-n2/view"
+    },
+    {
+      "nombre": "IMG_0877.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0877.HEIC",
+      "tamano": "1.88 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1Glcsvf62mlrWr8Xru9hezv-CO6RCRSsy/view"
+    },
+    {
+      "nombre": "IMG_0859.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0859.HEIC",
+      "tamano": "2.45 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/14tryN3hDFR7O0qu9pP56OyluwupINUpu/view"
+    },
+    {
+      "nombre": "IMG_0879.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0879.HEIC",
+      "tamano": "1.65 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1GWR4nmHwJ96SYK5qXICIRa3cbpBPk7iL/view"
+    },
+    {
+      "nombre": "IMG_0860.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0860.HEIC",
+      "tamano": "1.94 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/10IGd80YOMEEoE9r_tIQL0r0wI3piCGHb/view"
+    },
+    {
+      "nombre": "IMG_0882.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0882.HEIC",
+      "tamano": "1.68 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1hOOIY-R_UpsVYvQhYXyZ67t9Da3xDXld/view"
+    },
+    {
+      "nombre": "IMG_0881.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0881.HEIC",
+      "tamano": "1.62 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1FVgIvNo7rsXawc_f8Ndt7pLagxIwn1Mm/view"
+    },
+    {
+      "nombre": "IMG_0870.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0870.HEIC",
+      "tamano": "2.55 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1K0hv7cSHCZGnZCeWBRoljP9oHf5uv2f4/view"
+    },
+    {
+      "nombre": "IMG_0866.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0866.HEIC",
+      "tamano": "1.72 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1NOzZn5E7Cfxv0f4ndUreQ612ypn3hNUZ/view"
+    },
+    {
+      "nombre": "IMG_0885.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0885.HEIC",
+      "tamano": "1.71 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1X_oIuTIQvON670UYxlGrHh4IM9x9s2U3/view"
+    },
+    {
+      "nombre": "IMG_0887.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0887.HEIC",
+      "tamano": "1.74 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1g85tRqgdQMGsC_gkHAFaAh4fEYxkTF5W/view"
+    },
+    {
+      "nombre": "IMG_0894.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0894.HEIC",
+      "tamano": "1.44 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1lHN8-_DsxYyglcqZIQtvb84Kkfy-A53R/view"
+    },
+    {
+      "nombre": "IMG_0893.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0893.HEIC",
+      "tamano": "1.75 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1cAEK7aQiQGNYRqy-MXIijKv4ek1xvrvE/view"
+    },
+    {
+      "nombre": "IMG_0890.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0890.HEIC",
+      "tamano": "2.66 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1aNaLQ-MMOxXPpJQQAG9IbLFXRjUU3tE_/view"
+    },
+    {
+      "nombre": "IMG_0878.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO / Fotos 8 Marzo / IMG_0878.MOV",
+      "tamano": "19.23 MB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1QZ3T8jxUCq9lpFtxG4c4Tw0E4Re_AJHO/view"
+    },
+    {
+      "nombre": "1.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 1.mp4",
+      "tamano": "78.89 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1m4fi_8MlRz8bZVQMFv3_9w1Vdj-qFaFn/view"
+    },
+    {
+      "nombre": "3.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 3.mp4",
+      "tamano": "79.24 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1TrkJIqEBnbtSvHEtxy82hKC8dMJML0Q2/view"
+    },
+    {
+      "nombre": "5.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 5.mp4",
+      "tamano": "116.45 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1EbSALnMUaI881JD69SAdqcO1atutM_Jb/view"
+    },
+    {
+      "nombre": "11.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 11.mp4",
+      "tamano": "95.15 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1JwY97KR3Bsyy96ALTYGwhTDLW3LvBlEi/view"
+    },
+    {
+      "nombre": "2.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 2.mp4",
+      "tamano": "116.38 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1jpeGf3qgXGEqKiEdftqdXkdD5BPc_35P/view"
+    },
+    {
+      "nombre": "10.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 10.mp4",
+      "tamano": "68.15 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/139PHblqKpXQP5Gr9GH21Hd3XXU6q-kkg/view"
+    },
+    {
+      "nombre": "7.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 7.mp4",
+      "tamano": "77.51 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/19WQXbqNgTVDF7u0ZbTrz46LM5H-1Q4sl/view"
+    },
+    {
+      "nombre": "6.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 6.mp4",
+      "tamano": "73.56 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1uZZLQ5QgCso-779LvfTjQaDwyFQhQ9ay/view"
+    },
+    {
+      "nombre": "9.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 9.mp4",
+      "tamano": "89.75 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/17Hec_usGvUelcUsCG2aHNM1PpKpIfl4l/view"
+    },
+    {
+      "nombre": "4.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 4.mp4",
+      "tamano": "130.77 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1e9g1BuGCuGL6LRyfoJgu_UcLMnhHTPRP/view"
+    },
+    {
+      "nombre": "8.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 8.mp4",
+      "tamano": "111.56 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1QFInAhACTZ94hQLaj8z524oaFbph6yaL/view"
+    },
+    {
+      "nombre": "12.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 12.mp4",
+      "tamano": "116.12 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1mUCGw3cjFfX_lEhtACgqwwiTSTw54Yzp/view"
+    },
+    {
+      "nombre": "14.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 14.mp4",
+      "tamano": "74.80 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/11bWnAZFNouO4BjAC2vUt25AVzIUwS-9t/view"
+    },
+    {
+      "nombre": "13.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 13.mp4",
+      "tamano": "102.40 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1WzS13fHXuIhP-mDQJRq0QWmOuSpfqwaG/view"
+    },
+    {
+      "nombre": "15.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 15.mp4",
+      "tamano": "100.91 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/18RIN_KGST7izGe1fZm1ks3NfvSTQBwPN/view"
+    },
+    {
+      "nombre": "16.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 16.mp4",
+      "tamano": "88.28 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/14BhktAD7SRk45TDShoa4HXbab1aImJrm/view"
+    },
+    {
+      "nombre": "17.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 17.mp4",
+      "tamano": "69.80 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1EqI7eLS0v3KIMOd1jhYWq1NC9M0xfWyz/view"
+    },
+    {
+      "nombre": "18.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 18.mp4",
+      "tamano": "67.82 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/11uZy3QHCaNXVzWwzgNuZtCCwGizhjiUr/view"
+    },
+    {
+      "nombre": "19.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 19.mp4",
+      "tamano": "70.15 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1PNJ64Az2gaTAUEj3ydbHZLexTeMMGcSr/view"
+    },
+    {
+      "nombre": "20.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 20.mp4",
+      "tamano": "95.06 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1T4hSMDvrusBa7vJsFm3Ezm3EGWECtUtn/view"
+    },
+    {
+      "nombre": "21.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 21.mp4",
+      "tamano": "77.15 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1NYa89mzF-bY14uMrn9kxKIueC1alcIpV/view"
+    },
+    {
+      "nombre": "24.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 24.mp4",
+      "tamano": "27.22 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/13SozciVDTd2hGWm77GhEOqLPf9yY8gNA/view"
+    },
+    {
+      "nombre": "23.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 23.mp4",
+      "tamano": "76.97 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1SVkIbvcW_NbFaClHgtLjsAV8rYTDXQP4/view"
+    },
+    {
+      "nombre": "22.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 22.mp4",
+      "tamano": "87.57 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/18NI22zaIqgHKa_PFGFKZiJ-q416cswcZ/view"
+    },
+    {
+      "nombre": "25.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 25.mp4",
+      "tamano": "105.09 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1aa9fUcqF5hbs50zh_kr3u4LIrHiBDkS0/view"
+    },
+    {
+      "nombre": "26.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 26.mp4",
+      "tamano": "71.39 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1dm_0OK6cgfXkpsXiMA4gkzJxcX_4INVe/view"
+    },
+    {
+      "nombre": "27.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 27.mp4",
+      "tamano": "92.37 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1R67-2ZnCLXYm9MOmcaAsLKyGS7OJaS44/view"
+    },
+    {
+      "nombre": "29.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 29.mp4",
+      "tamano": "41.70 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1PNl4Rg6_OqOpGCXC4pqwpCjYCoWyj0Uy/view"
+    },
+    {
+      "nombre": "28.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 28.mp4",
+      "tamano": "122.55 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1IPqGciJH21xZAiKjMta0boVi2Siz5hgE/view"
+    },
+    {
+      "nombre": "31.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 31.mp4",
+      "tamano": "94.65 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1lPUqw_C5iFyyCXoZ85mHxhBq7qAmaWTn/view"
+    },
+    {
+      "nombre": "30.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Compromiso / 30.mp4",
+      "tamano": "106.25 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1RWsdg4grY5qofqRkmcQ8n9TgFdTndYvF/view"
+    },
+    {
+      "nombre": "IMG_3923.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3923.HEIC",
+      "tamano": "627.42 KB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1Y9o2lX-Qd8aoPOdnto3B8vXon6t3jowU/view"
+    },
+    {
+      "nombre": "IMG_3919.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3919.HEIC",
+      "tamano": "661.11 KB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1Wb37Oax13npjcmtn-G_-N87MSKdZ0kFZ/view"
+    },
+    {
+      "nombre": "IMG_3897.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3897.HEIC",
+      "tamano": "1.20 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1P7_jNf9k2b1VqP7GPfWFMGdIQXrpekWB/view"
+    },
+    {
+      "nombre": "IMG_3889.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3889.HEIC",
+      "tamano": "1.39 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1QKfmBXQFgmspvL9wGHkY_FfKsUJkGf_h/view"
+    },
+    {
+      "nombre": "IMG_3909.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3909.HEIC",
+      "tamano": "1.31 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1q6akPF8eJ9Y0WbYuN57njLLUFVsSWBW4/view"
+    },
+    {
+      "nombre": "IMG_3984.HEIC",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3984.HEIC",
+      "tamano": "1.24 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1wKS68vtn1JE3eyAszFZdPb9JGe3bg8t4/view"
+    },
+    {
+      "nombre": "IMG_3957.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3957.DNG",
+      "tamano": "13.51 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1H78bGM6rjHspJJWbj2LSImMmbqGhhImA/view"
+    },
+    {
+      "nombre": "IMG_3963.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3963.DNG",
+      "tamano": "15.38 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/12ClxJ2o4ojl-1c4lEcGIKkGJX2D0hnZV/view"
+    },
+    {
+      "nombre": "IMG_3983.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3983.DNG",
+      "tamano": "18.42 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1eA8TAH5qbIICyiidNcL2oH5KscdXQq7O/view"
+    },
+    {
+      "nombre": "IMG_3971.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3971.DNG",
+      "tamano": "19.09 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1ru1DpJ_BlD43OQD5ymERnLs3D4GnMHZW/view"
+    },
+    {
+      "nombre": "IMG_3974.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3974.DNG",
+      "tamano": "19.86 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1V3oKPPVHRVotCmTXTPJSo3w1BA2byhMV/view"
+    },
+    {
+      "nombre": "IMG_3902.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3902.DNG",
+      "tamano": "1.69 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1jRz88Ra-JihD0mcArOFT6T95mm-EFHJr/view"
+    },
+    {
+      "nombre": "IMG_3907.DNG",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3907.DNG",
+      "tamano": "27.79 MB",
+      "categoria": "fotografías",
+      "enlace": "https://drive.google.com/file/d/1CIM6sY2jIbUO4t7GEfkXrm5Xn5luIbBM/view"
+    },
+    {
+      "nombre": "IMG_3993.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3993.MOV",
+      "tamano": "131.92 MB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1eC9Zll1zaKBBU30FV4HktrbeyICIMVrg/view"
+    },
+    {
+      "nombre": "IMG_3989.MOV",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE / Fotos Noviembre / IMG_3989.MOV",
+      "tamano": "177.35 MB",
+      "categoria": "videos",
+      "enlace": "https://drive.google.com/file/d/1QUgfSy4bSxZmOyHM0ihJ3zTA0O20812a/view"
+    },
+    {
+      "nombre": "1.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 1.mp4",
+      "tamano": "85.58 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1Zu5YqOqFVBE3oWTfHCl4xfvChOlJY1cD/view"
+    },
+    {
+      "nombre": "6.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 6.mp4",
+      "tamano": "43.15 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1VjL2HTB9Pz9AhJFwDBzFIX_IEODqCI5I/view"
+    },
+    {
+      "nombre": "2.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 2.mp4",
+      "tamano": "116.01 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1Q3dF7_Hsxes8j8mBV-cbXdrwRqEdcbZ7/view"
+    },
+    {
+      "nombre": "18.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 18.mp4",
+      "tamano": "71.77 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1Qb9ddq5wn8Lkodmm8lcWkw_x51N9c-R5/view"
+    },
+    {
+      "nombre": "15.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 15.mp4",
+      "tamano": "144.46 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1c0ITYkBerOpzCETIUmkUw7Pmr3ocQCVs/view"
+    },
+    {
+      "nombre": "10.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 10.mp4",
+      "tamano": "195.38 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1I-yqeF_SeBB9HJdiU7xtCHMw3nBebReg/view"
+    },
+    {
+      "nombre": "13.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 13.mp4",
+      "tamano": "185.00 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1kkUu-4wZhVbiMMunbvnMNEZy28QNllp2/view"
+    },
+    {
+      "nombre": "17.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 17.mp4",
+      "tamano": "224.37 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1oMkWsxDY0oZE_9Anox4fSaTThul1ggYx/view"
+    },
+    {
+      "nombre": "14.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 14.mp4",
+      "tamano": "92.50 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/13oND9G2gBytHfGddPBg3ByuFKrJJIrYB/view"
+    },
+    {
+      "nombre": "7.mp4",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / CLIPS / Frascos Rotos / 7.mp4",
+      "tamano": "118.70 MB",
+      "categoria": "prédicas",
+      "enlace": "https://drive.google.com/file/d/1CB2gkzVh9dx1JI6I25glEBR7kLv1gvW1/view"
+    }
+  ],
+  "por_revisar_muestra": [
+    {
+      "id": "16-a--iyz7Y8rfwxcChQRWUuPa3YfEya0",
+      "nombre": "04. EVENTOS",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 04. EVENTOS",
+      "carpeta_padre": "Mi unidad",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2023-11-30T12:57:48.766000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/16-a--iyz7Y8rfwxcChQRWUuPa3YfEya0"
+    },
+    {
+      "id": "1aJNqaJX7oBpfIAoYx0bXpOTEyO9p4ydS",
+      "nombre": "02. DOMINGO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO",
+      "carpeta_padre": "Mi unidad",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-04-09T17:44:16.023000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1aJNqaJX7oBpfIAoYx0bXpOTEyO9p4ydS"
+    },
+    {
+      "id": "1TbERmLo0YQr6hAmJxTgFSF3Fr9xq1aeU",
+      "nombre": "08. YOUTUBE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 08. YOUTUBE",
+      "carpeta_padre": "Mi unidad",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-08-04T12:41:37.864000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1TbERmLo0YQr6hAmJxTgFSF3Fr9xq1aeU"
+    },
+    {
+      "id": "179xCAZXnh68IsQmyUeVrceINtMgs1eT6fErMxu3fP0o49Dq1moNPe6GC",
+      "nombre": "FARO Web API.gscript",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / FARO Web API.gscript",
+      "carpeta_padre": "Mi unidad",
+      "tamano_bytes": 0,
+      "tamano_formateado": "0.00 B",
+      "fecha_modificacion": "2026-08-13T17:00:00.538000",
+      "ano": "2026",
+      "extension": ".gscript",
+      "mime_type": "application/vnd.google-apps.script",
+      "enlace_visualizacion": "https://drive.google.com/file/d/179xCAZXnh68IsQmyUeVrceINtMgs1eT6fErMxu3fP0o49Dq1moNPe6GC/view"
+    },
+    {
+      "id": "1BbdSP-8oHPL6ZjLNq6Gk7MIv1V1sv7JH",
+      "nombre": "Google Meet",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / Google Meet",
+      "carpeta_padre": "Mi unidad",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-09-10T22:28:28.031000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1BbdSP-8oHPL6ZjLNq6Gk7MIv1V1sv7JH"
+    },
+    {
+      "id": "1t_CofCFxI1xxnkq3f5F8tnvNDlGLN_Lj",
+      "nombre": "2023",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2023-11-30T15:56:33.526000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1t_CofCFxI1xxnkq3f5F8tnvNDlGLN_Lj"
+    },
+    {
+      "id": "1EE6TTJdRfeP7JTew5Od5Jvl1U4kgUryA",
+      "nombre": "2024",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-12-15T14:18:56.484000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1EE6TTJdRfeP7JTew5Od5Jvl1U4kgUryA"
+    },
+    {
+      "id": "15lJkTTo-mo64V3s68C_20MGtCXeHf1zw",
+      "nombre": "2025",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-01-15T23:26:01.488000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/15lJkTTo-mo64V3s68C_20MGtCXeHf1zw"
+    },
+    {
+      "id": "1RyWm6dDvuo8f5d9umB-3Fdx8Y8tygTPB",
+      "nombre": "2022",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2022",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-03-04T15:48:25.981000",
+      "ano": "2022",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1RyWm6dDvuo8f5d9umB-3Fdx8Y8tygTPB"
+    },
+    {
+      "id": "1r4jdxtOeK8g6YsuuNaWd_x-c3KDp-NVN",
+      "nombre": "2026",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-01-19T21:37:40.273000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1r4jdxtOeK8g6YsuuNaWd_x-c3KDp-NVN"
+    },
+    {
+      "id": "1itZGPLQScn1qyPLOONuKXulNx8u_gWCWvIYLN_8An3M",
+      "nombre": "CALENDARIO ANUAL 2023.gslides",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / CALENDARIO ANUAL 2023.gslides",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023",
+      "tamano_bytes": 840925,
+      "tamano_formateado": "821.22 KB",
+      "fecha_modificacion": "2025-03-04T15:39:15.177000",
+      "ano": "2023",
+      "extension": ".gslides",
+      "mime_type": "application/vnd.google-apps.presentation",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1itZGPLQScn1qyPLOONuKXulNx8u_gWCWvIYLN_8An3M/view"
+    },
+    {
+      "id": "1mE5xiPtb2tMQh1KiGITsk284a_JsY9xv",
+      "nombre": "ENERO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / ENERO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-01-19T21:37:57.154000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1mE5xiPtb2tMQh1KiGITsk284a_JsY9xv"
+    },
+    {
+      "id": "1rOvInzQ-1lp5dotdKg4v4hmVp2hovsl-",
+      "nombre": "FEBRERO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / FEBRERO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-02-01T20:16:53.885000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1rOvInzQ-1lp5dotdKg4v4hmVp2hovsl-"
+    },
+    {
+      "id": "1AgQ5HUCvxtqF_d_486WvwTj3_IU3njwm",
+      "nombre": "MARZO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MARZO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-03-08T12:53:36.469000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1AgQ5HUCvxtqF_d_486WvwTj3_IU3njwm"
+    },
+    {
+      "id": "1qq1s6E0mBOwad4qYXYx35B7u2JkhbyXd",
+      "nombre": "ABRIL",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / ABRIL",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-04-13T14:05:24.678000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1qq1s6E0mBOwad4qYXYx35B7u2JkhbyXd"
+    },
+    {
+      "id": "1KQQk06_aoAVyjBnVsGNOoIFlVyCZVo9-",
+      "nombre": "MAYO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MAYO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-05-03T14:22:45.578000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1KQQk06_aoAVyjBnVsGNOoIFlVyCZVo9-"
+    },
+    {
+      "id": "1hrT9v-OqegrrLOIZ4c415jC4hsdNRsNu",
+      "nombre": "JUNIO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / JUNIO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-06-08T10:38:08.840000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1hrT9v-OqegrrLOIZ4c415jC4hsdNRsNu"
+    },
+    {
+      "id": "1fgGAUusKEjBcddviAinNhXkeQXy9BVlL",
+      "nombre": "AGOSTO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / AGOSTO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-08-23T23:08:16.580000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1fgGAUusKEjBcddviAinNhXkeQXy9BVlL"
+    },
+    {
+      "id": "1Pgp50bT-rggyhDZ-9BjRltzdrfAhMo7Y",
+      "nombre": "SEPTIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / SEPTIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-09-14T09:56:24.370000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1Pgp50bT-rggyhDZ-9BjRltzdrfAhMo7Y"
+    },
+    {
+      "id": "1RdsHtO2HcFDtmKkMU2UlQMcdoB2Uuc1x",
+      "nombre": "1. ENERO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-09-02T20:57:54.708000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1RdsHtO2HcFDtmKkMU2UlQMcdoB2Uuc1x"
+    },
+    {
+      "id": "1n6H0dJQAQ5aSVHMbZF6xkXIekckR3I_1",
+      "nombre": "2. FEBRERO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-09-02T20:58:31.864000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1n6H0dJQAQ5aSVHMbZF6xkXIekckR3I_1"
+    },
+    {
+      "id": "1hma1qA5MLNCEUrvIkoCS_n-Offo2AeAj",
+      "nombre": "3. MARZO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 3. MARZO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-09-02T20:58:46.886000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1hma1qA5MLNCEUrvIkoCS_n-Offo2AeAj"
+    },
+    {
+      "id": "1-BArVPTqMmFQ6rJe6TzjyidrInw4StLC",
+      "nombre": "4. ABRIL",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-09-02T20:59:36.374000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1-BArVPTqMmFQ6rJe6TzjyidrInw4StLC"
+    },
+    {
+      "id": "1PMRJrIW_0bJ6_NYqO_VTp0PPZova4ir2",
+      "nombre": "5. MAYO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-09-02T21:00:03.776000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1PMRJrIW_0bJ6_NYqO_VTp0PPZova4ir2"
+    },
+    {
+      "id": "1SP3eqEyKxYgQsjs8MrN2O4QfL3Ka_Dzl",
+      "nombre": "9.SEPTIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-09-09T20:20:20.996000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1SP3eqEyKxYgQsjs8MrN2O4QfL3Ka_Dzl"
+    },
+    {
+      "id": "1O_8Yw_sIIF7MyPUhaci6sEEsb_xrJ_YF",
+      "nombre": "10. OCTUBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 10. OCTUBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-10-08T10:48:37.075000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1O_8Yw_sIIF7MyPUhaci6sEEsb_xrJ_YF"
+    },
+    {
+      "id": "1Fy9iTLFCJZkpNRhfLFL3KE4mo5hTusxk",
+      "nombre": "8. AGOSTO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 8. AGOSTO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-10-08T10:48:46.634000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1Fy9iTLFCJZkpNRhfLFL3KE4mo5hTusxk"
+    },
+    {
+      "id": "1-60alL1JLbv-gtJarNf6XtsSzgaKX9Np",
+      "nombre": "7. JULIO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 7. JULIO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-10-08T10:48:55.541000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1-60alL1JLbv-gtJarNf6XtsSzgaKX9Np"
+    },
+    {
+      "id": "1Ho4UeNqloi6GlqSFi842plEGWWE5Xq7y",
+      "nombre": "6. JUNIO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 6. JUNIO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-10-08T10:49:02.828000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1Ho4UeNqloi6GlqSFi842plEGWWE5Xq7y"
+    },
+    {
+      "id": "1K8JH-9AlFpiOmTtEld1IcGiSiQChRKqx",
+      "nombre": "11. NOVIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 11. NOVIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:52:27.056000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1K8JH-9AlFpiOmTtEld1IcGiSiQChRKqx"
+    },
+    {
+      "id": "1-RzBrRMk40JCOyxMFaoDAg1F9oedprX7",
+      "nombre": "12. DICIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 12. DICIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-12-01T19:05:14.982000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1-RzBrRMk40JCOyxMFaoDAg1F9oedprX7"
+    },
+    {
+      "id": "12jTOMst9ZbCJi7rqhmieWL0-JqM6PVK9oBdx_AUzgpk",
+      "nombre": "Proyecto-Medios 2024.gslides",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / Proyecto-Medios 2024.gslides",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024",
+      "tamano_bytes": 1368222,
+      "tamano_formateado": "1.30 MB",
+      "fecha_modificacion": "2025-03-04T15:49:02.176000",
+      "ano": "2024",
+      "extension": ".gslides",
+      "mime_type": "application/vnd.google-apps.presentation",
+      "enlace_visualizacion": "https://drive.google.com/file/d/12jTOMst9ZbCJi7rqhmieWL0-JqM6PVK9oBdx_AUzgpk/view"
+    },
+    {
+      "id": "1rdHB0q9G5GNJ8uUUFrcZQw_Y34zU6_sxRaPBDSwNEb4",
+      "nombre": "Parrilla 2022.gsheet",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2022 / Parrilla 2022.gsheet",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2022",
+      "tamano_bytes": 6660,
+      "tamano_formateado": "6.50 KB",
+      "fecha_modificacion": "2025-03-04T15:39:18.661000",
+      "ano": "2022",
+      "extension": ".gsheet",
+      "mime_type": "application/vnd.google-apps.spreadsheet",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1rdHB0q9G5GNJ8uUUFrcZQw_Y34zU6_sxRaPBDSwNEb4/view"
+    },
+    {
+      "id": "1QSZ4zbIE3XUGIhUF0QnlbA5b42TuUmf5",
+      "nombre": "1. ENERO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 1. ENERO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-03-04T15:31:14.363000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1QSZ4zbIE3XUGIhUF0QnlbA5b42TuUmf5"
+    },
+    {
+      "id": "1BkpNr_cn33FpQcBDJVYcRXTD6jdkVs_D",
+      "nombre": "2. FEBRERO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 2. FEBRERO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-03-04T15:31:17.809000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1BkpNr_cn33FpQcBDJVYcRXTD6jdkVs_D"
+    },
+    {
+      "id": "1pKIYeAnWJB70NDR_xpn40T2HaJbwlho5",
+      "nombre": "3. MARZO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 3. MARZO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-03-04T15:31:21.260000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1pKIYeAnWJB70NDR_xpn40T2HaJbwlho5"
+    },
+    {
+      "id": "1_NCbpUtlABwCUcyyROrDSfPFZN_s-8ym",
+      "nombre": "4. ABRIL",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 4. ABRIL",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-04-11T11:01:01.463000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1_NCbpUtlABwCUcyyROrDSfPFZN_s-8ym"
+    },
+    {
+      "id": "1oaEPIZOnUZeBXghYq7Rm1QfN4IFOJ2vz",
+      "nombre": "5. MAYO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 5. MAYO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-05-12T09:23:56.671000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1oaEPIZOnUZeBXghYq7Rm1QfN4IFOJ2vz"
+    },
+    {
+      "id": "1X6J9i4JGhy1eEYa-6c5F8te4GIK2MIho",
+      "nombre": "6. JUNIO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 6. JUNIO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-06-08T20:24:25.386000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1X6J9i4JGhy1eEYa-6c5F8te4GIK2MIho"
+    },
+    {
+      "id": "1u2Ar2Hy3f13PzQ4E5tN2KNn014Vi2mXA",
+      "nombre": "7.- JULIO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 7.- JULIO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-06-24T09:44:46.800000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1u2Ar2Hy3f13PzQ4E5tN2KNn014Vi2mXA"
+    },
+    {
+      "id": "1jg3TLkzTUbRv01HKudsKXlcsbO1-jxLn",
+      "nombre": "8.- AGOSTO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 8.- AGOSTO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-08-04T10:55:17.849000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1jg3TLkzTUbRv01HKudsKXlcsbO1-jxLn"
+    },
+    {
+      "id": "1THHkkRW-wMvPz3hQ6uhUV-GQYa4Cy85X",
+      "nombre": "9.- SEPTIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 9.- SEPTIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-09-02T12:33:37.868000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1THHkkRW-wMvPz3hQ6uhUV-GQYa4Cy85X"
+    },
+    {
+      "id": "1V0x51-8BqZTaSdyZ2xcnmHzGS2IWF6zK",
+      "nombre": "10.- OCTUBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 10.- OCTUBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-10-05T14:05:33.828000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1V0x51-8BqZTaSdyZ2xcnmHzGS2IWF6zK"
+    },
+    {
+      "id": "1klwyquozW0JSwExQShGISPdyTDvmRLXo",
+      "nombre": "11.-NOVIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 11.-NOVIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-11-03T10:50:13.206000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1klwyquozW0JSwExQShGISPdyTDvmRLXo"
+    },
+    {
+      "id": "196YS2LaG4BdW_7RRjFpPZmqobs4eYiDK",
+      "nombre": "12.-DICIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2025 / 12.-DICIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2025",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2025-12-08T11:49:02.428000",
+      "ano": "2025",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/196YS2LaG4BdW_7RRjFpPZmqobs4eYiDK"
+    },
+    {
+      "id": "1fop02dewdQO83zgdHZk4dVq_-Yf_Irdt",
+      "nombre": "4. ABRIL",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:12:55.455000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1fop02dewdQO83zgdHZk4dVq_-Yf_Irdt"
+    },
+    {
+      "id": "1KMxrdtgXIZc-kxHAw77vdbMa6U3mM9az",
+      "nombre": "12. DICIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:13:00.548000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1KMxrdtgXIZc-kxHAw77vdbMa6U3mM9az"
+    },
+    {
+      "id": "1sFh8Rn2hYejUygcyM02fsSxdbcyYiZWW",
+      "nombre": "7. JULIO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 7. JULIO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:13:06.961000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1sFh8Rn2hYejUygcyM02fsSxdbcyYiZWW"
+    },
+    {
+      "id": "1cM69eJ2_clRfzBAc-2Zidz-ekYX9LsKS",
+      "nombre": "5. MAYO",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 5. MAYO",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:13:14.736000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1cM69eJ2_clRfzBAc-2Zidz-ekYX9LsKS"
+    },
+    {
+      "id": "1EQ2e_2LO7eSwYeEBW_jNb1v6s58DvuCZ",
+      "nombre": "11. NOVIEMBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 11. NOVIEMBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:13:18.686000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1EQ2e_2LO7eSwYeEBW_jNb1v6s58DvuCZ"
+    },
+    {
+      "id": "1Yg1vNWzwzBfHhy6DbBwGiseT6iUktME8",
+      "nombre": "10. OCTUBRE",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 10. OCTUBRE",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:13:25.254000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1Yg1vNWzwzBfHhy6DbBwGiseT6iUktME8"
+    },
+    {
+      "id": "1t0Ts4dQKaRkYvQEmGUVLGl9-6ROzS3l_J9PaUQ7gh7s",
+      "nombre": "Pr. Daniel Ortega-05 de Marzo.gdoc",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / Pr. Daniel Ortega-05 de Marzo.gdoc",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO",
+      "tamano_bytes": 2750,
+      "tamano_formateado": "2.69 KB",
+      "fecha_modificacion": "2024-11-20T22:38:07.726000",
+      "ano": "2023",
+      "extension": ".gdoc",
+      "mime_type": "application/vnd.google-apps.document",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1t0Ts4dQKaRkYvQEmGUVLGl9-6ROzS3l_J9PaUQ7gh7s/view"
+    },
+    {
+      "id": "1lRUhC5fx6NB_A7Ue-zkV-7_d48QByJ3p",
+      "nombre": "Domingo 23 Abril",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2023-04-27T12:16:25.497000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1lRUhC5fx6NB_A7Ue-zkV-7_d48QByJ3p"
+    },
+    {
+      "id": "1dJYuZc3J_0OgeDZfqUkNt0s1pREFxYSY",
+      "nombre": "03",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 03",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-01-02T15:31:21.625000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1dJYuZc3J_0OgeDZfqUkNt0s1pREFxYSY"
+    },
+    {
+      "id": "1AqQ4re2uAlf9xpfGFFN8ghouRrnNS3u1",
+      "nombre": "10",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 10",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-01-02T15:31:26.428000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1AqQ4re2uAlf9xpfGFFN8ghouRrnNS3u1"
+    },
+    {
+      "id": "1piNOQLbc8VrlG2preIhcRYOXgdMqwyVu",
+      "nombre": "23",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 23",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-01-02T15:31:45.172000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1piNOQLbc8VrlG2preIhcRYOXgdMqwyVu"
+    },
+    {
+      "id": "1VQSKxao8Rj-cZM1eOGHun0bSMalGZYAh",
+      "nombre": "29",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 29",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-01-02T15:32:00.143000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1VQSKxao8Rj-cZM1eOGHun0bSMalGZYAh"
+    },
+    {
+      "id": "1aZDEC3_Pab7t7zVMq4xF8ifvikEdnONX",
+      "nombre": "17",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE / 17",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 12. DICIEMBRE",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-01-03T14:22:05.112000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1aZDEC3_Pab7t7zVMq4xF8ifvikEdnONX"
+    },
+    {
+      "id": "16jpLDvtTBESs76s2FYlsoRO9kKfDf6pk",
+      "nombre": "Domingo 29-mayo",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 5. MAYO / Domingo 29-mayo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 5. MAYO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2023-05-30T11:12:57.325000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/16jpLDvtTBESs76s2FYlsoRO9kKfDf6pk"
+    },
+    {
+      "id": "14MY0FyaMadxN5Np1x0SIEvhO4suJeWuy",
+      "nombre": "ORIGINALES",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril / ORIGINALES",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2023 / VIDEO / 4. ABRIL / Domingo 23 Abril",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2023-05-07T22:12:04.788000",
+      "ano": "2023",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/14MY0FyaMadxN5Np1x0SIEvhO4suJeWuy"
+    },
+    {
+      "id": "1rHlgBuve7Cb1sY2-gEc0vqC_D84mtTtg",
+      "nombre": "18",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / ENERO / 18",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / ENERO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-01-19T21:38:28.566000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1rHlgBuve7Cb1sY2-gEc0vqC_D84mtTtg"
+    },
+    {
+      "id": "19avBHNnnNUlltzmuWdFjPLvD7YSezHbP",
+      "nombre": "1",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / FEBRERO / 1",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / FEBRERO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-02-01T20:17:04.806000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/19avBHNnnNUlltzmuWdFjPLvD7YSezHbP"
+    },
+    {
+      "id": "17zVnqFwADM_ZGFIDP0VsaAnyMNY2e2BJ",
+      "nombre": "Moisés",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / ABRIL / Moisés",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / ABRIL",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-04-25T19:11:26.745000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/17zVnqFwADM_ZGFIDP0VsaAnyMNY2e2BJ"
+    },
+    {
+      "id": "1QkghkfXBShiyZtOwCrRzr-KXgAs85ftR",
+      "nombre": "Ciudades",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / ABRIL / Ciudades",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / ABRIL",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-04-27T09:19:22.736000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1QkghkfXBShiyZtOwCrRzr-KXgAs85ftR"
+    },
+    {
+      "id": "1LpQ3GF1wfuYALJ-CajKJXRq2CQtf4GyM",
+      "nombre": "Resurrección",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / ABRIL / Resurrección",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / ABRIL",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-05-04T09:19:18.509000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1LpQ3GF1wfuYALJ-CajKJXRq2CQtf4GyM"
+    },
+    {
+      "id": "1HHNLY9tk_Wwm4dRYGxcBXZWS1F4D_S96",
+      "nombre": "21",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO / Fotos Enero / 21",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 1. ENERO / Fotos Enero",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-01-22T21:24:47.077000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1HHNLY9tk_Wwm4dRYGxcBXZWS1F4D_S96"
+    },
+    {
+      "id": "12hsdMHmocXQ9bvg2u4WOamfqixS2G-BN",
+      "nombre": "Gedeón",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MAYO / Gedeón",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / MAYO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-05-04T09:19:31.916000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/12hsdMHmocXQ9bvg2u4WOamfqixS2G-BN"
+    },
+    {
+      "id": "1NVINRDkWfkAcX0Grw3FhdAl1YckDeL3a",
+      "nombre": "10 de Mayo - Mamás",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MAYO / 10 de Mayo - Mamás",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / MAYO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-05-11T11:26:50.726000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1NVINRDkWfkAcX0Grw3FhdAl1YckDeL3a"
+    },
+    {
+      "id": "1G9bU4W7UdtVUTdPc4FoXx9YH0E8EYGTo",
+      "nombre": "Características del Discípulo",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MAYO / Características del Discípulo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / MAYO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-05-18T12:05:12.347000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1G9bU4W7UdtVUTdPc4FoXx9YH0E8EYGTo"
+    },
+    {
+      "id": "1SunHMtHoI9vHClypWjeACMprlLAswDUU",
+      "nombre": "4",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero / 4",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-02-04T22:03:48.523000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1SunHMtHoI9vHClypWjeACMprlLAswDUU"
+    },
+    {
+      "id": "1V5_GeWR7ymkId3X13T0T17KIxX7V5GNn",
+      "nombre": "18",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero / 18",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-02-21T10:58:33.066000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1V5_GeWR7ymkId3X13T0T17KIxX7V5GNn"
+    },
+    {
+      "id": "1LxLGKiGc4OilBoyQtTR9aI-v-V0fRmJQ",
+      "nombre": "25",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero / 25",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 2. FEBRERO / Fotos Febrero",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-02-28T19:45:05.069000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1LxLGKiGc4OilBoyQtTR9aI-v-V0fRmJQ"
+    },
+    {
+      "id": "1GiM-hOvXevSQEMNxwPtkIIqOwEcqyttu",
+      "nombre": "Encargo",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Encargo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / JUNIO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-06-14T13:07:25.021000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1GiM-hOvXevSQEMNxwPtkIIqOwEcqyttu"
+    },
+    {
+      "id": "1SXZMkFY4804wmX_KBqFVOcptU3xlyUaF",
+      "nombre": "Josúe",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Josúe",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / JUNIO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-06-14T13:07:35.366000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1SXZMkFY4804wmX_KBqFVOcptU3xlyUaF"
+    },
+    {
+      "id": "1I9STcFCudHRhFF3b-0MuzX8gP1hgFoET",
+      "nombre": "Día del Padre   Jehú",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Día del Padre   Jehú",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / JUNIO",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2026-06-22T13:12:06.706000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1I9STcFCudHRhFF3b-0MuzX8gP1hgFoET"
+    },
+    {
+      "id": "1VaGo1zhNkXetFJ1-GEZgwtOry0IxcXOY",
+      "nombre": "Características del Discípulo",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MAYO / Características del Discípulo / Características del Discípulo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / MAYO / Características del Discípulo",
+      "tamano_bytes": 718421753,
+      "tamano_formateado": "685.14 MB",
+      "fecha_modificacion": "2026-05-18T12:05:38.507000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1VaGo1zhNkXetFJ1-GEZgwtOry0IxcXOY/view"
+    },
+    {
+      "id": "1l_eCr1hk4upIFDqCc_yF2dXNrGBhZraj",
+      "nombre": "Mamás.txt",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / MAYO / 10 de Mayo - Mamás / Mamás.txt",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / MAYO / 10 de Mayo - Mamás",
+      "tamano_bytes": 3633,
+      "tamano_formateado": "3.55 KB",
+      "fecha_modificacion": "2026-05-10T13:10:28",
+      "ano": "2026",
+      "extension": ".txt",
+      "mime_type": "text/plain",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1l_eCr1hk4upIFDqCc_yF2dXNrGBhZraj/view"
+    },
+    {
+      "id": "1Sc-oDKjLqjiYf3aMCNrTglz1qTII8kD5",
+      "nombre": "Domingo 24 Agosto",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / AGOSTO / Domingo 24 Agosto",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / AGOSTO",
+      "tamano_bytes": 160910728,
+      "tamano_formateado": "153.46 MB",
+      "fecha_modificacion": "2026-08-24T08:05:23.953000",
+      "ano": "2026",
+      "extension": "",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1Sc-oDKjLqjiYf3aMCNrTglz1qTII8kD5/view"
+    },
+    {
+      "id": "195_2uNkBe3TuZ8kcXuxcWVJo2PHW9X1-",
+      "nombre": "Encargo.txt",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Encargo / Encargo.txt",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2026 / JUNIO / Encargo",
+      "tamano_bytes": 2670,
+      "tamano_formateado": "2.61 KB",
+      "fecha_modificacion": "2026-06-07T13:28:00",
+      "ano": "2026",
+      "extension": ".txt",
+      "mime_type": "text/plain",
+      "enlace_visualizacion": "https://drive.google.com/file/d/195_2uNkBe3TuZ8kcXuxcWVJo2PHW9X1-/view"
+    },
+    {
+      "id": "1oHjWNl4gj1QB5KK6nMkPnt7G2QDcVorp",
+      "nombre": "Pr. Miguel Rivera - 05 de Mayo",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo / Pr. Miguel Rivera - 05 de Mayo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T21:20:25.801000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1oHjWNl4gj1QB5KK6nMkPnt7G2QDcVorp"
+    },
+    {
+      "id": "1jwW1w8KqSZj-xS5DMTwXmEhTLa2X6H14",
+      "nombre": "Pr. Miguel Rivera - 12 de Mayo",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo / Pr. Miguel Rivera - 12 de Mayo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T21:20:43.342000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1jwW1w8KqSZj-xS5DMTwXmEhTLa2X6H14"
+    },
+    {
+      "id": "1p9qyZB7qzrTTLEbhKrXYOvwodJYkOure",
+      "nombre": "Pr. Daniel Ortega - 19 de Mayo",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo / Pr. Daniel Ortega - 19 de Mayo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo",
+      "tamano_bytes": 679587871,
+      "tamano_formateado": "648.11 MB",
+      "fecha_modificacion": "2024-11-20T21:22:32.661000",
+      "ano": "2024",
+      "extension": ". daniel ortega - 19 de mayo",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1p9qyZB7qzrTTLEbhKrXYOvwodJYkOure/view"
+    },
+    {
+      "id": "1Qf1F4uGtNq9kx2JWD7TEWuspEWoCeLjn",
+      "nombre": "Pr. Miguel Rivera - 26 de Mayo",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo / Pr. Miguel Rivera - 26 de Mayo",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Grabaciones Mayo",
+      "tamano_bytes": 590641561,
+      "tamano_formateado": "563.28 MB",
+      "fecha_modificacion": "2024-11-20T21:23:18.857000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 26 de mayo",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1Qf1F4uGtNq9kx2JWD7TEWuspEWoCeLjn/view"
+    },
+    {
+      "id": "1z719puKimFsljRx_7nE5dBpT_bpU2n0N",
+      "nombre": "5",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo / 5",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-05-08T07:00:18.683000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1z719puKimFsljRx_7nE5dBpT_bpU2n0N"
+    },
+    {
+      "id": "1jMvUFdh-EpbIGPXJMRDzul9zwz1xtHcs",
+      "nombre": "12",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo / 12",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-05-14T21:26:47.832000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1jMvUFdh-EpbIGPXJMRDzul9zwz1xtHcs"
+    },
+    {
+      "id": "1DNMfy8qMq3QE_e_4d3AqHlIbaflpmtt1",
+      "nombre": "19",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo / 19",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 5. MAYO / Fotos Mayo",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-05-22T12:22:52.957000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1DNMfy8qMq3QE_e_4d3AqHlIbaflpmtt1"
+    },
+    {
+      "id": "145-dYimAz6vWxQTKI_cFtD7uMj0-LBec",
+      "nombre": "Pr. Miguel Rivera - 29 de Sept 2024",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre / Pr. Miguel Rivera - 29 de Sept 2024",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre",
+      "tamano_bytes": 89004941,
+      "tamano_formateado": "84.88 MB",
+      "fecha_modificacion": "2024-10-08T10:44:09.303000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 29 de sept 2024",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/145-dYimAz6vWxQTKI_cFtD7uMj0-LBec/view"
+    },
+    {
+      "id": "1z0lfPsKx6iJkFmqI7ehV18DCWVv3702H",
+      "nombre": "Pr. Miguel Rivera - 8 de Septiembre",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre / Pr. Miguel Rivera - 8 de Septiembre",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre",
+      "tamano_bytes": 534033331,
+      "tamano_formateado": "509.29 MB",
+      "fecha_modificacion": "2024-10-08T10:44:51.015000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 8 de septiembre",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1z0lfPsKx6iJkFmqI7ehV18DCWVv3702H/view"
+    },
+    {
+      "id": "1b-nNDsmWAubIdib5khOXgl3oVbLmd4Uh",
+      "nombre": "Pr. Miguel Rivera - 22 de Septiembre",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre / Pr. Miguel Rivera - 22 de Septiembre",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre",
+      "tamano_bytes": 496999250,
+      "tamano_formateado": "473.98 MB",
+      "fecha_modificacion": "2024-10-08T10:47:34.768000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 22 de septiembre",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1b-nNDsmWAubIdib5khOXgl3oVbLmd4Uh/view"
+    },
+    {
+      "id": "1qi6qIp4gs4VCnCZg7yA8sgDUJ1RNLUNd",
+      "nombre": "Neitan Morales - 15 de Septiembre",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre / Neitan Morales - 15 de Septiembre",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre",
+      "tamano_bytes": 246088175,
+      "tamano_formateado": "234.69 MB",
+      "fecha_modificacion": "2024-10-08T10:47:56.290000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1qi6qIp4gs4VCnCZg7yA8sgDUJ1RNLUNd/view"
+    },
+    {
+      "id": "1_EQrEi4SB76woZzCyMrPTbjAdJFXFi8u",
+      "nombre": "Isaí Rodríguez - 01 de Septiembre",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre / Isaí Rodríguez - 01 de Septiembre",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 9.SEPTIEMBRE / Grabaciones Septiembre",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:03:00.806000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1_EQrEi4SB76woZzCyMrPTbjAdJFXFi8u"
+    },
+    {
+      "id": "1-I35pFNzyZuWAbZaGTLoB4OPLf0CvRS9",
+      "nombre": "7",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril / 7",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-04-07T19:16:34.474000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1-I35pFNzyZuWAbZaGTLoB4OPLf0CvRS9"
+    },
+    {
+      "id": "1THF_1gNn6AlvXM2i7jauShHb62SWHXrj",
+      "nombre": "14",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril / 14",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-04-14T15:23:57.647000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1THF_1gNn6AlvXM2i7jauShHb62SWHXrj"
+    },
+    {
+      "id": "1-McBP7ObuG6tbXEybIh6zBms9Bru-GBb",
+      "nombre": "21",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril / 21",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Fotos Abril",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-04-22T11:40:19.654000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1-McBP7ObuG6tbXEybIh6zBms9Bru-GBb"
+    },
+    {
+      "id": "1wKPSLM9MifPoZJsTIwOaE02VSF4kCpRQ",
+      "nombre": "Pr. Miguel Rivera - 04 de Abril",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril / Pr. Miguel Rivera - 04 de Abril",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril",
+      "tamano_bytes": 125266248,
+      "tamano_formateado": "119.46 MB",
+      "fecha_modificacion": "2024-11-20T21:07:03.289000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 04 de abril",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1wKPSLM9MifPoZJsTIwOaE02VSF4kCpRQ/view"
+    },
+    {
+      "id": "1Std-ltwJ2ja8J-2CGSk9XrAYlYUdKfGV",
+      "nombre": "Pr. Miguel Rivera - 14 de Abril",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril / Pr. Miguel Rivera - 14 de Abril",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril",
+      "tamano_bytes": 683793235,
+      "tamano_formateado": "652.12 MB",
+      "fecha_modificacion": "2024-11-20T21:08:20.362000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 14 de abril",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1Std-ltwJ2ja8J-2CGSk9XrAYlYUdKfGV/view"
+    },
+    {
+      "id": "1MzD4gvOVDJyrYB8DWDJhfWvyDm0Smv44",
+      "nombre": "Pr. Miguel Rivera - 21 de Abril",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril / Pr. Miguel Rivera - 21 de Abril",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril",
+      "tamano_bytes": 360489991,
+      "tamano_formateado": "343.79 MB",
+      "fecha_modificacion": "2024-11-20T21:10:24.947000",
+      "ano": "2024",
+      "extension": ". miguel rivera - 21 de abril",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1MzD4gvOVDJyrYB8DWDJhfWvyDm0Smv44/view"
+    },
+    {
+      "id": "1xxy5P8lY6lcK9TVeOtk6LqZsLn4ojehl",
+      "nombre": "Pr. Antonio García - 28 de Abril",
+      "tipo": "Archivo",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril / Pr. Antonio García - 28 de Abril",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril",
+      "tamano_bytes": 533624787,
+      "tamano_formateado": "508.90 MB",
+      "fecha_modificacion": "2024-11-20T21:12:44.734000",
+      "ano": "2024",
+      "extension": ". antonio garcía - 28 de abril",
+      "mime_type": "video/mp4",
+      "enlace_visualizacion": "https://drive.google.com/file/d/1xxy5P8lY6lcK9TVeOtk6LqZsLn4ojehl/view"
+    },
+    {
+      "id": "19rFHYvQAtWY8V0Nd3gK-G0sPYT3aUk9A",
+      "nombre": "(Fragmentos) Pr. Abraham Mendoza   Mary Gomora - 28 de Abril",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril / (Fragmentos) Pr. Abraham Mendoza   Mary Gomora - 28 de Abril",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 4. ABRIL / Grabaciones Abril",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T21:14:49.717000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/19rFHYvQAtWY8V0Nd3gK-G0sPYT3aUk9A"
+    },
+    {
+      "id": "1CoTe-WJxskjfT3HNl2sodcwsuEeajAIY",
+      "nombre": "6",
+      "tipo": "Carpeta",
+      "categoria": "POR REVISAR",
+      "ruta": "Mi unidad / 02. DOMINGO / 2024 / 10. OCTUBRE / Fotos Octubre / 6",
+      "carpeta_padre": "Mi unidad / 02. DOMINGO / 2024 / 10. OCTUBRE / Fotos Octubre",
+      "tamano_bytes": 0,
+      "tamano_formateado": "-",
+      "fecha_modificacion": "2024-11-20T22:31:54.973000",
+      "ano": "2024",
+      "extension": "",
+      "mime_type": "application/vnd.google-apps.folder",
+      "enlace_visualizacion": "https://drive.google.com/drive/folders/1CoTe-WJxskjfT3HNl2sodcwsuEeajAIY"
+    }
+  ]
+}
