@@ -488,3 +488,142 @@
     margin-left: 0;
   }
 }
+
+
+/* ==========================================================================
+   Hero Carousel & Alert Banner
+   ========================================================================== */
+.hero-carousel {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.04);
+  transition: opacity 2.2s cubic-bezier(0.25, 1, 0.5, 1), transform 9s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.hero-slide.is-active {
+  opacity: 1;
+  transform: scale(1);
+  z-index: 1;
+}
+
+.hero-dots {
+  position: absolute;
+  bottom: 2rem;
+  left: var(--pad);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  z-index: 4;
+}
+
+.hero-dot {
+  width: 28px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  border-radius: 2px;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.hero-dot:hover {
+  background: rgba(255, 255, 255, 0.65);
+}
+
+.hero-dot.is-active {
+  background: #fff;
+  width: 48px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.faro-alert-banner {
+  background: #f04f43;
+  color: #fff;
+  padding: 0.75rem var(--pad);
+  position: relative;
+  z-index: 100;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.faro-alert-content {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.faro-alert-dot {
+  width: 8px;
+  height: 8px;
+  background: #fff;
+  border-radius: 50%;
+  animation: livePulse 1.25s ease-out infinite;
+}
+
+.faro-alert-content p {
+  margin: 0;
+}
+
+.hero-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(17, 17, 15, 0.42) 0%,
+    rgba(17, 17, 15, 0.62) 42%,
+    rgba(17, 17, 15, 0.94) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.calendar-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dcd7ce;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 0.2rem;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.calendar-external-link:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+@media (max-width: 600px) {
+  .hero-dots {
+    bottom: 1.25rem;
+  }
+  .hero-dot {
+    width: 20px;
+  }
+  .hero-dot.is-active {
+    width: 36px;
+  }
+}

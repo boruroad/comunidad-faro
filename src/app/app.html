@@ -27,21 +27,30 @@
 </header>
 
 <main id="contenido">
+  @if (alertMessage) {
+    <div class="faro-alert-banner" role="alert">
+      <div class="faro-alert-content">
+        <span class="faro-alert-dot" aria-hidden="true"></span>
+        <p>{{ alertMessage }}</p>
+      </div>
+    </div>
+  }
+
   @if (isLiveActive) {
     <section class="live-takeover" id="en-vivo" aria-labelledby="live-title">
       <div class="live-broadcast-bar" aria-hidden="true">
         <div class="live-broadcast-track">
-          <span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span><span>● TRANSMISION ACTIVA</span><span>ENTRA AHORA</span>
+          <span>● {{ liveTickerText }}</span><span>{{ liveButtonLabelText }}</span><span>● {{ liveTickerText }}</span><span>{{ liveButtonLabelText }}</span><span>● {{ liveTickerText }}</span><span>{{ liveButtonLabelText }}</span>
         </div>
       </div>
       <div class="live-grid">
         <div class="live-copy reveal">
-          <p class="live-kicker"><span class="live-dot" aria-hidden="true"></span><span>{{ live.label || 'TRANSMISION EN VIVO' }}</span></p>
-          <h1 id="live-title"><span>{{ live.titleTop || 'ESTAMOS' }}</span><br><em>{{ live.titleAccent || 'EN VIVO.' }}</em></h1>
-          <p class="live-description">{{ live.description || 'La Casa esta transmitiendo. Entra desde donde estes.' }}</p>
+          <p class="live-kicker"><span class="live-dot" aria-hidden="true"></span><span>{{ liveKickerText }}</span></p>
+          <h1 id="live-title"><span>{{ liveTitleTopText }}</span><br><em>{{ liveTitleAccentText }}</em></h1>
+          <p class="live-description">{{ liveDescriptionText }}</p>
           <div class="live-actions">
             @if (liveStreamUrl) {
-              <a class="live-primary" [href]="liveStreamUrl" target="_blank" rel="noopener"><span class="live-primary-dot" aria-hidden="true"></span><span>{{ live.buttonLabel || 'Entrar a la transmision' }}</span><span aria-hidden="true">↗</span></a>
+              <a class="live-primary" [href]="liveStreamUrl" target="_blank" rel="noopener"><span class="live-primary-dot" aria-hidden="true"></span><span>{{ liveButtonLabelText }}</span><span aria-hidden="true">↗</span></a>
             }
             <a class="live-scroll" href="#inicio">Seguir al sitio ↓</a>
           </div>
@@ -66,8 +75,30 @@
   }
 
   <section class="hero" id="inicio" aria-labelledby="hero-title">
-    <div class="hero-photo photo-slot" [style.background-image]="photoStyle(cfg.photos.hero)" [class.has-image]="!!cfg.photos.hero" aria-hidden="true"></div>
+    <!-- Carrusel de fotos de inicio con transición cinematográfica -->
+    <div class="hero-carousel" aria-hidden="true">
+      @for (photo of heroPhotos; track photo; let i = $index) {
+        <div
+          class="hero-slide"
+          [class.is-active]="activeHeroIndex === i"
+          [style.background-image]="photoStyle(photo)"
+        ></div>
+      }
+    </div>
     <div class="hero-shade"></div>
+
+    <div class="hero-dots" role="tablist" aria-label="Fotografías de inicio">
+      @for (photo of heroPhotos; track photo; let i = $index) {
+        <button
+          type="button"
+          class="hero-dot"
+          [class.is-active]="activeHeroIndex === i"
+          [attr.aria-label]="'Fotografía ' + (i + 1)"
+          (click)="setHeroPhoto(i)"
+        ></button>
+      }
+    </div>
+
     <div class="hero-content reveal">
       <p class="eyebrow">COMUNIDAD F.A.R.O.</p>
       <h1 id="hero-title"><b>{{ heroTitleTop }}</b><br><span>{{ heroTitleAccent }}</span></h1>
@@ -455,10 +486,13 @@
         <p class="eyebrow">PROXIMAS FECHAS</p>
         <h2 id="calendar-title">{{ calendar.title }}<br><span>DE COMUNIDAD.</span></h2>
         <p class="serif-lead">{{ calendar.subtitle }}</p>
+        <a class="calendar-external-link" [href]="calendarEmbedUrl" target="_blank" rel="noopener">
+          <span>Abrir Google Calendar</span> <em aria-hidden="true">↗</em>
+        </a>
       </div>
 
       <div class="calendar-grid">
-        @for (event of calendar.events; track event.date + event.title) {
+        @for (event of calendarEvents; track event.date + event.title) {
           <article class="calendar-card reveal">
             <div class="calendar-card-top">
               <time [attr.datetime]="event.date">{{ formatCalendarDate(event.date) }}</time>

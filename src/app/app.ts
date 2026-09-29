@@ -30,9 +30,124 @@ export class App implements AfterViewInit, OnDestroy {
   readonly releaseSpotifyUrls: (SafeResourceUrl | null)[];
   selectedReleaseIndex = 0;
   readonly isCalendarEnabled = this.calendar.enabled && this.calendar.events.length > 0;
-  readonly isLiveActive = this.computeLiveActive();
-  readonly liveStreamUrl = (this.live.url || this.onlineUrl).trim();
+  liveStreamUrl = (this.live.url || this.onlineUrl).trim();
+  liveMessage = this.live.description || 'La Casa está transmitiendo. Entra desde donde estés.';
+  featuredMessage = '';
+  alertMessage = '';
+  faroControlLiveMode: 'AUTO' | 'ON' | 'OFF' = 'AUTO';
   readonly safeEmbedUrl: SafeResourceUrl | null;
+
+  calendarEvents: CalendarEvent[] = [...this.calendar.events];
+  readonly calendarEmbedUrl = 'https://calendar.google.com/calendar/embed?src=0266b1310dc0d1d71d45b12ce92aa075141e7f18bf3a3b224f375f3d508cdcf5%40group.calendar.google.com&ctz=America%2FMexico_City';
+  readonly calendarIcalUrl = 'https://calendar.google.com/calendar/ical/0266b1310dc0d1d71d45b12ce92aa075141e7f18bf3a3b224f375f3d508cdcf5%40group.calendar.google.com/public/basic.ics';
+
+  // Fotos de Hero limpias, modernas 2024-2025, sin cubrebocas ni desgastes
+  readonly heroPhotos = [
+    'assets/images/faro-identidad-welcome-home-camiseta.webp',
+    'assets/images/faro-identidad-camiseta-comunidad-faro.webp',
+    'assets/images/faro-detalle-biblia-manos-mateo.webp',
+    'assets/images/faro-oracion-joven-tatuado-claroscuro.webp'
+  ];
+  activeHeroIndex = 0;
+  private heroTimer?: ReturnType<typeof setInterval>;
+
+  get liveState(): 'PRE_LIVE' | 'LIVE' | 'POST_LIVE' | 'NORMAL' {
+    if (this.faroControlLiveMode === 'ON') {
+      return 'LIVE';
+    }
+    if (this.faroControlLiveMode === 'OFF') {
+      return 'NORMAL';
+    }
+
+    const now = Date.now();
+    const start = this.live.startsAt ? Date.parse(this.live.startsAt) : NaN;
+    const end = this.live.endsAt ? Date.parse(this.live.endsAt) : NaN;
+
+    if (Number.isFinite(start) && Number.isFinite(end)) {
+      const preLiveWindow = start - 45 * 60 * 1000; // 45 minutos antes
+      const postLiveWindow = end + 2 * 60 * 60 * 1000; // 2 horas después de terminar
+
+      if (now >= preLiveWindow && now < start) {
+        return 'PRE_LIVE';
+      }
+      if (now >= start && now <= end) {
+        return 'LIVE';
+      }
+      if (now > end && now <= postLiveWindow) {
+        return 'POST_LIVE';
+      }
+    }
+
+    return this.live.enabled ? 'LIVE' : 'NORMAL';
+  }
+
+  get isLiveActive(): boolean {
+    return this.liveState !== 'NORMAL';
+  }
+
+  get liveKickerText(): string {
+    switch (this.liveState) {
+      case 'PRE_LIVE': return 'TRANSMISIÓN POR COMENZAR';
+      case 'LIVE': return this.live.label || 'TRANSMISIÓN EN VIVO';
+      case 'POST_LIVE': return 'TRANSMISIÓN FINALIZADA';
+      default: return 'TRANSMISIÓN EN VIVO';
+    }
+  }
+
+  get liveTitleTopText(): string {
+    switch (this.liveState) {
+      case 'PRE_LIVE': return 'ESTAMOS';
+      case 'LIVE': return this.live.titleTop || 'ESTAMOS';
+      case 'POST_LIVE': return 'LA REUNIÓN';
+      default: return 'ESTAMOS';
+    }
+  }
+
+  get liveTitleAccentText(): string {
+    switch (this.liveState) {
+      case 'PRE_LIVE': return 'POR COMENZAR.';
+      case 'LIVE': return this.live.titleAccent || 'EN VIVO.';
+      case 'POST_LIVE': return 'HA TERMINADO.';
+      default: return 'EN VIVO.';
+    }
+  }
+
+  get liveDescriptionText(): string {
+    if (this.liveMessage && this.liveMessage !== this.live.description) {
+      return this.liveMessage;
+    }
+    switch (this.liveState) {
+      case 'PRE_LIVE':
+        return 'La Casa se está preparando para transmitir. En unos minutos iniciamos.';
+      case 'LIVE':
+        return this.live.description || 'La Casa está transmitiendo. Entra desde donde estés.';
+      case 'POST_LIVE':
+        return 'Gracias por acompañarnos hoy en Casa FARO. Nos vemos la próxima semana.';
+      default:
+        return this.live.description;
+    }
+  }
+
+  get liveButtonLabelText(): string {
+    switch (this.liveState) {
+      case 'PRE_LIVE': return 'Esperar en la transmisión';
+      case 'LIVE': return this.live.buttonLabel || 'Entrar a la transmisión';
+      case 'POST_LIVE': return 'Ver última reunión';
+      default: return 'Entrar a la transmisión';
+    }
+  }
+
+  get liveTickerText(): string {
+    if (this.featuredMessage) {
+      return this.featuredMessage;
+    }
+    switch (this.liveState) {
+      case 'PRE_LIVE': return 'ESTAMOS POR COMENZAR · LA CASA SE PREPARA · ENTRA EN BREVE';
+      case 'LIVE': return 'TRANSMISIÓN ACTIVA · ENTRA AHORA · EN VIVO';
+      case 'POST_LIVE': return 'REUNIÓN CONCLUIDA · GRACIAS POR ACOMPAÑARNOS · NOS VEMOS EN CASA';
+      default: return 'TRANSMISIÓN ACTIVA · ENTRA AHORA';
+    }
+  }
 
   readonly heroTitleTop: string;
   readonly heroTitleAccent: string;
@@ -89,6 +204,8 @@ export class App implements AfterViewInit, OnDestroy {
       this.doc.body.classList.add('is-live');
     }
 
+    this.startHeroTimer();
+    this.loadFaroControl();
     this.initRevealAnimation();
     this.writeSchema();
   }
@@ -97,6 +214,93 @@ export class App implements AfterViewInit, OnDestroy {
     window.removeEventListener('scroll', this.onWindowScroll);
     this.revealObserver?.disconnect();
     this.doc.body.classList.remove('is-live');
+    if (this.heroTimer) {
+      clearInterval(this.heroTimer);
+    }
+  }
+
+  setHeroPhoto(index: number): void {
+    this.activeHeroIndex = index;
+    this.resetHeroTimer();
+  }
+
+  nextHeroPhoto(): void {
+    this.activeHeroIndex = (this.activeHeroIndex + 1) % this.heroPhotos.length;
+  }
+
+  prevHeroPhoto(): void {
+    this.activeHeroIndex = (this.activeHeroIndex - 1 + this.heroPhotos.length) % this.heroPhotos.length;
+  }
+
+  private startHeroTimer(): void {
+    this.heroTimer = setInterval(() => {
+      this.nextHeroPhoto();
+    }, 6500);
+  }
+
+  private resetHeroTimer(): void {
+    if (this.heroTimer) {
+      clearInterval(this.heroTimer);
+    }
+    this.startHeroTimer();
+  }
+
+  private loadFaroControl(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    const callbackName = 'handleFaroControl_' + Math.floor(Math.random() * 1000000);
+    const win = window as unknown as Record<string, unknown>;
+
+    win[callbackName] = (data: { table?: { rows?: Array<{ c?: Array<{ v?: string } | null> }> } }) => {
+      try {
+        const rows = data?.table?.rows || [];
+        const params: Record<string, string> = {};
+        for (const row of rows) {
+          const key = row.c?.[0]?.v?.toString().trim();
+          const val = row.c?.[1]?.v?.toString().trim() || '';
+          if (key) {
+            params[key] = val;
+          }
+        }
+
+        const mode = (params['LIVE_MODE'] || 'AUTO').toUpperCase() as 'AUTO' | 'ON' | 'OFF';
+        this.faroControlLiveMode = mode;
+        if (this.isLiveActive) {
+          this.doc.body.classList.add('is-live');
+        } else {
+          this.doc.body.classList.remove('is-live');
+        }
+
+        if (params['LIVE_URL']) {
+          this.liveStreamUrl = params['LIVE_URL'];
+        }
+        if (params['LIVE_MESSAGE']) {
+          this.liveMessage = params['LIVE_MESSAGE'];
+        }
+        if (params['FEATURED_MESSAGE']) {
+          this.featuredMessage = params['FEATURED_MESSAGE'];
+        }
+        if (params['ALERT']) {
+          this.alertMessage = params['ALERT'];
+        }
+      } catch (err) {
+        console.warn('Error procesando FARO CONTROL:', err);
+      } finally {
+        delete win[callbackName];
+        script.remove();
+      }
+    };
+
+    const script = this.doc.createElement('script');
+    script.src = `https://docs.google.com/spreadsheets/d/1wNYuLLacrld7Yb3Ur6gerOP4STXofIcqTF8hEAq3Ugo/gviz/tq?tqx=responseHandler:${callbackName}`;
+    script.async = true;
+    script.onerror = () => {
+      delete win[callbackName];
+      script.remove();
+    };
+    this.doc.head.appendChild(script);
   }
 
   toggleMenu(): void {
