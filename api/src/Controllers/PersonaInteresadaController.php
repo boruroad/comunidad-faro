@@ -16,63 +16,67 @@ class PersonaInteresadaController extends BaseController
     public function register($request)
     {
         $payload = $this->extractPayload($request);
+        $fields = $this->buildRegistroFields($payload);
 
-        $nombre = trim((string) ($payload['nombre'] ?? ''));
-        $apellidoPaterno = trim((string) ($payload['apellido_paterno'] ?? ''));
-        $apellidoMaterno = trim((string) ($payload['apellido_materno'] ?? ''));
-        $whatsapp = trim((string) ($payload['whatsapp'] ?? ''));
-        $email = trim((string) ($payload['email'] ?? ''));
-        $comoSeEntero = trim((string) ($payload['como_se_entero'] ?? ''));
-        $medioContacto = strtoupper(trim((string) ($payload['medio_contacto_preferido'] ?? '')));
-        $comentario = trim((string) ($payload['comentario'] ?? ''));
-        $aceptoPrivacidad = $this->toBool($payload['acepto_privacidad'] ?? false);
-
-        if ($nombre === '' || mb_strlen($nombre) > 100) {
-            return $this->fail('nombre es requerido (maximo 100 caracteres)', 422);
+        $validationError = $this->validateRegistro($fields);
+        if ($validationError) {
+            return $this->fail($validationError, 422);
         }
 
-        if ($apellidoPaterno !== '' && mb_strlen($apellidoPaterno) > 100) {
-            return $this->fail('apellido paterno debe tener maximo 100 caracteres', 422);
+        return $this->persistRegistro($fields);
+    }
+
+    private function buildRegistroFields($payload)
+    {
+        return array(
+            'nombre' => trim((string) ($payload['nombre'] ?? '')),
+            'apellido_paterno' => trim((string) ($payload['apellido_paterno'] ?? '')),
+            'apellido_materno' => trim((string) ($payload['apellido_materno'] ?? '')),
+            'whatsapp' => trim((string) ($payload['whatsapp'] ?? '')),
+            'email' => trim((string) ($payload['email'] ?? '')),
+            'como_se_entero' => trim((string) ($payload['como_se_entero'] ?? '')),
+            'medio_contacto_preferido' => strtoupper(trim((string) ($payload['medio_contacto_preferido'] ?? ''))),
+            'comentario' => trim((string) ($payload['comentario'] ?? '')),
+            'acepto_privacidad' => $this->toBool($payload['acepto_privacidad'] ?? false),
+        );
+    }
+
+    // Primer chequeo que falle gana; mismo orden y mensajes que la validacion original.
+    private function validateRegistro($fields)
+    {
+        $checks = array(
+            array($fields['nombre'] === '' || mb_strlen($fields['nombre']) > 100, 'nombre es requerido (maximo 100 caracteres)'),
+            array($fields['apellido_paterno'] !== '' && mb_strlen($fields['apellido_paterno']) > 100, 'apellido paterno debe tener maximo 100 caracteres'),
+            array($fields['apellido_materno'] !== '' && mb_strlen($fields['apellido_materno']) > 100, 'apellido materno debe tener maximo 100 caracteres'),
+            array($fields['whatsapp'] === '' || !preg_match('/^[0-9+()\s-]{7,30}$/', $fields['whatsapp']), 'whatsapp es requerido y debe ser un numero valido'),
+            array($fields['email'] !== '' && !filter_var($fields['email'], FILTER_VALIDATE_EMAIL), 'email no tiene un formato valido'),
+            array($fields['como_se_entero'] === '' || mb_strlen($fields['como_se_entero']) > 150, 'como_se_entero es requerido (maximo 150 caracteres)'),
+            array(!in_array($fields['medio_contacto_preferido'], $this->medioContactoValidos, true), 'medio_contacto_preferido debe ser WHATSAPP, LLAMADA o EMAIL'),
+            array($fields['comentario'] !== '' && mb_strlen($fields['comentario']) > 2000, 'comentario debe tener maximo 2000 caracteres'),
+            array(!$fields['acepto_privacidad'], 'debes aceptar la politica de privacidad para continuar'),
+        );
+
+        foreach ($checks as $check) {
+            if ($check[0]) {
+                return $check[1];
+            }
         }
 
-        if ($apellidoMaterno !== '' && mb_strlen($apellidoMaterno) > 100) {
-            return $this->fail('apellido materno debe tener maximo 100 caracteres', 422);
-        }
+        return null;
+    }
 
-        if ($whatsapp === '' || !preg_match('/^[0-9+()\s-]{7,30}$/', $whatsapp)) {
-            return $this->fail('whatsapp es requerido y debe ser un numero valido', 422);
-        }
-
-        if ($email !== '' && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->fail('email no tiene un formato valido', 422);
-        }
-
-        if ($comoSeEntero === '' || mb_strlen($comoSeEntero) > 150) {
-            return $this->fail('como_se_entero es requerido (maximo 150 caracteres)', 422);
-        }
-
-        if (!in_array($medioContacto, $this->medioContactoValidos, true)) {
-            return $this->fail('medio_contacto_preferido debe ser WHATSAPP, LLAMADA o EMAIL', 422);
-        }
-
-        if ($comentario !== '' && mb_strlen($comentario) > 2000) {
-            return $this->fail('comentario debe tener maximo 2000 caracteres', 422);
-        }
-
-        if (!$aceptoPrivacidad) {
-            return $this->fail('debes aceptar la politica de privacidad para continuar', 422);
-        }
-
+    private function persistRegistro($fields)
+    {
         $id = $this->repo->create(array(
             'origen' => 'INTERESADO',
-            'nombre' => $nombre,
-            'apellido_paterno' => $apellidoPaterno !== '' ? $apellidoPaterno : null,
-            'apellido_materno' => $apellidoMaterno !== '' ? $apellidoMaterno : null,
-            'whatsapp' => $whatsapp,
-            'email' => $email !== '' ? $email : null,
-            'como_se_entero' => $comoSeEntero,
-            'medio_contacto_preferido' => $medioContacto,
-            'observaciones' => $comentario !== '' ? $comentario : null,
+            'nombre' => $fields['nombre'],
+            'apellido_paterno' => $fields['apellido_paterno'] !== '' ? $fields['apellido_paterno'] : null,
+            'apellido_materno' => $fields['apellido_materno'] !== '' ? $fields['apellido_materno'] : null,
+            'whatsapp' => $fields['whatsapp'],
+            'email' => $fields['email'] !== '' ? $fields['email'] : null,
+            'como_se_entero' => $fields['como_se_entero'],
+            'medio_contacto_preferido' => $fields['medio_contacto_preferido'],
+            'observaciones' => $fields['comentario'] !== '' ? $fields['comentario'] : null,
             'estatus' => 'NUEVO',
             'acepto_privacidad' => 1,
             'acepto_privacidad_at' => date('Y-m-d H:i:s'),
@@ -106,7 +110,7 @@ class PersonaInteresadaController extends BaseController
         $rows = $this->repo->findAllBy($conditions, $limit, $offset);
 
         return $this->ok(array(
-            'items' => camelize_keys($rows),
+            'items' => camelizeKeys($rows),
         ), 'personas interesadas list');
     }
 
@@ -117,18 +121,13 @@ class PersonaInteresadaController extends BaseController
             return $this->fail('unauthorized', 401);
         }
 
-        $id = isset($request['id']) ? (int) $request['id'] : 0;
-        if ($id <= 0) {
-            return $this->fail('id is required', 422);
-        }
-
-        $row = $this->findInteresadaOrNull($id);
-        if (!$row) {
-            return $this->fail('persona interesada not found', 404);
+        $target = $this->resolveInteresadaTarget($request);
+        if ($this->isFailResponse($target)) {
+            return $target;
         }
 
         return $this->ok(array(
-            'item' => camelize_keys($row),
+            'item' => camelize_keys($target),
         ), 'persona interesada found');
     }
 
@@ -139,16 +138,31 @@ class PersonaInteresadaController extends BaseController
             return $this->fail('unauthorized', 401);
         }
 
-        $id = isset($request['id']) ? (int) $request['id'] : 0;
-        if ($id <= 0) {
-            return $this->fail('id is required', 422);
+        $target = $this->resolveInteresadaTarget($request);
+        if ($this->isFailResponse($target)) {
+            return $target;
         }
 
-        if (!$this->findInteresadaOrNull($id)) {
-            return $this->fail('persona interesada not found', 404);
-        }
+        return $this->applyInteresadaUpdate((int) $target['id'], $request);
+    }
 
+    private function applyInteresadaUpdate($id, $request)
+    {
         $payload = $this->extractPayload($request);
+        $fields = $this->buildInteresadaUpdateFields($payload);
+        if ($this->isFailResponse($fields)) {
+            return $fields;
+        }
+
+        if (empty($fields)) {
+            return $this->fail('payload is required', 422);
+        }
+
+        return $this->persistInteresadaUpdate($id, $fields);
+    }
+
+    private function buildInteresadaUpdateFields($payload)
+    {
         $fields = array();
 
         if (isset($payload['estatus'])) {
@@ -163,10 +177,11 @@ class PersonaInteresadaController extends BaseController
             $fields['observaciones'] = trim((string) $payload['observaciones']);
         }
 
-        if (empty($fields)) {
-            return $this->fail('payload is required', 422);
-        }
+        return $fields;
+    }
 
+    private function persistInteresadaUpdate($id, $fields)
+    {
         $ok = $this->repo->updateById($id, $fields);
         if (!$ok) {
             return $this->fail('persona interesada could not be updated', 409);
@@ -187,21 +202,40 @@ class PersonaInteresadaController extends BaseController
             return $this->fail('unauthorized', 401);
         }
 
-        $id = isset($request['id']) ? (int) $request['id'] : 0;
-        if ($id <= 0) {
-            return $this->fail('id is required', 422);
+        $target = $this->resolveInteresadaTarget($request);
+        if ($this->isFailResponse($target)) {
+            return $target;
         }
 
-        if (!$this->findInteresadaOrNull($id)) {
-            return $this->fail('persona interesada not found', 404);
-        }
+        return $this->persistInteresadaDelete((int) $target['id']);
+    }
 
+    private function persistInteresadaDelete($id)
+    {
         $ok = $this->repo->deleteById($id);
         if (!$ok) {
             return $this->fail('persona interesada could not be deleted', 409);
         }
 
         return $this->ok(array(), 'persona interesada deleted');
+    }
+
+    // Valida el id de la URL y que exista como lead (origen=INTERESADO); comparte logica entre detail()/update()/delete().
+    private function resolveInteresadaTarget($request)
+    {
+        $id = isset($request['id']) ? (int) $request['id'] : 0;
+        if ($id <= 0) {
+            return $this->fail('id is required', 422);
+        }
+
+        $row = $this->findInteresadaOrNull($id);
+
+        return $row ? $row : $this->fail('persona interesada not found', 404);
+    }
+
+    private function isFailResponse($result)
+    {
+        return is_array($result) && isset($result['success']) && $result['success'] === false;
     }
 
     // Evita operar sobre un registro que en realidad es un miembro formal (origen=MIEMBRO).

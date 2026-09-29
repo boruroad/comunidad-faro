@@ -20,9 +20,9 @@ spl_autoload_register(function ($class) {
     }
 });
 
-load_env_file(__DIR__ . '/.env');
+loadEnvFile(__DIR__ . '/.env');
 
-function load_env_file($filePath)
+function loadEnvFile($filePath)
 {
     if (!file_exists($filePath) || !is_readable($filePath)) {
         return;
@@ -58,7 +58,7 @@ function load_env_file($filePath)
     }
 }
 
-function send_cors_headers()
+function sendCorsHeaders()
 {
     $origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : '*';
 
@@ -69,36 +69,31 @@ function send_cors_headers()
     header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
 }
 
-function request_data()
+function requestData()
 {
-    $request = $_GET;
+    $request = array_merge($_GET, $_POST);
 
-    foreach ($_POST as $key => $value) {
-        $request[$key] = $value;
-    }
-
-    $rawBody = file_get_contents('php://input');
-    if ($rawBody !== false && trim($rawBody) !== '') {
-        $decoded = json_decode($rawBody, true);
-
-        if (is_array($decoded)) {
-            foreach ($decoded as $key => $value) {
-                $request[$key] = $value;
-            }
-        } else {
-            parse_str($rawBody, $parsed);
-            if (is_array($parsed)) {
-                foreach ($parsed as $key => $value) {
-                    $request[$key] = $value;
-                }
-            }
-        }
-    }
-
-    return $request;
+    return array_merge($request, parseRawRequestBody());
 }
 
-function get_bearer_token()
+function parseRawRequestBody()
+{
+    $rawBody = file_get_contents('php://input');
+    if ($rawBody === false || trim($rawBody) === '') {
+        return array();
+    }
+
+    $decoded = json_decode($rawBody, true);
+    if (is_array($decoded)) {
+        return $decoded;
+    }
+
+    parse_str($rawBody, $parsed);
+
+    return is_array($parsed) ? $parsed : array();
+}
+
+function getBearerToken()
 {
     if (isset($_SERVER['HTTP_AUTHORIZATION'])) {
         $header = trim((string) $_SERVER['HTTP_AUTHORIZATION']);
@@ -117,7 +112,7 @@ function get_bearer_token()
     return '';
 }
 
-function camelize_keys($value)
+function camelizeKeys($value)
 {
     if (!is_array($value)) {
         return $value;
@@ -125,18 +120,18 @@ function camelize_keys($value)
 
     $isAssoc = array_keys($value) !== range(0, count($value) - 1);
     if (!$isAssoc) {
-        return array_map('camelize_keys', $value);
+        return array_map('camelizeKeys', $value);
     }
 
     $result = array();
     foreach ($value as $key => $item) {
-        $result[snake_to_camel((string) $key)] = camelize_keys($item);
+        $result[snakeToCamel((string) $key)] = camelizeKeys($item);
     }
 
     return $result;
 }
 
-function snake_to_camel($value)
+function snakeToCamel($value)
 {
     $value = strtolower($value);
     return preg_replace_callback('/_([a-z0-9])/', function ($matches) {
@@ -144,13 +139,13 @@ function snake_to_camel($value)
     }, $value);
 }
 
-function camel_to_snake($value)
+function camelToSnake($value)
 {
     $value = preg_replace('/[A-Z]/', '_$0', $value);
     return strtolower(ltrim($value, '_'));
 }
 
-function env_value($key, $default = '')
+function envValue($key, $default = '')
 {
     $value = getenv($key);
     return ($value !== false && $value !== '') ? $value : $default;

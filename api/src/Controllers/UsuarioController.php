@@ -2,6 +2,8 @@
 
 class UsuarioController extends CrudController
 {
+    private const ID_REQUIRED_MESSAGE = 'id is required';
+
     protected $resourceLabel = 'usuario';
     protected $allowedFields = array('comunidad_id', 'persona_id', 'rol_id', 'email', 'activo');
     protected $filterableFields = array('comunidad_id', 'rol_id', 'activo');
@@ -11,6 +13,8 @@ class UsuarioController extends CrudController
     private $roles;
     private $comunidades;
     private $personas;
+    private $accessGuard;
+    private $requestValidator;
 
     public function __construct()
     {
@@ -19,6 +23,8 @@ class UsuarioController extends CrudController
         $this->roles = new RolRepository();
         $this->comunidades = new ComunidadRepository();
         $this->personas = new PersonaRepository();
+        $this->accessGuard = new UsuarioAccessGuard($this->authService, $this->roles, $this->repo);
+        $this->requestValidator = new UsuarioRequestValidator($this->roles, $this->repo);
     }
 
     public function index($request)
@@ -42,7 +48,7 @@ class UsuarioController extends CrudController
             ? $this->repo->findAll($limit, $offset)
             : $this->repo->findAllBy($conditions, $limit, $offset);
 
-        $rows = $this->ocultarSuperadminsSiNoAplica($usuario, $rows);
+        $rows = $this->accessGuard->visibleRows($usuario, $rows);
         $rows = $this->enrichRows($rows);
 
         return $this->ok(array(
@@ -59,11 +65,16 @@ class UsuarioController extends CrudController
 
         $id = isset($request['id']) ? (int) $request['id'] : 0;
         if ($id <= 0) {
-            return $this->fail('id is required', 422);
+            return $this->fail(self::ID_REQUIRED_MESSAGE, 422);
         }
 
-        $row = $this->repo->findById($id);
-        if (!$row || empty($this->ocultarSuperadminsSiNoAplica($usuario, array($row)))) {
+        return $this->buildDetailResponse($usuario, $id);
+    }
+
+    private function buildDetailResponse($usuario, $id)
+    {
+        $row = $this->accessGuard->findVisibleTarget($usuario, $id);
+        if (!$row) {
             return $this->fail($this->resourceLabel . ' not found', 404);
         }
 
@@ -100,47 +111,61 @@ class UsuarioController extends CrudController
     }
 
     // Un ADMIN_COMUNIDAD (u otro rol no SUPERADMIN) no debe ver cuentas de SUPERADMIN.
-    private function ocultarSuperadminsSiNoAplica($usuario, array $rows)
-    {
-        $role = $this->authService->roleForUsuario($usuario);
-        if ($role && $role['nombre'] === 'SUPERADMIN') {
-            return $rows;
-        }
+    // -> ver UsuarioAccessGuard::visibleRows()
 
-        $superadminRol = $this->roles->findByNombre('SUPERADMIN');
-        $superadminRolId = $superadminRol ? (int) $superadminRol['id'] : 0;
-
-        return array_values(array_filter($rows, function ($row) use ($superadminRolId) {
-            return (int) $row['rol_id'] !== $superadminRolId;
-        }));
-    }
-
-    public function create($request)
+    // Login valido pero sin permisos de escritura -> array de fail(); exito -> objeto Usuario.
+    private function requireWriteAuth()
     {
         $usuario = $this->requireAuth();
         if (!$usuario) {
             return $this->fail('unauthorized', 401);
         }
-        if (!$this->hasAnyRole($usuario, $this->writeRoles)) {
-            return $this->fail('insufficient permissions', 403);
+
+        return $this->accessGuard->hasWriteAccess($usuario, $this->writeRoles) ? $usuario : $this->fail('insufficient permissions', 403);
+    }
+
+    private function isFailResponse($result)
+    {
+        return is_array($result) && isset($result['success']) && $result['success'] === false;
+    }
+
+    // Valida el id de la URL y que el usuario objetivo exista/sea visible; comparte logica entre update() y setActivoConGuardas().
+    private function resolveTargetUsuario($usuario, $request)
+    {
+        $id = isset($request['id']) ? (int) $request['id'] : 0;
+        if ($id <= 0) {
+            return $this->fail(self::ID_REQUIRED_MESSAGE, 422);
         }
 
+        $target = $this->accessGuard->findVisibleTarget($usuario, $id);
+        if (!$target) {
+            return $this->fail('usuario not found', 404);
+        }
+
+        return $target;
+    }
+
+    public function create($request)
+    {
+        $usuario = $this->requireWriteAuth();
+        if ($this->isFailResponse($usuario)) {
+            return $usuario;
+        }
+
+        return $this->createUsuarioFromRequest($request);
+    }
+
+    private function createUsuarioFromRequest($request)
+    {
         $payload = $this->extractPayload($request);
         $email = isset($payload['email']) ? strtolower(trim((string) $payload['email'])) : '';
         $password = isset($request['password']) ? (string) $request['password'] : '';
         $comunidadId = isset($payload['comunidad_id']) ? (int) $payload['comunidad_id'] : 0;
         $rolId = isset($payload['rol_id']) ? (int) $payload['rol_id'] : 0;
 
-        if ($email === '' || $password === '' || $comunidadId <= 0 || $rolId <= 0) {
-            return $this->fail('email, password, comunidad_id and rol_id are required', 422);
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return $this->fail('email format is invalid', 422);
-        }
-
-        if (!$this->isStrongPassword($password)) {
-            return $this->fail('password must be at least 12 chars and include uppercase, lowercase, number, special char, and no spaces', 422);
+        $validationError = $this->requestValidator->validateCreateInput($email, $password, $comunidadId, $rolId);
+        if ($validationError) {
+            return $this->fail($validationError['message'], $validationError['code']);
         }
 
         $createdUser = $this->authService->createUsuario(array(
@@ -160,78 +185,42 @@ class UsuarioController extends CrudController
         ), 'usuario created');
     }
 
-    // Sobrescribe el update generico: permite cambiar email, rol, comunidad, activo
-    // y opcionalmente la contraseña (todo en una sola llamada).
     public function update($request)
     {
-        $usuario = $this->requireAuth();
-        if (!$usuario) {
-            return $this->fail('unauthorized', 401);
+        $usuario = $this->requireWriteAuth();
+        if ($this->isFailResponse($usuario)) {
+            return $usuario;
         }
 
-        if (!$this->hasAnyRole($usuario, $this->writeRoles)) {
-            return $this->fail('insufficient permissions', 403);
+        $target = $this->resolveTargetUsuario($usuario, $request);
+        if ($this->isFailResponse($target)) {
+            return $target;
         }
 
-        $id = isset($request['id']) ? (int) $request['id'] : 0;
-        if ($id <= 0) {
-            return $this->fail('id is required', 422);
-        }
+        return $this->applyUsuarioUpdate((int) $target['id'], $request);
+    }
 
-        $target = $this->repo->findById($id);
-        if (!$target || empty($this->ocultarSuperadminsSiNoAplica($usuario, array($target)))) {
-            return $this->fail('usuario not found', 404);
-        }
-
+    private function applyUsuarioUpdate($id, $request)
+    {
         $payload = $this->extractPayload($request);
-        $fields = array();
-
-        if (isset($payload['email'])) {
-            $email = strtolower(trim((string) $payload['email']));
-            if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                return $this->fail('email format is invalid', 422);
-            }
-
-            $existing = $this->repo->findByEmail($email);
-            if ($existing && (int) $existing->id !== $id) {
-                return $this->fail('email already exists', 409);
-            }
-
-            $fields['email'] = $email;
-        }
-
-        if (isset($payload['rol_id'])) {
-            $rolId = (int) $payload['rol_id'];
-            if ($rolId <= 0 || !$this->roles->findById($rolId)) {
-                return $this->fail('rol_id is invalid', 422);
-            }
-
-            $fields['rol_id'] = $rolId;
-        }
-
-        if (array_key_exists('comunidad_id', $payload)) {
-            $fields['comunidad_id'] = $payload['comunidad_id'] ? (int) $payload['comunidad_id'] : null;
-        }
-
-        if (array_key_exists('persona_id', $payload)) {
-            $fields['persona_id'] = $payload['persona_id'] ? (int) $payload['persona_id'] : null;
-        }
-
-        if (array_key_exists('activo', $payload)) {
-            $fields['activo'] = (bool) $payload['activo'];
+        $fields = $this->requestValidator->buildUpdateFields($id, $payload);
+        if ($this->requestValidator->isError($fields)) {
+            return $this->fail($fields['message'], $fields['code']);
         }
 
         $newPassword = isset($request['password']) ? (string) $request['password'] : '';
-        if ($newPassword !== '') {
-            if (!$this->isStrongPassword($newPassword)) {
-                return $this->fail('password must be at least 12 chars and include uppercase, lowercase, number, special char, and no spaces', 422);
-            }
-
-            $this->authService->updatePassword($id, $newPassword);
+        $validationError = $this->requestValidator->validatePasswordAndPresence($fields, $newPassword);
+        if ($validationError) {
+            return $this->fail($validationError['message'], $validationError['code']);
         }
 
-        if (empty($fields) && $newPassword === '') {
-            return $this->fail('payload is required', 422);
+        return $this->persistUsuarioUpdate($id, $fields, $newPassword);
+    }
+
+    private function persistUsuarioUpdate($id, $fields, $newPassword)
+    {
+        if ($newPassword !== '') {
+            $this->authService->updatePassword($id, $newPassword);
         }
 
         if (!empty($fields)) {
@@ -284,25 +273,21 @@ class UsuarioController extends CrudController
 
     private function setActivoConGuardas($request, $activo, $successMessage)
     {
-        $usuario = $this->requireAuth();
-        if (!$usuario) {
-            return $this->fail('unauthorized', 401);
+        $usuario = $this->requireWriteAuth();
+        if ($this->isFailResponse($usuario)) {
+            return $usuario;
         }
 
-        if (!$this->hasAnyRole($usuario, $this->writeRoles)) {
-            return $this->fail('insufficient permissions', 403);
+        $target = $this->resolveTargetUsuario($usuario, $request);
+        if ($this->isFailResponse($target)) {
+            return $target;
         }
 
-        $id = isset($request['id']) ? (int) $request['id'] : 0;
-        if ($id <= 0) {
-            return $this->fail('id is required', 422);
-        }
+        return $this->persistActivoChange((int) $target['id'], $activo, $successMessage);
+    }
 
-        $target = $this->repo->findById($id);
-        if (!$target || empty($this->ocultarSuperadminsSiNoAplica($usuario, array($target)))) {
-            return $this->fail('usuario not found', 404);
-        }
-
+    private function persistActivoChange($id, $activo, $successMessage)
+    {
         $ok = $this->repo->setActivo($id, $activo);
         if (!$ok) {
             return $this->fail('usuario could not be updated', 409);
@@ -314,21 +299,5 @@ class UsuarioController extends CrudController
         return $this->ok(array(
             'item' => $this->camelize($enriched[0]),
         ), $successMessage);
-    }
-
-    private function isStrongPassword($password)
-    {
-        if (!is_string($password) || strlen($password) < 12) {
-            return false;
-        }
-
-        if (preg_match('/\s/', $password)) {
-            return false;
-        }
-
-        return preg_match('/[A-Z]/', $password)
-            && preg_match('/[a-z]/', $password)
-            && preg_match('/\d/', $password)
-            && preg_match('/[^A-Za-z0-9]/', $password);
     }
 }

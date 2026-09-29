@@ -6,9 +6,10 @@ class MailService
 {
     public function send($to, $subject, $htmlBody, $textBody = '')
     {
-        $fromEmail = env_value('MAIL_FROM_ADDRESS', 'no-responder@faro.loc');
-        $fromName = env_value('MAIL_FROM_NAME', env_value('APP_NAME', 'Comunidad FARO'));
-        $boundary = md5((string) microtime());
+        $fromEmail = envValue('MAIL_FROM_ADDRESS', 'no-responder@faro.loc');
+        $fromName = envValue('MAIL_FROM_NAME', envValue('APP_NAME', 'Comunidad FARO'));
+        // Solo es un delimitador MIME, no un valor de seguridad: evitar md5 para no disparar el aviso de hash debil.
+        $boundary = bin2hex(random_bytes(16));
 
         $headers = array();
         $headers[] = 'From: ' . $this->encodeHeader($fromName) . ' <' . $fromEmail . '>';

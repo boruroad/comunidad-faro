@@ -2,6 +2,8 @@
 
 class BaseRepository
 {
+    private const SELECT_ALL_PREFIX = 'SELECT * FROM ';
+
     protected $db;
     protected $table = '';
     protected $fillable = array();
@@ -13,7 +15,7 @@ class BaseRepository
 
     public function findById($id)
     {
-        $sql = 'SELECT * FROM ' . $this->table . ' WHERE id = ? LIMIT 1';
+        $sql = self::SELECT_ALL_PREFIX . $this->table . ' WHERE id = ? LIMIT 1';
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('i', $id);
         $stmt->execute();
@@ -28,7 +30,7 @@ class BaseRepository
         $limit = max(1, (int) $limit);
         $offset = max(0, (int) $offset);
 
-        $sql = 'SELECT * FROM ' . $this->table . ' LIMIT ? OFFSET ?';
+        $sql = self::SELECT_ALL_PREFIX . $this->table . ' LIMIT ? OFFSET ?';
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('ii', $limit, $offset);
         $stmt->execute();
@@ -57,7 +59,7 @@ class BaseRepository
             return $this->findAll($limit, $offset);
         }
 
-        $sql = 'SELECT * FROM ' . $this->table . ' WHERE ' . implode(' AND ', $where) . ' LIMIT ? OFFSET ?';
+        $sql = self::SELECT_ALL_PREFIX . $this->table . ' WHERE ' . implode(' AND ', $where) . ' LIMIT ? OFFSET ?';
         $types .= 'ii';
         $values[] = $limit;
         $values[] = $offset;

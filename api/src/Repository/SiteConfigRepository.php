@@ -4,19 +4,23 @@ class SiteConfigRepository extends BaseRepository
 {
     protected $table = 'site_configs';
 
+    private const META_SELECT_SQL = 'SELECT sc.*, '
+        . 'uc.email AS created_by_email, '
+        . 'ua.email AS activated_by_email, '
+        . 'ud.email AS deactivated_by_email '
+        . 'FROM site_configs sc '
+        . 'LEFT JOIN usuarios uc ON uc.id = sc.created_by_usuario_id '
+        . 'LEFT JOIN usuarios ua ON ua.id = sc.activated_by_usuario_id '
+        . 'LEFT JOIN usuarios ud ON ud.id = sc.deactivated_by_usuario_id ';
+
+    private const UPDATE_SITE_CONFIGS_PREFIX = 'UPDATE site_configs ';
+
     public function findAllWithMeta($limit = 100, $offset = 0)
     {
         $limit = max(1, (int) $limit);
         $offset = max(0, (int) $offset);
 
-        $sql = 'SELECT sc.*, '
-            . 'uc.email AS created_by_email, '
-            . 'ua.email AS activated_by_email, '
-            . 'ud.email AS deactivated_by_email '
-            . 'FROM site_configs sc '
-            . 'LEFT JOIN usuarios uc ON uc.id = sc.created_by_usuario_id '
-            . 'LEFT JOIN usuarios ua ON ua.id = sc.activated_by_usuario_id '
-            . 'LEFT JOIN usuarios ud ON ud.id = sc.deactivated_by_usuario_id '
+        $sql = self::META_SELECT_SQL
             . 'ORDER BY sc.created_at DESC, sc.id DESC '
             . 'LIMIT ? OFFSET ?';
 
@@ -33,15 +37,7 @@ class SiteConfigRepository extends BaseRepository
     {
         $id = (int) $id;
 
-        $sql = 'SELECT sc.*, '
-            . 'uc.email AS created_by_email, '
-            . 'ua.email AS activated_by_email, '
-            . 'ud.email AS deactivated_by_email '
-            . 'FROM site_configs sc '
-            . 'LEFT JOIN usuarios uc ON uc.id = sc.created_by_usuario_id '
-            . 'LEFT JOIN usuarios ua ON ua.id = sc.activated_by_usuario_id '
-            . 'LEFT JOIN usuarios ud ON ud.id = sc.deactivated_by_usuario_id '
-            . 'WHERE sc.id = ? LIMIT 1';
+        $sql = self::META_SELECT_SQL . 'WHERE sc.id = ? LIMIT 1';
 
         $stmt = $this->db->prepare($sql);
         $stmt->bind_param('i', $id);
@@ -54,14 +50,7 @@ class SiteConfigRepository extends BaseRepository
 
     public function findActive()
     {
-        $sql = 'SELECT sc.*, '
-            . 'uc.email AS created_by_email, '
-            . 'ua.email AS activated_by_email, '
-            . 'ud.email AS deactivated_by_email '
-            . 'FROM site_configs sc '
-            . 'LEFT JOIN usuarios uc ON uc.id = sc.created_by_usuario_id '
-            . 'LEFT JOIN usuarios ua ON ua.id = sc.activated_by_usuario_id '
-            . 'LEFT JOIN usuarios ud ON ud.id = sc.deactivated_by_usuario_id '
+        $sql = self::META_SELECT_SQL
             . 'WHERE sc.activo = 1 '
             . 'ORDER BY sc.activated_at DESC, sc.id DESC '
             . 'LIMIT 1';
@@ -89,7 +78,7 @@ class SiteConfigRepository extends BaseRepository
             $stmt->close();
 
             if (!$ok) {
-                throw new RuntimeException('could not create config version');
+                throw new SiteConfigException('could not create config version');
             }
 
             $id = (int) $this->db->insert_id;
@@ -167,7 +156,7 @@ class SiteConfigRepository extends BaseRepository
             return false;
         }
 
-        $sql = 'UPDATE site_configs '
+        $sql = self::UPDATE_SITE_CONFIGS_PREFIX
             . 'SET activo = 0, deactivated_at = NOW(), deactivated_by_usuario_id = ?, updated_at = NOW() '
             . 'WHERE id = ?';
 
@@ -181,7 +170,7 @@ class SiteConfigRepository extends BaseRepository
 
     private function activateVersionInternal($id, $actorUserId)
     {
-        $deactivateSql = 'UPDATE site_configs '
+        $deactivateSql = self::UPDATE_SITE_CONFIGS_PREFIX
             . 'SET activo = 0, deactivated_at = NOW(), deactivated_by_usuario_id = ?, updated_at = NOW() '
             . 'WHERE activo = 1 AND id <> ?';
 
@@ -191,10 +180,10 @@ class SiteConfigRepository extends BaseRepository
         $deactivateStmt->close();
 
         if (!$deactivateOk) {
-            throw new RuntimeException('could not deactivate previous config');
+            throw new SiteConfigException('could not deactivate previous config');
         }
 
-        $activateSql = 'UPDATE site_configs '
+        $activateSql = self::UPDATE_SITE_CONFIGS_PREFIX
             . 'SET activo = 1, activated_at = NOW(), activated_by_usuario_id = ?, '
             . 'deactivated_at = NULL, deactivated_by_usuario_id = NULL, updated_at = NOW() '
             . 'WHERE id = ?';
@@ -206,7 +195,7 @@ class SiteConfigRepository extends BaseRepository
         $activateStmt->close();
 
         if (!$activateOk || $affected <= 0) {
-            throw new RuntimeException('config version not found');
+            throw new SiteConfigException('config version not found');
         }
     }
 }

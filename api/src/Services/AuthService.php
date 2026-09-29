@@ -65,11 +65,7 @@ class AuthService
     {
         $email = strtolower(trim(isset($payload['email']) ? (string) $payload['email'] : ''));
 
-        if ($email === '') {
-            return null;
-        }
-
-        if ($this->usuarios->findByEmail($email)) {
+        if ($email === '' || $this->usuarios->findByEmail($email)) {
             return null;
         }
 
@@ -97,34 +93,12 @@ class AuthService
     public function createUsuario($payload)
     {
         $email = strtolower(trim(isset($payload['email']) ? (string) $payload['email'] : ''));
-        if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            return null;
-        }
-
-        if ($this->usuarios->findByEmail($email)) {
-            return null;
-        }
-
         $comunidadId = isset($payload['comunidad_id']) ? (int) $payload['comunidad_id'] : 0;
-        if ($comunidadId <= 0) {
-            return null;
-        }
-
         $rolId = isset($payload['rol_id']) ? (int) $payload['rol_id'] : 0;
-        if ($rolId <= 0 || !$this->roles->findById($rolId)) {
-            return null;
-        }
-
-        $personaId = null;
-        if (!empty($payload['persona_id'])) {
-            $personaId = (int) $payload['persona_id'];
-            if (!$this->personas->findById($personaId)) {
-                return null;
-            }
-        }
-
         $password = isset($payload['password']) ? (string) $payload['password'] : '';
-        if ($password === '') {
+        $personaId = $this->resolvePersonaIdForCreate($payload);
+
+        if (!$this->canCreateUsuario($email, $comunidadId, $rolId, $password, $personaId)) {
             return null;
         }
 
@@ -137,6 +111,26 @@ class AuthService
         ));
 
         return $usuarioId > 0 ? $this->usuarios->findModelById($usuarioId) : null;
+    }
+
+    // null = sin persona asociada, false = persona_id invalido/no encontrado.
+    private function resolvePersonaIdForCreate($payload)
+    {
+        if (empty($payload['persona_id'])) {
+            return null;
+        }
+
+        $personaId = (int) $payload['persona_id'];
+
+        return $this->personas->findById($personaId) ? $personaId : false;
+    }
+
+    private function canCreateUsuario($email, $comunidadId, $rolId, $password, $personaId)
+    {
+        $emailValido = $email !== '' && filter_var($email, FILTER_VALIDATE_EMAIL) && !$this->usuarios->findByEmail($email);
+        $rolValido = $rolId > 0 && $this->roles->findById($rolId);
+
+        return $emailValido && $comunidadId > 0 && $rolValido && $personaId !== false && $password !== '';
     }
 
     public function requestPasswordReset($email)
@@ -159,13 +153,13 @@ class AuthService
 
     private function sendPasswordResetEmail($email, $token)
     {
-        $frontendUrl = rtrim(env_value('FRONTEND_URL', 'http://localhost:4200'), '/');
+        $frontendUrl = rtrim(envValue('FRONTEND_URL', 'http://localhost:4200'), '/');
         $resetUrl = $frontendUrl . '/restablecer-password?token=' . urlencode($token);
 
         // Respaldo para pruebas locales sin SMTP configurado.
         error_log('[AuthService] enlace de restablecimiento para ' . $email . ': ' . $resetUrl);
 
-        $appName = env_value('APP_NAME', 'Comunidad FARO');
+        $appName = envValue('APP_NAME', 'Comunidad FARO');
         $subject = $appName . ': restablece tu contrasena';
         $safeAppName = htmlspecialchars($appName, ENT_QUOTES, 'UTF-8');
         $safeResetUrl = htmlspecialchars($resetUrl, ENT_QUOTES, 'UTF-8');
@@ -229,7 +223,7 @@ class AuthService
         }
 
         $persona = $this->personas->findById((int) $usuario->persona_id);
-        return $persona ? camelize_keys($persona) : null;
+        return $persona ? camelizeKeys($persona) : null;
     }
 
     public function userHasAnyRole($usuarioId, $allowedRoles)
