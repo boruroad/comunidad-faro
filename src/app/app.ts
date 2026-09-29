@@ -1,7 +1,7 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CalendarEvent, FARO_CONFIG, FaroConfig } from './faro-config';
+import { CalendarEvent, FARO_CONFIG, FaroConfig, MusicRelease } from './faro-config';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +18,7 @@ export class App implements AfterViewInit, OnDestroy {
   readonly firstVisit = this.cfg.firstVisit;
   readonly newsletterTag = this.cfg.newsletter.tag;
   readonly calendar = this.cfg.calendar;
+  readonly moments = this.cfg.moments;
 
   readonly onlineUrl = this.meeting.onlineUrl.trim();
   readonly nearestUrl = this.meeting.nearestUrl || this.meeting.facebookUrl || this.cfg.socials['facebook'];
@@ -25,6 +26,9 @@ export class App implements AfterViewInit, OnDestroy {
   readonly socialEntries = Object.entries(this.cfg.socials || {}).filter(([, url]) => Boolean(url));
   readonly newsletterAction = this.computeNewsletterAction();
   readonly isMusicEnabled = this.cfg.music.enabled && this.releases.length > 0;
+  readonly artistSpotifyUrl = this.cfg.music.artistSpotifyUrl;
+  readonly releaseSpotifyUrls: (SafeResourceUrl | null)[];
+  selectedReleaseIndex = 0;
   readonly isCalendarEnabled = this.calendar.enabled && this.calendar.events.length > 0;
   readonly isLiveActive = this.computeLiveActive();
   readonly liveStreamUrl = (this.live.url || this.onlineUrl).trim();
@@ -50,6 +54,14 @@ export class App implements AfterViewInit, OnDestroy {
   };
 
   constructor() {
+    this.releaseSpotifyUrls = this.releases.map(r =>
+      r.spotifyTrackId
+        ? this.sanitizer.bypassSecurityTrustResourceUrl(
+            `https://open.spotify.com/embed/track/${r.spotifyTrackId}?utm_source=generator`
+          )
+        : null
+    );
+
     this.safeEmbedUrl = this.live.embedUrl
       ? this.sanitizer.bypassSecurityTrustResourceUrl(this.live.embedUrl)
       : null;
@@ -101,6 +113,28 @@ export class App implements AfterViewInit, OnDestroy {
 
   isReleaseExpanded(index: number): boolean {
     return this.expandedReleaseIndex === index;
+  }
+
+  selectRelease(index: number): void {
+    this.selectedReleaseIndex = index;
+  }
+
+  nextRelease(): void {
+    if (this.releases.length === 0) return;
+    this.selectedReleaseIndex = (this.selectedReleaseIndex + 1) % this.releases.length;
+  }
+
+  prevRelease(): void {
+    if (this.releases.length === 0) return;
+    this.selectedReleaseIndex = (this.selectedReleaseIndex - 1 + this.releases.length) % this.releases.length;
+  }
+
+  get selectedRelease(): MusicRelease {
+    return this.releases[this.selectedReleaseIndex] ?? this.releases[0];
+  }
+
+  get selectedSpotifyUrl(): SafeResourceUrl | null {
+    return this.releaseSpotifyUrls[this.selectedReleaseIndex] ?? null;
   }
 
   onNewsletterSubmit(event: Event): void {

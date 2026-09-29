@@ -1,0 +1,490 @@
+/* MOMENTOS DE CASA — Composición Editorial Cinematográfica */
+.moments-section {
+  position: relative;
+}
+
+.moments-essay {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4.5rem, 8vw, 8rem);
+}
+
+.moments-chapter {
+  display: grid;
+  gap: clamp(1.8rem, 4vw, 3.8rem);
+  align-items: start;
+}
+
+/* Capítulo I: Duo Asimétrico (Vertical dominante + Columna lateral) */
+.moments-chapter-duo {
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+}
+
+.moment-duo-side {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 5vw, 4rem);
+}
+
+.editorial-interlude {
+  margin: 0;
+  padding: 0 0 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.editorial-interlude em {
+  display: block;
+  font: 400 clamp(2rem, 3.8vw, 3.4rem)/1.08 "Source Serif 4", Georgia, serif;
+  color: var(--ink);
+  font-style: italic;
+  margin-bottom: 0.8rem;
+}
+
+.editorial-interlude p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--stone-deep);
+  margin: 0;
+  max-width: 38ch;
+}
+
+/* Capítulo II: Díptico Split (Escalonado tipo revista) */
+.moments-chapter-split {
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4.5rem);
+}
+
+.moments-chapter-split .offset-top {
+  margin-top: clamp(2.5rem, 6vw, 6rem);
+}
+
+/* Cita Central de Casa */
+.story-quote-center {
+  text-align: center;
+  margin: clamp(4rem, 7vw, 6.5rem) auto;
+  max-width: 22ch;
+  line-height: 1.12;
+}
+
+/* Capítulo III: Tríptico Generacional */
+.moments-chapter-trio {
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.moments-chapter-trio .offset-top-small {
+  margin-top: clamp(1.5rem, 4vw, 3.5rem);
+}
+
+/* Capítulo IV: Clímax Cinematográfico */
+.moments-chapter-cinema {
+  grid-template-columns: 1fr;
+}
+
+.moment-card-cinema .moment-media {
+  aspect-ratio: 21 / 9;
+  max-height: 640px;
+}
+
+.cinema-aspect {
+  position: relative;
+}
+
+.cinema-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: clamp(2rem, 5vw, 4rem);
+  background: linear-gradient(180deg, transparent 0%, rgba(17, 17, 15, 0.82) 55%, rgba(17, 17, 15, 0.98) 100%);
+  color: #fff;
+  z-index: 3;
+}
+
+.cinema-overlay .moment-tag {
+  color: #e0d9cf;
+}
+
+.cinema-overlay .moment-name {
+  color: #fff;
+  font-size: clamp(1.5rem, 3vw, 2.4rem);
+}
+
+.cinema-overlay p {
+  color: rgba(255, 255, 255, 0.82);
+  margin: 0.5rem 0 0;
+  max-width: 50ch;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* Card y Media base */
+.moment-card {
+  margin: 0;
+  position: relative;
+}
+
+.moment-media {
+  position: relative;
+  overflow: hidden;
+  background: #252522;
+  border-radius: 2px;
+}
+
+.moment-card-tall .moment-media {
+  aspect-ratio: 3 / 4;
+}
+
+.moment-card-wide .moment-media {
+  aspect-ratio: 16 / 10;
+}
+
+.moment-card-medium .moment-media {
+  aspect-ratio: 4 / 5;
+}
+
+.moments-chapter-trio .moment-media {
+  aspect-ratio: 3 / 4;
+}
+
+.moment-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.moment-card:hover .moment-img {
+  transform: scale(1.028);
+}
+
+.moment-index {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: rgba(21, 21, 19, 0.68);
+  color: #fff;
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  font-weight: 700;
+  padding: 0.28rem 0.55rem;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 2px;
+  z-index: 2;
+}
+
+.moment-caption {
+  margin-top: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.moment-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--stone-deep);
+}
+
+.moment-name {
+  font: 700 clamp(1.15rem, 1.8vw, 1.45rem)/1.2 Archivo, sans-serif;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.moment-caption p {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: #55524c;
+  margin: 0;
+  max-width: 44ch;
+}
+
+/* Responsivo */
+@media (max-width: 980px) {
+  .moments-chapter-duo,
+  .moments-chapter-split,
+  .moments-chapter-trio {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .moments-chapter-split .offset-top,
+  .moments-chapter-trio .offset-top-small {
+    margin-top: 0;
+  }
+  .moment-card-cinema .moment-media {
+    aspect-ratio: 16 / 10;
+  }
+  .cinema-overlay {
+    position: relative;
+    background: var(--ink);
+    padding: 1.5rem;
+  }
+}
+
+
+/* ==========================================================================
+   Música de Casa - Reproductor Editorial y Navegación
+   ========================================================================== */
+.music-artist-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #dcd7ce;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+  padding-bottom: 0.2rem;
+  transition: all 0.2s ease;
+  width: fit-content;
+}
+
+.music-artist-link:hover {
+  color: #fff;
+  border-bottom-color: #fff;
+}
+
+.music-player-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.music-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.music-pills {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.25rem 0;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.music-pills::-webkit-scrollbar {
+  display: none;
+}
+
+.music-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: #a39f97;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 9999px;
+  font-family: Archivo, sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.music-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+.music-pill.is-active {
+  background: #f8f6f1;
+  color: #151513;
+  border-color: #f8f6f1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.music-pill-num {
+  font-size: 0.65rem;
+  opacity: 0.7;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.music-pill.is-active .music-pill-num {
+  color: #726e67;
+}
+
+.music-nav-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.music-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #dcd7ce;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.music-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.music-nav-counter {
+  font-family: Archivo, sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #8c8880;
+  min-width: 3.5rem;
+  text-align: center;
+}
+
+/* Tarjeta y reproductor */
+.music-player-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background: rgba(26, 26, 24, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 3.5vw, 2.75rem);
+  backdrop-filter: blur(12px);
+}
+
+.music-player-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.music-active-title {
+  font: 700 clamp(2.2rem, 4.5vw, 3.4rem)/1 Archivo, sans-serif;
+  color: #fff;
+  letter-spacing: -0.04em;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.music-active-artist {
+  font: 400 clamp(1.15rem, 2vw, 1.45rem) 'Source Serif 4', serif;
+  color: #a39f97;
+  margin: 0;
+}
+
+.music-spotify-frame {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+}
+
+.music-spotify-frame iframe {
+  display: block;
+}
+
+/* Acordeón de plataformas */
+.music-extra-platforms {
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.music-platforms-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1rem 0;
+  background: transparent;
+  border: none;
+  color: #8c8880;
+  font-family: Archivo, sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.music-platforms-btn:hover {
+  color: #fff;
+}
+
+.music-toggle-icon {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.music-platforms-drawer {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.music-platform-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 0.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  color: #cbc7bf;
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.music-platform-link:hover {
+  color: #fff;
+  padding-left: 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.music-platform-link em {
+  font-style: normal;
+  color: #726e67;
+}
+
+.music-platform-link:hover em {
+  color: #fff;
+}
+
+@media (max-width: 680px) {
+  .music-nav-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .music-nav-controls {
+    justify-content: space-between;
+    width: 100%;
+    margin-left: 0;
+  }
+}

@@ -94,29 +94,136 @@
 
   <section class="voice-strip" aria-label="Palabras que atraviesan la comunicacion de FARO">
     <div class="voice-track">
-      <span>CASA.</span><em>FAMILIA.</em><span>REY.</span><em>REINO.</em><span>FARO.</span>
+      <span>CASA.</span><em>FAMILIA.</em><span>REINO.</span><em>FARO.</em>
     </div>
   </section>
 
-  <section class="life-section" id="casa" aria-labelledby="casa-title">
+  <section class="life-section moments-section" id="casa" aria-labelledby="casa-title">
     <div class="section-heading reveal">
-      <p class="eyebrow">DOMINGO EN CASA · LA SEMANA EN MOVIMIENTO</p>
-      <h2 id="casa-title">HAY UN LUGAR<br><span>EN LA MESA.</span></h2>
+      <p class="eyebrow">{{ moments.eyebrow }}</p>
+      <h2 id="casa-title">{{ moments.title }}<br><span>{{ moments.subtitle }}</span></h2>
     </div>
-    <div class="photo-story">
-      <figure class="story-shot shot-wide reveal">
-        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.worship)" [class.has-image]="!!cfg.photos.worship"></div>
-        <figcaption>Celebrar al Rey · crecer en familia</figcaption>
-      </figure>
-      <figure class="story-shot shot-tall reveal">
-        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.people)" [class.has-image]="!!cfg.photos.people"></div>
-        <figcaption>Una familia · muchas tribus</figcaption>
-      </figure>
-      <blockquote class="story-quote reveal">La Casa no termina cuando termina la reunion.</blockquote>
-      <figure class="story-shot shot-square reveal">
-        <div class="photo-slot" [style.background-image]="photoStyle(cfg.photos.prayer)" [class.has-image]="!!cfg.photos.prayer"></div>
-        <figcaption>Oracion · conversacion · comunidad</figcaption>
-      </figure>
+
+    <div class="moments-essay">
+      <!-- Acto I: Vulnerabilidad y Amor Fraterno -->
+      <div class="moments-chapter moments-chapter-duo">
+        <figure class="moment-card moment-card-tall reveal">
+          <div class="moment-media">
+            <img [src]="moments.items[0].image" [alt]="moments.items[0].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[0].id }}</span>
+          </div>
+          <figcaption class="moment-caption">
+            <span class="moment-tag">{{ moments.items[0].tag }}</span>
+            <strong class="moment-name">{{ moments.items[0].title }}</strong>
+            <p>{{ moments.items[0].caption }}</p>
+          </figcaption>
+        </figure>
+
+        <div class="moment-duo-side">
+          <blockquote class="editorial-interlude reveal">
+            <em>«Nadie camina solo.»</em>
+            <p>La Casa existe para sostenernos cuando el paso pesa, y para celebrar juntos cuando abunda la bendición.</p>
+          </blockquote>
+
+          <figure class="moment-card moment-card-wide reveal">
+            <div class="moment-media">
+              <img [src]="moments.items[1].image" [alt]="moments.items[1].alt" loading="lazy" class="moment-img">
+              <span class="moment-index">{{ moments.items[1].id }}</span>
+            </div>
+            <figcaption class="moment-caption">
+              <span class="moment-tag">{{ moments.items[1].tag }}</span>
+              <strong class="moment-name">{{ moments.items[1].title }}</strong>
+              <p>{{ moments.items[1].caption }}</p>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- Acto II: La Mesa y la Conversación -->
+      <div class="moments-chapter moments-chapter-split">
+        <figure class="moment-card moment-card-medium reveal">
+          <div class="moment-media">
+            <img [src]="moments.items[2].image" [alt]="moments.items[2].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[2].id }}</span>
+          </div>
+          <figcaption class="moment-caption">
+            <span class="moment-tag">{{ moments.items[2].tag }}</span>
+            <strong class="moment-name">{{ moments.items[2].title }}</strong>
+            <p>{{ moments.items[2].caption }}</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment-card moment-card-medium offset-top reveal">
+          <div class="moment-media">
+            <img [src]="moments.items[3].image" [alt]="moments.items[3].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[3].id }}</span>
+          </div>
+          <figcaption class="moment-caption">
+            <span class="moment-tag">{{ moments.items[3].tag }}</span>
+            <strong class="moment-name">{{ moments.items[3].title }}</strong>
+            <p>{{ moments.items[3].caption }}</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Cita central de Casa -->
+      <blockquote class="story-quote story-quote-center reveal">
+        La Casa no termina cuando termina la reunión.
+      </blockquote>
+
+      <!-- Acto III: Generaciones y Vida Real -->
+      <div class="moments-chapter moments-chapter-trio">
+        <figure class="moment-card reveal">
+          <div class="moment-media">
+            <img [src]="moments.items[4].image" [alt]="moments.items[4].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[4].id }}</span>
+          </div>
+          <figcaption class="moment-caption">
+            <span class="moment-tag">{{ moments.items[4].tag }}</span>
+            <strong class="moment-name">{{ moments.items[4].title }}</strong>
+            <p>{{ moments.items[4].caption }}</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment-card offset-top-small reveal">
+          <div class="moment-media">
+            <img [src]="moments.items[5].image" [alt]="moments.items[5].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[5].id }}</span>
+          </div>
+          <figcaption class="moment-caption">
+            <span class="moment-tag">{{ moments.items[5].tag }}</span>
+            <strong class="moment-name">{{ moments.items[5].title }}</strong>
+            <p>{{ moments.items[5].caption }}</p>
+          </figcaption>
+        </figure>
+
+        <figure class="moment-card reveal">
+          <div class="moment-media">
+            <img [src]="moments.items[6].image" [alt]="moments.items[6].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[6].id }}</span>
+          </div>
+          <figcaption class="moment-caption">
+            <span class="moment-tag">{{ moments.items[6].tag }}</span>
+            <strong class="moment-name">{{ moments.items[6].title }}</strong>
+            <p>{{ moments.items[6].caption }}</p>
+          </figcaption>
+        </figure>
+      </div>
+
+      <!-- Acto IV: Clímax de Adoración Cinematográfica -->
+      <div class="moments-chapter moments-chapter-cinema reveal">
+        <figure class="moment-card moment-card-cinema">
+          <div class="moment-media cinema-aspect">
+            <img [src]="moments.items[7].image" [alt]="moments.items[7].alt" loading="lazy" class="moment-img">
+            <span class="moment-index">{{ moments.items[7].id }}</span>
+            <div class="cinema-overlay">
+              <span class="moment-tag">{{ moments.items[7].tag }}</span>
+              <strong class="moment-name">{{ moments.items[7].title }}</strong>
+              <p>{{ moments.items[7].caption }}</p>
+            </div>
+          </div>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -148,48 +255,107 @@
   @if (isMusicEnabled) {
     <section class="music-section section-dark" id="musica" aria-labelledby="music-title">
       <div class="music-heading reveal">
-        <p class="eyebrow">MUSICA DE CASA</p>
+        <p class="eyebrow">MUSICA DE CASA · A. MENDOZA</p>
         <h2 id="music-title">TAMBIEN<br><span>SUENA AFUERA.</span></h2>
-        <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas.</p>
+        <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas favoritas.</p>
+        @if (artistSpotifyUrl) {
+          <a class="music-artist-link" [href]="artistSpotifyUrl" target="_blank" rel="noopener">
+            <span>Escuchar en Spotify</span> <em aria-hidden="true">↗</em>
+          </a>
+        }
       </div>
-      <div class="music-releases" id="music-releases">
-        @for (release of releases; track $index) {
-          <article class="music-release reveal">
-            <div
-              class="music-cover-art"
-              [style.background-image]="photoStyle(release.coverImage)"
-              [class.has-cover]="hasCoverImage(release.coverImage)"
-              [attr.role]="hasCoverImage(release.coverImage) ? 'img' : null"
-              [attr.aria-label]="hasCoverImage(release.coverImage) ? coverAriaLabel(release.title, release.artist) : null"
+
+      <div class="music-player-wrap reveal">
+        <!-- Navegación de canciones: Selector moderno tipo pills + flechas -->
+        <div class="music-nav-bar">
+          <div class="music-pills" role="tablist" aria-label="Canciones de FARO Music">
+            @for (track of releases; track track.title; let i = $index) {
+              <button
+                type="button"
+                role="tab"
+                class="music-pill"
+                [class.is-active]="selectedReleaseIndex === i"
+                [attr.aria-selected]="selectedReleaseIndex === i"
+                (click)="selectRelease(i)"
+              >
+                <span class="music-pill-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+                <span class="music-pill-title">{{ track.title }}</span>
+              </button>
+            }
+          </div>
+
+          <div class="music-nav-controls">
+            <button
+              type="button"
+              class="music-nav-btn"
+              (click)="prevRelease()"
+              aria-label="Canción anterior"
+              title="Anterior"
             >
-              @if (!hasCoverImage(release.coverImage)) {
-                <span class="music-cover-label">FARO · MUSIC</span>
-                <strong>{{ release.title }}</strong>
-                <span class="music-cover-artist">{{ release.artist }}</span>
-                <span class="music-vinyl" aria-hidden="true"></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <span class="music-nav-counter">{{ selectedReleaseIndex + 1 }} / {{ releases.length }}</span>
+            <button
+              type="button"
+              class="music-nav-btn"
+              (click)="nextRelease()"
+              aria-label="Siguiente canción"
+              title="Siguiente"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Vista del reproductor activo -->
+        <div class="music-player-card">
+          <div class="music-player-meta">
+            <h3 class="music-active-title">{{ selectedRelease.title }}</h3>
+            <p class="music-active-artist">{{ selectedRelease.artist }}</p>
+          </div>
+
+          <!-- Reproductor Spotify Embed (reproduce el fragmento de la canción) -->
+          @if (selectedSpotifyUrl) {
+            <div class="music-spotify-frame">
+              <iframe
+                data-testid="embed-iframe"
+                style="border-radius:12px; border:0;"
+                [src]="selectedSpotifyUrl"
+                width="100%"
+                height="152"
+                frameBorder="0"
+                allowfullscreen=""
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                title="Reproductor Spotify: {{ selectedRelease.title }}"
+              ></iframe>
+            </div>
+          }
+
+          <!-- Otras plataformas de streaming acordeón -->
+          <div class="music-extra-platforms">
+            <button
+              class="music-platforms-btn"
+              type="button"
+              [attr.aria-expanded]="isReleaseExpanded(selectedReleaseIndex)"
+              (click)="toggleRelease(selectedReleaseIndex)"
+            >
+              <span>OTRAS PLATAFORMAS DE STREAMING</span>
+              <span class="music-toggle-icon" aria-hidden="true">{{ isReleaseExpanded(selectedReleaseIndex) ? '−' : '＋' }}</span>
+            </button>
+
+            <div class="music-platforms-drawer" [hidden]="!isReleaseExpanded(selectedReleaseIndex)">
+              @for (platform of selectedRelease.platforms; track platform.name + platform.url) {
+                @if (platform.url) {
+                  <a class="music-platform-link" [href]="platform.url" target="_blank" rel="noopener">
+                    <span>{{ platform.name }}</span>
+                    <em aria-hidden="true">↗</em>
+                  </a>
+                }
               }
             </div>
-
-            <div class="music-release-info">
-              <p class="music-available"><span aria-hidden="true">●</span>{{ release.eyebrow || 'YA DISPONIBLE' }}</p>
-              <h3>{{ release.title }}</h3>
-              <p class="music-artist">{{ release.artist }}</p>
-              <button class="music-listen-button" type="button" [attr.aria-expanded]="isReleaseExpanded($index)" [attr.aria-controls]="'music-platforms-' + $index" (click)="toggleRelease($index)">
-                <span>Escuchar cancion</span><span aria-hidden="true">{{ isReleaseExpanded($index) ? '−' : '＋' }}</span>
-              </button>
-
-              <div class="music-platforms" [id]="'music-platforms-' + $index" [hidden]="!isReleaseExpanded($index)">
-                @for (platform of release.platforms; track platform.name + platform.url) {
-                  @if (platform.url) {
-                    <a class="music-platform" [href]="platform.url" target="_blank" rel="noopener">
-                      <span>{{ ($index + 1).toString().padStart(2, '0') }}</span><strong>{{ platform.name }}</strong><em aria-hidden="true">↗</em>
-                    </a>
-                  }
-                }
-              </div>
-            </div>
-          </article>
-        }
+          </div>
+        </div>
       </div>
     </section>
   }
