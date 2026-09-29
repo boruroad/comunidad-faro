@@ -19,15 +19,15 @@ import { SiteConfigAdminComponent } from './pages/private/site-config-admin/site
 export const routes: Routes = [
 	{
 		path: '',
-		//component: HomeComponent
-		component: InterestedRegistrationComponent
+		component: HomeComponent
+		//component: InterestedRegistrationComponent
 	},
 	{
 		path: 'home',
 		redirectTo: ''
 	},
 	{
-		path: 'interesado',
+		path: 'ser-parte',
 		component: InterestedRegistrationComponent
 	},
 	{

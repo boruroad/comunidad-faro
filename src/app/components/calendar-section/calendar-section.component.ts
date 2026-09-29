@@ -10,6 +10,7 @@ import { CalendarEvent, FaroConfig } from '../../faro-config';
 export class CalendarSectionComponent {
   @Input() isStaticCalendarEnabled = false;
   @Input({ required: true }) calendar!: FaroConfig['calendar'];
+  @Input() calendarEmbedUrl = '';
 
   formatCalendarDate(
     date: string

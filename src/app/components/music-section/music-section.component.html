@@ -1,48 +1,106 @@
 @if (isMusicEnabled) {
   <section class="music-section section-dark" id="musica" aria-labelledby="music-title">
     <div class="music-heading reveal">
-      <p class="eyebrow">MUSICA DE CASA</p>
+      <p class="eyebrow">MUSICA DE CASA · A. MENDOZA</p>
       <h2 id="music-title">TAMBIEN<br><span>SUENA AFUERA.</span></h2>
-      <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas.</p>
+      <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas favoritas.</p>
+      @if (artistSpotifyUrl) {
+        <a class="music-artist-link" [href]="artistSpotifyUrl" target="_blank" rel="noopener">
+          <span>Escuchar en Spotify</span>
+        </a>
+      }
     </div>
-    <div class="music-releases" id="music-releases">
-      @for (release of releases; track $index) {
-        <article class="music-release reveal">
-          <div
-            class="music-cover-art"
-            [style.background-image]="photoStyle(release.coverImage)"
-            [class.has-cover]="!!release.coverImage"
-            [attr.role]="!!release.coverImage ? 'img' : null"
-            [attr.aria-label]="!!release.coverImage ? coverAriaLabel(release.title, release.artist) : null"
+
+    <div class="music-player-wrap reveal">
+      <!-- Navegación de canciones: Selector moderno tipo pills + flechas -->
+      <div class="music-nav-bar">
+        <div class="music-pills" role="tablist" aria-label="Canciones de FARO Music">
+          @for (track of releases; track track.title; let i = $index) {
+            <button
+              type="button"
+              role="tab"
+              class="music-pill"
+              [class.is-active]="selectedReleaseIndex === i"
+              [attr.aria-selected]="selectedReleaseIndex === i"
+              (click)="selectRelease(i)"
+            >
+              <span class="music-pill-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <span class="music-pill-title">{{ track.title }}</span>
+            </button>
+          }
+        </div>
+
+        <div class="music-nav-controls">
+          <button
+            type="button"
+            class="music-nav-btn"
+            (click)="prevRelease()"
+            aria-label="Canción anterior"
+            title="Anterior"
           >
-            @if (!release.coverImage) {
-              <span class="music-cover-label">FARO · MUSIC</span>
-              <strong>{{ release.title }}</strong>
-              <span class="music-cover-artist">{{ release.artist }}</span>
-              <span class="music-vinyl" aria-hidden="true"></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <span class="music-nav-counter">{{ selectedReleaseIndex + 1 }} / {{ releases.length }}</span>
+          <button
+            type="button"
+            class="music-nav-btn"
+            (click)="nextRelease()"
+            aria-label="Siguiente canción"
+            title="Siguiente"
+          >
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Vista del reproductor activo -->
+      <div class="music-player-card">
+        <div class="music-player-meta">
+          <h3 class="music-active-title">{{ selectedRelease.title }}</h3>
+          <p class="music-active-artist">{{ selectedRelease.artist }}</p>
+        </div>
+
+        <!-- Reproductor Spotify Embed (reproduce el fragmento de la canción) -->
+        @if (selectedSpotifyUrl) {
+          <div class="music-spotify-frame">
+            <iframe
+              data-testid="embed-iframe"
+              style="border-radius:12px; border:0;"
+              [src]="selectedSpotifyUrl"
+              width="100%"
+              height="152"
+              frameBorder="0"
+              allowfullscreen=""
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              title="Reproductor Spotify: {{ selectedRelease.title }}"
+            ></iframe>
+          </div>
+        }
+
+        <!-- Otras plataformas de streaming acordeón -->
+        <div class="music-extra-platforms">
+          <button
+            class="music-platforms-btn"
+            type="button"
+            [attr.aria-expanded]="isReleaseExpanded(selectedReleaseIndex)"
+            (click)="toggleRelease(selectedReleaseIndex)"
+          >
+            <span>OTRAS PLATAFORMAS DE STREAMING</span>
+            <span class="music-toggle-icon" aria-hidden="true">{{ isReleaseExpanded(selectedReleaseIndex) ? '−' : '＋' }}</span>
+          </button>
+
+          <div class="music-platforms-drawer" [hidden]="!isReleaseExpanded(selectedReleaseIndex)">
+            @for (platform of selectedRelease.platforms; track platform.name + platform.url) {
+              @if (platform.url) {
+                <a class="music-platform-link" [href]="platform.url" target="_blank" rel="noopener">
+                  <span>{{ platform.name }}</span>
+                </a>
+              }
             }
           </div>
-
-          <div class="music-release-info">
-            <p class="music-available"><span aria-hidden="true">●</span>{{ release.eyebrow || 'YA DISPONIBLE' }}</p>
-            <h3>{{ release.title }}</h3>
-            <p class="music-artist">{{ release.artist }}</p>
-            <button class="music-listen-button" type="button" [attr.aria-expanded]="isReleaseExpanded($index)" [attr.aria-controls]="'music-platforms-' + $index" (click)="toggleRelease($index)">
-              <span>Escuchar cancion</span><span aria-hidden="true">{{ isReleaseExpanded($index) ? '−' : '＋' }}</span>
-            </button>
-
-            <div class="music-platforms" [id]="'music-platforms-' + $index" [hidden]="!isReleaseExpanded($index)">
-              @for (platform of release.platforms; track platform.name + platform.url) {
-                @if (platform.url) {
-                  <a class="music-platform" [href]="platform.url" target="_blank" rel="noopener">
-                    <span>{{ ($index + 1).toString().padStart(2, '0') }}</span><strong>{{ platform.name }}</strong><em aria-hidden="true">↗</em>
-                  </a>
-                }
-              }
-            </div>
-          </div>
-        </article>
-      }
+        </div>
+      </div>
     </div>
   </section>
 }

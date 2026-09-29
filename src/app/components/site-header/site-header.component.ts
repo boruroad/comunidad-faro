@@ -20,9 +20,13 @@ import { RouterLink } from '@angular/router';
         <a [routerLink]="['/']" fragment="identidad">F.A.R.O.</a>
         <a [routerLink]="['/']" fragment="reunion">Esta semana</a>
         <a [routerLink]="['/']" fragment="musica">Musica</a>
+        @if (isSermonsEnabled) {
+          <a [routerLink]="['/']" fragment="mensajes">Mensajes</a>
+        }
         <a [routerLink]="['/']" fragment="calendario">Calendario</a>
         <a [routerLink]="['/']" fragment="newsletter">Mantente cerca</a>
-        <a [routerLink]="['/interesado']">¿Estas interesado?</a>
+        <a [routerLink]="['/ser-parte']">¿Quieres ser parte?</a>
+        <!--<a [routerLink]="['/login']">Iniciar sesión</a>-->
       </nav>
 
       <a class="header-cta" [href]="facebookUrl" target="_blank" rel="noopener">
@@ -51,9 +55,13 @@ import { RouterLink } from '@angular/router';
         <a [routerLink]="['/']" fragment="identidad" (click)="closeMenu.emit()">F.A.R.O.</a>
         <a [routerLink]="['/']" fragment="reunion" (click)="closeMenu.emit()">Esta semana</a>
         <a [routerLink]="['/']" fragment="musica" (click)="closeMenu.emit()">Musica</a>
+        @if (isSermonsEnabled) {
+          <a [routerLink]="['/']" fragment="mensajes" (click)="closeMenu.emit()">Mensajes</a>
+        }
         <a [routerLink]="['/']" fragment="calendario" (click)="closeMenu.emit()">Calendario</a>
         <a [routerLink]="['/']" fragment="newsletter" (click)="closeMenu.emit()">Mantente cerca</a>
-        <a [routerLink]="['/interesado']" (click)="closeMenu.emit()">¿Estas interesado?</a>
+        <a [routerLink]="['/ser-parte']" (click)="closeMenu.emit()">¿Quieres ser parte?</a>
+        <a [routerLink]="['/login']" (click)="closeMenu.emit()">Iniciar sesión</a>
         <a [href]="facebookUrl" target="_blank" rel="noopener" (click)="closeMenu.emit()">
           Ultima convocatoria ↗
         </a>
@@ -65,6 +73,7 @@ export class SiteHeaderComponent {
   @Input({ required: true }) facebookUrl = '';
   @Input() menuOpen = false;
   @Input() headerScrolled = false;
+  @Input() isSermonsEnabled = false;
 
   @Output() readonly toggleMenu = new EventEmitter<void>();
   @Output() readonly closeMenu = new EventEmitter<void>();
