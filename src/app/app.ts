@@ -379,7 +379,10 @@ export class App implements AfterViewInit, OnDestroy {
     return this.releaseSpotifyUrls[this.selectedReleaseIndex] ?? null;
   }
 
+  // Clips controls
+  openClip(clip: Clip): void {
     this.activeClip = clip;
+    this.isClipModalOpen = true;
   }
 
   closeClip(): void {
