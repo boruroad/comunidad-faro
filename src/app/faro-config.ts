@@ -133,6 +133,18 @@ export interface FaroConfig {
     prayer: string;
     footer: string;
   };
+  api: {
+    enabled: boolean;
+    url: string;
+    refreshMs: number;
+  };
+}
+
+export interface LiveConfig {
+  label: string;
+  titleTop: string;
+  titleAccent: string;
+  buttonLabel: string;
 }
 
 export const FARO_CONFIG: FaroConfig = {
@@ -141,6 +153,20 @@ export const FARO_CONFIG: FaroConfig = {
     canonicalUrl: 'https://comunidadfaro.org/',
     description: 'Comunidad cristiana en constante movimiento. Fe, amor, relevancia y obediencia como forma de vida.'
   },
+
+  /*
+   * FUENTE DINÁMICA DE LA WEB
+   *
+   * Angular consulta este endpoint automáticamente.
+   * Los horarios, próximos eventos y transmisiones LIVE
+   * dejan de depender de cambios manuales en el código.
+   */
+  api: {
+    enabled: true,
+    url: 'https://script.google.com/macros/s/AKfycbwAC0pJrqevZMBgXSis6qQRlw4s3h9ARQtBR2KizHZMmojnwZ3WxJL60KJKzfeXReIw/exec',
+    refreshMs: 30000
+  },
+
   meeting: {
     title: 'Reunion presencial en ubicacion dinamica',
     description: 'Nuestra reunion principal se convoca semana a semana. Confirma el punto exacto antes de salir para que llegues a tiempo.',
@@ -151,6 +177,14 @@ export const FARO_CONFIG: FaroConfig = {
     onlineLabel: 'Entrar a la transmision',
     nearestUrl: 'https://www.facebook.com/comunidad.FARO/'
   },
+
+  /*
+   * FALLBACK MANUAL.
+   *
+   * Normalmente estos campos quedan vacíos porque Google Calendar
+   * controla el LIVE. Si algún día la API falla, todavía puedes usar
+   * enabled / startsAt / endsAt / url manualmente.
+   */
   live: {
     enabled: false,
     label: 'TRANSMISION EN VIVO',
@@ -595,12 +629,14 @@ export const FARO_CONFIG: FaroConfig = {
       }
     ]
   },
+
   newsletter: {
     enabled: true,
     buttondownUsername: '',
     actionUrl: '',
     tag: 'sitio-web'
   },
+
   calendar: {
     enabled: true,
     title: 'Calendario FARO',
@@ -635,20 +671,23 @@ export const FARO_CONFIG: FaroConfig = {
       }
     ]
   },
+
   socials: {
     facebook: 'https://www.facebook.com/comunidad.FARO/',
     instagram: 'https://www.instagram.com/comunidad_faro/',
     youtube: '',
     whatsapp: ''
   },
+
   firstVisit: [
-    ['¿Dónde se reúnen esta semana?', 'La ubicación no se deja fija en este sitio. Revisa la convocatoria vigente en nuestras redes.'],
+    ['¿Dónde se reúnen esta semana?', 'La ubicación puede cambiar. Revisa aquí la próxima fecha o la convocatoria vigente en nuestras redes.'],
     ['¿Y si la reunión es en casas?', 'Escríbenos desde el enlace Preguntar por la más cercana para conocer el punto que te conviene.'],
-    ['¿Hay transmisión en vivo?', 'Cuando exista una transmisión confirmada, será lo primero que aparezca al entrar al sitio.'],
+    ['¿Hay transmisión en vivo?', 'Cuando exista una transmisión activa, será lo primero que aparezca al entrar al sitio.'],
     ['¿Hay actividades para niños?', '[INFORMACIÓN POR CONFIRMAR]'],
     ['¿Necesito registrarme?', '[INFORMACIÓN POR CONFIRMAR]'],
     ['¿Hay código de vestimenta?', '[INFORMACIÓN POR CONFIRMAR]']
   ],
+
   photos: {
     hero: 'assets/images/faro-adoracion-congregacion-manos-dorado.webp',
     worship: '',

@@ -1,0 +1,16 @@
+<app-private-header (logout)="logout()"></app-private-header>
+
+<main id="contenido" class="dashboard-page">
+  @if (loading()) {
+    <p class="auth-copy" style="padding:2.4rem var(--pad) 0;">Cargando tu sesion...</p>
+  } @else {
+    <div class="dashboard-main">
+      <router-outlet></router-outlet>
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <p class="auth-error" style="padding:0 var(--pad);" aria-live="polite">{{ errorMessage() }}</p>
+  }
+</main>
+

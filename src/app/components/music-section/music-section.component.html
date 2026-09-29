@@ -1,0 +1,48 @@
+@if (isMusicEnabled) {
+  <section class="music-section section-dark" id="musica" aria-labelledby="music-title">
+    <div class="music-heading reveal">
+      <p class="eyebrow">MUSICA DE CASA</p>
+      <h2 id="music-title">TAMBIEN<br><span>SUENA AFUERA.</span></h2>
+      <p class="serif-lead">Canciones que nacen en nuestra comunidad y ya puedes llevar contigo en tus plataformas.</p>
+    </div>
+    <div class="music-releases" id="music-releases">
+      @for (release of releases; track $index) {
+        <article class="music-release reveal">
+          <div
+            class="music-cover-art"
+            [style.background-image]="photoStyle(release.coverImage)"
+            [class.has-cover]="!!release.coverImage"
+            [attr.role]="!!release.coverImage ? 'img' : null"
+            [attr.aria-label]="!!release.coverImage ? coverAriaLabel(release.title, release.artist) : null"
+          >
+            @if (!release.coverImage) {
+              <span class="music-cover-label">FARO · MUSIC</span>
+              <strong>{{ release.title }}</strong>
+              <span class="music-cover-artist">{{ release.artist }}</span>
+              <span class="music-vinyl" aria-hidden="true"></span>
+            }
+          </div>
+
+          <div class="music-release-info">
+            <p class="music-available"><span aria-hidden="true">●</span>{{ release.eyebrow || 'YA DISPONIBLE' }}</p>
+            <h3>{{ release.title }}</h3>
+            <p class="music-artist">{{ release.artist }}</p>
+            <button class="music-listen-button" type="button" [attr.aria-expanded]="isReleaseExpanded($index)" [attr.aria-controls]="'music-platforms-' + $index" (click)="toggleRelease($index)">
+              <span>Escuchar cancion</span><span aria-hidden="true">{{ isReleaseExpanded($index) ? '−' : '＋' }}</span>
+            </button>
+
+            <div class="music-platforms" [id]="'music-platforms-' + $index" [hidden]="!isReleaseExpanded($index)">
+              @for (platform of release.platforms; track platform.name + platform.url) {
+                @if (platform.url) {
+                  <a class="music-platform" [href]="platform.url" target="_blank" rel="noopener">
+                    <span>{{ ($index + 1).toString().padStart(2, '0') }}</span><strong>{{ platform.name }}</strong><em aria-hidden="true">↗</em>
+                  </a>
+                }
+              }
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+}

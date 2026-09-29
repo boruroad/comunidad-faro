@@ -1,0 +1,27 @@
+@if (isStaticCalendarEnabled) {
+  <section class="calendar-section section-dark" id="calendario" aria-labelledby="calendar-title">
+    <div class="calendar-heading reveal">
+      <p class="eyebrow">PROXIMAS FECHAS</p>
+      <h2 id="calendar-title">{{ calendar.title }}<br><span>DE COMUNIDAD.</span></h2>
+      <p class="serif-lead">{{ calendar.subtitle }}</p>
+    </div>
+
+    <div class="calendar-grid">
+      @for (event of calendar.events; track event.date + event.title) {
+        <article class="calendar-card reveal">
+          <div class="calendar-card-top">
+            <time [attr.datetime]="event.date">{{ formatCalendarDate(event.date) }}</time>
+            <span>{{ event.time }}</span>
+          </div>
+          <h3>{{ event.title }}</h3>
+          <p class="calendar-location">{{ event.location }}</p>
+          <p class="calendar-description">{{ event.description }}</p>
+
+          @if (hasCalendarCta(event)) {
+            <a class="text-link" [href]="event.ctaUrl" target="_blank" rel="noopener">{{ event.ctaLabel }} ↗</a>
+          }
+        </article>
+      }
+    </div>
+  </section>
+}

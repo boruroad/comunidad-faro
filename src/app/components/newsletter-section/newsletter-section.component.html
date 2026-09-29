@@ -1,0 +1,25 @@
+@if (enabled) {
+  <section class="newsletter-section section-dark" id="newsletter" aria-labelledby="newsletter-title">
+    <div class="newsletter-copy reveal">
+      <p class="eyebrow">MANTENTE CERCA · NEWSLETTER FARO</p>
+      <h2 id="newsletter-title">NO TE PIERDAS<br><span>LA PROXIMA.</span></h2>
+      <p class="serif-lead">Recibe la convocatoria, cambios de punto, reuniones en casas y acceso en linea directamente en tu correo.</p>
+    </div>
+    <div class="newsletter-panel reveal">
+      <form class="newsletter-form" method="post" [attr.action]="newsletterAction || null" (submit)="onNewsletterSubmit($event)">
+        <label for="newsletter-email">Tu correo</label>
+        <div class="newsletter-field">
+          <input id="newsletter-email" type="email" name="email" autocomplete="email" placeholder="tu@correo.com" required>
+          <button type="submit">QUIERO RECIBIRLO ↗</button>
+        </div>
+        <input type="hidden" name="embed" value="1">
+        <input type="hidden" name="tag" [value]="newsletterTag">
+        <label class="newsletter-consent">
+          <input type="checkbox" required>
+          <span>Acepto recibir novedades de Comunidad FARO por correo. Puedo cancelar mi suscripcion cuando quiera.</span>
+        </label>
+        <p class="newsletter-status" [class.is-warning]="newsletterWarning" aria-live="polite">{{ newsletterStatus }}</p>
+      </form>
+    </div>
+  </section>
+}
