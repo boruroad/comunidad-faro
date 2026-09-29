@@ -10,7 +10,9 @@ import { CurrentUserService } from '../../auth/current-user.service';
   template: `
     <header class="private-header">
       <a class="private-brand" routerLink="/dashboard" aria-label="Panel interno, ir al dashboard">
-        <span class="brand-mark" aria-hidden="true">F</span>
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/images/farologuito.png" alt="FARO" class="brand-logo-img">
+        </span>
         <span class="brand-copy">
           <strong>FARO</strong>
           <small>PANEL INTERNO</small>

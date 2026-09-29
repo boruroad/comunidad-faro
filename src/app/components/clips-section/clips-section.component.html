@@ -1,45 +1,78 @@
 @if (clips.length > 0) {
   <div class="clips-section reveal" id="clips">
     <div class="clips-header">
-      <div>
+      <div class="clips-header-copy">
         <p class="eyebrow">EN MENOS DE 60 SEGUNDOS</p>
         <h3 class="clips-title">REELS Y CLIPS DE CASA</h3>
+        <p class="clips-subtitle">Palabra práctica y oportuna clasificada por lo que tu corazón necesita hoy.</p>
       </div>
-      <div class="clips-filters" role="tablist" aria-label="Filtro de clips por serie">
-        @for (seriesName of clipSeriesList; track seriesName) {
+
+      <!-- Buscador por Tema / Emoción / Palabra clave -->
+      <div class="clips-search-wrap">
+        <div class="clips-search-box">
+          <svg class="clips-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            type="search"
+            class="clips-search-input"
+            [value]="searchQuery"
+            (input)="onSearchInput($event)"
+            placeholder="Buscar por emoción o tema (paz, ánimo, familia, propósito, fe...)"
+            aria-label="Buscar clips por emoción o tema"
+          >
+          @if (searchQuery) {
+            <button type="button" class="clips-search-clear" (click)="clearSearch()" aria-label="Limpiar búsqueda">✕</button>
+          }
+        </div>
+      </div>
+
+      <!-- Filtros por Emoción / Tema -->
+      <div class="clips-filters" role="tablist" aria-label="Filtro de clips por emoción o tema">
+        @for (category of categories; track category) {
           <button
             type="button"
             class="clip-filter-pill"
-            [class.is-active]="selectedClipSeries === seriesName"
-            (click)="filterClips(seriesName)"
+            [class.is-active]="selectedCategory === category"
+            (click)="filterCategory(category)"
           >
-            {{ seriesName }}
+            {{ category }}
           </button>
         }
       </div>
     </div>
 
-    <div class="clips-grid">
-      @for (clip of filteredClips; track clip.id) {
-        <article class="clip-card" (click)="openClip(clip)" tabindex="0" (keydown.enter)="openClip(clip)">
-          <div class="clip-poster-wrap">
-            <img [src]="clip.posterUrl" [alt]="clip.title" loading="lazy" class="clip-poster">
-            <div class="clip-overlay">
-              <span class="clip-play-badge" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-              </span>
-              @if (clip.duration) {
-                <span class="clip-duration-tag">{{ clip.duration }}</span>
-              }
+    @if (filteredClips.length > 0) {
+      <div class="clips-grid">
+        @for (clip of filteredClips; track clip.id) {
+          <article class="clip-card" (click)="openClip(clip)" tabindex="0" (keydown.enter)="openClip(clip)">
+            <div class="clip-poster-wrap">
+              <img [src]="clip.posterUrl" [alt]="clip.title" loading="lazy" class="clip-poster">
+              <div class="clip-overlay">
+                <span class="clip-play-badge" aria-hidden="true">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                </span>
+                @if (clip.duration) {
+                  <span class="clip-duration-tag">{{ clip.duration }}</span>
+                }
+              </div>
             </div>
-          </div>
-          <div class="clip-caption">
-            <span class="clip-series-badge">{{ clip.series }}</span>
-            <h4 class="clip-name">{{ clip.title }}</h4>
-          </div>
-        </article>
-      }
-    </div>
+            <div class="clip-caption">
+              <div class="clip-tags-row">
+                <span class="clip-series-badge">{{ clip.series }}</span>
+                @if (clip.emotion) {
+                  <span class="clip-emotion-tag">{{ clip.emotion }}</span>
+                }
+              </div>
+              <h4 class="clip-name">{{ clip.title }}</h4>
+            </div>
+          </article>
+        }
+      </div>
+    } @else {
+      <div class="clips-empty-state">
+        <p>No encontramos clips con ese término o emoción.</p>
+        <button type="button" class="button button-dark" (click)="clearSearch()">Ver todos los clips</button>
+      </div>
+    }
   </div>
 }
 
@@ -59,7 +92,12 @@
       </div>
 
       <div class="reel-modal-meta">
-        <span class="reel-meta-series">{{ activeClip.series }}</span>
+        <div class="reel-meta-tags">
+          <span class="reel-meta-series">{{ activeClip.series }}</span>
+          @if (activeClip.emotion) {
+            <span class="reel-meta-emotion">{{ activeClip.emotion }}</span>
+          }
+        </div>
         <h3 class="reel-meta-title">{{ activeClip.title }}</h3>
         <div class="reel-modal-actions">
           @if (activeClip.driveFolderUrl) {

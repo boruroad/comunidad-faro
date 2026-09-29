@@ -73,6 +73,8 @@ export interface Clip {
   id: string;
   title: string;
   series: string;
+  theme?: string;
+  emotion?: string;
   date?: string;
   duration?: string;
   posterUrl: string;
@@ -551,6 +553,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-fundamentos-obediencia',
         title: 'Cristianismo es Obediencia Diaria, No Solo Domingos',
         series: 'Fundamentos',
+        theme: 'Fe & Obediencia',
+        emotion: 'Obediencia Práctica',
         date: '2026',
         duration: '0:34',
         posterUrl: 'assets/clips/poster-fundamentos-obediencia.webp',
@@ -561,6 +565,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-fundamentos-fe-actuar',
         title: 'Fe: Escuchar sin actuar es solo una ilusión',
         series: 'Fundamentos',
+        theme: 'Fe & Fundamentos',
+        emotion: 'Firmeza & Verdad',
         date: '2026',
         duration: '0:38',
         posterUrl: 'assets/clips/poster-fundamentos-fe-actuar.webp',
@@ -571,6 +577,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-fundamentos-sobre-roca',
         title: 'Edificar sobre la Roca y no sobre la Arena',
         series: 'Fundamentos',
+        theme: 'Fortaleza & Firmeza',
+        emotion: 'Seguridad en la Tormenta',
         date: '2026',
         duration: '0:42',
         posterUrl: 'assets/clips/poster-fundamentos-sobre-roca.webp',
@@ -581,6 +589,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-encargo-legado',
         title: 'Dios: El Legado es Para Tus Hijos',
         series: 'Encargo',
+        theme: 'Familia & Legado',
+        emotion: 'Legado Generacional',
         date: '2026',
         duration: '0:35',
         posterUrl: 'assets/clips/poster-encargo-legado.webp',
@@ -591,6 +601,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-encargo-divino',
         title: 'El Encargo Divino Para Tu Vida',
         series: 'Encargo',
+        theme: 'Propósito & Misión',
+        emotion: 'Llamado Divino',
         date: '2026',
         duration: '0:28',
         posterUrl: 'assets/clips/poster-encargo-divino.webp',
@@ -601,6 +613,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-mama-oracion',
         title: 'La Oración de Mamá: Poder Divino en el Hogar',
         series: '10 de Mayo',
+        theme: 'Oración & Familia',
+        emotion: 'Paz en el Hogar',
         date: '2026',
         duration: '0:40',
         posterUrl: 'assets/clips/poster-mama-oracion.webp',
@@ -611,6 +625,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-mama-guia',
         title: 'La Sabiduría de Madre que Forma Generaciones',
         series: '10 de Mayo',
+        theme: 'Sabiduría & Maternidad',
+        emotion: 'Amor Incondicional',
         date: '2026',
         duration: '0:33',
         posterUrl: 'assets/clips/poster-mama-guia.webp',
@@ -621,6 +637,8 @@ export const FARO_CONFIG: FaroConfig = {
         id: 'clip-padre-alineamiento',
         title: 'El Corazón de un Padre Guiado por el Reino',
         series: 'Día del Padre',
+        theme: 'Paternidad & Carácter',
+        emotion: 'Paz & Alineamiento',
         date: '2026',
         duration: '0:31',
         posterUrl: 'assets/clips/poster-padre-alineamiento.webp',

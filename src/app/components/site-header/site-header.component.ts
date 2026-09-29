@@ -8,7 +8,9 @@ import { RouterLink } from '@angular/router';
   template: `
     <header class="site-header" [class.scrolled]="headerScrolled" data-header>
       <a class="brand" [routerLink]="['/']" fragment="inicio" aria-label="Comunidad FARO, ir al inicio">
-        <span class="brand-mark" aria-hidden="true">F</span>
+        <span class="brand-mark" aria-hidden="true">
+          <img src="assets/images/farologuito.png" alt="Comunidad FARO" class="brand-logo-img">
+        </span>
         <span class="brand-copy">
           <strong>COMUNIDAD FARO</strong>
           <small>FE · AMOR · RELEVANCIA · OBEDIENCIA</small>
@@ -30,7 +32,7 @@ import { RouterLink } from '@angular/router';
       </nav>
 
       <a class="header-cta" [href]="facebookUrl" target="_blank" rel="noopener">
-        Ultima convocatoria ↗
+        Ultima convocatoria
       </a>
 
       <button
@@ -63,7 +65,7 @@ import { RouterLink } from '@angular/router';
         <a [routerLink]="['/ser-parte']" (click)="closeMenu.emit()">¿Quieres ser parte?</a>
         <a [routerLink]="['/login']" (click)="closeMenu.emit()">Iniciar sesión</a>
         <a [href]="facebookUrl" target="_blank" rel="noopener" (click)="closeMenu.emit()">
-          Ultima convocatoria ↗
+          Ultima convocatoria
         </a>
       </nav>
     </header>

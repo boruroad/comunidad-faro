@@ -10,24 +10,60 @@ import { Clip } from '../../faro-config';
 export class ClipsSectionComponent {
   @Input({ required: true }) clips: Clip[] = [];
 
-  selectedClipSeries = 'TODOS';
+  selectedCategory = 'TODOS';
+  searchQuery = '';
   activeClip: Clip | null = null;
   isClipModalOpen = false;
 
-  get clipSeriesList(): string[] {
-    const seriesSet = new Set(this.clips.map(c => c.series));
-    return ['TODOS', ...Array.from(seriesSet)];
-  }
+  readonly categories = [
+    'TODOS',
+    'Fortaleza',
+    'Propósito',
+    'Paz & Consuelo',
+    'Familia',
+    'Fe & Obediencia',
+    'Oración'
+  ];
 
   get filteredClips(): Clip[] {
-    if (this.selectedClipSeries === 'TODOS') {
-      return this.clips;
+    let list = this.clips;
+
+    // Filter by selected category/emotion pill
+    if (this.selectedCategory !== 'TODOS') {
+      const catLower = this.selectedCategory.toLowerCase();
+      list = list.filter(c =>
+        (c.theme && c.theme.toLowerCase().includes(catLower)) ||
+        (c.emotion && c.emotion.toLowerCase().includes(catLower)) ||
+        (c.series && c.series.toLowerCase().includes(catLower))
+      );
     }
-    return this.clips.filter(c => c.series === this.selectedClipSeries);
+
+    // Filter by free text search query
+    if (this.searchQuery.trim()) {
+      const q = this.searchQuery.toLowerCase().trim();
+      list = list.filter(c =>
+        c.title.toLowerCase().includes(q) ||
+        (c.series && c.series.toLowerCase().includes(q)) ||
+        (c.theme && c.theme.toLowerCase().includes(q)) ||
+        (c.emotion && c.emotion.toLowerCase().includes(q))
+      );
+    }
+
+    return list;
   }
 
-  filterClips(series: string): void {
-    this.selectedClipSeries = series;
+  filterCategory(category: string): void {
+    this.selectedCategory = category;
+  }
+
+  onSearchInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.searchQuery = input.value;
+  }
+
+  clearSearch(): void {
+    this.searchQuery = '';
+    this.selectedCategory = 'TODOS';
   }
 
   openClip(clip: Clip): void {
