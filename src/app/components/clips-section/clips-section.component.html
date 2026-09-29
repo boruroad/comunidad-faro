@@ -1,0 +1,78 @@
+@if (clips.length > 0) {
+  <div class="clips-section reveal" id="clips">
+    <div class="clips-header">
+      <div>
+        <p class="eyebrow">EN MENOS DE 60 SEGUNDOS</p>
+        <h3 class="clips-title">REELS Y CLIPS DE CASA</h3>
+      </div>
+      <div class="clips-filters" role="tablist" aria-label="Filtro de clips por serie">
+        @for (seriesName of clipSeriesList; track seriesName) {
+          <button
+            type="button"
+            class="clip-filter-pill"
+            [class.is-active]="selectedClipSeries === seriesName"
+            (click)="filterClips(seriesName)"
+          >
+            {{ seriesName }}
+          </button>
+        }
+      </div>
+    </div>
+
+    <div class="clips-grid">
+      @for (clip of filteredClips; track clip.id) {
+        <article class="clip-card" (click)="openClip(clip)" tabindex="0" (keydown.enter)="openClip(clip)">
+          <div class="clip-poster-wrap">
+            <img [src]="clip.posterUrl" [alt]="clip.title" loading="lazy" class="clip-poster">
+            <div class="clip-overlay">
+              <span class="clip-play-badge" aria-hidden="true">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </span>
+              @if (clip.duration) {
+                <span class="clip-duration-tag">{{ clip.duration }}</span>
+              }
+            </div>
+          </div>
+          <div class="clip-caption">
+            <span class="clip-series-badge">{{ clip.series }}</span>
+            <h4 class="clip-name">{{ clip.title }}</h4>
+          </div>
+        </article>
+      }
+    </div>
+  </div>
+}
+
+@if (isClipModalOpen && activeClip) {
+  <div class="reel-modal-backdrop" (click)="closeClip()" role="dialog" aria-modal="true" aria-label="Reproductor de clip">
+    <div class="reel-modal-container" (click)="$event.stopPropagation()">
+      <button type="button" class="reel-modal-close" (click)="closeClip()" aria-label="Cerrar reproductor">✕</button>
+
+      <div class="reel-player-box">
+        <video
+          [src]="activeClip.videoUrl"
+          controls
+          autoplay
+          playsinline
+          class="reel-video"
+        ></video>
+      </div>
+
+      <div class="reel-modal-meta">
+        <span class="reel-meta-series">{{ activeClip.series }}</span>
+        <h3 class="reel-meta-title">{{ activeClip.title }}</h3>
+        <div class="reel-modal-actions">
+          @if (activeClip.driveFolderUrl) {
+            <a class="button button-light reel-drive-btn" [href]="activeClip.driveFolderUrl" target="_blank" rel="noopener">
+              Ver prédica completa
+            </a>
+          }
+          <div class="reel-nav-buttons">
+            <button type="button" class="reel-nav-btn" (click)="prevClip()" aria-label="Clip anterior" title="Anterior">←</button>
+            <button type="button" class="reel-nav-btn" (click)="nextClip()" aria-label="Siguiente clip" title="Siguiente">→</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

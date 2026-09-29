@@ -133,6 +133,18 @@ export interface FaroConfig {
     prayer: string;
     footer: string;
   };
+  api: {
+    enabled: boolean;
+    url: string;
+    refreshMs: number;
+  };
+}
+
+export interface LiveConfig {
+  label: string;
+  titleTop: string;
+  titleAccent: string;
+  buttonLabel: string;
 }
 
 export const FARO_CONFIG: FaroConfig = {

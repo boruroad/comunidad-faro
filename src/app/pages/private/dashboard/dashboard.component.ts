@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, inject, signal } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 
-import { PrivateHeaderComponent } from '../../../components/private-header.component';
+import { PrivateHeaderComponent } from '../../../components/private-header/private-header.component';
 import { SessionService } from '../../../auth/session.service';
 import { CurrentUserService } from '../../../auth/current-user.service';
 

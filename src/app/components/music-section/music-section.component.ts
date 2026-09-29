@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
 
-import { MusicRelease } from '../faro-config';
+import { MusicRelease } from '../../faro-config';
 import {
   toCoverAriaLabel,
   toPhotoBackground
-} from '../shared/presentation.utils';
+} from '../../shared/presentation.utils';
 
 @Component({
   selector: 'app-music-section',

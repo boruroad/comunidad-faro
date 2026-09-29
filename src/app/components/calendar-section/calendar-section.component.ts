@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { CalendarEvent, FaroConfig } from '../faro-config';
+import { CalendarEvent, FaroConfig } from '../../faro-config';
 
 @Component({
   selector: 'app-calendar-section',

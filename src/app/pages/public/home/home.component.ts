@@ -13,16 +13,17 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription } from 'rxjs';
 
 import { FaroConfig } from '../../../faro-config';
-import { CalendarSectionComponent } from '../../../components/calendar-section.component';
-import { FirstVisitSectionComponent } from '../../../components/first-visit-section.component';
-import { HeroSectionComponent } from '../../../components/hero-section.component';
-import { LiveTakeoverComponent } from '../../../components/live-takeover.component';
-import { MeetingSectionComponent } from '../../../components/meeting-section.component';
-import { MusicSectionComponent } from '../../../components/music-section.component';
-import { NewsletterSectionComponent } from '../../../components/newsletter-section.component';
-import { SocialSectionComponent } from '../../../components/social-section.component';
-import { SiteFooterComponent } from '../../../components/site-footer.component';
-import { SiteHeaderComponent } from '../../../components/site-header.component';
+import { CalendarSectionComponent } from '../../../components/calendar-section/calendar-section.component';
+import { FirstVisitSectionComponent } from '../../../components/first-visit-section/first-visit-section.component';
+import { HeroSectionComponent } from '../../../components/hero-section/hero-section.component';
+import { LiveTakeoverComponent } from '../../../components/live-takeover/live-takeover.component';
+import { MeetingSectionComponent } from '../../../components/meeting-section/meeting-section.component';
+import { MusicSectionComponent } from '../../../components/music-section/music-section.component';
+import { NewsletterSectionComponent } from '../../../components/newsletter-section/newsletter-section.component';
+import { SermonsSectionComponent } from '../../../components/sermons-section/sermons-section.component';
+import { SocialSectionComponent } from '../../../components/social-section/social-section.component';
+import { SiteFooterComponent } from '../../../components/site-footer/site-footer.component';
+import { SiteHeaderComponent } from '../../../components/site-header/site-header.component';
 import { RuntimeConfigService } from '../../../config/runtime-config.service';
 import { toPhotoBackground } from '../../../shared/presentation.utils';
 
@@ -79,6 +80,7 @@ interface FaroApiResponse {
     HeroSectionComponent,
     MusicSectionComponent,
     MeetingSectionComponent,
+    SermonsSectionComponent,
     NewsletterSectionComponent,
     SocialSectionComponent,
     FirstVisitSectionComponent,
@@ -128,6 +130,16 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   readonly isMusicEnabled =
     this.cfg.music.enabled &&
     this.releases.length > 0;
+
+  readonly sermonsConfig = this.cfg.sermons;
+
+  readonly isSermonsEnabled =
+    Boolean(
+      this.sermonsConfig?.enabled &&
+      this.sermonsConfig?.featured
+    );
+
+  readonly clips = this.cfg.clips?.items ?? [];
 
   readonly now =
     signal(Date.now());

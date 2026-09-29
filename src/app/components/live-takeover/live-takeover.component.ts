@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { SafeResourceUrl } from '@angular/platform-browser';
 
-import { LiveConfig } from '../faro-config';
+import { LiveBroadcast } from '../../faro-config';
 
 @Component({
   selector: 'app-live-takeover',
@@ -88,7 +88,7 @@ import { LiveConfig } from '../faro-config';
   `
 })
 export class LiveTakeoverComponent {
-  @Input({ required: true }) live!: LiveConfig;
+  @Input({ required: true }) live!: LiveBroadcast;
   @Input() isLiveActive = false;
   @Input() liveDescription = '';
   @Input() alertMessage = '';

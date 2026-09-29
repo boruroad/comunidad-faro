@@ -1,0 +1,59 @@
+@if (isSermonsEnabled && sermonFeatured) {
+  <section class="sermons-section" id="mensajes" aria-labelledby="sermons-title">
+    <div class="sermons-header reveal">
+      <p class="eyebrow">PALABRA VIVA</p>
+      <h2 id="sermons-title">{{ sermonsConfig.title || 'MENSAJES DE CASA' }}</h2>
+      <p class="serif-lead">{{ sermonsConfig.subtitle || 'Palabra compartida en nuestra comunidad para edificar, acompañar y profundizar en la fe.' }}</p>
+    </div>
+
+    <div class="sermons-layout">
+      <article class="sermon-card sermon-card-featured reveal">
+        <div class="sermon-thumb-wrap">
+          <img [src]="sermonFeatured.thumbnail" [alt]="sermonFeatured.thumbnailAlt" loading="lazy" class="sermon-thumb-img">
+          <span class="sermon-badge-featured">DESTACADO</span>
+        </div>
+        <div class="sermon-content">
+          <div class="sermon-meta-row">
+            @if (sermonFeatured.series) {
+              <span class="sermon-series-tag">{{ sermonFeatured.series }}</span>
+            }
+            @if (sermonFeatured.date) {
+              <span class="sermon-date">{{ sermonFeatured.date }}</span>
+            }
+          </div>
+          <h3 class="sermon-featured-title">{{ sermonFeatured.title }}</h3>
+          @if (sermonFeatured.preacher) {
+            <p class="sermon-preacher">{{ sermonFeatured.preacher }}</p>
+          }
+          <div class="sermon-actions">
+            <a class="button button-dark sermon-drive-btn" [href]="sermonFeatured.driveUrl" target="_blank" rel="noopener">
+              Ver prédica
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <div class="sermons-list reveal">
+        @for (sermon of sermonList; track sermon.id) {
+          <a class="sermon-list-item" [href]="sermon.driveUrl" target="_blank" rel="noopener">
+            <div class="sermon-list-thumb">
+              <img [src]="sermon.thumbnail" [alt]="sermon.thumbnailAlt" loading="lazy">
+            </div>
+            <div class="sermon-list-info">
+              @if (sermon.series) {
+                <span class="sermon-series-tag">{{ sermon.series }}</span>
+              }
+              <strong class="sermon-list-title">{{ sermon.title }}</strong>
+              @if (sermon.date) {
+                <span class="sermon-list-date">{{ sermon.date }}</span>
+              }
+            </div>
+            <span class="sermon-list-arrow" aria-hidden="true">›</span>
+          </a>
+        }
+      </div>
+    </div>
+
+    <app-clips-section [clips]="clips"></app-clips-section>
+  </section>
+}

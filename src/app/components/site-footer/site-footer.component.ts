@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { toPhotoBackground } from '../shared/presentation.utils';
+import { toPhotoBackground } from '../../shared/presentation.utils';
 
 @Component({
   selector: 'app-site-footer',

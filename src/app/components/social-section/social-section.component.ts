@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { toSocialLabel } from '../shared/presentation.utils';
+import { toSocialLabel } from '../../shared/presentation.utils';
 
 @Component({
   selector: 'app-social-section',

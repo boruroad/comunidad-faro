@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
-import { CurrentUserService } from '../auth/current-user.service';
+import { CurrentUserService } from '../../auth/current-user.service';
 
 @Component({
   selector: 'app-private-header',

@@ -7,24 +7,27 @@ import {
   FARO_CONFIG,
   FaroConfig,
   MusicRelease,
-  Sermon
+  Sermon,
+  LiveBroadcast
 } from './faro-config';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App implements AfterViewInit, OnDestroy {
   readonly cfg: FaroConfig = FARO_CONFIG;
+  readonly live: LiveBroadcast = this.cfg.live;
   readonly releases = this.cfg.music.releases;
   readonly firstVisit = this.cfg.firstVisit;
   readonly newsletterTag = this.cfg.newsletter.tag;
   readonly calendar = this.cfg.calendar;
   readonly moments = this.cfg.moments;
 
+  readonly meeting = this.cfg.meeting;
   readonly onlineUrl = this.meeting.onlineUrl.trim();
   readonly nearestUrl = this.meeting.nearestUrl || this.meeting.facebookUrl || this.cfg.socials['facebook'];
   readonly facebookUrl = this.meeting.facebookUrl || this.cfg.socials['facebook'];
@@ -60,6 +63,7 @@ export class App implements AfterViewInit, OnDestroy {
   // Sección Prédicas / Mensajes de Casa
   readonly sermonsConfig = this.cfg.sermons;
   readonly isSermonsEnabled = Boolean(this.sermonsConfig?.enabled && this.sermonsConfig?.featured);
+  readonly year = new Date().getFullYear();
 
   get sermonFeatured(): Sermon | undefined {
     return this.sermonsConfig?.featured;

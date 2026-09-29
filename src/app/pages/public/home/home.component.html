@@ -27,7 +27,7 @@
     [meetingStatus]="meetingStatus()"
     [facebookUrl]="facebookUrl"
     [meetingOnlineUrl]="meetingOnlineUrl()"
-    [meetingOnlineLabel]="meeting.onlineLabel"
+    [meetingOnlineLabel]="meeting.onlineLabel ? meeting.onlineLabel : ''"
   ></app-hero-section>
 
   <section class="voice-strip" aria-label="Palabras que atraviesan la comunicacion de FARO">
@@ -88,6 +88,12 @@
     [releases]="releases"
   ></app-music-section>
 
+  <app-sermons-section
+    [isSermonsEnabled]="isSermonsEnabled"
+    [sermonsConfig]="sermonsConfig"
+    [clips]="clips"
+  ></app-sermons-section>
+
   <app-meeting-section
     [meetingTitle]="meetingTitle()"
     [meetingDescription]="meetingDescription()"
@@ -96,7 +102,7 @@
     [facebookUrl]="facebookUrl"
     [nearestUrl]="nearestUrl"
     [meetingOnlineUrl]="meetingOnlineUrl()"
-    [meetingOnlineLabel]="meeting.onlineLabel"
+    [meetingOnlineLabel]="meeting.onlineLabel ? meeting.onlineLabel : ''"
   ></app-meeting-section>
 
   @if (featuredMessage()) {
