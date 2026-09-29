@@ -1,7 +1,14 @@
 import { DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { CalendarEvent, FARO_CONFIG, FaroConfig, MusicRelease } from './faro-config';
+import {
+  CalendarEvent,
+  Clip,
+  FARO_CONFIG,
+  FaroConfig,
+  MusicRelease,
+  Sermon
+} from './faro-config';
 
 @Component({
   selector: 'app-root',
@@ -30,18 +37,19 @@ export class App implements AfterViewInit, OnDestroy {
   readonly releaseSpotifyUrls: (SafeResourceUrl | null)[];
   selectedReleaseIndex = 0;
   readonly isCalendarEnabled = this.calendar.enabled && this.calendar.events.length > 0;
+
+  faroControlLiveMode: 'AUTO' | 'ON' | 'OFF' = 'AUTO';
   liveStreamUrl = (this.live.url || this.onlineUrl).trim();
-  liveMessage = this.live.description || 'La Casa está transmitiendo. Entra desde donde estés.';
+  liveMessage = '';
   featuredMessage = '';
   alertMessage = '';
-  faroControlLiveMode: 'AUTO' | 'ON' | 'OFF' = 'AUTO';
   readonly safeEmbedUrl: SafeResourceUrl | null;
 
   calendarEvents: CalendarEvent[] = [...this.calendar.events];
   readonly calendarEmbedUrl = 'https://calendar.google.com/calendar/embed?src=0266b1310dc0d1d71d45b12ce92aa075141e7f18bf3a3b224f375f3d508cdcf5%40group.calendar.google.com&ctz=America%2FMexico_City';
   readonly calendarIcalUrl = 'https://calendar.google.com/calendar/ical/0266b1310dc0d1d71d45b12ce92aa075141e7f18bf3a3b224f375f3d508cdcf5%40group.calendar.google.com/public/basic.ics';
 
-  // Fotos de Hero limpias, modernas 2024-2025, sin cubrebocas ni desgastes
+  // Fotos de Hero limpias, modernas, sin cubrebocas ni desgastes
   readonly heroPhotos = [
     'assets/images/faro-identidad-welcome-home-camiseta.webp',
     'assets/images/faro-identidad-camiseta-comunidad-faro.webp',
@@ -50,6 +58,36 @@ export class App implements AfterViewInit, OnDestroy {
   ];
   activeHeroIndex = 0;
   private heroTimer?: ReturnType<typeof setInterval>;
+
+  // Sección Prédicas / Mensajes de Casa
+  readonly sermonsConfig = this.cfg.sermons;
+  readonly isSermonsEnabled = Boolean(this.sermonsConfig?.enabled && this.sermonsConfig?.featured);
+
+  get sermonFeatured(): Sermon | undefined {
+    return this.sermonsConfig?.featured;
+  }
+
+  get sermonList(): Sermon[] {
+    return this.sermonsConfig?.list ?? [];
+  }
+
+  // Sección Reels y Clips de Casa
+  readonly clips: Clip[] = this.cfg.clips?.items ?? [];
+  selectedClipSeries = 'TODOS';
+  activeClip: Clip | null = null;
+  isClipModalOpen = false;
+
+  get clipSeriesList(): string[] {
+    const seriesSet = new Set(this.clips.map(c => c.series));
+    return ['TODOS', ...Array.from(seriesSet)];
+  }
+
+  get filteredClips(): Clip[] {
+    if (this.selectedClipSeries === 'TODOS') {
+      return this.clips;
+    }
+    return this.clips.filter(c => c.series === this.selectedClipSeries);
+  }
 
   get liveState(): 'PRE_LIVE' | 'LIVE' | 'POST_LIVE' | 'NORMAL' {
     if (this.faroControlLiveMode === 'ON') {
@@ -64,8 +102,8 @@ export class App implements AfterViewInit, OnDestroy {
     const end = this.live.endsAt ? Date.parse(this.live.endsAt) : NaN;
 
     if (Number.isFinite(start) && Number.isFinite(end)) {
-      const preLiveWindow = start - 45 * 60 * 1000; // 45 minutos antes
-      const postLiveWindow = end + 2 * 60 * 60 * 1000; // 2 horas después de terminar
+      const preLiveWindow = start - 45 * 60 * 1000;
+      const postLiveWindow = end + 2 * 60 * 60 * 1000;
 
       if (now >= preLiveWindow && now < start) {
         return 'PRE_LIVE';
@@ -341,6 +379,38 @@ export class App implements AfterViewInit, OnDestroy {
     return this.releaseSpotifyUrls[this.selectedReleaseIndex] ?? null;
   }
 
+    this.activeClip = clip;
+  }
+
+  closeClip(): void {
+    this.isClipModalOpen = false;
+    this.activeClip = null;
+  }
+
+  nextClip(): void {
+    if (!this.activeClip) return;
+    const currentList = this.filteredClips;
+    const currentIndex = currentList.findIndex(c => c.id === this.activeClip?.id);
+    if (currentIndex !== -1) {
+      const nextIndex = (currentIndex + 1) % currentList.length;
+      this.activeClip = currentList[nextIndex];
+    }
+  }
+
+  prevClip(): void {
+    if (!this.activeClip) return;
+    const currentList = this.filteredClips;
+    const currentIndex = currentList.findIndex(c => c.id === this.activeClip?.id);
+    if (currentIndex !== -1) {
+      const prevIndex = (currentIndex - 1 + currentList.length) % currentList.length;
+      this.activeClip = currentList[prevIndex];
+    }
+  }
+
+  filterClips(series: string): void {
+    this.selectedClipSeries = series;
+  }
+
   onNewsletterSubmit(event: Event): void {
     if (!this.newsletterAction) {
       event.preventDefault();
@@ -358,7 +428,7 @@ export class App implements AfterViewInit, OnDestroy {
   }
 
   socialLabel(name: string): string {
-    return `${name.charAt(0).toUpperCase() + name.slice(1)} ↗`;
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 
   hasCoverImage(path: string): boolean {
@@ -398,14 +468,6 @@ export class App implements AfterViewInit, OnDestroy {
     }
 
     return `https://buttondown.com/api/emails/embed-subscribe/${encodeURIComponent(username)}`;
-  }
-
-  private computeLiveActive(): boolean {
-    const now = Date.now();
-    const start = this.live.startsAt ? Date.parse(this.live.startsAt) : NaN;
-    const end = this.live.endsAt ? Date.parse(this.live.endsAt) : NaN;
-    const scheduledLive = Number.isFinite(start) && Number.isFinite(end) && now >= start && now <= end;
-    return Boolean(this.live.enabled || scheduledLive);
   }
 
   private initRevealAnimation(): void {
