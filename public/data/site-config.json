@@ -1,0 +1,23 @@
+{
+  "site": {
+    "name": "Comunidad F.A.R.O.",
+    "description": "Fe, Amor, Relevancia y Obediencia. Una familia, muchas tribus.",
+    "canonicalUrl": "https://faro.neitanworales.com/"
+  },
+  "meeting": {
+    "status": "CONFIRMAR EN REDES",
+    "title": "La próxima convocatoria.",
+    "description": "Revisa la publicación más reciente para confirmar el punto, la reunión en casas o el acceso en línea.",
+    "schedule": "Consulta la convocatoria vigente",
+    "facebookUrl": "https://www.facebook.com/comunidad.FARO/",
+    "nearestUrl": "https://www.facebook.com/comunidad.FARO/",
+    "onlineUrl": "",
+    "onlineLabel": "Entrar a la transmisión"
+  },
+  "socials": {
+    "facebook": "https://www.facebook.com/comunidad.FARO/",
+    "instagram": "https://www.instagram.com/comunidad_faro/",
+    "youtube": "",
+    "whatsapp": ""
+  }
+}

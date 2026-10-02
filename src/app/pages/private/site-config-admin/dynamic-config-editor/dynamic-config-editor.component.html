@@ -1,0 +1,211 @@
+<div class="config-editor" [class.config-editor-root]="depth === 0">
+  @for (field of schema; track field.key) {
+    <div class="config-field" [class.config-field-root]="depth === 0">
+      @switch (field.type) {
+        @case ('text') {
+          <label class="config-field-label">
+            <span>{{ field.label }}</span>
+            <input
+              type="text"
+              [value]="getScalar(field)"
+              [placeholder]="field.placeholder || ''"
+              (change)="updateScalar(field, $any($event.target).value)"
+            />
+          </label>
+        }
+
+        @case ('url') {
+          <label class="config-field-label">
+            <span>{{ field.label }}</span>
+            <input
+              type="url"
+              [value]="getScalar(field)"
+              [placeholder]="field.placeholder || ''"
+              (change)="updateScalar(field, $any($event.target).value)"
+            />
+          </label>
+        }
+
+        @case ('number') {
+          <label class="config-field-label">
+            <span>{{ field.label }}</span>
+            <input
+              type="number"
+              [value]="getScalar(field)"
+              (change)="updateScalar(field, $any($event.target).value)"
+            />
+          </label>
+        }
+
+        @case ('textarea') {
+          <label class="config-field-label config-field-label-block">
+            <span>{{ field.label }}</span>
+            <textarea
+              rows="3"
+              [value]="getScalar(field)"
+              (change)="updateScalar(field, $any($event.target).value)"
+            ></textarea>
+          </label>
+        }
+
+        @case ('boolean') {
+          <label class="config-field-checkbox">
+            <input
+              type="checkbox"
+              [checked]="getBoolean(field)"
+              (change)="updateBoolean(field, $any($event.target).checked)"
+            />
+            <span>{{ field.label }}</span>
+          </label>
+        }
+
+        @case ('object') {
+          <fieldset class="config-fieldset">
+            <legend>{{ field.label }}</legend>
+            <app-dynamic-config-editor
+              [schema]="field.objectSchema || []"
+              [value]="getObjectValue(field)"
+              [depth]="depth + 1"
+              (valueChange)="updateObject(field, $event)"
+            ></app-dynamic-config-editor>
+          </fieldset>
+        }
+
+        @case ('list') {
+          <fieldset class="config-fieldset config-fieldset-list">
+            <legend>{{ field.label }}</legend>
+
+            @for (item of getListValue(field); track $index) {
+              <details class="config-list-item" open>
+                <summary>
+                  <span>{{ itemLabel(field, item, $index) }}</span>
+                  <span class="config-list-item-actions">
+                    <button
+                      type="button"
+                      class="button"
+                      (click)="moveListItem(field, $index, -1)"
+                      [disabled]="$index === 0"
+                    >&uarr;</button>
+                    <button
+                      type="button"
+                      class="button"
+                      (click)="moveListItem(field, $index, 1)"
+                      [disabled]="$index === getListValue(field).length - 1"
+                    >&darr;</button>
+                    <button type="button" class="button" (click)="removeListItem(field, $index)">Eliminar</button>
+                  </span>
+                </summary>
+
+                <app-dynamic-config-editor
+                  [schema]="field.itemSchema || []"
+                  [value]="item"
+                  [depth]="depth + 1"
+                  (valueChange)="updateListItem(field, $index, $event)"
+                ></app-dynamic-config-editor>
+              </details>
+            }
+
+            <button type="button" class="button button-dark" (click)="addListItem(field)">+ Agregar fila</button>
+          </fieldset>
+        }
+
+        @case ('map') {
+          <fieldset class="config-fieldset">
+            <legend>{{ field.label }}</legend>
+
+            <div class="data-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>{{ field.mapKeyLabel || 'Propiedad' }}</th>
+                    <th>{{ field.mapValueLabel || 'Valor' }}</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (entry of getMapEntries(field); track entry[0]) {
+                    <tr>
+                      <td>
+                        <input
+                          type="text"
+                          [value]="entry[0]"
+                          (change)="renameMapKey(field, entry[0], $any($event.target).value)"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          [value]="entry[1]"
+                          (change)="updateMapValue(field, entry[0], $any($event.target).value)"
+                        />
+                      </td>
+                      <td>
+                        <button type="button" class="button" (click)="removeMapEntry(field, entry[0])">Eliminar</button>
+                      </td>
+                    </tr>
+                  }
+                  <tr>
+                    <td>
+                      <input
+                        type="text"
+                        placeholder="Nueva propiedad"
+                        [value]="newMapKey[field.key] || ''"
+                        (input)="updateNewMapKey(field, $any($event.target).value)"
+                      />
+                    </td>
+                    <td colspan="2">
+                      <button type="button" class="button button-dark" (click)="addMapEntry(field)">+ Agregar</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </fieldset>
+        }
+
+        @case ('tuple-list') {
+          <fieldset class="config-fieldset">
+            <legend>{{ field.label }}</legend>
+
+            <div class="data-table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>{{ field.tupleLabels?.[0] || 'Columna 1' }}</th>
+                    <th>{{ field.tupleLabels?.[1] || 'Columna 2' }}</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (pair of getTupleEntries(field); track $index) {
+                    <tr>
+                      <td>
+                        <input
+                          type="text"
+                          [value]="pair[0]"
+                          (change)="updateTupleCell(field, $index, 0, $any($event.target).value)"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          [value]="pair[1]"
+                          (change)="updateTupleCell(field, $index, 1, $any($event.target).value)"
+                        />
+                      </td>
+                      <td>
+                        <button type="button" class="button" (click)="removeTupleRow(field, $index)">Eliminar</button>
+                      </td>
+                    </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+
+            <button type="button" class="button button-dark" (click)="addTupleRow(field)">+ Agregar fila</button>
+          </fieldset>
+        }
+      }
+    </div>
+  }
+</div>

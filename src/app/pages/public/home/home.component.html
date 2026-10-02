@@ -1,0 +1,92 @@
+<a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+<app-site-header
+  [facebookUrl]="facebookUrl"
+  [menuOpen]="menuOpen"
+  [headerScrolled]="headerScrolled"
+  [isSermonsEnabled]="isSermonsEnabled"
+  (toggleMenu)="toggleMenu()"
+  (closeMenu)="closeMenu()"
+></app-site-header>
+
+<main id="contenido">
+  <app-alert-banner [alertMessage]="alertMessage"></app-alert-banner>
+
+  <app-live-takeover
+    [isLiveActive]="isLiveActive"
+    [liveTickerText]="liveTickerText"
+    [liveKickerText]="liveKickerText"
+    [liveTitleTopText]="liveTitleTopText"
+    [liveTitleAccentText]="liveTitleAccentText"
+    [liveDescriptionText]="liveDescriptionText"
+    [liveButtonLabelText]="liveButtonLabelText"
+    [liveStreamUrl]="liveStreamUrl"
+    [safeEmbedUrl]="safeEmbedUrl"
+  ></app-live-takeover>
+
+  <app-hero-section
+    [heroTitleTop]="heroTitleTop"
+    [heroTitleAccent]="heroTitleAccent"
+    [heroLine]="heroLine"
+    [meetingTitle]="meeting.title"
+    [meetingStatus]="meeting.status"
+    [facebookUrl]="facebookUrl"
+    [meetingOnlineUrl]="onlineUrl"
+    [meetingOnlineLabel]="meeting.onlineLabel || ''"
+  ></app-hero-section>
+
+  <app-voice-strip></app-voice-strip>
+
+  <app-moments-section [moments]="moments"></app-moments-section>
+
+  <app-manifesto-section></app-manifesto-section>
+
+  <app-kingdom-section></app-kingdom-section>
+
+  <app-music-section
+    [isMusicEnabled]="isMusicEnabled"
+    [releases]="releases"
+    [artistSpotifyUrl]="artistSpotifyUrl"
+  ></app-music-section>
+
+  <app-sermons-section
+    [isSermonsEnabled]="isSermonsEnabled"
+    [sermonsConfig]="sermonsConfig"
+    [clips]="clips"
+  ></app-sermons-section>
+
+  <app-meeting-section
+    [meetingTitle]="meeting.title"
+    [meetingDescription]="meeting.description"
+    [meetingStatus]="meeting.status"
+    [meetingSchedule]="meeting.schedule"
+    [facebookUrl]="facebookUrl"
+    [nearestUrl]="nearestUrl"
+    [meetingOnlineUrl]="onlineUrl"
+    [meetingOnlineLabel]="meeting.onlineLabel || ''"
+  ></app-meeting-section>
+
+  <app-newsletter-section
+    [enabled]="cfg.newsletter.enabled"
+    [newsletterAction]="newsletterAction"
+    [newsletterTag]="newsletterTag"
+  ></app-newsletter-section>
+
+  <app-social-section [socialEntries]="socialEntries"></app-social-section>
+
+  <app-first-visit-section [firstVisit]="firstVisit" [facebookUrl]="facebookUrl"></app-first-visit-section>
+
+  <app-calendar-section
+    [isStaticCalendarEnabled]="isCalendarEnabled"
+    [calendar]="calendar"
+    [calendarEmbedUrl]="calendarEmbedUrl"
+  ></app-calendar-section>
+</main>
+
+<app-site-footer
+  [footerPhoto]="cfg.photos.footer"
+  [footerTitleTop]="footerTitleTop"
+  [footerTitleAccent]="footerTitleAccent"
+  [facebookUrl]="facebookUrl"
+  [year]="year"
+></app-site-footer>

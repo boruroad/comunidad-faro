@@ -1,0 +1,71 @@
+<section class="data-table-panel" aria-labelledby="comunidades-title">
+  <p class="eyebrow">MODULO</p>
+  <h1 id="comunidades-title">COMUNIDADES</h1>
+  <p class="auth-copy">Administra las comunidades: crea, edita o elimina registros.</p>
+
+  <form class="config-admin-form" [formGroup]="form" (ngSubmit)="save()">
+    <label for="comunidad-nombre">Nombre</label>
+    <input id="comunidad-nombre" type="text" formControlName="nombre" placeholder="Ejemplo: Casa FARO Centro">
+
+    <label for="comunidad-lugar">Lugar</label>
+    <input id="comunidad-lugar" type="text" formControlName="lugar" placeholder="Ejemplo: Ciudad de Mexico">
+
+    <label for="comunidad-direccion">Direccion</label>
+    <input id="comunidad-direccion" type="text" formControlName="direccion" placeholder="Direccion completa">
+
+    <div class="dashboard-actions">
+      <button class="button button-dark" type="submit" [disabled]="saving()">
+        {{ selectedId() ? 'Actualizar comunidad' : 'Crear comunidad' }}
+      </button>
+      @if (selectedId()) {
+        <button class="button" type="button" (click)="cancelEdit()">Cancelar edicion</button>
+      }
+    </div>
+  </form>
+
+  @if (successMessage()) {
+    <p class="config-admin-success" aria-live="polite">{{ successMessage() }}</p>
+  }
+
+  @if (errorMessage()) {
+    <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+  }
+
+  @if (loading()) {
+    <mat-spinner diameter="32"></mat-spinner>
+  } @else {
+    <div class="data-table-wrap">
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Nombre</th>
+          <td mat-cell *matCellDef="let comunidad">{{ comunidad.nombre }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lugar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Lugar</th>
+          <td mat-cell *matCellDef="let comunidad">{{ comunidad.lugar }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="direccion">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Direccion</th>
+          <td mat-cell *matCellDef="let comunidad">{{ comunidad.direccion }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let comunidad">
+            <button class="button" type="button" (click)="edit(comunidad)">Editar</button>
+            <button class="button" type="button" (click)="remove(comunidad)">Eliminar</button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      @if (!dataSource.data.length) {
+        <p class="auth-copy">No hay comunidades registradas todavia.</p>
+      }
+    </div>
+  }
+</section>

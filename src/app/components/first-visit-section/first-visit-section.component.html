@@ -1,0 +1,20 @@
+<section class="first-visit" id="visita" aria-labelledby="visit-title">
+  <div class="section-heading reveal">
+    <p class="eyebrow">¿ES TU PRIMERA VEZ?</p>
+    <h2 id="visit-title">ANTES DE<br>LLEGAR.</h2>
+  </div>
+  <div class="visit-grid">
+    <div class="visit-essential reveal">
+      <p class="serif-lead">Lo primero es saber donde nos vemos esta semana. Si la reunion es por casas, preguntanos cual te queda mas cerca.</p>
+      <a class="button button-dark" [href]="facebookUrl" target="_blank" rel="noopener">Revisar convocatoria ↗</a>
+    </div>
+    <div class="faq reveal" id="faq-list">
+      @for (item of firstVisit; track item[0]) {
+        <details>
+          <summary>{{ item[0] }}</summary>
+          <p>{{ item[1] }}</p>
+        </details>
+      }
+    </div>
+  </div>
+</section>
