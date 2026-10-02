@@ -43,6 +43,7 @@ export interface Persona {
   estatus: string;
   fechaAlta: string | null;
   createdAt: string | null;
+  updatedAt: string | null;
 }
 
 export interface PersonaEditPayload {

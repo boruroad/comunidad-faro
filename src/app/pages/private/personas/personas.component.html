@@ -499,6 +499,8 @@
                   <div><small>ES LIDER</small><br>{{ persona.esLider ? 'Si' : 'No' }}</div>
                   <div><small>ES SERVIDOR</small><br>{{ persona.esServidor ? 'Si' : 'No' }}</div>
                   <div><small>ORIGEN DE REGISTRO</small><br>{{ persona.registradoPorNombre || '—' }}</div>
+                  <div><small>REGISTRADO EL</small><br>{{ persona.createdAt || '—' }}</div>
+                  <div><small>ACTUALIZADO EL</small><br>{{ persona.updatedAt || '—' }}</div>
                 </div>
                 <p class="auth-copy" style="margin-top: 1rem;">{{ persona.observaciones || 'Sin comentarios.' }}</p>
 
