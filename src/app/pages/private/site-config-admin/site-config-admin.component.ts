@@ -5,6 +5,8 @@ import { RouterLink } from '@angular/router';
 
 import { SiteConfigAdminService, SiteConfigVersion } from './site-config-admin.service';
 import { FARO_CONFIG } from '../../../faro-config';
+import { CONFIG_SCHEMA } from './config-schema';
+import { DynamicConfigEditorComponent } from './dynamic-config-editor/dynamic-config-editor.component';
 
 @Component({
   selector: 'app-site-config-admin',
@@ -12,7 +14,8 @@ import { FARO_CONFIG } from '../../../faro-config';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterLink
+    RouterLink,
+    DynamicConfigEditorComponent
   ],
   templateUrl: './site-config-admin.component.html'
 })
@@ -27,16 +30,25 @@ export class SiteConfigAdminComponent implements OnInit {
   readonly versions = signal<SiteConfigVersion[]>([]);
   readonly selectedId = signal<number | null>(null);
 
+  // Estado estructurado de la configuracion (reemplaza al textarea con JSON crudo).
+  readonly configSchema = CONFIG_SCHEMA;
+  readonly configValue = signal<Record<string, unknown>>(
+    FARO_CONFIG as unknown as Record<string, unknown>
+  );
+
   readonly form = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(180)]],
     descripcion: ['', [Validators.maxLength(255)]],
-    configJson: ['{}', [Validators.required]],
     activateOnSave: [false]
   });
 
   // El adminGuard de la ruta ya garantiza el rol; aqui solo cargamos datos.
   ngOnInit(): void {
     this.loadVersions();
+  }
+
+  onConfigChange(nextValue: Record<string, unknown>): void {
+    this.configValue.set(nextValue);
   }
 
   createFromCurrentEditor(): void {
@@ -53,10 +65,10 @@ export class SiteConfigAdminComponent implements OnInit {
 
   edit(version: SiteConfigVersion): void {
     this.selectedId.set(version.id);
+    this.configValue.set(version.config);
     this.form.patchValue({
       nombre: version.nombre,
       descripcion: version.descripcion,
-      configJson: JSON.stringify(version.config, null, 2),
       activateOnSave: version.activo
     });
 
@@ -103,15 +115,10 @@ export class SiteConfigAdminComponent implements OnInit {
       return;
     }
 
-    const parsed = this.parseConfigJson(this.form.value.configJson || '');
-    if (!parsed) {
-      this.errorMessage.set('El campo JSON no es valido. Debe ser un objeto JSON.');
-      return;
-    }
-
     const nombre = (this.form.value.nombre || '').trim();
     const descripcion = (this.form.value.descripcion || '').trim();
     const activateOnSave = Boolean(this.form.value.activateOnSave);
+    const config = this.configValue();
 
     this.saving.set(true);
 
@@ -122,7 +129,7 @@ export class SiteConfigAdminComponent implements OnInit {
         .update(selectedId, {
           nombre,
           descripcion,
-          config: parsed
+          config
         })
         .subscribe({
           next: () => {
@@ -149,7 +156,7 @@ export class SiteConfigAdminComponent implements OnInit {
       .create({
         nombre,
         descripcion,
-        config: parsed,
+        config,
         activate: activateOnSave
       })
       .subscribe({
@@ -183,11 +190,11 @@ export class SiteConfigAdminComponent implements OnInit {
         const active = items.find(item => item.activo) || null;
 
         if (!this.selectedId()) {
-          const seedConfig = active?.config ?? FARO_CONFIG;
+          const seedConfig = active?.config ?? (FARO_CONFIG as unknown as Record<string, unknown>);
+          this.configValue.set(seedConfig);
           this.form.patchValue({
             nombre: active?.nombre ?? 'Configuracion inicial',
             descripcion: active?.descripcion ?? '',
-            configJson: JSON.stringify(seedConfig, null, 2),
             activateOnSave: true
           });
 
@@ -203,19 +210,5 @@ export class SiteConfigAdminComponent implements OnInit {
         this.loading.set(false);
       }
     });
-  }
-
-  private parseConfigJson(text: string): Record<string, unknown> | null {
-    try {
-      const decoded: unknown = JSON.parse(text);
-
-      if (!decoded || typeof decoded !== 'object' || Array.isArray(decoded)) {
-        return null;
-      }
-
-      return decoded as Record<string, unknown>;
-    } catch {
-      return null;
-    }
   }
 }

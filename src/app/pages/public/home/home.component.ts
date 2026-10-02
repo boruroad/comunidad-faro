@@ -3,10 +3,10 @@ import { AfterViewInit, Component, OnDestroy, inject } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import {
   Clip,
-  FARO_CONFIG,
   FaroConfig,
   LiveBroadcast
 } from '../../../faro-config';
+import { RuntimeConfigService } from '../../../config/runtime-config.service';
 
 import { AlertBannerComponent } from '../../../components/alert-banner/alert-banner.component';
 import { CalendarSectionComponent } from '../../../components/calendar-section/calendar-section.component';
@@ -49,7 +49,8 @@ import { VoiceStripComponent } from '../../../components/voice-strip/voice-strip
   templateUrl: './home.component.html'
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
-  readonly cfg: FaroConfig = FARO_CONFIG;
+  private readonly runtimeConfig = inject(RuntimeConfigService);
+  readonly cfg: FaroConfig = this.runtimeConfig.config;
   readonly live: LiveBroadcast = this.cfg.live;
   readonly releases = this.cfg.music.releases;
   readonly firstVisit = this.cfg.firstVisit;

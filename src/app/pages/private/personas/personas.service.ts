@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable, map } from 'rxjs';
+import { EMPTY, Observable, expand, map, reduce } from 'rxjs';
 
 import { environment } from '../../../../environments/environment';
 import { SessionService } from '../../../auth/session.service';
@@ -90,7 +90,10 @@ export class PersonasService {
   private readonly session = inject(SessionService);
   private readonly apiBaseUrl = environment.apiBaseUrl.replace(/\/$/, '');
 
-  list(filters: PersonaFilters = {}): Observable<Persona[]> {
+  list(
+    filters: PersonaFilters = {},
+    pagination: { limit: number; offset: number } = { limit: 100, offset: 0 }
+  ): Observable<Persona[]> {
     let params = new HttpParams();
 
     for (const [key, value] of Object.entries(filters)) {
@@ -98,12 +101,30 @@ export class PersonasService {
         params = params.set(this.toSnakeCase(key), value);
       }
     }
+    params = params.set('limit', pagination.limit).set('offset', pagination.offset);
+
     return this.http
       .get<ApiEnvelope<PersonaListPayload>>(this.endpoint('/personas'), {
         headers: this.authHeaders(),
         params
       })
       .pipe(map(response => response.data.items || []));
+  }
+
+  listAll(filters: PersonaFilters = {}): Observable<Persona[]> {
+    const pageSize = 100;
+    const fetchPage = (offset: number) =>
+      this.list(filters, { limit: pageSize, offset }).pipe(
+        map(items => ({
+          items,
+          nextOffset: items.length === pageSize ? offset + pageSize : null
+        }))
+      );
+
+    return fetchPage(0).pipe(
+      expand(page => page.nextOffset === null ? EMPTY : fetchPage(page.nextOffset)),
+      reduce((people, page) => people.concat(page.items), [] as Persona[])
+    );
   }
 
   // Catalogo para el filtro "Lider": solo personas que ya lideran a alguien.
@@ -149,4 +170,3 @@ export class PersonasService {
     });
   }
 }
-

@@ -167,7 +167,7 @@ class CrudController extends BaseController
         $payload = array();
 
         foreach ((array) $source as $key => $value) {
-            $field = strpos($key, '_') !== false ? $key : camel_to_snake((string) $key);
+            $field = strpos($key, '_') !== false ? $key : camelToSnake((string) $key);
 
             if (!empty($this->allowedFields) && !in_array($field, $this->allowedFields, true)) {
                 continue;
@@ -185,6 +185,6 @@ class CrudController extends BaseController
 
     protected function camelize($value)
     {
-        return camelize_keys($value);
+        return camelizeKeys($value);
     }
 }

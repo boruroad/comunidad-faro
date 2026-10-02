@@ -23,11 +23,11 @@ class BaseController
 
     protected function requireAuth()
     {
-        if (!function_exists('get_bearer_token')) {
+        if (!function_exists('getBearerToken')) {
             return null;
         }
 
-        $token = get_bearer_token();
+        $token = getBearerToken();
         if ($token === '') {
             return null;
         }

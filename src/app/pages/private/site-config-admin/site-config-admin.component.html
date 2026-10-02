@@ -14,8 +14,13 @@
         <label for="config-descripcion">Descripcion</label>
         <input id="config-descripcion" type="text" formControlName="descripcion" placeholder="Notas de cambios" />
 
-        <label for="config-json">JSON de configuracion</label>
-        <textarea id="config-json" formControlName="configJson" rows="16" spellcheck="false"></textarea>
+        <div class="config-admin-editor">
+          <app-dynamic-config-editor
+            [schema]="configSchema"
+            [value]="configValue()"
+            (valueChange)="onConfigChange($event)"
+          ></app-dynamic-config-editor>
+        </div>
 
         <label class="config-admin-checkbox">
           <input type="checkbox" formControlName="activateOnSave" />
