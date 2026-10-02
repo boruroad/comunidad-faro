@@ -595,6 +595,37 @@ img{max-width:100%;display:block}
 .dashboard-stats-grid{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
 .dashboard-actions{display:flex;gap:1rem;align-items:center;margin-top:1.4rem;flex-wrap:wrap}
 
+/* Filtros rapidos (chips pequeños, un color distinto por atajo) */
+.quick-filters{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.8rem}
+.chip{
+  font-family:Archivo,sans-serif;
+  font-size:.62rem;
+  letter-spacing:.04em;
+  padding:.35rem .7rem;
+  min-height:auto;
+  border-radius:999px;
+  border:1px solid currentColor;
+  background:#fff;
+  cursor:pointer;
+  transition:background .15s ease,color .15s ease;
+}
+.chip:hover:not(:disabled),.chip:focus-visible:not(:disabled){color:#fff}
+.chip:disabled{opacity:.5;cursor:not-allowed}
+.chip-neutral{color:#5f5a52}
+.chip-neutral:hover:not(:disabled){background:#5f5a52}
+.chip-blue{color:#3f6694}
+.chip-blue:hover:not(:disabled){background:#3f6694}
+.chip-teal{color:#3f7a68}
+.chip-teal:hover:not(:disabled){background:#3f7a68}
+.chip-amber{color:#a66a1f}
+.chip-amber:hover:not(:disabled){background:#a66a1f}
+.chip-plum{color:#7a4a6b}
+.chip-plum:hover:not(:disabled){background:#7a4a6b}
+.chip-terracotta{color:#a84a34}
+.chip-terracotta:hover:not(:disabled){background:#a84a34}
+.chip-olive{color:#6b7a2f}
+.chip-olive:hover:not(:disabled){background:#6b7a2f}
+
 /* Header exclusivo de las paginas privadas (dashboard y sus modulos) */
 .private-header{
   display:grid;

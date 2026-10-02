@@ -89,6 +89,8 @@ export interface PersonaFilters {
   busqueda?: string;
   conCasa?: boolean | string;
   conLider?: boolean | string;
+  esLider?: boolean | string;
+  esServidor?: boolean | string;
 }
 
 interface PersonaListPayload {

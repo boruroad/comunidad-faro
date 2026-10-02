@@ -80,6 +80,8 @@ export class PersonasComponent implements OnInit {
     areaId: [''],
     conCasa: [''],
     conLider: [''],
+    esLider: [''],
+    esServidor: [''],
     soloActivos: [true]
   });
 
@@ -177,8 +179,31 @@ export class PersonasComponent implements OnInit {
       areaId: '',
       conCasa: '',
       conLider: '',
+      esLider: '',
+      esServidor: '',
       soloActivos: true
     });
+    this.search();
+  }
+
+  // Botones de filtro rapido junto a "Nueva persona": cada uno ajusta solo
+  // las dimensiones de origen/rol (origen, esLider, esServidor, conLider) y
+  // deja intactos los demas filtros ya capturados (nombre, busqueda, etc).
+  private static readonly QUICK_FILTER_PRESETS: Record<
+    string,
+    { origen: string; esLider: string; esServidor: string; conLider: string }
+  > = {
+    todos: { origen: '', esLider: '', esServidor: '', conLider: '' },
+    miembros: { origen: 'MIEMBRO', esLider: '', esServidor: '', conLider: '' },
+    interesados: { origen: 'INTERESADO', esLider: '', esServidor: '', conLider: '' },
+    lideres: { origen: '', esLider: '1', esServidor: '', conLider: '' },
+    servidores: { origen: '', esLider: '', esServidor: '1', conLider: '' },
+    sinLider: { origen: '', esLider: '', esServidor: '', conLider: 'false' },
+    conLider: { origen: '', esLider: '', esServidor: '', conLider: 'true' }
+  };
+
+  applyQuickFilter(preset: keyof typeof PersonasComponent.QUICK_FILTER_PRESETS): void {
+    this.filtersForm.patchValue(PersonasComponent.QUICK_FILTER_PRESETS[preset]);
     this.search();
   }
 

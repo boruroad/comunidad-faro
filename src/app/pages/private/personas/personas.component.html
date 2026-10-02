@@ -140,6 +140,16 @@
     </div>
   }
 
+  <div class="quick-filters" role="group" aria-label="Filtros rapidos">
+    <button class="chip chip-neutral" type="button" (click)="applyQuickFilter('todos')" [disabled]="loading()">Cargar todos</button>
+    <button class="chip chip-blue" type="button" (click)="applyQuickFilter('miembros')" [disabled]="loading()">Cargar miembros</button>
+    <button class="chip chip-teal" type="button" (click)="applyQuickFilter('interesados')" [disabled]="loading()">Cargar interesados</button>
+    <button class="chip chip-amber" type="button" (click)="applyQuickFilter('lideres')" [disabled]="loading()">Cargar lideres</button>
+    <button class="chip chip-plum" type="button" (click)="applyQuickFilter('servidores')" [disabled]="loading()">Cargar servidores</button>
+    <button class="chip chip-terracotta" type="button" (click)="applyQuickFilter('sinLider')" [disabled]="loading()">Cargar sin lider</button>
+    <button class="chip chip-olive" type="button" (click)="applyQuickFilter('conLider')" [disabled]="loading()">Cargar con lider</button>
+  </div>
+
   @if (currentUser.isAdmin() && creatingNew()) {
     <form class="config-admin-form" [formGroup]="editForm" (ngSubmit)="saveCreate()">
       <div class="filters-grid">
