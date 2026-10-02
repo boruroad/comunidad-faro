@@ -24,6 +24,7 @@ import { CurrentUserService } from '../../auth/current-user.service';
         @if (currentUser.isAdmin()) {
           <a routerLink="/dashboard/comunidades" routerLinkActive="is-active">Comunidades</a>
           <a routerLink="/dashboard/casas" routerLinkActive="is-active">Casas</a>
+          <a routerLink="/dashboard/areas" routerLinkActive="is-active">Areas</a>
           <a routerLink="/dashboard/configuracion" routerLinkActive="is-active">Configuracion</a>
         }
       </nav>

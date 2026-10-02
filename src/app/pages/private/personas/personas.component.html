@@ -4,80 +4,126 @@
   <p class="auth-copy">Consulta y filtra el directorio de personas (miembros e interesados).</p>
 
   <form class="filters-form" [formGroup]="filtersForm" (ngSubmit)="search()">
-    <div class="filters-grid">
-      <label>
-        <span>Nombre</span>
-        <input type="text" formControlName="nombre" placeholder="Buscar por nombre">
+    <div class="search-bar">
+      <label class="search-bar-field">
+        <span>Buscar</span>
+        <input
+          type="text"
+          formControlName="busqueda"
+          placeholder="Busca por nombre, telefono, correo, direccion, casa, lider, area..."
+        >
       </label>
-      <label>
-        <span>Apellido paterno</span>
-        <input type="text" formControlName="apellidoPaterno" placeholder="Buscar apellido paterno">
-      </label>
-      <label>
-        <span>Apellido materno</span>
-        <input type="text" formControlName="apellidoMaterno" placeholder="Buscar apellido materno">
-      </label>
-      <label>
-        <span>Telefono</span>
-        <input type="text" formControlName="telefono" placeholder="Buscar telefono">
-      </label>
-      <label>
-        <span>Whatsapp</span>
-        <input type="text" formControlName="whatsapp" placeholder="Buscar whatsapp">
-      </label>
-      <label>
-        <span>Correo</span>
-        <input type="text" formControlName="email" placeholder="Buscar correo">
-      </label>
-      <label>
-        <span>Como se entero</span>
-        <input type="text" formControlName="comoSeEntero" placeholder="Buscar como se entero">
-      </label>
-      <label>
-        <span>Medio de contacto</span>
-        <select formControlName="medioContactoPreferido">
-          <option value="">Todos</option>
-          <option value="WHATSAPP">Whatsapp</option>
-          <option value="LLAMADA">Llamada</option>
-          <option value="EMAIL">Email</option>
-        </select>
-      </label>
-      <label>
-        <span>Estatus</span>
-        <select formControlName="estatus">
-          <option value="">Todos</option>
-          <option value="NUEVO">Nuevo</option>
-          <option value="CONTACTADO">Contactado</option>
-          <option value="DESCARTADO">Descartado</option>
-          <option value="ACTIVO">Activo</option>
-          <option value="INACTIVO">Inactivo</option>
-          <option value="FALLECIDO">Fallecido</option>
-          <option value="BAJA">Baja</option>
-        </select>
-      </label>
-      <label>
-        <span>Origen</span>
-        <select formControlName="origen">
-          <option value="">Todos</option>
-          <option value="INTERESADO">Interesado</option>
-          <option value="MIEMBRO">Miembro</option>
-        </select>
-      </label>
-      <label>
-        <span>Lider</span>
-        <select formControlName="liderId">
-          <option value="">Todos</option>
-          @for (lider of lideres(); track lider.id) {
-            <option [value]="lider.id">{{ nombreCompleto(lider) }}</option>
-          }
-        </select>
-      </label>
+      <button class="button button-dark" type="submit" [disabled]="loading()">Buscar</button>
+      <button class="button" type="button" (click)="toggleFilters()">
+        {{ showFilters() ? 'Ocultar filtros' : 'Ver filtros' }}
+      </button>
     </div>
 
-    <div class="filters-actions">
-      <button class="button button-dark" type="submit" [disabled]="loading()">Buscar</button>
-      <button class="button" type="button" (click)="clearFilters()" [disabled]="loading()">Limpiar filtros</button>
-    </div>
+    @if (showFilters()) {
+      <div class="filters-grid">
+        <label>
+          <span>Nombre</span>
+          <input type="text" formControlName="nombre" placeholder="Buscar por nombre">
+        </label>
+        <label>
+          <span>Apellido paterno</span>
+          <input type="text" formControlName="apellidoPaterno" placeholder="Buscar apellido paterno">
+        </label>
+        <label>
+          <span>Apellido materno</span>
+          <input type="text" formControlName="apellidoMaterno" placeholder="Buscar apellido materno">
+        </label>
+        <label>
+          <span>Telefono</span>
+          <input type="text" formControlName="telefono" placeholder="Buscar telefono">
+        </label>
+        <label>
+          <span>Whatsapp</span>
+          <input type="text" formControlName="whatsapp" placeholder="Buscar whatsapp">
+        </label>
+        <label>
+          <span>Correo</span>
+          <input type="text" formControlName="email" placeholder="Buscar correo">
+        </label>
+        <label>
+          <span>Como se entero</span>
+          <input type="text" formControlName="comoSeEntero" placeholder="Buscar como se entero">
+        </label>
+        <label>
+          <span>Medio de contacto</span>
+          <select formControlName="medioContactoPreferido">
+            <option value="">Todos</option>
+            <option value="WHATSAPP">Whatsapp</option>
+            <option value="LLAMADA">Llamada</option>
+            <option value="EMAIL">Email</option>
+          </select>
+        </label>
+        <label>
+          <span>Estatus</span>
+          <select formControlName="estatus">
+            <option value="">Todos</option>
+            <option value="NUEVO">Nuevo</option>
+            <option value="CONTACTADO">Contactado</option>
+            <option value="DESCARTADO">Descartado</option>
+            <option value="ACTIVO">Activo</option>
+            <option value="INACTIVO">Inactivo</option>
+            <option value="FALLECIDO">Fallecido</option>
+            <option value="BAJA">Baja</option>
+          </select>
+        </label>
+        <label>
+          <span>Origen</span>
+          <select formControlName="origen">
+            <option value="">Todos</option>
+            <option value="INTERESADO">Interesado</option>
+            <option value="MIEMBRO">Miembro</option>
+          </select>
+        </label>
+        <label>
+          <span>Lider</span>
+          <select formControlName="liderId">
+            <option value="">Todos</option>
+            @for (lider of lideres(); track lider.id) {
+              <option [value]="lider.id">{{ nombreCompleto(lider) }}</option>
+            }
+          </select>
+        </label>
+        <label>
+          <span>Area</span>
+          <select formControlName="areaId">
+            <option value="">Todas</option>
+            @for (area of areas(); track area.id) {
+              <option [value]="area.id">{{ area.nombre }}</option>
+            }
+          </select>
+        </label>
+        <label>
+          <span>Tiene casa</span>
+          <select formControlName="conCasa">
+            <option value="">Todos</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+        </label>
+        <label>
+          <span>Tiene lider</span>
+          <select formControlName="conLider">
+            <option value="">Todos</option>
+            <option value="true">Si</option>
+            <option value="false">No</option>
+          </select>
+        </label>
+      </div>
+
+      <label class="config-admin-checkbox">
+        <input type="checkbox" formControlName="soloActivos" />
+        <span>Solo activos (excluye inactivo, baja, fallecido y descartado)</span>
+      </label>
+
+      <div class="filters-actions">
+        <button class="button" type="button" (click)="clearFilters()" [disabled]="loading()">Limpiar filtros</button>
+      </div>
+    }
   </form>
 
   @if (successMessage()) {
@@ -182,12 +228,38 @@
           <span>Lider</span>
           <select formControlName="liderId">
             <option [value]="null">Sin lider</option>
-            @for (candidato of dataSource.data; track candidato.id) {
+            @for (candidato of lideres(); track candidato.id) {
               <option [value]="candidato.id">{{ nombreCompleto(candidato) }}</option>
             }
           </select>
         </label>
+        <label>
+          <span>Area</span>
+          <select formControlName="areaId">
+            <option [value]="null">Sin area</option>
+            @for (area of areas(); track area.id) {
+              <option [value]="area.id">{{ area.nombre }}</option>
+            }
+          </select>
+        </label>
       </div>
+
+      <label class="config-admin-checkbox">
+        <input type="checkbox" formControlName="asisteReunionGeneral" />
+        <span>Asiste a reunion general</span>
+      </label>
+      <label class="config-admin-checkbox">
+        <input type="checkbox" formControlName="asisteCasa" />
+        <span>Asiste a casa</span>
+      </label>
+      <label class="config-admin-checkbox">
+        <input type="checkbox" formControlName="esLider" />
+        <span>Es lider</span>
+      </label>
+      <label class="config-admin-checkbox">
+        <input type="checkbox" formControlName="esServidor" />
+        <span>Es servidor</span>
+      </label>
 
       <label for="persona-create-observaciones">Observaciones / comentario</label>
       <textarea id="persona-create-observaciones" formControlName="observaciones" rows="3"></textarea>
@@ -228,11 +300,6 @@
           <td mat-cell *matCellDef="let persona">{{ persona.whatsapp || persona.telefono || '—' }}</td>
         </ng-container>
 
-        <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Correo</th>
-          <td mat-cell *matCellDef="let persona">{{ persona.email || '—' }}</td>
-        </ng-container>
-
         <ng-container matColumnDef="casaNombre">
           <th mat-header-cell *matHeaderCellDef>Casa</th>
           <td mat-cell *matCellDef="let persona">{{ persona.casaNombre || '—' }}</td>
@@ -241,6 +308,11 @@
         <ng-container matColumnDef="liderNombre">
           <th mat-header-cell *matHeaderCellDef>Lider</th>
           <td mat-cell *matCellDef="let persona">{{ persona.liderNombre || '—' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="areaNombre">
+          <th mat-header-cell *matHeaderCellDef>Area</th>
+          <td mat-cell *matCellDef="let persona">{{ persona.areaNombre || '—' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="estatus">
@@ -257,6 +329,16 @@
         <ng-container matColumnDef="origen">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Origen</th>
           <td mat-cell *matCellDef="let persona">{{ persona.origen }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="esLider">
+          <th mat-header-cell *matHeaderCellDef>Es lider</th>
+          <td mat-cell *matCellDef="let persona">{{ persona.esLider ? 'Si' : '—' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="esServidor">
+          <th mat-header-cell *matHeaderCellDef>Es servidor</th>
+          <td mat-cell *matCellDef="let persona">{{ persona.esServidor ? 'Si' : '—' }}</td>
         </ng-container>
 
         <ng-container matColumnDef="expandedDetail">
@@ -355,7 +437,33 @@
                         }
                       </select>
                     </label>
+                    <label>
+                      <span>Area</span>
+                      <select formControlName="areaId">
+                        <option [value]="null">Sin area</option>
+                        @for (area of areas(); track area.id) {
+                          <option [value]="area.id">{{ area.nombre }}</option>
+                        }
+                      </select>
+                    </label>
                   </div>
+
+                  <label class="config-admin-checkbox">
+                    <input type="checkbox" formControlName="asisteReunionGeneral" />
+                    <span>Asiste a reunion general</span>
+                  </label>
+                  <label class="config-admin-checkbox">
+                    <input type="checkbox" formControlName="asisteCasa" />
+                    <span>Asiste a casa</span>
+                  </label>
+                  <label class="config-admin-checkbox">
+                    <input type="checkbox" formControlName="esLider" />
+                    <span>Es lider</span>
+                  </label>
+                  <label class="config-admin-checkbox">
+                    <input type="checkbox" formControlName="esServidor" />
+                    <span>Es servidor</span>
+                  </label>
 
                   <label for="persona-edit-observaciones">Observaciones / comentario</label>
                   <textarea id="persona-edit-observaciones" formControlName="observaciones" rows="3"></textarea>
@@ -367,6 +475,7 @@
                 </form>
               } @else {
                 <div class="filters-grid">
+                  <div><small>CORREO</small><br>{{ persona.email || '—' }}</div>
                   <div><small>TELEFONO</small><br>{{ persona.telefono || '—' }}</div>
                   <div><small>DIRECCION</small><br>{{ persona.direccion || '—' }}</div>
                   <div><small>BARRIO</small><br>{{ persona.barrio || '—' }}</div>
@@ -375,6 +484,11 @@
                   <div><small>FECHA DE ALTA</small><br>{{ persona.fechaAlta || '—' }}</div>
                   <div><small>COMO SE ENTERO</small><br>{{ persona.comoSeEntero || '—' }}</div>
                   <div><small>MEDIO PREFERIDO</small><br>{{ persona.medioContactoPreferido || '—' }}</div>
+                  <div><small>ASISTE A REUNION GENERAL</small><br>{{ persona.asisteReunionGeneral ? 'Si' : 'No' }}</div>
+                  <div><small>ASISTE A CASA</small><br>{{ persona.asisteCasa ? 'Si' : 'No' }}</div>
+                  <div><small>ES LIDER</small><br>{{ persona.esLider ? 'Si' : 'No' }}</div>
+                  <div><small>ES SERVIDOR</small><br>{{ persona.esServidor ? 'Si' : 'No' }}</div>
+                  <div><small>ORIGEN DE REGISTRO</small><br>{{ persona.registradoPorNombre || '—' }}</div>
                 </div>
                 <p class="auth-copy" style="margin-top: 1rem;">{{ persona.observaciones || 'Sin comentarios.' }}</p>
 

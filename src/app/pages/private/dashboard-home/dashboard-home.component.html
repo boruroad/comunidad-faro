@@ -12,34 +12,58 @@
     <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
   } @else if (stats(); as indicadores) {
     <div class="dashboard-grid dashboard-stats-grid">
-      <article class="dashboard-card">
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: 'MIEMBRO', soloActivos: 'true' }"
+      >
         <small>MIEMBROS ACTIVOS</small>
         <strong>{{ indicadores.miembros }}</strong>
-      </article>
-      <article class="dashboard-card">
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: 'INTERESADO', soloActivos: 'true' }"
+      >
         <small>INTERESADOS ACTIVOS</small>
         <strong>{{ indicadores.interesados }}</strong>
-      </article>
-      <article class="dashboard-card">
+      </a>
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/casas">
         <small>CASAS REGISTRADAS</small>
         <strong>{{ indicadores.casas }}</strong>
-      </article>
-      <article class="dashboard-card">
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conCasa: 'true' }"
+      >
         <small>SE REÚNEN EN CASAS</small>
         <strong>{{ indicadores.enCasas }}</strong>
-      </article>
-      <article class="dashboard-card">
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conCasa: 'false' }"
+      >
         <small>NO VAN A CASAS</small>
         <strong>{{ indicadores.sinCasa }}</strong>
-      </article>
-      <article class="dashboard-card">
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conLider: 'true' }"
+      >
         <small>BAJO UN LÍDER</small>
         <strong>{{ indicadores.conLider }}</strong>
-      </article>
-      <article class="dashboard-card">
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conLider: 'false' }"
+      >
         <small>SIN LÍDER</small>
         <strong>{{ indicadores.sinLider }}</strong>
-      </article>
+      </a>
     </div>
   }
 
@@ -61,6 +85,10 @@
       <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/casas">
         <small>MODULO</small>
         <strong>Casas</strong>
+      </a>
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/areas">
+        <small>MODULO</small>
+        <strong>Areas</strong>
       </a>
       <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/configuracion">
         <small>MODULO</small>

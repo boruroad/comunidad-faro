@@ -2,12 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit, ViewChild, inject, signal } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { CurrentUserService } from '../../../auth/current-user.service';
 import { Casa, CasasService } from '../casas/casas.service';
+import { Area, AreasService } from '../areas/areas.service';
 import { Persona, PersonaEditPayload, PersonaFilters, PersonasService } from './personas.service';
 
 @Component({
@@ -26,6 +28,8 @@ export class PersonasComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
   private readonly personasService = inject(PersonasService);
   private readonly casasService = inject(CasasService);
+  private readonly areasService = inject(AreasService);
+  private readonly route = inject(ActivatedRoute);
   readonly currentUser = inject(CurrentUserService);
 
   @ViewChild(MatSort) private readonly sort?: MatSort;
@@ -34,7 +38,9 @@ export class PersonasComponent implements OnInit {
   readonly saving = signal(false);
   readonly errorMessage = signal('');
   readonly successMessage = signal('');
+  readonly showFilters = signal(false);
   readonly casas = signal<Casa[]>([]);
+  readonly areas = signal<Area[]>([]);
   readonly lideres = signal<Persona[]>([]);
 
   readonly expandedId = signal<number | null>(null);
@@ -45,16 +51,21 @@ export class PersonasComponent implements OnInit {
     'expand',
     'nombre',
     'whatsapp',
-    'email',
     'casaNombre',
     'liderNombre',
+    'areaNombre',
     'estatus',
-    'origen'
+    'origen',
+    'esLider',
+    'esServidor'
   ];
   readonly dataSource = new MatTableDataSource<Persona>([]);
 
   // El default es INTERESADO: es el flujo publico que mas se necesita revisar hoy.
+  // soloActivos arranca en true: deja fuera inactivos/baja/fallecido/descartado
+  // a menos que se desmarque (vease PersonaController::index en el backend).
   readonly filtersForm = this.fb.group({
+    busqueda: [''],
     nombre: [''],
     apellidoPaterno: [''],
     apellidoMaterno: [''],
@@ -65,7 +76,11 @@ export class PersonasComponent implements OnInit {
     medioContactoPreferido: [''],
     estatus: [''],
     origen: ['INTERESADO'],
-    liderId: ['']
+    liderId: [''],
+    areaId: [''],
+    conCasa: [''],
+    conLider: [''],
+    soloActivos: [true]
   });
 
   readonly editForm = this.fb.group({
@@ -83,15 +98,47 @@ export class PersonasComponent implements OnInit {
     estatus: [''],
     comoSeEntero: [''],
     medioContactoPreferido: [''],
+    asisteReunionGeneral: [false],
+    asisteCasa: [false],
+    esLider: [false],
+    esServidor: [false],
     observaciones: [''],
     casaId: [null as number | null],
-    liderId: [null as number | null]
+    liderId: [null as number | null],
+    areaId: [null as number | null]
   });
 
   ngOnInit(): void {
     this.casasService.list().subscribe(casas => this.casas.set(casas));
+    this.areasService.list().subscribe(areas => this.areas.set(areas));
     this.personasService.listLideres().subscribe(lideres => this.lideres.set(lideres));
-    this.search();
+
+    // Los indicadores del dashboard enlazan aqui con query params (ej.
+    // ?conLider=0) para reproducir exactamente el mismo subconjunto que
+    // mostraba el indicador. Se suscribe (no solo snapshot) porque Angular
+    // reutiliza esta instancia si ya estabamos en /dashboard/personas.
+    this.route.queryParamMap.subscribe(params => {
+      const conCasa = params.get('conCasa');
+      const conLider = params.get('conLider');
+
+      this.filtersForm.patchValue({
+        origen: params.get('origen') ?? 'INTERESADO',
+        estatus: params.get('estatus') ?? '',
+        soloActivos: params.has('soloActivos') ? params.get('soloActivos') === 'true' : true,
+        conCasa: conCasa ?? '',
+        conLider: conLider ?? ''
+      });
+
+      if (conCasa !== null || conLider !== null || params.has('estatus')) {
+        this.showFilters.set(true);
+      }
+
+      this.search();
+    });
+  }
+
+  toggleFilters(): void {
+    this.showFilters.update(value => !value);
   }
 
   search(): void {
@@ -115,6 +162,7 @@ export class PersonasComponent implements OnInit {
 
   clearFilters(): void {
     this.filtersForm.reset({
+      busqueda: '',
       nombre: '',
       apellidoPaterno: '',
       apellidoMaterno: '',
@@ -125,7 +173,11 @@ export class PersonasComponent implements OnInit {
       medioContactoPreferido: '',
       estatus: '',
       origen: '',
-      liderId: ''
+      liderId: '',
+      areaId: '',
+      conCasa: '',
+      conLider: '',
+      soloActivos: true
     });
     this.search();
   }
@@ -136,9 +188,9 @@ export class PersonasComponent implements OnInit {
       .join(' ');
   }
 
-  // Otras personas disponibles para asignar como lider (no puede ser ella misma).
+  // Candidatos a lider: solo personas marcadas como es_lider=1 (no ella misma).
   posiblesLideres(persona: Persona): Persona[] {
-    return this.dataSource.data.filter(candidato => candidato.id !== persona.id);
+    return this.lideres().filter(candidato => candidato.id !== persona.id);
   }
 
   toggleExpand(persona: Persona): void {
@@ -171,9 +223,14 @@ export class PersonasComponent implements OnInit {
       estatus: persona.estatus,
       comoSeEntero: persona.comoSeEntero || '',
       medioContactoPreferido: persona.medioContactoPreferido || '',
+      asisteReunionGeneral: persona.asisteReunionGeneral,
+      asisteCasa: persona.asisteCasa,
+      esLider: persona.esLider,
+      esServidor: persona.esServidor,
       observaciones: persona.observaciones || '',
       casaId: persona.casaId,
-      liderId: persona.liderId
+      liderId: persona.liderId,
+      areaId: persona.areaId
     });
   }
 
@@ -203,9 +260,14 @@ export class PersonasComponent implements OnInit {
       estatus: 'NUEVO',
       comoSeEntero: '',
       medioContactoPreferido: '',
+      asisteReunionGeneral: false,
+      asisteCasa: false,
+      esLider: false,
+      esServidor: false,
       observaciones: '',
       casaId: null,
-      liderId: null
+      liderId: null,
+      areaId: null
     });
   }
 
@@ -230,9 +292,14 @@ export class PersonasComponent implements OnInit {
       estatus: value.estatus || '',
       comoSeEntero: value.comoSeEntero || '',
       medioContactoPreferido: value.medioContactoPreferido || '',
+      asisteReunionGeneral: Boolean(value.asisteReunionGeneral),
+      asisteCasa: Boolean(value.asisteCasa),
+      esLider: Boolean(value.esLider),
+      esServidor: Boolean(value.esServidor),
       observaciones: value.observaciones || '',
       casaId: value.casaId ? Number(value.casaId) : null,
-      liderId: value.liderId ? Number(value.liderId) : null
+      liderId: value.liderId ? Number(value.liderId) : null,
+      areaId: value.areaId ? Number(value.areaId) : null
     };
 
     this.personasService.update(persona.id, payload).subscribe({
@@ -282,9 +349,14 @@ export class PersonasComponent implements OnInit {
       estatus: value.estatus || '',
       comoSeEntero: value.comoSeEntero || '',
       medioContactoPreferido: value.medioContactoPreferido || '',
+      asisteReunionGeneral: Boolean(value.asisteReunionGeneral),
+      asisteCasa: Boolean(value.asisteCasa),
+      esLider: Boolean(value.esLider),
+      esServidor: Boolean(value.esServidor),
       observaciones: value.observaciones || '',
       casaId: value.casaId ? Number(value.casaId) : null,
-      liderId: value.liderId ? Number(value.liderId) : null
+      liderId: value.liderId ? Number(value.liderId) : null,
+      areaId: value.areaId ? Number(value.areaId) : null
     };
 
     this.personasService.create(payload).subscribe({

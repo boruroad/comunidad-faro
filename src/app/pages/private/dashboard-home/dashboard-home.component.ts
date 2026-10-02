@@ -33,22 +33,23 @@ export class DashboardHomeComponent implements OnInit {
 
   ngOnInit(): void {
     forkJoin({
-      personas: this.personasService.listAll({ estatus: 'ACTIVO' }),
+      personas: this.personasService.listAll({ soloActivos: true }),
       casas: this.casasService.listAll()
     }).subscribe({
       next: ({ personas, casas }) => {
-        const activas = personas.filter(persona => persona.estatus === 'ACTIVO');
-        const conCasa = activas.filter(persona => persona.casaId !== null);
-        const conLider = activas.filter(persona => persona.liderId !== null);
+        // El backend ya filtra "solo activos" (excluye inactivo/baja/fallecido/
+        // descartado); aqui no se vuelve a filtrar por estatus.
+        const conCasa = personas.filter(persona => persona.casaId !== null);
+        const conLider = personas.filter(persona => persona.liderId !== null);
 
         this.stats.set({
-          miembros: activas.filter(persona => persona.origen === 'MIEMBRO').length,
-          interesados: activas.filter(persona => persona.origen === 'INTERESADO').length,
+          miembros: personas.filter(persona => persona.origen === 'MIEMBRO').length,
+          interesados: personas.filter(persona => persona.origen === 'INTERESADO').length,
           casas: casas.length,
           enCasas: conCasa.length,
-          sinCasa: activas.length - conCasa.length,
+          sinCasa: personas.length - conCasa.length,
           conLider: conLider.length,
-          sinLider: activas.length - conLider.length
+          sinLider: personas.length - conLider.length
         });
         this.loading.set(false);
       },

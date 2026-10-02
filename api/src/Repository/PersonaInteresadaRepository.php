@@ -16,6 +16,18 @@ class PersonaInteresadaRepository extends BaseRepository
         'observaciones',
         'estatus',
         'acepto_privacidad',
-        'acepto_privacidad_at'
+        'acepto_privacidad_at',
+        'fecha_alta'
     );
+
+    // Misma regla que PersonaRepository: fecha_alta se fija sola al crear.
+    public function create($data)
+    {
+        $data = (array) $data;
+        if (empty($data['fecha_alta'])) {
+            $data['fecha_alta'] = date('Y-m-d');
+        }
+
+        return parent::create($data);
+    }
 }

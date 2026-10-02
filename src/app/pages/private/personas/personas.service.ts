@@ -18,6 +18,8 @@ export interface Persona {
   casaNombre: string | null;
   liderId: number | null;
   liderNombre: string | null;
+  areaId: number | null;
+  areaNombre: string | null;
   numeroControl: string | null;
   origen: 'MIEMBRO' | 'INTERESADO';
   nombre: string;
@@ -32,6 +34,11 @@ export interface Persona {
   seccion: string | null;
   comoSeEntero: string | null;
   medioContactoPreferido: string | null;
+  asisteReunionGeneral: boolean;
+  asisteCasa: boolean;
+  esLider: boolean;
+  esServidor: boolean;
+  registradoPorNombre: string | null;
   observaciones: string | null;
   estatus: string;
   fechaAlta: string | null;
@@ -42,6 +49,7 @@ export interface PersonaEditPayload {
   comunidadId?: number | null;
   casaId?: number | null;
   liderId?: number | null;
+  areaId?: number | null;
   numeroControl?: string;
   origen?: string;
   nombre?: string;
@@ -56,6 +64,10 @@ export interface PersonaEditPayload {
   estatus?: string;
   comoSeEntero?: string;
   medioContactoPreferido?: string;
+  asisteReunionGeneral?: boolean;
+  asisteCasa?: boolean;
+  esLider?: boolean;
+  esServidor?: boolean;
   observaciones?: string;
 }
 
@@ -72,6 +84,11 @@ export interface PersonaFilters {
   estatus?: string;
   origen?: string;
   liderId?: number | string;
+  areaId?: number | string;
+  soloActivos?: boolean;
+  busqueda?: string;
+  conCasa?: boolean | string;
+  conLider?: boolean | string;
 }
 
 interface PersonaListPayload {

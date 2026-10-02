@@ -654,7 +654,19 @@ img{max-width:100%;display:block}
 
 /* Panel de filtros de busqueda (Personas, Comunidades) */
 .filters-form{margin-top:1.4rem;border-top:1px solid var(--line);padding-top:1.2rem}
-.filters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.9rem}
+.search-bar{display:flex;gap:.8rem;align-items:flex-end;flex-wrap:wrap}
+.search-bar-field{flex:1 1 320px;display:flex;flex-direction:column;gap:.3rem}
+.search-bar-field span{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#726d65}
+.search-bar-field input{
+  border:0;
+  border-bottom:1px solid #a9a195;
+  background:transparent;
+  padding:.6rem 0;
+  outline:0;
+  font:400 1rem "Source Serif 4",serif;
+}
+.search-bar-field input:focus{border-color:var(--ink)}
+.filters-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:.9rem;margin-top:1.2rem}
 .filters-grid label{display:flex;flex-direction:column;gap:.3rem}
 .filters-grid label span{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#726d65}
 .filters-grid input,.filters-grid select{
@@ -748,6 +760,19 @@ dialog.modal-panel::backdrop{
 .config-list-item>.config-editor{padding:.2rem .9rem .9rem}
 .config-list-item-actions{display:flex;gap:.4rem;flex-shrink:0}
 .config-list-item-actions .button{padding:.3rem .55rem;min-height:auto;font-size:.6rem}
+
+/* Edicion inline en tablas de catalogo (Comunidades, Casas, Areas) */
+.data-table-wrap td input[type="text"],
+.data-table-wrap td input[type="number"],
+.data-table-wrap td select{
+  width:100%;
+  border:1px solid #c8c0b4;
+  background:#fdfbf7;
+  padding:.4rem .5rem;
+  font:400 .88rem "Source Serif 4",serif;
+}
+.data-table-wrap td .coord-input{width:7.5rem;display:inline-block;margin-right:.4rem}
+.inline-create-row td{background:#f3f0e9}
 
 @media(max-width:760px){
   .site-alert-inner{

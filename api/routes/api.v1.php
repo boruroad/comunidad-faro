@@ -98,6 +98,11 @@ register_crud($router, '/api/v1/casas', 'CasaController');
 register_crud($router, '/api/v1/roles', 'RolController');
 
 // ---------------------------------------------------------------------
+// Areas (catalogo de areas de servicio/ministerio)
+// ---------------------------------------------------------------------
+register_crud($router, '/api/v1/areas', 'AreaController');
+
+// ---------------------------------------------------------------------
 // Personas
 // ---------------------------------------------------------------------
 $personaController = new PersonaController();

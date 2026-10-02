@@ -5,10 +5,10 @@ import { MatSort, MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
-import { Comunidad, ComunidadesService } from './comunidades.service';
+import { Area, AreasService } from './areas.service';
 
 @Component({
-  selector: 'app-comunidades',
+  selector: 'app-areas',
   standalone: true,
   imports: [
     CommonModule,
@@ -17,11 +17,11 @@ import { Comunidad, ComunidadesService } from './comunidades.service';
     MatSortModule,
     MatProgressSpinnerModule
   ],
-  templateUrl: './comunidades.component.html'
+  templateUrl: './areas.component.html'
 })
-export class ComunidadesComponent implements OnInit {
+export class AreasComponent implements OnInit {
   private readonly fb = inject(FormBuilder);
-  private readonly comunidadesService = inject(ComunidadesService);
+  private readonly areasService = inject(AreasService);
 
   @ViewChild(MatSort) private readonly sort?: MatSort;
 
@@ -32,16 +32,15 @@ export class ComunidadesComponent implements OnInit {
   readonly editingId = signal<number | null>(null);
   readonly creatingNew = signal(false);
 
-  readonly displayedColumns = ['nombre', 'lugar', 'direccion', 'acciones'];
-  readonly dataSource = new MatTableDataSource<Comunidad>([]);
+  readonly displayedColumns = ['nombre', 'descripcion', 'acciones'];
+  readonly dataSource = new MatTableDataSource<Area>([]);
 
-  // FormGroup compartido para editar y crear: la fila de footer solo existe
-  // en el DOM mientras creatingNew() es true (vease el template), asi que
-  // nunca coexiste con una fila en edicion sobre el mismo FormGroup.
+  // Un solo FormGroup compartido para editar y crear: la fila de footer solo
+  // existe en el DOM mientras creatingNew() es true (vease el template), asi
+  // que nunca coexiste con una fila en edicion sobre el mismo FormGroup.
   readonly editForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(150)]],
-    lugar: ['', [Validators.required, Validators.maxLength(150)]],
-    direccion: ['', [Validators.required, Validators.maxLength(255)]]
+    descripcion: ['', [Validators.maxLength(255)]]
   });
 
   ngOnInit(): void {
@@ -52,14 +51,14 @@ export class ComunidadesComponent implements OnInit {
     this.loading.set(true);
     this.errorMessage.set('');
 
-    this.comunidadesService.list().subscribe({
-      next: comunidades => {
-        this.dataSource.data = comunidades;
+    this.areasService.list().subscribe({
+      next: areas => {
+        this.dataSource.data = areas;
         this.dataSource.sort = this.sort ?? null;
         this.loading.set(false);
       },
       error: () => {
-        this.errorMessage.set('No pudimos cargar la lista de comunidades.');
+        this.errorMessage.set('No pudimos cargar la lista de areas.');
         this.loading.set(false);
       }
     });
@@ -68,7 +67,7 @@ export class ComunidadesComponent implements OnInit {
   startCreate(): void {
     this.editingId.set(null);
     this.creatingNew.set(true);
-    this.editForm.reset({ nombre: '', lugar: '', direccion: '' });
+    this.editForm.reset({ nombre: '', descripcion: '' });
     this.successMessage.set('');
     this.errorMessage.set('');
   }
@@ -88,16 +87,16 @@ export class ComunidadesComponent implements OnInit {
 
     this.saving.set(true);
 
-    const payload = this.editForm.getRawValue() as { nombre: string; lugar: string; direccion: string };
+    const payload = this.editForm.getRawValue() as { nombre: string; descripcion: string };
 
-    this.comunidadesService.create(payload).subscribe({
+    this.areasService.create(payload).subscribe({
       next: () => {
-        this.successMessage.set('Comunidad creada correctamente.');
+        this.successMessage.set('Area creada correctamente.');
         this.creatingNew.set(false);
         this.load();
       },
       error: () => {
-        this.errorMessage.set('No se pudo crear la comunidad. Verifica que nombre + lugar no esten repetidos.');
+        this.errorMessage.set('No se pudo crear el area. Verifica que el nombre no este repetido.');
         this.saving.set(false);
       },
       complete: () => {
@@ -106,13 +105,12 @@ export class ComunidadesComponent implements OnInit {
     });
   }
 
-  startEdit(comunidad: Comunidad): void {
+  startEdit(area: Area): void {
     this.creatingNew.set(false);
-    this.editingId.set(comunidad.id);
+    this.editingId.set(area.id);
     this.editForm.reset({
-      nombre: comunidad.nombre,
-      lugar: comunidad.lugar,
-      direccion: comunidad.direccion
+      nombre: area.nombre,
+      descripcion: area.descripcion || ''
     });
     this.successMessage.set('');
     this.errorMessage.set('');
@@ -122,7 +120,7 @@ export class ComunidadesComponent implements OnInit {
     this.editingId.set(null);
   }
 
-  saveEdit(comunidad: Comunidad): void {
+  saveEdit(area: Area): void {
     this.errorMessage.set('');
     this.successMessage.set('');
 
@@ -133,16 +131,16 @@ export class ComunidadesComponent implements OnInit {
 
     this.saving.set(true);
 
-    const payload = this.editForm.getRawValue() as { nombre: string; lugar: string; direccion: string };
+    const payload = this.editForm.getRawValue() as { nombre: string; descripcion: string };
 
-    this.comunidadesService.update(comunidad.id, payload).subscribe({
+    this.areasService.update(area.id, payload).subscribe({
       next: () => {
-        this.successMessage.set('Comunidad actualizada correctamente.');
+        this.successMessage.set('Area actualizada correctamente.');
         this.editingId.set(null);
         this.load();
       },
       error: () => {
-        this.errorMessage.set('No se pudo guardar la comunidad. Verifica que nombre + lugar no esten repetidos.');
+        this.errorMessage.set('No se pudo guardar el area. Verifica que el nombre no este repetido.');
         this.saving.set(false);
       },
       complete: () => {
@@ -151,24 +149,24 @@ export class ComunidadesComponent implements OnInit {
     });
   }
 
-  remove(comunidad: Comunidad): void {
-    if (!confirm(`¿Eliminar la comunidad "${comunidad.nombre}"? Esta accion no se puede deshacer.`)) {
+  remove(area: Area): void {
+    if (!confirm(`¿Eliminar el area "${area.nombre}"? Esta accion no se puede deshacer.`)) {
       return;
     }
 
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    this.comunidadesService.delete(comunidad.id).subscribe({
+    this.areasService.delete(area.id).subscribe({
       next: () => {
-        this.successMessage.set('Comunidad eliminada correctamente.');
-        if (this.editingId() === comunidad.id) {
+        this.successMessage.set('Area eliminada correctamente.');
+        if (this.editingId() === area.id) {
           this.editingId.set(null);
         }
         this.load();
       },
       error: () => {
-        this.errorMessage.set('No se pudo eliminar la comunidad (puede tener personas o usuarios asociados).');
+        this.errorMessage.set('No se pudo eliminar el area (puede tener personas asignadas).');
       }
     });
   }
