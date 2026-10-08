@@ -56,7 +56,7 @@ export class SiteConfigAdminComponent implements OnInit {
     this.form.patchValue({
       nombre: '',
       descripcion: '',
-      activateOnSave: false
+      activateOnSave: true
     });
 
     this.successMessage.set('');
@@ -69,7 +69,7 @@ export class SiteConfigAdminComponent implements OnInit {
     this.form.patchValue({
       nombre: version.nombre,
       descripcion: version.descripcion,
-      activateOnSave: version.activo
+      activateOnSave: true
     });
 
     this.successMessage.set('');

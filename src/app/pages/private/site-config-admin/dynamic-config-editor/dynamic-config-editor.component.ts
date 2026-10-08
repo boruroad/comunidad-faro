@@ -22,6 +22,37 @@ export class DynamicConfigEditorComponent {
   // Buffer local del nombre de la nueva propiedad para cada campo tipo "map".
   readonly newMapKey: Record<string, string> = {};
 
+  // Pestaña activa en el nivel raiz (depth 0): evita tener que hacer scroll
+  // por todas las secciones (site, meeting, live, calendar, etc.) a la vez.
+  private activeTabKey: string | null = null;
+
+  // En depth 0 solo se dibuja la seccion seleccionada por el tab activo;
+  // en niveles anidados (objetos/items de lista) se dibujan todos los campos.
+  visibleFields(): ConfigFieldSchema[] {
+    if (this.depth !== 0) {
+      return this.schema;
+    }
+
+    const key = this.currentTabKey();
+    return this.schema.filter(field => field.key === key);
+  }
+
+  currentTabKey(): string {
+    if (this.activeTabKey && this.schema.some(field => field.key === this.activeTabKey)) {
+      return this.activeTabKey;
+    }
+
+    return this.schema[0]?.key ?? '';
+  }
+
+  isActiveTab(key: string): boolean {
+    return this.currentTabKey() === key;
+  }
+
+  selectTab(key: string): void {
+    this.activeTabKey = key;
+  }
+
   getScalar(field: ConfigFieldSchema): string {
     const raw = this.value ? this.value[field.key] : undefined;
     return raw === undefined || raw === null ? '' : String(raw);

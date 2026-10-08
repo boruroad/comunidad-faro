@@ -725,6 +725,7 @@ img{max-width:100%;display:block}
 .config-admin-form textarea:focus,.config-admin-form input:focus{border-color:var(--ink)}
 .config-admin-checkbox{display:flex;align-items:center;gap:.6rem;margin-top:.4rem}
 .config-admin-checkbox input{width:1rem;height:1rem}
+.config-admin-warning{margin:.5rem 0 0;color:#8a5a12;font-size:.75rem;letter-spacing:.02em;border-left:3px solid #d08a2a;padding-left:.7rem}
 
 .config-admin-history{margin-top:2.5rem;border-top:1px solid #cfc7bb;padding-top:1.3rem}
 .config-admin-history h2{font-size:clamp(1.6rem,3.8vw,2.8rem);line-height:1;letter-spacing:-.04em;margin:0 0 1rem;text-transform:uppercase}
@@ -774,6 +775,10 @@ dialog.modal-panel::backdrop{
 .config-admin-editor{margin-top:.4rem}
 .config-editor{display:grid;gap:1rem}
 .config-editor-root{gap:1.4rem}
+.config-tabs{display:flex;flex-wrap:wrap;gap:.3rem;border-bottom:1px solid #d6cfc2;padding-bottom:0}
+.config-tab{border:1px solid #d6cfc2;border-bottom:0;background:#f3efe6;color:#5f5a52;padding:.55rem .9rem;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;min-height:auto}
+.config-tab:hover{background:#ece6d9}
+.config-tab.is-active{background:#fdfbf6;color:#20201d;border-color:#20201d;position:relative;top:1px}
 .config-field-root>.config-fieldset{border:1px solid var(--line);background:#fdfbf6;padding:1.1rem 1.1rem 1.3rem}
 .config-field-root>.config-fieldset>legend{font-family:Archivo,sans-serif;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;padding:0 .4rem;color:#20201d}
 .config-fieldset{border:1px solid #d6cfc2;padding:.9rem .9rem 1.1rem;display:grid;gap:.8rem}

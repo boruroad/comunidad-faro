@@ -1,5 +1,20 @@
 <div class="config-editor" [class.config-editor-root]="depth === 0">
-  @for (field of schema; track field.key) {
+  @if (depth === 0) {
+    <div class="config-tabs" role="tablist">
+      @for (field of schema; track field.key) {
+        <button
+          type="button"
+          class="config-tab"
+          role="tab"
+          [class.is-active]="isActiveTab(field.key)"
+          [attr.aria-selected]="isActiveTab(field.key)"
+          (click)="selectTab(field.key)"
+        >{{ field.label }}</button>
+      }
+    </div>
+  }
+
+  @for (field of visibleFields(); track field.key) {
     <div class="config-field" [class.config-field-root]="depth === 0">
       @switch (field.type) {
         @case ('text') {

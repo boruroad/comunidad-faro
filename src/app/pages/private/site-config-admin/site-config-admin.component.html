@@ -27,6 +27,13 @@
           <span>Activar al guardar</span>
         </label>
 
+        @if (!form.value.activateOnSave) {
+          <p class="config-admin-warning">
+            Esta version se guardara como INACTIVA y no se va a reflejar en el sitio publico
+            hasta que la actives manualmente desde el historial.
+          </p>
+        }
+
         <div class="dashboard-actions">
           <button class="button button-dark" type="submit" [disabled]="saving()">
             {{ selectedId() ? 'Actualizar configuracion' : 'Guardar nueva version' }}
