@@ -2,7 +2,7 @@
 require_once dirname(__DIR__) . '/bootstrap.php';
 require_once dirname(__DIR__) . '/src/Http/Router.php';
 
-send_cors_headers();
+sendCorsHeaders();
 
 $method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : 'GET';
 
@@ -23,7 +23,7 @@ if ($path === '') {
     $path = '/';
 }
 
-$request = request_data();
+$request = requestData();
 $response = $router->dispatch($method, $path, $request);
 
 $statusCode = isset($response['code']) ? (int) $response['code'] : 200;

@@ -29,12 +29,16 @@ export class ComunidadesComponent implements OnInit {
   readonly saving = signal(false);
   readonly errorMessage = signal('');
   readonly successMessage = signal('');
-  readonly selectedId = signal<number | null>(null);
+  readonly editingId = signal<number | null>(null);
+  readonly creatingNew = signal(false);
 
   readonly displayedColumns = ['nombre', 'lugar', 'direccion', 'acciones'];
   readonly dataSource = new MatTableDataSource<Comunidad>([]);
 
-  readonly form = this.fb.group({
+  // FormGroup compartido para editar y crear: la fila de footer solo existe
+  // en el DOM mientras creatingNew() es true (vease el template), asi que
+  // nunca coexiste con una fila en edicion sobre el mismo FormGroup.
+  readonly editForm = this.fb.group({
     nombre: ['', [Validators.required, Validators.maxLength(150)]],
     lugar: ['', [Validators.required, Validators.maxLength(150)]],
     direccion: ['', [Validators.required, Validators.maxLength(255)]]
@@ -61,9 +65,51 @@ export class ComunidadesComponent implements OnInit {
     });
   }
 
-  edit(comunidad: Comunidad): void {
-    this.selectedId.set(comunidad.id);
-    this.form.patchValue({
+  startCreate(): void {
+    this.editingId.set(null);
+    this.creatingNew.set(true);
+    this.editForm.reset({ nombre: '', lugar: '', direccion: '' });
+    this.successMessage.set('');
+    this.errorMessage.set('');
+  }
+
+  cancelCreate(): void {
+    this.creatingNew.set(false);
+  }
+
+  saveCreate(): void {
+    this.errorMessage.set('');
+    this.successMessage.set('');
+
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
+      return;
+    }
+
+    this.saving.set(true);
+
+    const payload = this.editForm.getRawValue() as { nombre: string; lugar: string; direccion: string };
+
+    this.comunidadesService.create(payload).subscribe({
+      next: () => {
+        this.successMessage.set('Comunidad creada correctamente.');
+        this.creatingNew.set(false);
+        this.load();
+      },
+      error: () => {
+        this.errorMessage.set('No se pudo crear la comunidad. Verifica que nombre + lugar no esten repetidos.');
+        this.saving.set(false);
+      },
+      complete: () => {
+        this.saving.set(false);
+      }
+    });
+  }
+
+  startEdit(comunidad: Comunidad): void {
+    this.creatingNew.set(false);
+    this.editingId.set(comunidad.id);
+    this.editForm.reset({
       nombre: comunidad.nombre,
       lugar: comunidad.lugar,
       direccion: comunidad.direccion
@@ -73,36 +119,26 @@ export class ComunidadesComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    this.selectedId.set(null);
-    this.form.reset({ nombre: '', lugar: '', direccion: '' });
-    this.successMessage.set('');
-    this.errorMessage.set('');
+    this.editingId.set(null);
   }
 
-  save(): void {
+  saveEdit(comunidad: Comunidad): void {
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
       return;
     }
 
     this.saving.set(true);
 
-    const payload = this.form.getRawValue() as { nombre: string; lugar: string; direccion: string };
-    const selectedId = this.selectedId();
+    const payload = this.editForm.getRawValue() as { nombre: string; lugar: string; direccion: string };
 
-    const request = selectedId
-      ? this.comunidadesService.update(selectedId, payload)
-      : this.comunidadesService.create(payload);
-
-    request.subscribe({
+    this.comunidadesService.update(comunidad.id, payload).subscribe({
       next: () => {
-        this.successMessage.set(
-          selectedId ? 'Comunidad actualizada correctamente.' : 'Comunidad creada correctamente.'
-        );
-        this.cancelEdit();
+        this.successMessage.set('Comunidad actualizada correctamente.');
+        this.editingId.set(null);
         this.load();
       },
       error: () => {
@@ -126,8 +162,8 @@ export class ComunidadesComponent implements OnInit {
     this.comunidadesService.delete(comunidad.id).subscribe({
       next: () => {
         this.successMessage.set('Comunidad eliminada correctamente.');
-        if (this.selectedId() === comunidad.id) {
-          this.cancelEdit();
+        if (this.editingId() === comunidad.id) {
+          this.editingId.set(null);
         }
         this.load();
       },

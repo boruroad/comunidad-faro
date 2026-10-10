@@ -31,13 +31,17 @@ export class CasasComponent implements OnInit {
   readonly saving = signal(false);
   readonly errorMessage = signal('');
   readonly successMessage = signal('');
-  readonly selectedId = signal<number | null>(null);
+  readonly editingId = signal<number | null>(null);
+  readonly creatingNew = signal(false);
   readonly comunidades = signal<Comunidad[]>([]);
 
   readonly displayedColumns = ['nombre', 'comunidad', 'direccion', 'coordenadas', 'acciones'];
   readonly dataSource = new MatTableDataSource<Casa>([]);
 
-  readonly form = this.fb.group({
+  // FormGroup compartido para editar y crear: la fila de footer solo existe
+  // en el DOM mientras creatingNew() es true (vease el template), asi que
+  // nunca coexiste con una fila en edicion sobre el mismo FormGroup.
+  readonly editForm = this.fb.group({
     comunidadId: [0, [Validators.required, Validators.min(1)]],
     nombre: ['', [Validators.required, Validators.maxLength(150)]],
     direccion: ['', [Validators.required, Validators.maxLength(255)]],
@@ -71,9 +75,49 @@ export class CasasComponent implements OnInit {
     return this.comunidades().find(c => c.id === comunidadId)?.nombre || '—';
   }
 
-  edit(casa: Casa): void {
-    this.selectedId.set(casa.id);
-    this.form.patchValue({
+  startCreate(): void {
+    this.editingId.set(null);
+    this.creatingNew.set(true);
+    this.editForm.reset({ comunidadId: 0, nombre: '', direccion: '', latitud: null, longitud: null });
+    this.successMessage.set('');
+    this.errorMessage.set('');
+  }
+
+  cancelCreate(): void {
+    this.creatingNew.set(false);
+  }
+
+  saveCreate(): void {
+    this.errorMessage.set('');
+    this.successMessage.set('');
+
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
+      return;
+    }
+
+    this.saving.set(true);
+
+    this.casasService.create(this.buildPayload()).subscribe({
+      next: () => {
+        this.successMessage.set('Casa creada correctamente.');
+        this.creatingNew.set(false);
+        this.load();
+      },
+      error: () => {
+        this.errorMessage.set('No se pudo crear la casa.');
+        this.saving.set(false);
+      },
+      complete: () => {
+        this.saving.set(false);
+      }
+    });
+  }
+
+  startEdit(casa: Casa): void {
+    this.creatingNew.set(false);
+    this.editingId.set(casa.id);
+    this.editForm.reset({
       comunidadId: casa.comunidadId,
       nombre: casa.nombre,
       direccion: casa.direccion,
@@ -85,42 +129,24 @@ export class CasasComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    this.selectedId.set(null);
-    this.form.reset({ comunidadId: 0, nombre: '', direccion: '', latitud: null, longitud: null });
-    this.successMessage.set('');
-    this.errorMessage.set('');
+    this.editingId.set(null);
   }
 
-  save(): void {
+  saveEdit(casa: Casa): void {
     this.errorMessage.set('');
     this.successMessage.set('');
 
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
+    if (this.editForm.invalid) {
+      this.editForm.markAllAsTouched();
       return;
     }
 
     this.saving.set(true);
 
-    const value = this.form.getRawValue();
-    const payload = {
-      comunidadId: Number(value.comunidadId),
-      nombre: value.nombre || '',
-      direccion: value.direccion || '',
-      latitud: value.latitud !== null && value.latitud !== undefined ? Number(value.latitud) : null,
-      longitud: value.longitud !== null && value.longitud !== undefined ? Number(value.longitud) : null
-    };
-
-    const selectedId = this.selectedId();
-
-    const request = selectedId
-      ? this.casasService.update(selectedId, payload)
-      : this.casasService.create(payload);
-
-    request.subscribe({
+    this.casasService.update(casa.id, this.buildPayload()).subscribe({
       next: () => {
-        this.successMessage.set(selectedId ? 'Casa actualizada correctamente.' : 'Casa creada correctamente.');
-        this.cancelEdit();
+        this.successMessage.set('Casa actualizada correctamente.');
+        this.editingId.set(null);
         this.load();
       },
       error: () => {
@@ -131,6 +157,18 @@ export class CasasComponent implements OnInit {
         this.saving.set(false);
       }
     });
+  }
+
+  private buildPayload() {
+    const value = this.editForm.getRawValue();
+
+    return {
+      comunidadId: Number(value.comunidadId),
+      nombre: value.nombre || '',
+      direccion: value.direccion || '',
+      latitud: value.latitud !== null && value.latitud !== undefined ? Number(value.latitud) : null,
+      longitud: value.longitud !== null && value.longitud !== undefined ? Number(value.longitud) : null
+    };
   }
 
   remove(casa: Casa): void {
@@ -144,8 +182,8 @@ export class CasasComponent implements OnInit {
     this.casasService.delete(casa.id).subscribe({
       next: () => {
         this.successMessage.set('Casa eliminada correctamente.');
-        if (this.selectedId() === casa.id) {
-          this.cancelEdit();
+        if (this.editingId() === casa.id) {
+          this.editingId.set(null);
         }
         this.load();
       },

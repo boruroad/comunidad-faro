@@ -5,6 +5,69 @@
     Bienvenido, {{ currentUser.email() }}. Tu rol actual es {{ currentUser.roleName() }}.
   </p>
 
+  <h2 class="dashboard-section-title">Indicadores de personas activas</h2>
+  @if (loading()) {
+    <p class="auth-copy" aria-live="polite">Cargando indicadores...</p>
+  } @else if (errorMessage()) {
+    <p class="auth-error" aria-live="polite">{{ errorMessage() }}</p>
+  } @else if (stats(); as indicadores) {
+    <div class="dashboard-grid dashboard-stats-grid">
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: 'MIEMBRO', soloActivos: 'true' }"
+      >
+        <small>MIEMBROS ACTIVOS</small>
+        <strong>{{ indicadores.miembros }}</strong>
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: 'INTERESADO', soloActivos: 'true' }"
+      >
+        <small>INTERESADOS ACTIVOS</small>
+        <strong>{{ indicadores.interesados }}</strong>
+      </a>
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/casas">
+        <small>CASAS REGISTRADAS</small>
+        <strong>{{ indicadores.casas }}</strong>
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conCasa: 'true' }"
+      >
+        <small>SE REÚNEN EN CASAS</small>
+        <strong>{{ indicadores.enCasas }}</strong>
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conCasa: 'false' }"
+      >
+        <small>NO VAN A CASAS</small>
+        <strong>{{ indicadores.sinCasa }}</strong>
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conLider: 'true' }"
+      >
+        <small>BAJO UN LÍDER</small>
+        <strong>{{ indicadores.conLider }}</strong>
+      </a>
+      <a
+        class="dashboard-card dashboard-card-link"
+        routerLink="/dashboard/personas"
+        [queryParams]="{ origen: '', soloActivos: 'true', conLider: 'false' }"
+      >
+        <small>SIN LÍDER</small>
+        <strong>{{ indicadores.sinLider }}</strong>
+      </a>
+    </div>
+  }
+
+  <h2 class="dashboard-section-title">Módulos</h2>
   <div class="dashboard-grid">
     <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/usuarios">
       <small>MODULO</small>
@@ -18,6 +81,14 @@
       <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/comunidades">
         <small>MODULO</small>
         <strong>Comunidades</strong>
+      </a>
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/casas">
+        <small>MODULO</small>
+        <strong>Casas</strong>
+      </a>
+      <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/areas">
+        <small>MODULO</small>
+        <strong>Areas</strong>
       </a>
       <a class="dashboard-card dashboard-card-link" routerLink="/dashboard/configuracion">
         <small>MODULO</small>

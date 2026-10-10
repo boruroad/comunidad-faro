@@ -4,7 +4,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { SiteHeaderComponent } from '../../../components/site-header/site-header.component';
-import { FARO_CONFIG } from '../../../faro-config';
+import { RuntimeConfigService } from '../../../config/runtime-config.service';
 import { SessionService } from '../../../auth/session.service';
 
 @Component({
@@ -23,10 +23,11 @@ export class LoginComponent {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
   private readonly session = inject(SessionService);
+  private readonly runtimeConfig = inject(RuntimeConfigService);
 
   readonly facebookUrl =
-    FARO_CONFIG.meeting.facebookUrl ||
-    FARO_CONFIG.socials['facebook'];
+    this.runtimeConfig.config.meeting.facebookUrl ||
+    this.runtimeConfig.config.socials['facebook'];
 
   readonly loading = signal(false);
   readonly errorMessage = signal('');

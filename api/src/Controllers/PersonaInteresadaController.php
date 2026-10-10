@@ -127,7 +127,7 @@ class PersonaInteresadaController extends BaseController
         }
 
         return $this->ok(array(
-            'item' => camelize_keys($target),
+            'item' => camelizeKeys($target),
         ), 'persona interesada found');
     }
 
@@ -190,7 +190,7 @@ class PersonaInteresadaController extends BaseController
         $updated = $this->repo->findById($id);
 
         return $this->ok(array(
-            'item' => camelize_keys($updated),
+            'item' => camelizeKeys($updated),
         ), 'persona interesada updated');
     }
 
@@ -294,7 +294,7 @@ class PersonaInteresadaController extends BaseController
 
         $payload = array();
         foreach ((array) $source as $key => $value) {
-            $field = strpos($key, '_') !== false ? $key : camel_to_snake((string) $key);
+            $field = strpos($key, '_') !== false ? $key : camelToSnake((string) $key);
             $payload[$field] = $value;
         }
 

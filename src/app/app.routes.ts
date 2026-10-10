@@ -12,6 +12,7 @@ import { UsuariosComponent } from './pages/private/usuarios/usuarios.component';
 import { PersonasComponent } from './pages/private/personas/personas.component';
 import { ComunidadesComponent } from './pages/private/comunidades/comunidades.component';
 import { CasasComponent } from './pages/private/casas/casas.component';
+import { AreasComponent } from './pages/private/areas/areas.component';
 import { authGuard } from './auth/auth.guard';
 import { adminGuard } from './auth/admin.guard';
 import { SiteConfigAdminComponent } from './pages/private/site-config-admin/site-config-admin.component';
@@ -75,6 +76,11 @@ export const routes: Routes = [
 			{
 				path: 'casas',
 				component: CasasComponent,
+				canActivate: [adminGuard]
+			},
+			{
+				path: 'areas',
+				component: AreasComponent,
 				canActivate: [adminGuard]
 			},
 			{
